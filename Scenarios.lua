@@ -7,56 +7,73 @@
 --]]
 
 Scenario_List = { 
-    ['1-00'] = { handler = 'SetupS100ButtonPressed', name = 'Introductory Scenario (3p)', tooltip = 'This scenario is intended for a group of players that are new to the game.', },
-    ['1-01'] = { handler = 'SetupS101ButtonPressed', name = 'Discovery and Reformation (3-5p)', },
-    ['1-02'] = { handler = 'SetupS102ButtonPressed', name = 'Imperial Waltz (3p+1-2b)', },
-    ['1-03'] = { handler = 'SetupS103ButtonPressed', name = 'Sea Route to India (3-4p)', },
-    ['1-04'] = { handler = 'SetupS104ButtonPressed', name = 'The Wars of Religion (2-4p)', },
-    ['1-05'] = { handler = 'SetupS105ButtonPressed', name = 'The Bourbonic Plague (4/6p)', },
-    ['1-06'] = { handler = 'SetupS106ButtonPressed', name = 'The Ambitious Margrave (solo)', },
-    ['2-01'] = { handler = 'SetupS201ButtonPressed', name = 'The Grand Campaign (6p)', },
-    ['2-02'] = { handler = 'SetupS202ButtonPressed', name = 'The Enemy at the Gates (4-6p)', },
-    ['2-03'] = { handler = 'SetupS203ButtonPressed', name = 'Mediterranean Dominance (5-6p)', },
-    ['2-04'] = { handler = 'SetupS204ButtonPressed', name = 'Napoleon Rising (6p)', },
-    ['2-05'] = { handler = 'SetupS205ButtonPressed', name = 'Here I Stand Once More (6p)', },
-    ['2-06'] = { handler = 'SetupS206ButtonPressed', name = 'The Rise of the Purple Phoenix (solo)', unavailable = false, },
-    ['2-07'] = { handler = 'SetupS207ButtonPressed', name = 'Glory for Ulm (solo)', unavailable = false, },
-   }
+  ['0-00'] = { handler = 'SetupS000ButtonPressed', players = {false, false, false, false, false, false}, active = true, name = 'Manual Setup', tooltip = 'If you want to set up your game by hand', },
+  ['1-00'] = { handler = 'SetupS100ButtonPressed', players = {false, false,  true, false, false, false}, active = true, name = 'Introductory Scenario (3p)', tooltip = 'This scenario is intended for a group of players that are new to the game.', },
+  ['1-01'] = { handler = 'SetupS101ButtonPressed', players = {false, false,  true,  true,  true, false}, active = true, name = 'Discovery and Reformation (3-5p)', },
+  ['1-02'] = { handler = 'SetupS102ButtonPressed', players = {false, false,  true, false, false, false}, active = true, name = 'Imperial Waltz (3p+1-2b)', },
+  ['1-03'] = { handler = 'SetupS103ButtonPressed', players = {false, false,  true,  true, false, false}, active = true, name = 'Sea Route to India (3-4p)', },
+  ['1-04'] = { handler = 'SetupS104ButtonPressed', players = {false,  true,  true,  true, false, false}, active = true, name = 'The Wars of Religion (2-4p)', },
+  ['1-05'] = { handler = 'SetupS105ButtonPressed', players = {false, false, false,  true, false,  true}, active = true, name = 'The Bourbonic Plague (4/6p)', },
+  ['1-06'] = { handler = 'SetupS106ButtonPressed', players = { true, false, false, false, false, false}, active = true, name = 'The Ambitious Margrave (solo)', },
+  ['2-01'] = { handler = 'SetupS201ButtonPressed', players = {false, false, false, false, false,  true}, active = true, name = 'The Grand Campaign (6p)', },
+  ['2-02'] = { handler = 'SetupS202ButtonPressed', players = {false, false, false,  true,  true,  true}, active = true, name = 'The Enemy at the Gates (4-6p)', },
+  ['2-03'] = { handler = 'SetupS203ButtonPressed', players = {false, false, false, false,  true,  true}, active = true, name = 'Mediterranean Dominance (5-6p)', },
+  ['2-04'] = { handler = 'SetupS204ButtonPressed', players = {false, false, false, false, false,  true}, active = true, name = 'Napoleon Rising (6p)', },
+  ['2-05'] = { handler = 'SetupS205ButtonPressed', players = {false, false, false, false, false,  true}, active = true, name = 'Here I Stand Once More (6p)', },
+  ['2-06'] = { handler = 'SetupS206ButtonPressed', players = { true, false, false, false, false, false}, active = true, name = 'The Rise of the Purple Phoenix (solo)' },
+  ['2-07'] = { handler = 'SetupS207ButtonPressed', players = { true, false, false, false, false, false}, active = true, name = 'Glory for Ulm (solo)' },
+}
 
+Scenario_List['0-00'].description = [[This option lets you do the setup by hand. It places the play mats for all six players and their associated components. After this any additions and changes are left to the players to handle.]]
+
+Scenario_List['1-00'].description = [[This scenario is intended for a group of players that are new to the game. The scenario begins at the standard 1444 starting point and lasts for two Rounds (the first half of Age I). This is enough to famil­iarize yourself with all of the basics, as well as the flow, of the game.]]
 Scenario_List['1-00'].variants = { 
   { name = '3 Players', code = '3P', handler = 'Variant_1_Selected', age = 1, book = {1,2}, player_realms = {
-    [REALM.france] = { seat = 1, color = 'blue', realm = {REALM.france, '1444'}, rem_missions = {'4B', '4E'}, start_missions = {'1A','1B'}, start = true },
-    [REALM.castile] = { seat = 2, color = 'yellow', realm = {REALM.castile, '1444'}, rem_missions = {'3E', '4C'}, start_missions = {'1A','1B'}, },
-    [REALM.england] = { seat = 3, color = 'red', realm = {REALM.england, '1444'}, rem_missions = {'2C', '3G'}, start_missions = {'1A','1C'}, },
-  }, age_1_events = {
-    {'11a-1', 8}, {'12a-1', 8}, {'13a-1', 8}, {'14a-1', 8}, {'153b', 8}, {'102-1', 8}, {'103-1', 8}, {'104-1', 8},
-    {'11a-3', 1}, {'12a-2', 1}, {'13a-2', 1}, {'14a-2', 1}, {'155b', 1}, {'102-2', 1}, {'103-2', 1}, {'104-2', 1},
-  }, ideas = { admin = {}, diplo = {}, war = {} }, curia = {REALM.none, REALM.castile, REALM.france, REALM.england, }, 
-  milestones = { eco = Milestone_Card_GUIDs.age1.eco.cabinet, exp = Milestone_Card_GUIDs.age1.exp.fleet, pol = Milestone_Card_GUIDs.age1.pol.dynastic, war = Milestone_Card_GUIDs.age1.war.victorious },
+      [REALM.france] = { seat = 1, color = 'blue', realm = {REALM.france, '1444'}, rem_missions = {'4B', '4E'}, start_missions = {'1A','1B'}, start = true },
+      [REALM.castile] = { seat = 2, color = 'yellow', realm = {REALM.castile, '1444'}, rem_missions = {'3E', '4C'}, start_missions = {'1A','1B'}, },
+      [REALM.england] = { seat = 3, color = 'red', realm = {REALM.england, '1444'}, rem_missions = {'2C', '3G'}, start_missions = {'1A','1C'}, },
+    }, age_1_events = {
+      {'11a-1', 8}, {'12a-1', 8}, {'13a-1', 8}, {'14a-1', 8}, {'153b', 8}, {'102-1', 8}, {'103-1', 8}, {'104-1', 8},
+      {'11a-3', 1}, {'12a-2', 1}, {'13a-2', 1}, {'14a-2', 1}, {'155b', 1}, {'102-2', 1}, {'103-2', 1}, {'104-2', 1},
+    }, ideas = { admin = {}, diplo = {}, war = {} }, curia = {REALM.none, REALM.castile, REALM.france, REALM.england, }, 
+    milestones = { eco = Milestone_Card_GUIDs.age1.eco.cabinet, exp = Milestone_Card_GUIDs.age1.exp.fleet, pol = Milestone_Card_GUIDs.age1.pol.dynastic, war = Milestone_Card_GUIDs.age1.war.victorious },
   },
 } 
 
+
+Scenario_List['1-01'].description = [[This scenario is quite well suited for an inexperienced group of play­ers, but if no one in the group has played before, we recommend watching the Extended Gameplay Example first (www.aegirgames.com/europa-universalis/resources).
+
+>France and ›England begin with a higher Tax Income than the two other Realms, but they are likely to get entangled in conflicts with each other while ›Castile and ›Austria can usually enjoy a quieter start. ›France might edge a head­on battle, but a strategic Alliance can change that. On the other hand, ›England enjoys a more protected po­sition on its island home base, with no other powerful enemies nearby.
+
+›	France will need to avoid having too many enemies at once.
+›	Castile may seem somewhat weaker at the outset, but they have a great chance of forging a diplomatic union with ›Aragon to be come a real powerhouse. ›Castile also has the best position for early­game exploration and building their colonial empire.
+
+> Austria is the most isolated of the four Realms. While their Realm is rather small, they also hold the Holy Roman Emperor title. This provides them with a great deal of additional power, which comes with extra responsibilities. ›Austria has a tougher second Age. As the Em­peror, they must be familiar with some extra rules.
+
+With the Deluxe Edition or the Fate of Empires Expansion you can play this scenario with five players instead of four, by adding ›Den­mark as a PR
+]]
 Scenario_List['1-01'].variants = { 
   { name = '3 Players', code = '3P', handler = 'Variant_1_Selected', age = 1, book = {1,3}, player_realms = {
-    [REALM.france] = { seat = 1, color = 'blue', realm = {REALM.france, '1444'}, rem_missions = {'4B', '4E'}, start_missions = {'1A','1B','1C'}, start = true },
-    [REALM.castile] = { seat = 2, color = 'yellow', realm = {REALM.castile, '1444'}, rem_missions = {'3E', '4C'}, start_missions = {'1A','1B','1C'}, },
-    [REALM.england] = { seat = 3, color = 'red', realm = {REALM.england, '1444'}, rem_missions = {'2C', '3G'}, start_missions = {'1A','1B','1C'}, },
-  }, age_1_events = {
-    {'11a-1', 8}, {'12a-1', 8}, {'13a-1', 8}, {'14a-1', 8}, {'157b', 8}, {'102-1', 8}, {'103-1', 8}, {'104-1', 8},
-    {'11a-3', 7}, {'12a-2', 7}, {'13a-2', 7}, {'14a-2', 7}, {'155b', 7}, {'102-2', 7}, {'103-2', 7}, {'104-2', 7},
-  }, age_2_events = {
-    {'21a-1', 6}, {'22a-1', 6}, {'23a-1', 6}, {'24a-1', 6}, {'253b', 6}, {'202-1', 6}, {'203-1', 6}, {'204-1', 6},
-    {'21a-2', 5}, {'22a-2', 5}, {'23a-2', 5}, {'24a-2', 5}, {'255b', 5}, {'202-2', 5}, {'203-2', 5}, {'204-2', 5},
-  }, age_3_events = {
-    {'31a-1', 4}, {'32a-1', 4}, {'33a-1', 4}, {'34a-1', 4}, {'352b', 4}, {'302-1', 4}, {'303-1', 4}, {'304-1', 4},
-    {'31a-2', 3}, {'32a-2', 3}, {'33a-2', 3}, {'34a-2', 3}, {'351b', 3}, {'302-2', 3}, {'303-2', 3}, {'304-2', 3},
-  }, curia = {REALM.none, REALM.castile, REALM.france, REALM.england, }, DNPR_Pink_L = { 
-    WesternMap.kobenhavn, WesternMap.gotland, WesternMap.lund, WesternMap.ostjylland, WesternMap.vestjylland, WesternMap.slesvig, WesternMap.holstein,
-  }, DNPR_Green_S = { 
-    WesternMap.lisboa, WesternMap.porto, WesternMap.beira, WesternMap.ceuta, WesternMap.madeira,
-  }, manpower = { WesternMap.stockholm, WesternMap.danzig, WesternMap.poznan, WesternMap.kalisz, WesternMap.sieradz, WesternMap.pozsony, WesternMap.pest},
-       powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.distant_trade, PS_GUIDs.thirty_years_war }, },
-    { name = '4 Players', code = '4P', handler = 'Variant_2_Selected', age = 1, book = {1,3}, player_realms = {
+      [REALM.france] = { seat = 1, color = 'blue', realm = {REALM.france, '1444'}, rem_missions = {'4B', '4E'}, start_missions = {'1A','1B','1C'}, start = true },
+      [REALM.castile] = { seat = 2, color = 'yellow', realm = {REALM.castile, '1444'}, rem_missions = {'3E', '4C'}, start_missions = {'1A','1B','1C'}, },
+      [REALM.england] = { seat = 3, color = 'red', realm = {REALM.england, '1444'}, rem_missions = {'2C', '3G'}, start_missions = {'1A','1B','1C'}, },
+    }, age_1_events = {
+      {'11a-1', 8}, {'12a-1', 8}, {'13a-1', 8}, {'14a-1', 8}, {'157b', 8}, {'102-1', 8}, {'103-1', 8}, {'104-1', 8},
+      {'11a-3', 7}, {'12a-2', 7}, {'13a-2', 7}, {'14a-2', 7}, {'155b', 7}, {'102-2', 7}, {'103-2', 7}, {'104-2', 7},
+    }, age_2_events = {
+      {'21a-1', 6}, {'22a-1', 6}, {'23a-1', 6}, {'24a-1', 6}, {'253b', 6}, {'202-1', 6}, {'203-1', 6}, {'204-1', 6},
+      {'21a-2', 5}, {'22a-2', 5}, {'23a-2', 5}, {'24a-2', 5}, {'255b', 5}, {'202-2', 5}, {'203-2', 5}, {'204-2', 5},
+    }, age_3_events = {
+      {'31a-1', 4}, {'32a-1', 4}, {'33a-1', 4}, {'34a-1', 4}, {'352b', 4}, {'302-1', 4}, {'303-1', 4}, {'304-1', 4},
+      {'31a-2', 3}, {'32a-2', 3}, {'33a-2', 3}, {'34a-2', 3}, {'351b', 3}, {'302-2', 3}, {'303-2', 3}, {'304-2', 3},
+    }, curia = {REALM.none, REALM.castile, REALM.france, REALM.england, }, DNPR_Pink_L = { 
+      WesternMap.kobenhavn, WesternMap.gotland, WesternMap.lund, WesternMap.ostjylland, WesternMap.vestjylland, WesternMap.slesvig, WesternMap.holstein,
+    }, DNPR_Green_S = { 
+      WesternMap.lisboa, WesternMap.porto, WesternMap.beira, WesternMap.ceuta, WesternMap.madeira,
+    }, manpower = { WesternMap.stockholm, WesternMap.danzig, WesternMap.poznan, WesternMap.kalisz, WesternMap.sieradz, WesternMap.pozsony, WesternMap.pest},
+    powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.distant_trade, PS_GUIDs.thirty_years_war },
+  },
+  { name = '4 Players', code = '4P', handler = 'Variant_2_Selected', age = 1, book = {1,3}, player_realms = {
       [REALM.france] = { seat = 1, color = 'blue', realm = {REALM.france, '1444'}, rem_missions = {'4B', '4E'}, start_missions = {'1A','1B','1C'}, start = true },
       [REALM.castile] = { seat = 2, color = 'yellow', realm = {REALM.castile, '1444'}, rem_missions = {'3E', '4C'}, start_missions = {'1A','1B','1C'}, },
       [REALM.england] = { seat = 3, color = 'red', realm = {REALM.england, '1444'}, rem_missions = {'2C', '3G'}, start_missions = {'1A','1B','1C'}, },
@@ -76,8 +93,9 @@ Scenario_List['1-01'].variants = {
     }, DNPR_Green_S = { 
       WesternMap.lisboa, WesternMap.porto, WesternMap.beira, WesternMap.ceuta, WesternMap.madeira,
     }, manpower = { WesternMap.stockholm, WesternMap.danzig, WesternMap.poznan, WesternMap.kalisz, WesternMap.sieradz, WesternMap.pozsony, WesternMap.pest},
-    powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.distant_trade, PS_GUIDs.thirty_years_war }, },
-    { name = '5 Players', code = '5P', handler = 'Variant_3_Selected', age = 1, book = {1,3}, player_realms = {
+    powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.distant_trade, PS_GUIDs.thirty_years_war },
+  },
+  { name = '5 Players', code = '5P', handler = 'Variant_3_Selected', age = 1, book = {1,3}, player_realms = {
       [REALM.france] = { seat = 1, color = 'blue', realm = {REALM.france, '1444'}, rem_missions = {'4B','4E'}, start_missions = {'1A','1B','1C'}, start = true },
       [REALM.castile] = { seat = 2, color = 'yellow', realm = {REALM.castile, '1444'}, rem_missions = {'3E','4C'}, start_missions = {'1A','1B','1C'} },
       [REALM.england] ={ seat = 3, color = 'red', realm = {REALM.england, '1444'}, rem_missions = {'2C','3G'}, start_missions = {'1A','1B','1C'} },
@@ -96,9 +114,14 @@ Scenario_List['1-01'].variants = {
     curia = {REALM.none, REALM.castile, REALM.austria, REALM.france, REALM.england, REALM.denmark, }, DNPR_Green_S = { 
       WesternMap.lisboa, WesternMap.porto, WesternMap.beira, WesternMap.ceuta, WesternMap.madeira,
     }, manpower = { WesternMap.stockholm, WesternMap.danzig, WesternMap.poznan, WesternMap.kalisz, WesternMap.sieradz, WesternMap.pozsony, WesternMap.pest}, 
-    powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.distant_trade, PS_GUIDs.thirty_years_war }, },
-  }
-  
+      powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.distant_trade, PS_GUIDs.thirty_years_war },
+  },
+}
+
+
+Scenario_List['1-02'].description = [[In this scenario the players face the struggle of three minor nations fighting to survive, and eventually trying to grow and flourish, in the periphery of a Holy Roman Empire dominated by the powerful Em­peror, AustriaBot. The players must carefully plan their strategies, not getting over­confident in their advance within the Holy Roman Empire, as the Emperor will not tolerate anyone trying to outclass him and will be swift dealing with unprepared opponents. Playing through this scenario is a good way for players to familiar­ize themselves with the Solo & Bot rules, and learning how to handle Bots. It is also an interesting challenge to play as a minor Realm that has to weigh its options more carefully, using less brute force, and a more subtle approach, than when playing as a Major Power. At times the players will likely benefit from cooperating with one or even both of the other players. Sometimes they might also be able to take advantage of the actions of the Bot, or even manipulate the Bot into doing things that work in their favor.
+
+With careful resource management and skilled diplomacy each of these three minor Realms have the potential to grow into powerful states, eventually perhaps even eclipsing the might of the Emperor.]]
 Scenario_List['1-02'].variants = {
   { name = '3 Players + 1 Bot', code = '1B', handler = 'Variant_1_Selected', age = 1, book = {1,4}, board = MAIN_BOARD_STATE.s1_02, player_realms = {
     [REALM.papal] = { seat = 1, color = 'red', realm = {REALM.papal, '1444'}, rem_missions = {'3H', '4P'}, start_missions = {'1F','1A','1C'}, locked = true, start = true },
@@ -120,7 +143,8 @@ Scenario_List['1-02'].variants = {
     }, DNPR_Pink_S = { 
       WesternMap.kobenhavn, WesternMap.gotland, WesternMap.lund, WesternMap.ostjylland, WesternMap.vestjylland, WesternMap.slesvig, WesternMap.holstein,
     }, manpower = { WesternMap.stockholm, WesternMap.danzig, WesternMap.poznan, WesternMap.kalisz, WesternMap.sieradz, WesternMap.pozsony, WesternMap.pest}, 
-      powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.thirty_years_war }, remove = {{-5.43, -5.16, 'Cube'}, }, },
+      powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.thirty_years_war }, remove = {{-5.43, -5.16, 'Cube'}, },
+  },
   { name = '3 Players + 2 Bots', code = '2B', handler = 'Variant_2_Selected', age = 1, book = {1,4}, board = MAIN_BOARD_STATE.s1_02, player_realms = {
     [REALM.papal] = { seat = 2, color = 'red', realm = {REALM.papal, '1444'}, rem_missions = {'3H', '4P'}, start_missions = {'1F','1A','1C'}, locked = true, start = true },
     [REALM.netherlands] = { seat = 3, color = 'yellow', realm = {REALM.netherlands, '1444'}, rem_missions = {'2H - Fight', '3B - Establish'}, start_missions = {'1D','1C','1F'}, },
@@ -142,26 +166,33 @@ Scenario_List['1-02'].variants = {
      powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.thirty_years_war }, remove = {{-5.43, -5.16, 'Cube'}, {-7.80, 6.45,'Alliance'}, {-9.02, 7.22,'Cube'}, {-9.02, 6.84,'Cube'},},
   },
 }
-  
-  Scenario_List['1-03'].variants = {
+
+
+Scenario_List['1-03'].description = [[This scenario starts with the second half of Age I. This means that there will be just two rounds for Age I. There are are some slight changes to each PR's setup, as compared to the 1444 Setup Cards. As the smallest Realm,
+› Portugal has a tough start. However, they have the upper hand in the colonial race since they have “Quest for the New World” researched from the beginning. They may have to divide their efforts between expanding and defending against their stronger neighbor to the east. Their alliance with ›England may prove valu­able – if the English are willing to stand by them.
+> Castile can wait for Columbus and start by consolidating the lands closest to them, or they may instead channel their efforts into be coming the new masters of the Distant Continents.
+> England and ›France have seemingly buried the hatchet. Will France now start looking beyond its immediate horizons, or will it once again put its trust in military prowess? Although ›England may have suffered from losing their continental posessions to ›France, they should be in a great position to focus on maritime efforts.
+]]
+Scenario_List['1-03'].variants = {
   { name = '3 Players', code = '3P', handler = 'Variant_1_Selected', age = 1, book = {1,5}, player_realms = {
-    [REALM.portugal] = { seat = 1, color = 'white', realm = {REALM.portugal, 'S103'}, rem_missions = {'2D - Found', '3B - Dominate'}, start_missions = {'1B','1D'}, start = true },
-    [REALM.castile] = { seat = 2, color = 'yellow', realm = {REALM.castile, 'S103'}, rem_missions = {'3E','4C'}, done_missions = {'1B'}, start_missions = {'1A','1C'}, },
-    [REALM.england] ={ seat = 3, color = 'red', realm = {REALM.england, 'S103'}, rem_missions = {'2C', '3G'}, start_missions = {'1A','1B'}, },
-  }, age_1_events = {
-    {'11a-3', 7}, {'12a-1', 7}, {'13a-1', 7}, {'14a-1', 7}, {'155b', 7}, {'102-2', 7}, {'103-2', 7}, {'110-2', 7}
-  }, age_2_events = {
-    {'21a-1', 6}, {'22a-1', 6}, {'23a-1', 6}, {'24a-4', 6}, {'253b', 6}, {'202-1', 6}, {'203-1', 6}, {'210-1', 6},
-    {'21a-2', 5}, {'22a-2', 5}, {'23a-2', 5}, {'24a-2', 5}, {'252b', 5}, {'202-2', 5}, {'203-2', 5}, {'210-2', 5}
-  }, age_3_events = {
-    {'31a-1', 4}, {'32a-1', 4}, {'33a-1', 4}, {'34a-3', 4}, {'352b', 4}, {'302-1', 4}, {'303-1', 4}, {'310-1', 4},
-    {'31a-2', 3}, {'32a-2', 3}, {'33a-2', 3}, {'34a-2', 3}, {'361b', 3}, {'302-2', 3}, {'303-2', 3}, {'310-2', 3}
-  }, ideas = {
-    diplo = {{Idea_Card_GUIDs.diplo.quest_for_the_new_world, { REALM.portugal }}, '', ''},
-  }, curia = {REALM.none, REALM.castile, REALM.portugal, REALM.england, }, trade_add_tags = {'Trade2'}, DNPR_Blue_L = { 
-    WesternMap.paris, WesternMap.rennes, WesternMap.nantes, WesternMap.maine, WesternMap.normandie, WesternMap.caux, 
-    WesternMap.picardie, WesternMap.artois, WesternMap.bordeaux, WesternMap.anjou, WesternMap.bourgogne, WesternMap.provence,
-  }, },
+      [REALM.portugal] = { seat = 1, color = 'white', realm = {REALM.portugal, 'S103'}, rem_missions = {'2D - Found', '3B - Dominate'}, start_missions = {'1B','1D'}, start = true },
+      [REALM.castile] = { seat = 2, color = 'yellow', realm = {REALM.castile, 'S103'}, rem_missions = {'3E','4C'}, done_missions = {'1B'}, start_missions = {'1A','1C'}, },
+      [REALM.england] ={ seat = 3, color = 'red', realm = {REALM.england, 'S103'}, rem_missions = {'2C', '3G'}, start_missions = {'1A','1B'}, },
+    }, age_1_events = {
+      {'11a-3', 7}, {'12a-1', 7}, {'13a-1', 7}, {'14a-1', 7}, {'155b', 7}, {'102-2', 7}, {'103-2', 7}, {'110-2', 7}
+    }, age_2_events = {
+      {'21a-1', 6}, {'22a-1', 6}, {'23a-1', 6}, {'24a-4', 6}, {'253b', 6}, {'202-1', 6}, {'203-1', 6}, {'210-1', 6},
+      {'21a-2', 5}, {'22a-2', 5}, {'23a-2', 5}, {'24a-2', 5}, {'252b', 5}, {'202-2', 5}, {'203-2', 5}, {'210-2', 5}
+    }, age_3_events = {
+      {'31a-1', 4}, {'32a-1', 4}, {'33a-1', 4}, {'34a-3', 4}, {'352b', 4}, {'302-1', 4}, {'303-1', 4}, {'310-1', 4},
+      {'31a-2', 3}, {'32a-2', 3}, {'33a-2', 3}, {'34a-2', 3}, {'361b', 3}, {'302-2', 3}, {'303-2', 3}, {'310-2', 3}
+    }, ideas = {
+      diplo = {{Idea_Card_GUIDs.diplo.quest_for_the_new_world, { REALM.portugal }}, '', ''},
+    }, curia = {REALM.none, REALM.castile, REALM.portugal, REALM.england, }, trade_add_tags = {'Trade2'}, DNPR_Blue_L = { 
+      WesternMap.paris, WesternMap.rennes, WesternMap.nantes, WesternMap.maine, WesternMap.normandie, WesternMap.caux, 
+      WesternMap.picardie, WesternMap.artois, WesternMap.bordeaux, WesternMap.anjou, WesternMap.bourgogne, WesternMap.provence,
+    },
+  },
   { name = '4 Players', code = '4P', handler = 'Variant_2_Selected', age = 1, book = {1,5}, player_realms = {
     [REALM.portugal] = { seat = 2, color = 'white', realm = {REALM.portugal, 'S103'}, rem_missions = {'2D - Found', '3B - Dominate'}, start_missions = {'1B','1D'}, start = true },
     [REALM.castile] = { seat = 3, color = 'yellow', realm = {REALM.castile, 'S103'}, rem_missions = {'3E','4C'}, done_missions = {'1B'}, start_missions = {'1A','1C'}, },
@@ -182,7 +213,10 @@ Scenario_List['1-02'].variants = {
     WesternMap.krain, WesternMap.sundgau, WesternMap.franchecomte, WesternMap.namur, WesternMap.luxembourg,
   }, },
 }
-  
+
+
+Scenario_List['1-04'].description = [[This scenario starts at the beginning of Age II (skipping Age I). This means that this scenario's map situation will be very different from any scenarios that start in Age I. Two of the Major Powers in this scenario, ›France and ›Castile have firmly consolidated their territorial power bases. The same is true to some extent for ›Austria, but ›England is territorially in a weaker state compared to where it is when starting in Age I. ›Austria and ›England are compensated with some starting 0 as noted in the Setup Instructions. This means that this scenario is best suited for 2–3 players, using ›	England as a Bot, while the players assume control of ›France and ›	Castile. ›Austria can be either a third human player, or a second Bot. Larger territorial possessions and less space to expand into at the start of the game means that players are likely to enter conflict with each other relatively early. While Spain and Austria were historically united for most of the time period covered in this scenario, there are no special restrictions as to whom PRs may Ally with or against.
+]]
 Scenario_List['1-04'].variants = { 
   { name = '2 Players (no bots)', code = '2P', handler = 'Variant_1_Selected', age = 2, book = {1,6}, draw_per_round = 4, player_realms = {
     [REALM.france] = { seat = 1, color = 'blue', realm = {REALM.france, 'S104'}, start_missions = {'2A','2B','2C'}, rem_missions = {'4B','4E'}, done_missions = {'1A','1B','1C'}, extra_mp = 2, locked = true, start = true },
@@ -241,7 +275,16 @@ Scenario_List['1-04'].variants = {
   }, manpower = { WesternMap.stockholm, WesternMap.danzig, WesternMap.poznan, WesternMap.kalisz, WesternMap.sieradz, WesternMap.pozsony, WesternMap.pest}, 
   powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.distant_trade, PS_GUIDs.thirty_years_war }, },
 }
-  
+
+
+Scenario_List['1-05'].description = [[>Spain I (Castile) will need to send their armies across Europe to de­fend their many domains across Italy, Burgundy, and the Low Coun­tries. Threats arise both in Europe and on the Distant Continents.
+
+> France has a cohesive domain, but is surrounded by › Spanish holdings on all sides, and faces Religious Dissent in their lands. Can they find an opportunity to strike at the Habsburgs amidst all this?
+
+> Austria must deal with the disruptions of the Thirty Years' War. As the Holy Roman Emperor, they must quell Protestant Revolts while defending their Imperial borders from ›France and the ›Otto­mans.
+
+> Netherlands, being the smallest PR in the mix, will need to plan carefully to realize their ambition of reuniting the entirety of the Low Countries under their rule. Their Distant Provinces can provide the wealth needed to pay for life­saving Mercenary Armies.
+]]
 Scenario_List['1-05'].variants = {
   { name = '4 Players', code = '4P', handler = 'Variant_1_Selected', age = 3, book = {1,7}, board = MAIN_BOARD_STATE.base_1618, player_realms = {
     [REALM.austria] = { seat = 6, color = 'white', realm = {REALM.austria, '1618'}, start_missions = {'2A','2C','2D'}, rem_missions = {'4B','4E'}, done_missions = {'1A','1B','1C','2B','3B'}, extra_mp = 3, start = true },
@@ -294,7 +337,12 @@ Scenario_List['1-05'].variants = {
   }, powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.thirty_years_war, PS_GUIDs.distant_trade, PS_GUIDs.war_of_spanish_succession, PS_GUIDs.seven_years_war },
   remove = {{6.74, -0.30, 'SmallTown'}, }, },
 }
-  
+
+
+Scenario_List['1-06'].description = [[›	Brandenburg is a small Realm with a lot of potential. At the start of the game they enjoy a shielded existence within the HRE, protect­ed but also restricted by the power of the Emperor (AustriaBot). Outsiders have a hard time penetrating too far into the HRE, and if ›	Brandenburg eats too many of their Imperial neighbors, they will attract the Emperor's wrath. Thus their development and expansion have to be carefully planned, to avoid facing too­early, potentially fatal confrontations. Cautiously expand through the northern Areas of the Empire, and outside its borders when possible, while also establishing diplomatic ties to the other Electors before making an open challenge for su­premacy over the German lands.
+
+While building up for this confrontation, DenmarkBot will pro­vide early challenges. Once ›Branden burg eclipses one of their two Opponents, mighty FranceBot will wake up to dispute ›Branden­burg's claims to the region around the Rhine.
+]]
 Scenario_List['1-06'].variants = {
   { name = 'Default (Denmark)', code = 'N', handler = 'Variant_1_Selected', age = 1, book = {1,8}, player_realms = {
     [REALM.brandenburg] = { seat = 6, color = 'blue', realm = {REALM.brandenburg, 'S106'}, locked = true, start_missions = {'1C','1E','1F'}, rem_missions = {'1A','2F - Baltic','2I - Join'}, add_missions = {'1E','2C','2E','3C','3H','4A','5A'}, start = true },
@@ -378,6 +426,13 @@ Scenario_List['1-06'].variants = {
   }, remove = {{0.25, 6.35, 'Cube'}, {8.21, 2.07, 'Cube'}, }, },
 }
 
+
+Scenario_List['2-01'].description = [[Poland, which starts the game without a Ruler, has powerful neighbors to the west, east, and south. ›Poland's dynastic ties with
+
+>Lithuania can be used to their advantage, if they are nurtured with diplomacy. As soon as a new Ruler ascends to the throne, ›Poland can also think about expanding militarily to the north or south.
+
+The ›Ottomans are on the verge of becoming a true empire, but they have many enemies and few friends. If they can build up their military strength to conquer what remains of ›Byzantium and Ana-tolia, they are well placed to expand into Europe, the Middle East, or the Mediterranean.
+]]
 Scenario_List['2-01'].variants = {
   { name = 'Default (Austria)', code = 'A', handler = 'Variant_1_Selected', age = 1, book = {2,1}, board = MAIN_BOARD_STATE.s2_01, player_realms = {
     [REALM.ottomans] = { seat = 6, color = 'green', realm = {REALM.ottomans, '1444'}, start_missions = {'1A','1B','1C'}, start = true },
@@ -454,6 +509,15 @@ Scenario_List['2-01'].variants = {
   }, },
 }
 
+
+Scenario_List['2-02'].description = [[This scenario takes place in Central and Eastern Europe, with most of Western Europe not in play – this changes the character of the game quite a bit. While there is more room to expand by military conquest on land, it is much harder to expand via Colonization. Trade is gener-ally less lucrative than in scenarios like S2-01, where access to mari-time Trade Nodes is a lot easier, but it can still generate needed cash.
+
+> Muscovy is the strongest of the Russian princes, and can become a real empire once they see off their main rival to the North, the Re-public of ›Novgorod, and the remnants of the Mongol hordes.
+
+The Grand Duchy of ›Lithuania, with its Ruthenian lands, will likely be a region of conflict between the ›Muscovites and the ›Pol-ish, while the ›Ottomans will rival both of them for the steppes north of the Black Sea.
+
+The Balkans will be contested by ›Austria and the ›Ottomans, but the ›Polish also have dynastic claims to the ›Hungarian throne. And, who is to say that ›Austria will get the Holy Roman Empire all to themselves?
+]]
 Scenario_List['2-02'].variants = {
   { name = '3 Players', code = '3P', handler = 'Variant_1_Selected', age = 1, book = {2,2}, board = MAIN_BOARD_STATE.s2_02_4p, player_realms = {
     [REALM.ottomans] = { seat = 6, color = 'green', realm = {REALM. ottomans,'1444'}, start_missions = {'1A','1B','1C'}, start = true },
@@ -670,6 +734,15 @@ Scenario_List['2-02'].variants = {
   },
 }
 
+
+Scenario_List['2-03'].description = [[In this Scenario all players compete to gain Ownership of 4 Ob-jectives, which are key Mediterranean Provinces. Controlling any of these Provinces that are Lawfully Owned by an Opponent also counts for Victory purposes.
+
+Players should try to dominate the seas and coastlines to ensure Victory in the game, as this will improve their own mobility while also hindering that of their Opponents.
+
+The restricted play area creates fierce and intense competition right from the start. Short-term planning is crucial, since an un-checked Opponent can end the game at any moment. However, completely ignoring long-term planning will see you lose out if you are unable to get to the Objectives soon enough.
+
+This uneasy balance should see Alliances between players shifting dynamically as the board situation changes.
+]]
 Scenario_List['2-03'].variants = {
   { name = '5 Players', code = '5P', handler = 'Variant_1_Selected', age = 1, book = {2,3}, board = MAIN_BOARD_STATE.s2_03_5p, player_realms = {
     [REALM.venice] = { seat = 4, color = 'red', realm = {REALM.venice,'1444'}, start_missions = {'1A','1D','1F'}, add_missions = {'4O'}, rem_missions = {'2C','2H','4P'}, start = true },
@@ -724,6 +797,13 @@ Scenario_List['2-03'].variants = {
   },
 }
 
+
+Scenario_List['2-04'].description = [[This scenario starts in the middle of the Age of Revolutions and lasts for 3 Rounds, but it is not a very short scenario since there is a lot going on in Age IV.
+
+With Events triggering the spread of the Revolution, Grand Coa-litions, coups, and much more, this scenario should be action-packed and ripe for chaos and lots of player vs. player interaction. No Realm should escape unscathed in this game.
+
+Will the Revolution sweep the old monarchies aside? Will Na-poleon rise to power and form a new European Empire? Or, will the European Concert keep the revolutionary forces at bay?
+]]
 Scenario_List['2-04'].variants = {
 { name = '6 Players', code = '6P', handler = 'Variant_1_Selected', age = 4, book = {2,4}, board = MAIN_BOARD_STATE.s2_04, draw_per_round = 6, player_realms = {
     [REALM.prussia] = { name = 'Prussia', seat = 5, color = 'purple', realm = {REALM.prussia,'S204'}, no_missions = true, extra_mp = 4, prestige= 10, start = true },
@@ -767,7 +847,11 @@ Scenario_List['2-04'].variants = {
   }, powerstruggles = { PS_GUIDs.napoleonic_wars }, },
 }
 
-  Scenario_List['2-05'].variants = {
+
+Scenario_List['2-05'].description = [[This scenario pays tribute to the board game Here I Stand.
+It features some very unique styles of play for ›Protestant League and ›Papal States players. The ›Habsburg player may appear set to steamroll all before them, but they will find themselves beset by opponents on all sides. ›Papal States and ›Protestant League players will compete for religious domination, while the other 4 powers will need to conduct in-game diplomacy with care to prevent any one power from gaining too much strength. This is an advanced scenario, with additional setup and special rules, but is also quite rewarding and should hopefully excite players familiar with HiS or Virgin Queen, as well as anyone who enjoys asymmetric strategy games.
+]]
+Scenario_List['2-05'].variants = {
     { name = '6 Players', code = '6P', handler = 'Variant_1_Selected', age = 2, book = {2,5}, board = MAIN_BOARD_STATE.s2_05, player_realms = {
       [REALM.england] = { seat = 3, color = 'red', realm = {REALM.england,'S205'}, no_missions = true, extra_mp = 2, start = true },
       [REALM.france] = { seat = 4, color = 'blue', realm = {REALM.france,'S205'}, no_missions = true, extra_mp = 2, },
@@ -792,7 +876,12 @@ Scenario_List['2-04'].variants = {
     manpower = { EasternMap.krakow, EasternMap.lublin, EasternMap.sandomierz, EasternMap.warszawa,},
   },
 }
-  
+
+
+Scenario_List['2-06'].description = [[A challenging solo campaign, where you, as ›Byzantium, face over-whelming odds against the encroaching ›Ottoman forces and addi-tional threats from your long-standing rival in ›Venice. This scenario is recommended for experienced players who are comfortable start-ing with fewer resources than their Bot Opponents.
+
+Despite the difficult start, a successful ›Byzantine player will be able to make gains against the ›Ottomans, to reclaim their former heartland. Once a power base has been secured, goals can include re-claiming all of Anatolia or even avenging the Fourth Crusade. Should further success ensue, the player may turn their eyes West and seek to restore as much of the former Roman Empire as possible, although new Opponents in ›Spain and ›France may have something to say about that.
+]]
 Scenario_List['2-06'].variants = {
   { name = '1 Player', code = '1P', handler = 'Variant_1_Selected', age = 1, book = {2,6}, board = MAIN_BOARD_STATE.deluxe_1444, player_realms = {
     [REALM.byzantium] = { seat = 6, color = 'purple', realm = {REALM.byzantium,'S206'}, no_missions = true, locked = true, start = true  },
@@ -825,6 +914,9 @@ Scenario_List['2-06'].variants = {
   }, trade_add_tags = {'TradeStar'}, },
 }
 
+
+Scenario_List['2-07'].description = [[There may well be an alternative timeline, where ›Ulm's presence looms large way into the 21st century. Unfortunately for we fourth dimensional creatures that can only perceive a single timeline, we are not living that reality. Not since 1805 has ›Ulm made the headlines, and while headlines are still hard to come by, the After Action Report comic about ›Ulm's exploits in Europa Universalis III left a growing online community in its wake – much to the confusion of its original creator.
+]]
 Scenario_List['2-07'].variants = { 
   { name = 'Default Start', code = 'N', handler = 'Variant_1_Selected', age = 1, book = {2,7}, board = MAIN_BOARD_STATE.deluxe_1444, player_realms = {
     [REALM.ulm] = { seat = 6, color = 'purple', realm = {REALM.ulm,'1444'}, no_missions = true, locked = true, start = true },
@@ -846,12 +938,13 @@ Scenario_List['2-07'].variants = {
     {'41a-1', 2}, {'42a-1', 2}, {'43a-1', 2}, {'44a-1', 2}, {'453b', 2}, {'417-1', 2}, {'401-1', 2}, {'404-1', 2},
     {'41a-2', 1}, {'42a-2', 1}, {'43a-2', 1}, {'44a-2', 1}, {'452b', 1}, {'417-2', 1}, {'401-2', 1}, {'404-2', 1},
   }, manpower = { WesternMap.ferrara, WesternMap.siena, WesternMap.pfalz, WesternMap.frankfurt, },
-  DNPR_Green_L = { WesternMap.ferrara, },
-  DNPR_Orange_S = { WesternMap.siena, },
-  DNPR_Blue_L = { WesternMap.pfalz, },
-  DNPR_Pink_S = { WesternMap.frankfurt, }, 
-  empire = { ruler = REALM.austria, authority = 3, influence = {HRE_Influence_Map_Pos.rhineland, HRE_Influence_Map_Pos.westphalia, HRE_Influence_Map_Pos.saxony} },
-  curia = {REALM.none, REALM.austria, REALM.france, REALM.ulm, }, trade_add_tags = {'TradeStar'}, },
+     DNPR_Green_L = { WesternMap.ferrara, },
+     DNPR_Orange_S = { WesternMap.siena, },
+     DNPR_Blue_L = { WesternMap.pfalz, },
+     DNPR_Pink_S = { WesternMap.frankfurt, }, 
+     empire = { ruler = REALM.austria, authority = 3, influence = {HRE_Influence_Map_Pos.rhineland, HRE_Influence_Map_Pos.westphalia, HRE_Influence_Map_Pos.saxony} },
+     curia = {REALM.none, REALM.austria, REALM.france, REALM.ulm, }, trade_add_tags = {'TradeStar'},
+  },
   { name = 'Alternate Start', code = 'A', handler = 'Variant_2_Selected', age = 1, book = {2,7}, board = MAIN_BOARD_STATE.deluxe_1444, player_realms = {
     [REALM.ulm] = { seat = 6, color = 'purple', realm = {REALM.ulm,'1444'}, no_missions = true, locked = true, start = true },
     [REALM.austria] = { seat = 1, color = 'white', realm = {REALM.austria,'1444'}, locked = true, bot = true },
@@ -872,11 +965,11 @@ Scenario_List['2-07'].variants = {
     {'41a-1', 2}, {'42a-1', 2}, {'43a-1', 2}, {'44a-1', 2}, {'453b', 2}, {'417-1', 2}, {'401-1', 2}, {'414-1', 2},
     {'41a-2', 1}, {'42a-2', 1}, {'43a-2', 1}, {'44a-2', 1}, {'452b', 1}, {'417-2', 1}, {'401-2', 1}, {'414-2', 1},
   }, manpower = { WesternMap.ferrara, WesternMap.siena, WesternMap.pfalz, WesternMap.frankfurt, },
-        DNPR_Green_L = { WesternMap.ferrara, },
-        DNPR_Orange_S = { WesternMap.siena, },
-        DNPR_Blue_L = { WesternMap.pfalz, },
-        DNPR_Pink_S = { WesternMap.frankfurt, }, 
-        empire = { ruler = REALM.austria, authority = 3, influence = {HRE_Influence_Map_Pos.rhineland, HRE_Influence_Map_Pos.westphalia, HRE_Influence_Map_Pos.saxony} },
-        curia = {REALM.none, REALM.austria, REALM.venice, REALM.ulm, }, trade_add_tags = {'TradeStar'}, 
+     DNPR_Green_L = { WesternMap.ferrara, },
+     DNPR_Orange_S = { WesternMap.siena, },
+     DNPR_Blue_L = { WesternMap.pfalz, },
+     DNPR_Pink_S = { WesternMap.frankfurt, }, 
+     empire = { ruler = REALM.austria, authority = 3, influence = {HRE_Influence_Map_Pos.rhineland, HRE_Influence_Map_Pos.westphalia, HRE_Influence_Map_Pos.saxony} },
+     curia = {REALM.none, REALM.austria, REALM.venice, REALM.ulm, }, trade_add_tags = {'TradeStar'}, 
   },
 }
