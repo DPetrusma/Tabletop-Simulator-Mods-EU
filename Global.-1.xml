@@ -278,36 +278,96 @@
         </Button>
         <VerticalScrollView id="option_list" flexibleHeight="1" scrollSensitivity="10" color="rgba(0,0,0,0)" noScrollbars="false" verticalScrollbarVisibility="AutoHideAndExpandViewport" movementType="Elastic">
           <VerticalLayout id="option_panel" childForceExpandHeight="False" height="1200">
-            <Button class="option" id="opt01">
-              <Text id="opt01-text" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
+            <HorizontalLayout class="option" id="opt1">
+              <Text id="opt1-desc" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
                 Option 1
               </Text>
-            </Button>
-            <Button class="varoptioniant" id="opt02">
-              <Text id="opt02-text" fontSize="20" color="White" alignment="MiddleLeft">
+              <Button class="option" id="opt1-btn">
+                <Text id="opt1-text" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
+                  On/Off
+                </Text>
+              </Button>
+            </HorizontalLayout>
+            <HorizontalLayout class="option" id="opt2">
+              <Text id="opt2-desc" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
                 Option 2
               </Text>
-            </Button>
-            <Button class="option" id="opt03">
-              <Text id="opt03-text" fontSize="20" color="White" alignment="MiddleLeft">
+              <Button class="option" id="opt2-btn">
+                <Text id="opt1-text" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
+                  On/Off
+                </Text>
+              </Button>
+            </HorizontalLayout>
+            <HorizontalLayout class="option" id="opt3">
+              <Text id="opt3-desc" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
                 Option 3
               </Text>
-            </Button>
-            <Button class="option" id="opt04">
-              <Text id="opt04-text" fontSize="20" color="White" alignment="MiddleLeft">
+              <Button class="option" id="opt3-btn">
+                <Text id="opt3-text" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
+                  On/Off
+                </Text>
+              </Button>
+            </HorizontalLayout>
+            <HorizontalLayout class="option" id="opt4">
+              <Text id="opt4-desc" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
                 Option 4
               </Text>
-            </Button>
-            <Button class="option" id="opt05">
-              <Text id="opt05-text" fontSize="20" color="White" alignment="MiddleLeft">
+              <Button class="option" id="opt4-btn">
+                <Text id="opt4-text" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
+                  On/Off
+                </Text>
+              </Button>
+            </HorizontalLayout>
+            <HorizontalLayout class="option" id="opt5">
+              <Text id="opt5-desc" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
                 Option 5
               </Text>
-            </Button>
-            <Button class="option" id="opt06">
-              <Text id="opt06-text" fontSize="20" color="White" alignment="MiddleLeft">
+              <Button class="option" id="opt5-btn">
+                <Text id="opt5-text" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
+                  On/Off
+                </Text>
+              </Button>
+            </HorizontalLayout>
+            <HorizontalLayout class="option" id="opt6">
+              <Text id="opt6-desc" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
                 Option 6
               </Text>
-            </Button>
+              <Button class="option" id="opt6-btn">
+                <Text id="opt6-text" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
+                  On/Off
+                </Text>
+              </Button>
+            </HorizontalLayout>
+            <HorizontalLayout class="option" id="opt7">
+              <Text id="opt7-desc" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
+                Option 7
+              </Text>
+              <Button class="option" id="opt7-btn">
+                <Text id="opt7-text" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
+                  On/Off
+                </Text>
+              </Button>
+            </HorizontalLayout>
+            <HorizontalLayout class="option" id="opt8">
+              <Text id="opt8-desc" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
+                Option 8
+              </Text>
+              <Button class="option" id="opt8-btn">
+                <Text id="opt8-text" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
+                  On/Off
+                </Text>
+              </Button>
+            </HorizontalLayout>
+            <HorizontalLayout class="option" id="opt9">
+              <Text id="opt9-desc" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
+                Option 9
+              </Text>
+              <Button class="option" id="opt9-btn">
+                <Text id="opt9-text" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
+                  On/Off
+                </Text>
+              </Button>
+            </HorizontalLayout>
           </VerticalLayout>
         </VerticalScrollView>
       </VerticalLayout>
