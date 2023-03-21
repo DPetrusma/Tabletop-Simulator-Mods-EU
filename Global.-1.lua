@@ -195,7 +195,7 @@ Milestone_Card_GUIDs = {
 }
 
 PS_GUIDs = {
-  holy_league = 'e92f57', struggle_for_the_balkans = 'f1aae3', thirty_years_war = '6fdd0a', italian_wars = '5c7165', great_northern_war = '192497', 
+  holy_league = 'e92f57', struggle_for_the_balkans = 'f1aae3', thirty_years_war = '6fdd0a', italian_wars = '5c7165', great_northern_war = '192497',
   war_of_spanish_succession = '7d2122', distant_trade = 'a40cf0', deluge = '64c694', seven_years_war = '1e3668', napoleonic_wars = 'a8bd78'
 }
 
@@ -254,7 +254,7 @@ Setup_Bag_Item_GUIDs = {
              vassal = 'a2b1ce', s_town = '57dd90', l_town = '3eacd6', claim = 'fdaa7b', alliance = '31e859', marriage = '6f94d9',
              war = 'b0560c', tag_chit = '1b9ae8', merchant_1 = 'f02763', merchant_2 = '5ec83e', merchant_3 = '16ce9d',
              army_1 = 'f49823', army_2 = 'b2ccc9', army_3 = '390ccb', fleet = '1d9350' },
-  purple = { stability = '7659ef', ruler_general = 'abc742', ship = '89bf50', soldier = '3735aa', cube = '168120', 
+  purple = { stability = '7659ef', ruler_general = 'abc742', ship = '89bf50', soldier = '3735aa', cube = '168120',
              vassal = 'ef2a36', s_town = 'b0d827', l_town = 'cbcea5', claim = 'dbc249', alliance = 'f3661e', marriage = '955f8d',
              war = 'd82571', tag_chit = '1f43f9', merchant_1 = 'ff439f', merchant_2 = '0cceef', merchant_3 = 'd8da5c',
              army_1 = '18b918', army_2 = '84a1a8', army_3 = 'a3fbd1', fleet = '66a7e9' },
@@ -269,8 +269,8 @@ HRE_Influence_Cube_GUIDs = {
 }
 
 DNPR_Capital_GUIDs = {
-  orange_l = '17512d', orange_s = '13d1e0', green_l = '262f53', green_s = '6e7d49', 
-  pink_l = '175553', pink_s = 'e1faad', blue_l = 'e75acb', blue_s = '5df33c', 
+  orange_l = '17512d', orange_s = '13d1e0', green_l = '262f53', green_s = '6e7d49',
+  pink_l = '175553', pink_s = 'e1faad', blue_l = 'e75acb', blue_s = '5df33c',
 }
 
 
@@ -289,7 +289,7 @@ Event_Card_Positions = {
 }
 
 Discard_Positions = {
-  trade = {-27.32, 2, 12.16}, admin = {-27.38, 2, 9.98}, diplo = {-27.38, 2, 7.78}, war = {-27.38, 2, 5.52}
+  trade = {-27.32, 2, 12.16}, admin = {-27.38, 2, 9.98}, diplo = {-27.38, 2, 7.78}, war = {-27.38, 2, 5.52}, event = {-27.32, 2, 3.36}
 }
 
 Milestone_Deck_Positions = {
@@ -310,7 +310,7 @@ HRE_Authority_Positions = {
 }
 
 HRE_Influence_Map_Pos = {
-  rhineland = {-0.12, 0.27}, westphalia = {-0.69, 2.07}, saxony = {1.93, 1.92}, 
+  rhineland = {-0.12, 0.27}, westphalia = {-0.69, 2.07}, saxony = {1.93, 1.92},
   central_italy = {1.87, -5.73}, lombardy = {-1.35, -3.34}, bavaria_swabia = {0.93, 0.36},
 }
 
@@ -350,7 +350,7 @@ Main_Tableau_Offset_Positions = {
 }
 
 Main_Tableau_Local_Positions = { ['religion'] = {0.84, 2, 0.78}, ['ruler'] = {1.30, 2, 1.69}, ['missions'] = {-2.57, 2, -0.75}, ['missions_left'] = {2.57, 2, -0.75},
-  ['starting'] = {1.30, 2, 3.1}, ['income_token'] = {0.30, 2, 1.69}, ['tuck_zone'] = {0.00, -0.25, 1.09}, 
+  ['starting'] = {1.30, 2, 3.1}, ['income_token'] = {0.30, 2, 1.69}, ['tuck_zone'] = {0.00, -0.25, 1.09},
   ['manpower_1'] = { 1.16, 2, -0.38},  ['manpower_2'] = { 0.95, 2, -0.38},  ['manpower_3'] = { 1.16, 2, -0.24},  ['manpower_4'] = { 0.95, 2, -0.24},
   ['manpower_5'] = { 1.16, 2, -0.09},  ['manpower_6'] = { 0.95, 2, -0.09},  ['manpower_7'] = { 1.16, 2,  0.05},  ['manpower_8'] = { 0.95, 2,  0.05},
   ['manpower_9'] = { 0.74, 2, -0.38}, ['manpower_10'] = { 0.74, 2, -0.24}, ['manpower_11'] = { 0.74, 2, -0.09}, ['manpower_12'] = { 0.74, 2,  0.05},
@@ -385,7 +385,7 @@ Local_Large_Town_Positions = {
 }
 
 Local_Small_Town_Positions = {
-  { 0.521, -0.72}, { 0.276, -0.72}, { 0.018, -0.72}, { -0.228, -0.72}, { -0.488, -0.72}, { -0.739, -0.72}, { -0.996, -0.72}, { -1.241, -0.72}, { -1.503, -0.72}, { -1.747, -0.72}, 
+  { 0.521, -0.72}, { 0.276, -0.72}, { 0.018, -0.72}, { -0.228, -0.72}, { -0.488, -0.72}, { -0.739, -0.72}, { -0.996, -0.72}, { -1.241, -0.72}, { -1.503, -0.72}, { -1.747, -0.72},
   { 0.519, -0.47}, { 0.267, -0.47}, { 0.019, -0.47}, { -0.231, -0.47}, { -0.489, -0.47}, { -0.743, -0.47}, { -0.991, -0.47}, { -1.246, -0.47}, { -1.495, -0.47}, { -1.749, -0.47}
 }
 
@@ -395,11 +395,11 @@ Local_Vassal_Positions = {
 { -1.241, 0.195}, { -1.241, 0.195}, { -1.498, 0.195}, { -1.498, 0.195}, { -1.752, 0.195}, { -1.752, 0.195}
 }
 
-Military_Tableau_Local_Positions = { 
+Military_Tableau_Local_Positions = {
   ['upper_1']  = { 0.61, 1, -0.44},  ['upper_2'] = { 0.25, 1, -0.44}, ['upper_3'] = { 0.61, 1, -0.18}, ['upper_4'] = { 0.25, 1, -0.18},
   ['middle_1'] = { 0.61, 1, 0.08},  ['middle_2'] = { 0.25, 1, 0.08}, ['middle_3'] = { 0.61, 1, 0.26}, ['middle_4'] = { 0.25, 1, 0.26},
   ['lower_1']  = { 0.61, 1, 0.52},   ['lower_2'] = { 0.25, 1, 0.52},  ['lower_3'] = { 0.61, 1, 0.67},  ['lower_4'] = { 0.25, 1, 0.67},
-  ['tuck_zone'] = {0.00, -0.25, 1.09}, 
+  ['tuck_zone'] = {0.00, -0.25, 1.09},
 }
 
 
@@ -412,9 +412,9 @@ function onLoad()
   local btn = getObjectFromGUID(Setup_Button_GUID)
   if btn then
     btn.setPosition({ 0, -0.7, 0})
-    Notes.setNotes("Check the [b]Notebook[/b] for details on usage of this module")
+    Notes.setNotes("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCheck the [b]Notebook[/b] for details on usage of this module")
   end
-  
+
   -- Object Refs
   Removed_Components_Bag = getObjectFromGUID(Removed_Components_Bag_GUID)
 
@@ -448,11 +448,6 @@ function onLoad()
 end
 
 
---[[ The onUpdate event is called once per frame. --]]
-function onUpdate()
-
-end
-
 
 --[[ ---------------------------------
        Add & Remove Physical Buttons
@@ -485,9 +480,9 @@ function SetupButtonInit()
       position[1] = -9
     end
     if scenario.unavailable then
-      button_parameters.color = {r=0.6, g=0.6, b=0.6} 
+      button_parameters.color = {r=0.6, g=0.6, b=0.6}
     else
-      button_parameters.color = {r=1, g=1, b=1} 
+      button_parameters.color = {r=1, g=1, b=1}
     end
     if scenario.tooltip then
       button_parameters.tooltip = scenario.tooltip
@@ -530,9 +525,9 @@ function VariantButtonInit()
   for i, variant in ipairs(Scenario_List[Scenario].variants) do
     local position = { 0,2,0 }
     if variant.unavailable then
-      button_parameters.color = {r=0.6, g=0.6, b=0.6} 
+      button_parameters.color = {r=0.6, g=0.6, b=0.6}
     else
-      button_parameters.color = {r=1, g=1, b=1} 
+      button_parameters.color = {r=1, g=1, b=1}
     end
     if variant.tooltip then
       button_parameters.tooltip = variant.tooltip
@@ -577,8 +572,8 @@ function BotButtonInit()
 
   button_parameters.click_function = "StartGameButtonPressed"
   button_parameters.label = "Start Game"
-  button_parameters.font_color = {r=0.8, g=0.8, b=0.8} 
-  button_parameters.color = {r=0.0, g=0.0, b=0.4} 
+  button_parameters.font_color = {r=0.8, g=0.8, b=0.8}
+  button_parameters.color = {r=0.0, g=0.0, b=0.4}
   button_parameters.function_owner = nil
   button_parameters.position = {0, 2, -10.5}
   button_parameters.rotation = {0, 180, 0}
@@ -590,9 +585,9 @@ function BotButtonInit()
   button_parameters.width = 8000
   button_parameters.height = 800
   button_parameters.font_size = 450
-  button_parameters.font_color = {r=0.0, g=0.0, b=0.0} 
-  button_parameters.color = {r=1, g=1, b=1} 
-  
+  button_parameters.font_color = {r=0.0, g=0.0, b=0.0}
+  button_parameters.color = {r=1, g=1, b=1}
+
   local variant_list = Scenario_List[Scenario].variants
   local single_variant = false
   if #variant_list == 1 then
@@ -603,7 +598,7 @@ function BotButtonInit()
     if single_variant or (variant.code == Scenario_Variant) then
       for ref, realm in pairs(variant.player_realms) do
         local position = { 0,2,0 }
-        button_parameters.color = {r=1, g=1, b=1} 
+        button_parameters.color = {r=1, g=1, b=1}
         local realm_name = (realm.name or REALM_NAME[ref])
         button_parameters.click_function = 'Realm_Button_Pressed_' .. counter
         if realm.bot then
@@ -616,11 +611,11 @@ function BotButtonInit()
         if realm.locked then
           if realm.inactive then
             realm_name = realm_name .. ' (Inactive)'
-            button_parameters.color = {r=0.6, g=0.6, b=0.6} 
+            button_parameters.color = {r=0.6, g=0.6, b=0.6}
             table.insert(Bot_Locked, true)
           else
             realm_name = realm_name .. ' (Locked)'
-            button_parameters.color = {r=0.6, g=0.6, b=0.6} 
+            button_parameters.color = {r=0.6, g=0.6, b=0.6}
             table.insert(Bot_Locked, true)
           end
         else
@@ -825,7 +820,7 @@ function Setup_Game()
 
   -- Handle Manual Setup
   if Scenario == '0-00' then
-    local player_config = 
+    local player_config =
     {
       {seat = 1, color = 'blue' },
       {seat = 2, color = 'yellow' },
@@ -850,7 +845,7 @@ function Setup_Game()
     hiddenzone.destruct()
     local mainboard = getObjectFromGUID(Main_Board_GUID)
     mainboard.interactable = true
-    
+
     DestructByGUID({ Deck_Shuffler_Zone_1_GUID, Deck_Shuffler_Zone_2_GUID, Event_Deck_Zone_GUID })
     DestructByGUID(Mission_Deck_Zone_GUIDs)
     DestructByGUID(Reference_Zone_GUIDs)
@@ -859,7 +854,6 @@ function Setup_Game()
     return 1
   end
 
-  
   local scenario_data = {}
   local variant_list = Scenario_List[Scenario].variants
   if #variant_list == 1 then
@@ -884,7 +878,7 @@ function Setup_Game()
   end
 
   Scenario_Age = (scenario_data.age or 1)
-  
+
   -- Configure Bots
   local counter = 1
   for _, player in pairs(players) do
@@ -898,7 +892,7 @@ function Setup_Game()
   if scenario_data.draw_per_round then
     event_config.draw_per_round = scenario_data.draw_per_round
   else
-    event_config.draw_per_round = counter 
+    event_config.draw_per_round = counter
   end
   if scenario_data.reveal_per_round then
     event_config.reveal_per_round = scenario_data.reveal_per_round
@@ -908,12 +902,12 @@ function Setup_Game()
 
   if TEST_MODE then log('Game configured to draw ' .. (event_config.draw_per_round or '?') .. ' cards per round.') end
 
-  Idea_Config = { 
-    admin = {{Idea_Card_GUIDs.admin.tolerance, {}}, '', ''}, 
-    diplo = {{Idea_Card_GUIDs.diplo.quest_for_the_new_world, {}}, '', ''}, 
+  Idea_Config = {
+    admin = {{Idea_Card_GUIDs.admin.tolerance, {}}, '', ''},
+    diplo = {{Idea_Card_GUIDs.diplo.quest_for_the_new_world, {}}, '', ''},
     war =   {{Idea_Card_GUIDs.war.cannons, {}}, '', ''}
   }
-  
+
   if Scenario == '1-00' then
     broadcastToAll("Setting up: [u]Introductory Scenario (3 players)[/u]", {1,1,1})
 
@@ -932,7 +926,7 @@ function Setup_Game()
     pos[3] = pos[3] - 2.5
     PlaceCardsByPrefixOrTag(deck_war, pos, rot, {'MIL-01-', 'MIL-03-', 'MIL-05-', 'MIL-06-', 'MIL-09-'})
     pos[3] = pos[3] - 2.5
-    
+
     -- Religion Token
     PlaceObjectsFromBag({ WesternMapReligion.andalucia }, Bag_GUIDs['cat_div'], true)
 
@@ -997,13 +991,13 @@ function Setup_Game()
       PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
 
     end
-    
+
     CoreScenarioSetup(scenario_data)
-   
+
     -- Remind Netherlands to decide which towns to use
     broadcastToAll("Netherlands player: Remember choose your two starting towns", {1,1,1})
 
-      
+
   elseif Scenario == '1-03' then
 
     if Scenario_Variant == '3P' then
@@ -1023,7 +1017,7 @@ function Setup_Game()
     PlaceObjectsFromBag({ WesternMapReligion.andalucia }, Bag_GUIDs['cat_div'], false)
 
     CoreScenarioSetup(scenario_data)
-    
+
 
   elseif Scenario == '1-04' then
     if Scenario_Variant == '2P' then
@@ -1052,12 +1046,12 @@ function Setup_Game()
     else
       broadcastToAll('Scenario variant not found: ' .. Scenario_Variant)
     end
-    
+
     -- Religion
     PlaceObjectsFromBag({ WesternMapReligion.andalucia }, Bag_GUIDs['cat_div'], false)
 
     CoreScenarioSetup(scenario_data)
-    
+
   elseif Scenario == '1-05' then
 
     if Scenario_Variant == '4P' then
@@ -1112,13 +1106,13 @@ function Setup_Game()
       end
 
     end
-    
+
     -- Left HRE markers
     PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
 
     CoreScenarioSetup(scenario_data)
-   
-    
+
+
   elseif Scenario == '2-02' then
 
     if Scenario_Variant == '3P' then
@@ -1198,8 +1192,8 @@ function Setup_Game()
     PlaceObjectsFromBag( objective_positions, Bag_GUIDs['occ_bat'], false)
 
     CoreScenarioSetup(scenario_data)
-    
-    
+
+
   elseif Scenario == '2-04' then
     broadcastToAll("Setting up: [u]Napoleon Rising (6 players)[/u]", {1,1,1})
 
@@ -1207,8 +1201,8 @@ function Setup_Game()
     PlaceObjectsFromBag({ {-2.54, 2.70}, {-0.73, -2.29}, {-0.19, -3.26} }, Bag_GUIDs['hre_man'], false)
 
     CoreScenarioSetup(scenario_data)
-      
-    
+
+
   elseif Scenario == '2-05' then
     broadcastToAll("Setting up: [u]Here I Stand Once More (6 players)[/u]", {1,1,1})
 
@@ -1243,7 +1237,7 @@ function Setup_Game()
     PlaceCardsByGUIDs(Idea_Deck_GUIDs.diplo, {Idea_Card_GUIDs.diplo.quest_for_the_new_world}, pos, rot )
 
     CoreScenarioSetup(scenario_data)
-    
+
     -- TODO: Remove when MP is in treasury
     -- PlaceObjectsFromBag( {WesternMap.venezia}, Bag_GUIDs['rev_man'], true)
 
@@ -1254,7 +1248,7 @@ function Setup_Game()
     elseif Scenario_Variant == 'A' then
       broadcastToAll("Setting up: [u]Glory for Ulm (solo with alternate start)[/u]", {1,1,1})
     end
-    
+
     CoreScenarioSetup(scenario_data)
 
     local seat = players[REALM.ulm].seat
@@ -1262,7 +1256,7 @@ function Setup_Game()
     PlaceGuidObjectFromBag( { new_pos[1], new_pos[3] }, Action_Deck_GUIDs.diplo, false, '04259f', Main_Tableau_GUIDs[seat])
     PlaceGuidObjectFromBag( { new_pos[1], new_pos[3] }, Action_Deck_GUIDs.diplo, false, '545fdd', Main_Tableau_GUIDs[seat])
 
-    
+
   else
     broadcastToAll("Scenario not handled: " .. (Scenario or '') , {1,1,1})
   end
@@ -1311,8 +1305,8 @@ function Setup_Game()
 
   if TEST_MODE then log('Starting bot deck coroutine') end
   startLuaCoroutine(Global, 'SetupBotDecks')
-  
-  
+
+
   if TEST_MODE then log('Shuffing cards in zone 1') end
   local shuffler = getObjectFromGUID(Deck_Shuffler_Zone_1_GUID)
   local decks_to_shuffle = shuffler.getObjects()
@@ -1342,11 +1336,11 @@ function Setup_Game()
   if TEST_MODE then log('Preparing Milestones') end
     PrepareMilestones(scenario_data)
   if TEST_MODE then log('Milestone script completed') end
-  
+
   if TEST_MODE then log('Preparing Idea Cards') end
     PrepareIdeaDisplay(scenario_data)
   if TEST_MODE then log('Idea Card script completed') end
-  
+
   -- Lock Rules & References
   local references = getObjectsWithTag('Reference')
   local rules = getObjectsWithTag('Rules')
@@ -1367,7 +1361,7 @@ function Setup_Game()
       local flip = true
       if i > (event_config.reveal_per_round + 1 ) then
         flip = false
-      end 
+      end
       event_deck.takeObject({
         position          = pos,
         flip              = flip
@@ -1473,7 +1467,7 @@ function CoreScenarioSetup(scenario_data)
       PlaceScenarioBook(Scenario_Book_2_GUID, scenario_data.book[2])
     end
   end
-  
+
   if scenario_data.ideas then
     if scenario_data.ideas.admin then
       Idea_Config.admin = scenario_data.ideas.admin
@@ -1485,42 +1479,42 @@ function CoreScenarioSetup(scenario_data)
       Idea_Config.war = scenario_data.ideas.war
     end
   end
-  
+
   ManageHandsAndPrestige(players)
   for _, p in pairs(players) do
     PlaceTableausAndBags(p.seat, p.color)
   end
-  
+
   if TEST_MODE then log('Preparing Event Deck') end
   PrepareEventDecks(scenario_data)
 
   if TEST_MODE then log('Preparing Trade Deck') end
   PrepareTradeDeck(scenario_data)
-  
+
   if TEST_MODE then log('Placing extra Manpower') end
   if scenario_data.manpower then
     PlaceObjectsFromBag( scenario_data.manpower, Bag_GUIDs['rev_man'], true)
   end
-  
+
   if TEST_MODE then log('Setting up Papal Curia') end
   SetupPapalCuria(scenario_data)
-  
+
   if TEST_MODE then log('Setting up HRE') end
   SetupHRE(scenario_data)
-  
+
   if TEST_MODE then log('Placing DNPRs') end
     PlaceDNPRs(scenario_data)
-  
+
   -- Realms
   for _, p in pairs(players) do
     SetupRealm(p)
   waitFrames(15)
   end
-  
+
   if TEST_MODE then log('Preparing Missions') end
   ProcessMissionDecks(scenario_data)
   waitFrames(5)
-  
+
   if TEST_MODE then log('Preparing Power Struggle deck') end
   PreparePowerStruggles(scenario_data)
 
@@ -1580,7 +1574,7 @@ function SetupRealm(player)
         First_Player_Marker.setRotationSmooth(Main_Tableau_Rotations[seat])
     end
   end
-  
+
   -- Remove components unused by bot players
   if is_bot then
     main_tableau.setState(2)
@@ -1595,7 +1589,7 @@ function SetupRealm(player)
     table.insert(guids_for_removal, Figurine_GUIDs[color][4])
     table.insert(guids_for_removal, Army_Tableau_GUIDs[color])
     table.insert(guids_for_removal, Fleet_Tableau_GUIDs[color])
-        
+
     for _, v in ipairs(guids_for_removal) do
       local token = getObjectFromGUID(v)
       Removed_Components_Bag.putObject(token)
@@ -1627,7 +1621,7 @@ function SetupRealm(player)
       type              = 'Die_6',
       position          = new_pos,
     })
-    
+
 
   elseif player.no_missions then
     -- Get no deck
@@ -1665,10 +1659,10 @@ function SetupRealm(player)
       TakeCardsByCodes(realmTable.events, new_pos, Main_Tableau_Rotations[seat])
     end
   end
-  
+
   -- Religion
   if is_bot then
-    new_pos = main_tableau.positionToWorld(Bot_Tableau_Local_Positions.religion)  
+    new_pos = main_tableau.positionToWorld(Bot_Tableau_Local_Positions.religion)
   else
     new_pos = main_tableau.positionToWorld(Main_Tableau_Local_Positions.religion)
   end
@@ -1696,7 +1690,7 @@ function SetupRealm(player)
     PlaceObjectsFromBag({ { new_pos[1], new_pos[3] } }, religion_bag_guid, religion_flip, false, main_tableau)
   end
 
-  
+
   -- Monarch Power
   if is_bot then
     local bot_power = realmTable.bot_power
@@ -1753,7 +1747,7 @@ function SetupRealm(player)
       token.setPositionSmooth(new_pos)
     end
   end
-  
+
   waitFrames(10)
 
   -- Flip towns & vassals in unrest
@@ -1781,7 +1775,7 @@ function SetupRealm(player)
     PlaceObjectsFromList( realmTable['figurines'], Figurine_GUIDs, color, false)
   end
 
-  
+
   -- Populate Army Positions
   positions = {}
   local total_manpower = CalculateTotalManpower(realmTable, color, is_bot)
@@ -1797,13 +1791,13 @@ function SetupRealm(player)
       AppendTableauPositions(positions, realmTable['army1'][2], army_tableau, Military_Tableau_Local_Positions, 'middle_', false)
       AppendTableauPositions(positions, realmTable['army1'][3], army_tableau, Military_Tableau_Local_Positions, 'lower_', false)
     end
-  
+
     if realmTable['army2'] ~= 0 then
       AppendTableauPositions(positions, realmTable['army2'][1], army_tableau, Military_Tableau_Local_Positions, 'upper_', true)
       AppendTableauPositions(positions, realmTable['army2'][2], army_tableau, Military_Tableau_Local_Positions, 'middle_', true)
       AppendTableauPositions(positions, realmTable['army2'][3], army_tableau, Military_Tableau_Local_Positions, 'lower_', true)
     end
-  
+
     if realmTable['army3'] ~= 0 then
       AppendTableauPositions(positions, realmTable['army3'][1], fleet_tableau, Military_Tableau_Local_Positions, 'upper_', false)
       AppendTableauPositions(positions, realmTable['army3'][2], fleet_tableau, Military_Tableau_Local_Positions, 'middle_', false)
@@ -1834,7 +1828,7 @@ function SetupRealm(player)
       PlaceObjectsFromBag( positions, Bag_GUIDs['rev_man'], true, false, main_tableau)
     else
       positions = RepeatPosition(main_tableau.positionToWorld(Main_Tableau_Local_Positions.treasury_4), realmTable['extra_manpower'])
-      PlaceObjectsFromBag( positions, Bag_GUIDs['rev_man'], true, false, main_tableau)   
+      PlaceObjectsFromBag( positions, Bag_GUIDs['rev_man'], true, false, main_tableau)
     end
   end
 
@@ -1962,7 +1956,7 @@ function PlaceTableausAndBags(seat, color)
       height = 1.4
     end
     if TEST_MODE then log('Placing Bag: ' .. color .. ' --> ' .. name) end
-    new_pos = GetOffset(pos, Main_Tableau_Offset_Positions[name], seat, height) 
+    new_pos = GetOffset(pos, Main_Tableau_Offset_Positions[name], seat, height)
     obj = bag.takeObject({
       position          = new_pos,
       rotation          = rot,
@@ -1971,7 +1965,7 @@ function PlaceTableausAndBags(seat, color)
     obj.setLock(lock)
     waitFrames(5)
   end
-  
+
 end
 
 
@@ -2149,13 +2143,13 @@ function MoveBetweenDecksByNamesOrTags(deck_source, deck_destination, names_or_t
         waitFrames(3)
       end
     end
-    
+
   end
 end
 
 -- Place cards from a deck to a single position by GUIDs
 function PlaceCardsByGUIDs(deck_guid, guid_list, position, rotation)
-  local deck = getObjectFromGUID(deck_guid) 
+  local deck = getObjectFromGUID(deck_guid)
   for _, guid in ipairs(guid_list) do
     deck.takeObject({
       position = position,
@@ -2463,20 +2457,20 @@ function SetupBotDecks()
       bot_decks[3].shuffle()
       bot_decks[4].shuffle()
       waitFrames(15)
-      
+
       local current_age_deck = bot_decks[4]
       if Scenario_Age > 1 then
-        Removed_Components_Bag.putObject(bot_decks[4]) 
+        Removed_Components_Bag.putObject(bot_decks[4])
         current_age_deck = bot_decks[1]
         waitFrames(1)
       end
       if Scenario_Age > 2 then
-        Removed_Components_Bag.putObject(bot_decks[1]) 
+        Removed_Components_Bag.putObject(bot_decks[1])
         current_age_deck = bot_decks[2]
         waitFrames(1)
       end
       if Scenario_Age > 3 then
-        Removed_Components_Bag.putObject(bot_decks[2]) 
+        Removed_Components_Bag.putObject(bot_decks[2])
         current_age_deck = bot_decks[3]
         waitFrames(1)
       end
@@ -2574,7 +2568,7 @@ function GetObjectsByPosAndTags(positions, tags)
       end
     end
   end
-  
+
   local objects_found = {}
   for _, position in ipairs(positions) do
     local zone = spawnObject({
@@ -2605,7 +2599,7 @@ function PrepareIdeaDisplay(scenario_data)
   local war_deck = getObjectFromGUID(Idea_Deck_GUIDs.war)
   local future_deck = getObjectFromGUID(Idea_Deck_GUIDs.future)
   local bot_ideas = {}
-  
+
   for name, realm in pairs(scenario_data.player_realms) do
     if realm.bot then
       bot_ideas[name] = { admin = 0, diplo = 0, war = 0 }
@@ -2660,7 +2654,7 @@ function PrepareIdeaDisplay(scenario_data)
             local positions2d = {}
             local bag_guids = {}
             for j, realm in ipairs(idea[2]) do
-              table.insert(positions2d, { 
+              table.insert(positions2d, {
                 (idea_pos[1] + 0.80 - ( ( (j-1) % 3 ) * 0.45) ),
                 (idea_pos[3] - 0.50 + ( math.floor( (j-1) / 3 ) * 0.45) )
               })
@@ -2677,7 +2671,7 @@ function PrepareIdeaDisplay(scenario_data)
       end
     end
   end
-  
+
   -- Add markers for bot ideas
   for name, value in pairs(bot_ideas) do
     local color =  scenario_data.player_realms[name].color
@@ -2703,7 +2697,7 @@ function PrepareIdeaDisplay(scenario_data)
           else
             bag.takeObject({
               position          = new_pos,
-              rotation          = new_rot, 
+              rotation          = new_rot,
               smooth            = true,
               flip              = false,
             })
@@ -2758,7 +2752,7 @@ function PrepareMilestones(scenario_data)
     future_ages = { }
     current_age = 'age4'
   end
-  
+
   for i, deck_type in ipairs({'eco', 'exp', 'pol', 'war'}) do
     local deck = getObjectFromGUID(Milestone_Deck_GUIDs[current_age][deck_type])
     if deck ~= nil then
@@ -3040,7 +3034,7 @@ function PlaceObjectsFromBag(positions2d, bag_guid, flip, tag, rotation_referenc
   elseif positions2d == {} then
     return
   end
-    
+
   local newRot = {0.00, 180.00, 0.00}
     if flip then
     newRot[3] = 180.00
@@ -3049,7 +3043,7 @@ function PlaceObjectsFromBag(positions2d, bag_guid, flip, tag, rotation_referenc
     local rot = rotation_reference.getRotation()
     newRot[2] = rot[2]
   end
- 
+
   for _,pos in ipairs(positions2d) do
     local obj = getObjectFromGUID(bag_guid)
     if obj ~= nil then
@@ -3073,7 +3067,7 @@ function PlaceObjectsFromBag(positions2d, bag_guid, flip, tag, rotation_referenc
           smooth            = true
         })
       end
-      
+
       waitFrames(3)
     end
   end
@@ -3124,7 +3118,7 @@ function TransferMissionCards(player, deck, prefix_list)
             }))
           else
             log('Could not find card with prefix: ' .. prefix)
-          end 
+          end
         else
           local guid = GetGUIDFromPrefix(deck, prefix)
           if guid then
@@ -3134,7 +3128,7 @@ function TransferMissionCards(player, deck, prefix_list)
             }))
           else
             log('Could not find card with prefix: ' .. prefix)
-          end 
+          end
         end
       end
       break
@@ -3155,7 +3149,7 @@ function PlaceCardByPrefix(position2d, deck_guid, prefix, rotation_reference, fl
       newRot[2] = (newRot[2] + rotation_offset) % 360
     end
   end
-  
+
   local obj = getObjectFromGUID(deck_guid)
   if obj ~= nil then
     local newPos = { position2d[1], 2.0, position2d[2]}
@@ -3174,7 +3168,7 @@ function PlaceCardByPrefix(position2d, deck_guid, prefix, rotation_reference, fl
     else
       log('Could not find card with prefix: ' .. prefix)
     end
-    
+
     waitFrames(3)
   end
 end
@@ -3217,7 +3211,7 @@ function CalculateTotalManpower(realmTable, color, is_bot)
   local l_towns = #realmTable['l_towns']
   local s_towns = #realmTable['s_towns']
   local vassals = #realmTable['vassals']
-  
+
   if color == HRE_Config.ruler then
     total_manpower = total_manpower + HRE_Config.authority
   end
@@ -3325,7 +3319,7 @@ end
 
 function UpdateTuckZonePositions()
   if TEST_MODE then log('Updating position of tuck zones') end
-  
+
   -- find and delete all existing tuck zones
   local tuck_zones = getObjectsWithTag('Tuck_Zone')
   if tuck_zones ~= nil then
@@ -3414,32 +3408,103 @@ function onObjectLeaveContainer(container, object)
   end
 end
 
-
 -- Check trash bins for items from other containers
-function CheckRemovedEnter(object)
+
+-- BW -- this code all facilitates being able to delete objects safely
+
+function onObjectSpawn(o)
+	if o.type == "Card" then o.use_hands = true end -- BW safety-net for BW_NOTE_A below
+    o.sticky = false -- BW all objects are no longer sticky - should be easier to manipulate stacking objects now
+end
+
+function onPlayerAction(player, action, targets)
+    local trashBinObject = getClosesTrashBin(player.getPointerPosition())
+    if action == Player.Action.Delete then
+        for _,o in ipairs (targets) do
+			if getHandZone(o) then
+				o.use_hands = false
+				Wait.frames(function() if o ~= nil then o.use_hands = true end end,10) -- BW BW_NOTE_A this does not always result in resetting use_hands so is safeguarded in onObjectSpawn too
+			end
+            if CheckRemovedEnter(o, trashBinObject) then
+                trashBinObject.putObject(o) -- all objects that would be destroyed (by players) will instead go to the nearest bin
+            else
+                -- already handled by CheckRemovedEnter
+            end
+        end
+        return false -- prevents normal delete behaviour
+    end
+end
+
+function getHandZone(o)
+	if o.use_hands == false then return false end
+	for _,zone in ipairs(o.getZones()) do
+		if zone.type == "Hand" then
+			return zone
+		end
+	end
+	return nil
+end
+
+function getClosesTrashBin(p)
+    local closestDistance, closestObject = math.huge, nil
+    for _,o in ipairs (getObjects()) do
+        if o.getName() == "Removed from Game" then
+            local distance = Vector.distance(o.getPosition(), p)
+            if distance < closestDistance then
+                closestObject = o
+                closestDistance = distance
+            end
+        end
+    end
+    return closestObject or nil
+end
+
+function enterObjectIntoContainer(container, enter_object)
+    if tryObjectEnterContainer(container, enter_object) ~= false then
+        container.putObject(enter_object)
+    end
+end
+
+function tryObjectEnterContainer(container, enter_object)
+    if container.hasTag("Trash") then
+        return CheckRemovedEnter(enter_object, container)
+    end
+    return true
+end
+
+TRASH_BIN_MIN_DECK_SIZE_TO_AVOID_SEPARATION = 9
+function CheckRemovedEnter(object, trashBinObject)
   if object.type == 'Deck' then
     local count = object.getQuantity()
-    if object.hasTag('BotCard') or count > 9 then
+    if object.hasTag('BotCard') or count >= TRASH_BIN_MIN_DECK_SIZE_TO_AVOID_SEPARATION then
       return true
     else
-      local pos = object.getPosition()
-      pos[2] = pos[2] + 2
+      local pos = object.getPosition() + Vector(0,1,0)
+      if trashBinObject then
+          pos = trashBinObject.getPosition() + Vector(0,1,0)
+      end
       object.setPosition(pos)
-      for i = 1, (count-1), 1 do
-        pos[2] = pos[2] + 2 + (i * 0.5)
-        object.takeObject({
+      for i = 1, count, 1 do
+        pos:setAt("y", pos.y + 0.2)
+        local card = object.takeObject({
           position          = pos,
           smooth            = false,
         })
+        if trashBinObject then
+            enterObjectIntoContainer(trashBinObject, card)
+        else
+            trashBinObject.putObject(card)
+        end
       end
     end
     return false
   end
 
+
   if object.hasTag('Town') or object.hasTag('Vassal') then
     return false
   end
-  
+
   if object.hasTag('Figurine') then
     local col = string.lower(GetColorFromTag(object))
     local tableau = getObjectFromGUID(Main_Tableau_GUIDs[col])
@@ -3462,12 +3527,12 @@ function CheckRemovedEnter(object)
     else
       name = name .. '_left'
     end
-    new_pos = GetOffset(pos, Main_Tableau_Offset_Positions[name], seat, 2) 
+    new_pos = GetOffset(pos, Main_Tableau_Offset_Positions[name], seat, 2)
     object.setPositionSmooth(new_pos)
     object.setRotationSmooth(tableau.getRotation())
     return false
   end
-    
+
   if object.hasTag('LargeCard') or object.hasTag('SmallCard') then
     if object.hasTag('Tradegood') then
       object.setPositionSmooth(Discard_Positions.trade)
@@ -3485,13 +3550,17 @@ function CheckRemovedEnter(object)
       object.setPositionSmooth(Discard_Positions.war)
       object.setRotationSmooth({0.00, 270.00, 0.00})
       return false
+    elseif object.hasTag('EventCard') then
+      object.setPositionSmooth(Discard_Positions.event)
+      object.setRotationSmooth({0.00, 270.00, 0.00})
+      return false
     end
     return true
   end
   local memo = object.memo
   if TEST_MODE then log('Object entering bin: ' .. (object.getName() or '') .. ' Memo: ' .. (memo or '')) end
   if memo == nil or memo == '' then
-    return false
+    return true
   elseif memo == 'infinite' then
     return true
   else
@@ -3563,7 +3632,7 @@ function PrestigeToPos(num)
   if num > 60 then return {-19.49, 2, 11.58} end
   local pos = {-20.33, 1.08, -11.70}
   if num > 30 then pos[1] = -19.49 end
-  pos[3] = (-11.70 + ( ((num-1) % 30) * 0.8028)) 
+  pos[3] = (-11.70 + ( ((num-1) % 30) * 0.8028))
   return pos
 end
 
@@ -3614,7 +3683,7 @@ end
   ------------------------------------------------
   ------------------------------------------------
 --]]
-    
+
 -- snap points for provinces on the africa map --
 AfricaMap = {
   ['timbuktu'] = {-17.84, 3.49}, ['benin'] = {-17.11, 2.34}, ['songhai'] = {-17.21, 3.13}, ['ethiopia'] = {-15.02, 2.67},
@@ -3749,7 +3818,7 @@ EasternMap = {
   ['don'] = {17.98, -0.33}, ['mentese'] = {11.62, -8.57}, ['teke'] = {12.47, -8.41}, ['kutahya'] = {12.31, -7.24},
   ['amasya'] = {15.28, -6.0}, ['sivas'] = {15.89, -6.64}, ['erzurum'] = {17.82, -6.25}, ['zaporoze'] = {15.00, -1.11}
   }
-  
+
 -- snap points for religion tokens on the western map --
 WesternMapReligion = {
   ['algiers'] = {-5.15, -10.66}, ['andalucia'] = {-7.52, -8.46}, ['aquitaine'] = {-5.51, -2.87}, ['aragon'] = {-6.46, -5.08},
@@ -3766,7 +3835,7 @@ WesternMapReligion = {
   ['tirol'] = {1.47, -2.11}, ['tunisia'] = {0.8, -11.62}, ['venetia'] = {3.73, -2.45}, ['waleswesex'] = {-8.02, 3.87},
   ['westphalia'] = {0.15, 2.23}, ['wielkopoland'] = {4.47, 1.91}
 }
-  
+
 -- snap points for religion tokens on the eastern map --
 EasternMapReligion = {
   ['aegeanarchipelago'] = {10.42, -9.39}, ['transcaucasia'] = {20.29, -6.48}, ['astrakhan'] = {19.22, -2.33}, ['aydin'] = {11.56, -7.62},
@@ -3779,7 +3848,3 @@ EasternMapReligion = {
   ['saratov'] = {19.95, 2.38}, ['serbiaalbania'] = {7.9, -4.85}, ['syria'] = {16.17, -9.33}, ['transylvania'] = {9.02, -1.09},
   ['wallachiabulgaria'] = {8.71, -3.93}, ['westernukraine'] = {13.07, -0.35}, ['whiteruthenia'] = {14.2, 3.0}, ['cyprus'] = {13.19, -9.94}
 }
-
-require("EU.Realms")
-
-require("EU.Scenarios")
