@@ -1,4 +1,6 @@
 TEST_MODE = false
+UI_PAGES = { scenario = 1, variant = 2, bots = 3, options = 4 }
+UI_Data = { page = UI_PAGES.scenario, scenario = '', variant = '', variant_num = 0, players = {} }
 Scenario = ''
 Scenario_Variant = ''
 Scenario_Age = 1
@@ -407,7 +409,6 @@ Military_Tableau_Local_Positions = {
         onLoad Handler
      -------------------- ]]
 function onLoad()
-
   -- Bury buttons
   local btn = getObjectFromGUID(Setup_Button_GUID)
   if btn then
@@ -453,6 +454,199 @@ function onUpdate()
 
 end
 
+
+--[[ --------------------------
+       Handle XML UI Elements
+     -------------------------- ]]
+function ui_set_active()
+  for key, value in pairs(UI_PAGES) do
+    local active = value == UI_Data.page
+    Global.UI.setAttribute(key, "active",  active)
+  end
+  local elements = 0
+  if UI_Data.page == UI_PAGES.scenario then
+    for key, value in pairs(Scenario_List) do
+      Global.UI.setAttribute(key, "active", value.active)
+      if UI_Data.scenario == key then
+        Global.UI.setAttribute(key, "image", "button-selected")
+        Global.UI.setAttributes("scn-start", {image = "button", onClick = "ui_start_game"})
+      else
+        Global.UI.setAttribute(key, "image", "button")
+      end
+      if value.active then elements = elements + 1 end
+    end
+    Global.UI.setAttribute("scenario_panel", "height", (elements * 70))
+  elseif UI_Data.page == UI_PAGES.variant then
+    if Scenario_List[UI_Data.scenario] ~= nil then
+      if UI_Data.variant_num == 0 then
+        Global.UI.setAttributes("var-start", {image = "button-inactive", onClick = ""})
+      else
+        Global.UI.setAttributes("var-start", {image = "button", onClick = "ui_start_game"})
+      end
+      for i = 1, 6 do
+        if Scenario_List[UI_Data.scenario]['variants'][i] ~= nil then
+          Global.UI.setAttribute(('var0' .. i), "active", true)
+          Global.UI.setAttribute(('var0' .. i .. '-text'), "text", Scenario_List[UI_Data.scenario]['variants'][i].name)
+          elements = elements + 1
+        else
+          Global.UI.setAttribute(('var0' .. i), "active", false)
+        end
+        if UI_Data.variant_num == i then
+          Global.UI.setAttribute('var0' .. i, "image", "button-selected")
+        else
+          Global.UI.setAttribute('var0' .. i, "image", "button")
+        end
+      end
+    end
+    Global.UI.setAttribute("variant_panel", "height", (elements * 70))
+  elseif UI_Data.page == UI_PAGES.bots then
+    for i = 1, 6 do
+      if UI_Data.players[i] ~= nil then
+        Global.UI.setAttribute(('bot'.. i ..'-cell'), "active", true)
+        Global.UI.setAttribute(('bot'.. i ..'-realm'), "text", UI_Data.players[i].name)
+        if UI_Data.players[i].bot then
+          Global.UI.setAttribute(('bot'.. i ..'-type'), "text", 'Bot')
+        else
+          Global.UI.setAttribute(('bot'.. i ..'-type'), "text", 'Human')
+        end
+        if UI_Data.players[i].locked then
+          Global.UI.setAttributes(('bot'.. i ..'-btn'), {image = "button-inactive", onClick = ""})
+        else
+          Global.UI.setAttributes(('bot'.. i ..'-btn'), {image = "button", onClick = "ui_toggle_bot"})
+        end
+        elements = elements + 1
+      else
+        Global.UI.setAttribute(('bot'.. i ..'-cell'), "active", false)
+      end
+      if UI_Data.variant_num == i then
+        Global.UI.setAttribute('var0' .. i, "image", "button-selected")
+      else
+        Global.UI.setAttribute('var0' .. i, "image", "button")
+      end
+    end
+  elseif UI_Data.page == UI_PAGES.options then
+  end
+end
+
+
+function ui_num_players_filter(player, value, id)
+  local active = value=="True" and true or false
+  Global.UI.setAttribute(id, "isOn", value)
+  local num = tonumber(id)
+  for key, val in pairs(Scenario_List) do
+    if num == 0 then
+      Scenario_List[key].active = true
+    elseif val.players[num] then
+      Scenario_List[key].active = active
+    else
+      Scenario_List[key].active = false
+    end
+  end
+  ui_set_active()
+end
+
+
+function ui_generate_player_data(realms)
+  for key, realm in pairs(realms) do
+    local name = realm.name or REALM_NAME[key]
+    local bot = realm.bot or false
+    local locked = realm.locked or false
+    local inactive = realm.inactive or false
+    if not inactive then
+      table.insert(UI_Data.players, {name = name, bot = bot, locked = locked})
+    end
+  end
+end
+
+
+function ui_select_scenario(player, value, id)
+  if value ~= "-1" then return end
+  UI_Data.scenario = id
+  Global.UI.setAttribute("scn-num_players", "text", 3)
+  Global.UI.setAttribute("var-num_players", "text", 3)
+  Global.UI.setAttribute("scn-title", "text", Scenario_List[id].name)
+  Global.UI.setAttribute("var-title", "text", Scenario_List[id].name)
+  Global.UI.setAttribute("scn-description", "text", Scenario_List[id].description)
+  Global.UI.setAttribute("var-description", "text", Scenario_List[id].description)
+  Global.UI.setAttribute("scn-start", "active", true)
+  if id == '0-00' then
+    Global.UI.setAttribute("scn-start-text", "text", 'Start')
+  else
+    Global.UI.setAttribute("scn-start-text", "text", 'Continue')
+  end
+  ui_set_active()
+end
+
+
+function ui_select_variant(player, value, id)
+  if value ~= "-1" then return end
+  UI_Data.variant = id
+  local num = string.sub(id, -2)
+  UI_Data.variant_num = tonumber(num)
+  ui_set_active()
+end
+
+
+function ui_toggle_bot (player, value, id)
+  if value ~= "-1" then return end
+  local num = tonumber(string.sub(id, 4, 4))
+  if UI_Data.players[num] ~= nil then
+    UI_Data.players[num].bot = not (UI_Data.players[num].bot)
+  end
+  ui_set_active()
+end
+
+
+function ui_back(player, value, id)
+  if value ~= "-1" then return end
+  if UI_Data.page == UI_PAGES.variant then
+    UI_Data.page = UI_PAGES.scenario
+    UI_Data.variant = ''
+    UI_Data.variant_num = 0
+    ui_set_active()
+  elseif UI_Data.page == UI_PAGES.bots then
+    UI_Data.page = UI_PAGES.variant
+    UI_Data.players = {}
+    ui_set_active()
+  elseif UI_Data.page == UI_PAGES.options then
+    UI_Data.page = UI_PAGES.bots
+    -- TODO: reset options
+    ui_set_active()
+  end
+end
+
+
+function ui_start_game(player, value, id)
+  if value ~= "-1" then return end
+  if UI_Data.page == UI_PAGES.scenario then
+    if UI_Data.scenario == '0-00' then
+      print('Call manual setup')
+    else
+      UI_Data.page = UI_PAGES.variant
+      ui_set_active()
+    end
+  elseif UI_Data.page == UI_PAGES.variant then
+    UI_Data.page = UI_PAGES.bots
+    ui_generate_player_data(Scenario_List[UI_Data.scenario]['variants'][UI_Data.variant_num]['player_realms'])
+    ui_set_active()
+  elseif UI_Data.page == UI_PAGES.bots then
+    UI_Data.page = UI_PAGES.options
+    -- Switch to the options page
+    ui_set_active()
+  else
+    Global.UI.hide("scenario")
+    Global.UI.hide("variant")
+    Global.UI.hide("bots")
+    Global.UI.hide("options")
+  end
+  --[[
+    local scenario = Global.UI.getAttribute(id, "scenario")
+    getObjectsWithTag("cube")[1].destruct()
+    local spawner = getObjectsWithTag("spawner")[1]
+    spawner.call("spawn", scenario)
+    Wait.time(function() spawner.destruct() end, 10)
+  --]]
+end
 
 --[[ ---------------------------------
        Add & Remove Physical Buttons

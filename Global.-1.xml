@@ -1,1 +1,332 @@
-<!-- Xml UI. See documentation: https://api.tabletopsimulator.com/ui/introUI/ -->
+<Defaults>
+  <Text font="fonts/Goudy" />
+  <Toggle class="playercount" font="fonts/Goudy" rectalignment="MiddleLeft" preferredHeight="50" textcolor="White" resizeTextForBestFit="True" isOn="False" onValueChanged="ui_num_players_filter"/>
+  <Button padding="55 0 0 0" minHeight="70" image="button" active="True" preserveAspect="True"/>
+  <Button class="scenario" onClick="Global/ui_select_scenario" active="False"/>
+  <Button class="variant"  onClick="Global/ui_select_variant" active="False"/>
+  <Button class="bot" onClick="Global/ui_toggle_bot"/>
+  <Button class="option" onClick="Global/ui_toggle_option"/>
+</Defaults>
+
+<Panel id="scenario" image="background" width="1430" height="906" active="false">
+  <Panel color="rgba(0,0,0,0.8)" width="1000" Height="550" offsetXY="0 -70">
+    <HorizontalLayout padding="10" >
+      <VerticalLayout padding="10" childForceExpandHeight="False" preferredWidth="450">
+        <Text text="Choose your scenario" color="White" resizeTextForBestFit="True"/>
+          <ToggleGroup preferredHeight="60">
+            <HorizontalLayout childForceExpandHeight="False" preferredHeight="60">
+              <Image rectAlignment="MiddleLeft" image="people" preserveAspect="True" preferredHeight="50"/>
+              <Toggle class="playercount" id="0" text="Any" isOn="True" />
+              <Toggle class="playercount" id="1" text="1" />
+              <Toggle class="playercount" id="2" text="2" />
+              <Toggle class="playercount" id="3" text="3" />
+              <Toggle class="playercount" id="4" text="4" />
+              <Toggle class="playercount" id="5" text="5" />
+              <Toggle class="playercount" id="6" text="6" />
+            </HorizontalLayout>
+          </ToggleGroup>
+        <VerticalScrollView id="scenario_list" flexibleHeight="1" scrollSensitivity="10" color="rgba(0,0,0,0)" noScrollbars="false" verticalScrollbarVisibility="AutoHideAndExpandViewport" movementType="Elastic">
+          <VerticalLayout id="scenario_panel" childForceExpandHeight="False" height="1200">
+            <Button class="scenario" id="0-00" padding="55 55 0 0">
+              <Text fontSize="20" color="White" Width="200" alignment="MiddleCenter">
+                Manual Setup
+              </Text>
+            </Button>
+            <Button class="scenario" id="1-00">
+              <Text fontSize="20" color="White" Width="200" alignment="MiddleLeft">
+                S1-00: Introductory Scenario
+              </Text>
+            </Button>
+            <Button class="scenario" id="1-01">
+              <Text fontSize="20" color="White" alignment="MiddleLeft">
+                S1-01: Discovery and
+                Reformation
+              </Text>
+            </Button>
+            <Button class="scenario" id="1-02">
+              <Text fontSize="20" color="White" alignment="MiddleLeft">
+                S1-02: Imperial Waltz
+              </Text>
+            </Button>
+            <Button class="scenario" id="1-03">
+              <Text fontSize="20" color="White" alignment="MiddleLeft">
+                S1-03: Sea Route to India
+              </Text>
+            </Button>
+            <Button class="scenario" id="1-04">
+              <Text fontSize="20" color="White" alignment="MiddleLeft">
+                S1-04:  The Wars of Religion
+              </Text>
+            </Button>
+            <Button class="scenario" id="1-05">
+              <Text fontSize="20" color="White" alignment="MiddleLeft">
+                S1-05: The Bourbonic Plague
+              </Text>
+            </Button>
+            <Button class="scenario" id="1-06">
+              <Text fontSize="20" color="White" alignment="MiddleLeft">
+                S1-06: The Ambitious Margrave
+              </Text>
+            </Button>
+            <Button class="scenario" id="2-01">
+              <Text fontSize="20" color="White" alignment="MiddleLeft">
+                S2-01: The Grand Campaign
+              </Text>
+            </Button>
+            <Button class="scenario" id="2-02">
+              <Text fontSize="20" color="White" alignment="MiddleLeft">
+                S2-02:  The Enemy at the Gates
+              </Text>
+            </Button>
+            <Button class="scenario" id="2-03">
+              <Text fontSize="20" color="White" alignment="MiddleLeft">
+                S2-03: Mediterranean
+                Dominance
+              </Text>
+            </Button>
+            <Button class="scenario" id="2-04">
+              <Text fontSize="20" color="White" alignment="MiddleLeft">
+                S2-04: Napoleon Rising
+              </Text>
+            </Button>
+            <Button class="scenario" id="2-05">
+              <Text fontSize="20" color="White" alignment="MiddleLeft">
+                S2-05: Here I Stand Once More
+              </Text>
+            </Button>
+            <Button class="scenario" id="2-06">
+              <Text fontSize="20" color="White" alignment="MiddleLeft">
+                S2-06: The Rise of the Purple Phoenix
+              </Text>
+            </Button>
+            <Button class="scenario" id="2-07">
+              <Text fontSize="20" color="White" alignment="MiddleLeft">
+                S2-07: Glory for Ulm
+              </Text>
+            </Button>
+          </VerticalLayout>
+        </VerticalScrollView>
+      </VerticalLayout>
+      <VerticalLayout padding="10" childForceExpandHeight="False" preferredWidth="450">
+        <Text text="Scenario information" color="White" resizeTextForBestFit="True"/>
+        <Text id="scn-title" text="" alignment="MiddleLeft" resizeTextForBestFit="True" resizeTextMaxSize="25" color="Orange"/>
+        <HorizontalLayout childForceExpandHeight="False" preferredHeight="40" childAlignment="MiddleRight" childForceExpandWidth="False">
+          <Text id="scn-num_players" text="" alignment="MiddleRight" resizeTextForBestFit="True" resizeTextMaxSize="40" color="Orange"/>
+          <Image image="people" color="Orange" preserveAspect="True" preferredHeight="40"/>
+        </HorizontalLayout>
+        <VerticalScrollView preferredHeight="400" scrollSensitivity="10" color="rgba(0,0,0,0)" noScrollbars="False"  movementType="Unrestricted" spacing="30 30 30 30">
+          <Text id="scn-description" color="White" fontSize="14" preferredHeight="1000"/>
+        </VerticalScrollView>
+        <Button id="scn-start" scenario="" preferredHeight="60" padding="0 0" image="button-inactive" onClick="">
+          <Text id="scn-start-text" fontSize="20" color="White" alignment="MiddleCenter">
+            Start game
+          </Text>
+        </Button>
+      </VerticalLayout>
+    </HorizontalLayout>
+  </Panel>
+</Panel>
+
+<Panel id="variant" image="background" width="1430" height="906" active="false">
+  <Panel color="rgba(0,0,0,0.8)" width="1000" Height="550" offsetXY="0 -70">
+    <HorizontalLayout padding="10" >
+      <VerticalLayout padding="10" childForceExpandHeight="False" preferredWidth="450">
+        <Text text="Choose your variant" color="White" resizeTextForBestFit="True"/>
+        <Button id="var-back" padding="55 55 0 0" active="True" onClick="ui_back">
+          <Text fontSize="20" color="White" Width="200" alignment="MiddleCenter">
+            Back
+          </Text>
+        </Button>
+        <VerticalScrollView id="variant_list" flexibleHeight="1" scrollSensitivity="10" color="rgba(0,0,0,0)" noScrollbars="false" verticalScrollbarVisibility="AutoHideAndExpandViewport" movementType="Elastic">
+          <VerticalLayout id="variant_panel" childForceExpandHeight="False" height="1200">
+            <Button class="variant" id="var01">
+              <Text id="var01-text" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
+                Variant 1
+              </Text>
+            </Button>
+            <Button class="variant" id="var02">
+              <Text id="var02-text" fontSize="20" color="White" alignment="MiddleLeft">
+                Variant 2
+              </Text>
+            </Button>
+            <Button class="variant" id="var03">
+              <Text id="var03-text" fontSize="20" color="White" alignment="MiddleLeft">
+                Variant 3
+              </Text>
+            </Button>
+            <Button class="variant" id="var04">
+              <Text id="var04-text" fontSize="20" color="White" alignment="MiddleLeft">
+                Variant 4
+              </Text>
+            </Button>
+            <Button class="variant" id="var05">
+              <Text id="var05-text" fontSize="20" color="White" alignment="MiddleLeft">
+                Variant 5
+              </Text>
+            </Button>
+            <Button class="variant" id="var06">
+              <Text id="var06-text" fontSize="20" color="White" alignment="MiddleLeft">
+                Variant 6
+              </Text>
+            </Button>
+          </VerticalLayout>
+        </VerticalScrollView>
+      </VerticalLayout>
+      <VerticalLayout padding="10" childForceExpandHeight="False" preferredWidth="450">
+        <Text text="Scenario information" color="White" resizeTextForBestFit="True"/>
+        <Text id="var-title" text="" alignment="MiddleLeft" resizeTextForBestFit="True" resizeTextMaxSize="25" color="Orange"/>
+        <HorizontalLayout childForceExpandHeight="False" preferredHeight="40" childAlignment="MiddleRight" childForceExpandWidth="False">
+          <Text id="var-num_players" text="" alignment="MiddleRight" resizeTextForBestFit="True" resizeTextMaxSize="40" color="Orange"/>
+          <Image image="people" color="Orange" preserveAspect="True" preferredHeight="40"/>
+        </HorizontalLayout>
+        <VerticalScrollView preferredHeight="400" scrollSensitivity="10" color="rgba(0,0,0,0)" noScrollbars="False"  movementType="Unrestricted" spacing="30 30 30 30">
+          <Text id="var-description" color="White" fontSize="14" preferredHeight="1000"/>
+        </VerticalScrollView>
+        <Button id="var-start" scenario="" preferredHeight="60" padding="0 0" image="button-inactive" onClick="">
+          <Text fontSize="20" color="White" alignment="MiddleCenter">
+            Continue
+          </Text>
+        </Button>
+      </VerticalLayout>
+    </HorizontalLayout>
+  </Panel>
+</Panel>
+
+<Panel id="bots" image="background" width="1430" height="906" active="false">
+  <Panel color="rgba(0,0,0,0.8)" width="1000" Height="550" offsetXY="0 -70">
+    <VerticalLayout padding="10" childForceExpandHeight="False" preferredWidth="900">
+      <Text text="Select bot realms" color="White" resizeTextForBestFit="True"/>
+      <HorizontalLayout padding="10" preferredWidth="450" height="70" childForceExpandHeight="False">
+        <Button id="bot-back" padding="55 55 0 0" active="True" onClick="ui_back">
+          <Text fontSize="20" color="White" Width="200" alignment="MiddleCenter">
+            Back
+          </Text>
+        </Button>
+        <Text text="" color="White" resizeTextForBestFit="True"/>
+      </HorizontalLayout>
+      <GridLayout id="bot_list" cellSize="450 70">
+        <HorizontalLayout id="bot1-cell" spacing="10">
+          <Text id="bot1-realm" fontSize="20" color="White" Width="375" alignment="MiddleRight">
+              Realm 1
+            </Text>
+          <Button class="bot" id="bot1-btn">
+            <Text id="bot1-type" text="Human" fontSize="20" color="White" Width="75" alignment="MiddleLeft"/>
+          </Button>
+        </HorizontalLayout>
+        <HorizontalLayout id="bot2-cell" spacing="10">
+          <Text id="bot2-realm" fontSize="20" color="White" Width="375" alignment="MiddleRight">
+              Realm 2
+            </Text>
+          <Button class="bot" id="bot2-btn">
+            <Text id="bot2-type" text="Human" fontSize="20" color="White" Width="75" alignment="MiddleLeft"/>
+          </Button>
+        </HorizontalLayout>
+        <HorizontalLayout id="bot3-cell" spacing="10">
+          <Text id="bot3-realm" fontSize="20" color="White" Width="375" alignment="MiddleRight">
+              Realm 3
+            </Text>
+          <Button class="bot" id="bot3-btn">
+            <Text id="bot3-type" text="Human" fontSize="20" color="White" Width="75" alignment="MiddleLeft"/>
+          </Button>
+        </HorizontalLayout>
+        <HorizontalLayout id="bot4-cell" spacing="10">
+          <Text id="bot4-realm" fontSize="20" color="White" Width="375" alignment="MiddleRight">
+              Realm 4
+            </Text>
+          <Button class="bot" id="bot4-btn">
+            <Text id="bot4-type" text="Human" fontSize="20" color="White" Width="75" alignment="MiddleLeft"/>
+          </Button>
+        </HorizontalLayout>
+        <HorizontalLayout id="bot5-cell" spacing="10">
+          <Text id="bot5-realm" fontSize="20" color="White" Width="375" alignment="MiddleRight">
+              Realm 5
+            </Text>
+          <Button class="bot" id="bot5-btn">
+            <Text id="bot5-type" text="Human" fontSize="20" color="White" Width="75" alignment="MiddleLeft"/>
+          </Button>
+        </HorizontalLayout>
+        <HorizontalLayout id="bot6-cell" spacing="10">
+          <Text id="bot6-realm" fontSize="20" color="White" Width="375" alignment="MiddleRight">
+              Realm 6
+            </Text>
+          <Button class="bot" id="bot6-btn">
+            <Text id="bot6-type" text="Human" fontSize="20" color="White" Width="75" alignment="MiddleLeft"/>
+          </Button>
+        </HorizontalLayout>
+      </GridLayout>
+      <HorizontalLayout padding="10" preferredWidth="450" height="70" childForceExpandHeight="False">
+        <Text text="" color="White" resizeTextForBestFit="True"/>
+        <Button id="bot-start" scenario="" preferredHeight="60" padding="0 0" image="button" onClick="ui_start_game">
+          <Text fontSize="20" color="White" alignment="MiddleCenter">
+            Continue
+          </Text>
+        </Button>
+      </HorizontalLayout>
+    </VerticalLayout>
+  </Panel>
+</Panel>
+
+<Panel id="options" image="background" width="1430" height="906" active="false">
+  <Panel color="rgba(0,0,0,0.8)" width="1000" Height="550" offsetXY="0 -70">
+    <HorizontalLayout padding="10" >
+      <VerticalLayout padding="10" childForceExpandHeight="False" preferredWidth="450">
+        <Text text="Choose your options" color="White" resizeTextForBestFit="True"/>
+        <Button id="opt-back" padding="55 55 0 0" active="True" onClick="ui_back">
+          <Text fontSize="20" color="White" Width="200" alignment="MiddleCenter">
+            Back
+          </Text>
+        </Button>
+        <VerticalScrollView id="option_list" flexibleHeight="1" scrollSensitivity="10" color="rgba(0,0,0,0)" noScrollbars="false" verticalScrollbarVisibility="AutoHideAndExpandViewport" movementType="Elastic">
+          <VerticalLayout id="option_panel" childForceExpandHeight="False" height="1200">
+            <Button class="option" id="opt01">
+              <Text id="opt01-text" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
+                Option 1
+              </Text>
+            </Button>
+            <Button class="varoptioniant" id="opt02">
+              <Text id="opt02-text" fontSize="20" color="White" alignment="MiddleLeft">
+                Option 2
+              </Text>
+            </Button>
+            <Button class="option" id="opt03">
+              <Text id="opt03-text" fontSize="20" color="White" alignment="MiddleLeft">
+                Option 3
+              </Text>
+            </Button>
+            <Button class="option" id="opt04">
+              <Text id="opt04-text" fontSize="20" color="White" alignment="MiddleLeft">
+                Option 4
+              </Text>
+            </Button>
+            <Button class="option" id="opt05">
+              <Text id="opt05-text" fontSize="20" color="White" alignment="MiddleLeft">
+                Option 5
+              </Text>
+            </Button>
+            <Button class="option" id="opt06">
+              <Text id="opt06-text" fontSize="20" color="White" alignment="MiddleLeft">
+                Option 6
+              </Text>
+            </Button>
+          </VerticalLayout>
+        </VerticalScrollView>
+      </VerticalLayout>
+      <VerticalLayout padding="10" childForceExpandHeight="False" preferredWidth="450">
+        <Text text="Option information" color="White" resizeTextForBestFit="True"/>
+        <Text id="opt-title" text="" alignment="MiddleLeft" resizeTextForBestFit="True" resizeTextMaxSize="25" color="Orange"/>
+        <HorizontalLayout childForceExpandHeight="False" preferredHeight="40" childAlignment="MiddleRight" childForceExpandWidth="False">
+          <Text id="opt-num_players" text="" alignment="MiddleRight" resizeTextForBestFit="True" resizeTextMaxSize="40" color="Orange"/>
+          <Image image="people" color="Orange" preserveAspect="True" preferredHeight="40"/>
+        </HorizontalLayout>
+        <VerticalScrollView preferredHeight="400" scrollSensitivity="10" color="rgba(0,0,0,0)" noScrollbars="False"  movementType="Unrestricted" spacing="30 30 30 30">
+          <Text id="opt-description" color="White" fontSize="14" preferredHeight="1000"/>
+        </VerticalScrollView>
+        <Button id="opt-start" scenario="" preferredHeight="60" padding="0 0" image="button" onClick="ui_start_game">
+          <Text fontSize="20" color="White" alignment="MiddleCenter">
+            Continue
+          </Text>
+        </Button>
+      </VerticalLayout>
+    </HorizontalLayout>
+  </Panel>
+</Panel>
