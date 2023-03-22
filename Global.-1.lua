@@ -1,16 +1,11 @@
 TEST_MODE = false
 UI_PAGES = { scenario = 1, variant = 2, bots = 3, options = 4 }
-UI_Data = { page = UI_PAGES.scenario, scenario = '', variant = '', variant_num = 0, players = {}, options = {}, }
-Scenario = ''
-Scenario_Variant = ''
-Scenario_Age = 1
+UI_Data = { page = UI_PAGES.scenario, scenario = '', variant = '', variant_num = 0, players = {}, options = {}, start_age = 1, }
 Deferred_Placements = {}
 Change_Rotation = {}
 Last_Moving_Map_Marker = nil
 Last_Moving_Card = nil
 Idea_Config = {}
-Bot_Config = {}
-Bot_Locked = {}
 HRE_Config = { ['ruler'] = '', ['authority'] = 3 }
 
 MAIN_BOARD_STATE = {
@@ -437,8 +432,6 @@ function onLoad()
   HRE_Authority_Marker = getObjectFromGUID(HRE_Authority_Marker_GUID)
   First_Player_Marker = getObjectFromGUID(First_Player_Marker_GUID)
 
-  Setup_Button = SetupButtonInit()
-
   local tuckedCards = getObjectsWithTag('Tucked')
   if tuckedCards ~= nil then
     for _,i in pairs(tuckedCards) do
@@ -695,371 +688,12 @@ function ui_start_game(player, value, id)
     Global.UI.hide("variant")
     Global.UI.hide("bots")
     Global.UI.hide("options")
-  end
-  --[[
-    local scenario = Global.UI.getAttribute(id, "scenario")
-    getObjectsWithTag("cube")[1].destruct()
-    local spawner = getObjectsWithTag("spawner")[1]
-    spawner.call("spawn", scenario)
-    Wait.time(function() spawner.destruct() end, 10)
-  --]]
-end
-
---[[ ---------------------------------
-       Add & Remove Physical Buttons
-     --------------------------------- ]]
-function SetupButtonInit()
-  local button = getObjectFromGUID(Setup_Button_GUID)
-  if button == nil then return nil end
-  button.clearButtons()
-  Scenario_Variant = ''
-  local button_parameters = {}
-  button_parameters.click_function = "SetupManualButtonPressed"
-  button_parameters.label = "Manual Set-Up"
-  button_parameters.function_owner = nil
-  button_parameters.position = {0, 2, 9}
-  button_parameters.rotation = {0, 180, 0}
-  button_parameters.width = 10000
-  button_parameters.height = 1250
-  button_parameters.font_size = 800
-  button.createButton(button_parameters)
-
-  button_parameters.width = 8000
-  button_parameters.height = 800
-  button_parameters.font_size = 450
-  local counter = 0
-  for _, scenario in pairs(Scenario_List) do
-    local position = { 0,2,0 }
-    if counter < 7 then
-      position[1] = 9
-    else
-      position[1] = -9
-    end
-    if scenario.unavailable then
-      button_parameters.color = {r=0.6, g=0.6, b=0.6} 
-    else
-      button_parameters.color = {r=1, g=1, b=1} 
-    end
-    if scenario.tooltip then
-      button_parameters.tooltip = scenario.tooltip
-    else
-      button_parameters.tooltip = ''
-    end
-    if scenario.handler then
-      button_parameters.click_function = scenario.handler
-    else
-      button_parameters.click_function = 'onUpdate'
-    end
-    position[3] = ((counter) % 7) * -2.5 + 5
-    button_parameters.position = position
-    button_parameters.label = scenario.name
-    button.createButton(button_parameters)
-    counter = counter + 1
-  end
-  return button
-end
-
-
-function VariantButtonInit()
-  local button = getObjectFromGUID(Setup_Button_GUID)
-  if button == nil then return nil end
-  button.clearButtons()
-  local button_parameters = {}
-  button_parameters.click_function = "SetupButtonInit"
-  button_parameters.label = "Back to Scenarios"
-  button_parameters.function_owner = nil
-  button_parameters.position = {0, 2, 9}
-  button_parameters.rotation = {0, 180, 0}
-  button_parameters.width = 10000
-  button_parameters.height = 1250
-  button_parameters.font_size = 800
-  button.createButton(button_parameters)
-
-  button_parameters.width = 8000
-  button_parameters.height = 800
-  button_parameters.font_size = 450
-  for i, variant in ipairs(Scenario_List[Scenario].variants) do
-    local position = { 0,2,0 }
-    if variant.unavailable then
-      button_parameters.color = {r=0.6, g=0.6, b=0.6} 
-    else
-      button_parameters.color = {r=1, g=1, b=1} 
-    end
-    if variant.tooltip then
-      button_parameters.tooltip = variant.tooltip
-    else
-      button_parameters.tooltip = ''
-    end
-    if variant.handler then
-      button_parameters.click_function = variant.handler
-    else
-      button_parameters.click_function = 'onUpdate'
-    end
-    position[3] = (i-1) * -2.5 + 6
-    button_parameters.position = position
-    button_parameters.label = variant.name
-    button.createButton(button_parameters)
-  end
-  return button
-end
-
-
-function BotButtonInit()
-  local button = getObjectFromGUID(Setup_Button_GUID)
-  if button == nil then return nil end
-  button.clearButtons()
-  Bot_Config = {}
-  Bot_Locked = {}
-  local button_parameters = {}
-  if Scenario_Variant == '' then
-    button_parameters.click_function = "SetupButtonInit"
-    button_parameters.label = "Back to Scenarios"
-  else
-    button_parameters.click_function = "VariantButtonInit"
-    button_parameters.label = "Back to Variants"
-  end
-  button_parameters.function_owner = nil
-  button_parameters.position = {0, 2, 9}
-  button_parameters.rotation = {0, 180, 0}
-  button_parameters.width = 10000
-  button_parameters.height = 1250
-  button_parameters.font_size = 800
-  button.createButton(button_parameters)
-
-  button_parameters.click_function = "StartGameButtonPressed"
-  button_parameters.label = "Start Game"
-  button_parameters.font_color = {r=0.8, g=0.8, b=0.8} 
-  button_parameters.color = {r=0.0, g=0.0, b=0.4} 
-  button_parameters.function_owner = nil
-  button_parameters.position = {0, 2, -10.5}
-  button_parameters.rotation = {0, 180, 0}
-  button_parameters.width = 5000
-  button_parameters.height = 1500
-  button_parameters.font_size = 1000
-  button.createButton(button_parameters)
-
-  button_parameters.width = 8000
-  button_parameters.height = 800
-  button_parameters.font_size = 450
-  button_parameters.font_color = {r=0.0, g=0.0, b=0.0} 
-  button_parameters.color = {r=1, g=1, b=1} 
-  
-  local variant_list = Scenario_List[Scenario].variants
-  local single_variant = false
-  if #variant_list == 1 then
-    single_variant = true
-  end
-  local counter = 1
-  for _, variant in ipairs(variant_list) do
-    if single_variant or (variant.code == Scenario_Variant) then
-      for ref, realm in pairs(variant.player_realms) do
-        local position = { 0,2,0 }
-        button_parameters.color = {r=1, g=1, b=1} 
-        local realm_name = (realm.name or REALM_NAME[ref])
-        button_parameters.click_function = 'Realm_Button_Pressed_' .. counter
-        if realm.bot then
-          realm_name = realm_name .. ' (Bot)'
-          table.insert(Bot_Config, true)
-        else
-          realm_name = realm_name .. ' (Human)'
-          table.insert(Bot_Config, false)
-        end
-        if realm.locked then
-          if realm.inactive then
-            realm_name = realm_name .. ' (Inactive)'
-            button_parameters.color = {r=0.6, g=0.6, b=0.6} 
-            table.insert(Bot_Locked, true)
-          else
-            realm_name = realm_name .. ' (Locked)'
-            button_parameters.color = {r=0.6, g=0.6, b=0.6} 
-            table.insert(Bot_Locked, true)
-          end
-        else
-          table.insert(Bot_Locked, false)
-        end
-        position[3] = (counter - 1) * -2.5 + 6
-        button_parameters.position = position
-        button_parameters.label = realm_name
-        button.createButton(button_parameters)
-        counter = counter + 1
-      end
+    startLuaCoroutine(Global, 'Setup_Game')
+    local setup_button = getObjectFromGUID(Setup_Button_GUID)
+    if setup_button then
+      setup_button.destruct()
     end
   end
-  return button
-end
-
-
-
---[[ ------------------------------------
-       Physical Buttons Click Functions
-     ------------------------------------ ]]
-function SetupManualButtonPressed()
-  Scenario = '0-00'
-  startLuaCoroutine(Global, 'Setup_Game')
-  Setup_Button.destruct()
-end
-
-function UnlockButtonPressed()
-  local mainboard = getObjectsWithTag('MainBoard')
-  if mainboard ~= nil then
-    mainboard[1].interactable = true
-  end
-end
-
-function StartGameButtonPressed()
-  startLuaCoroutine(Global, 'Setup_Game')
-  Setup_Button.destruct()
-end
-
-function SetupS100ButtonPressed()
-  Scenario = '1-00'
-  BotButtonInit()
-end
-
-function SetupS101ButtonPressed()
-  Scenario = '1-01'
-  VariantButtonInit()
-end
-
-function SetupS102ButtonPressed()
-  Scenario = '1-02'
-  VariantButtonInit()
-end
-
-function SetupS103ButtonPressed()
-  Scenario = '1-03'
-  VariantButtonInit()
-end
-
-function SetupS104ButtonPressed()
-  Scenario = '1-04'
-  VariantButtonInit()
-end
-
-function SetupS105ButtonPressed()
-  Scenario = '1-05'
-  VariantButtonInit()
-end
-
-function SetupS106ButtonPressed()
-  Scenario = '1-06'
-  VariantButtonInit()
-end
-
-function SetupS201ButtonPressed()
-  Scenario = '2-01'
-  VariantButtonInit()
-end
-
-function SetupS202ButtonPressed()
-  Scenario = '2-02'
-  VariantButtonInit()
-end
-
-function SetupS203ButtonPressed()
-  Scenario = '2-03'
-  VariantButtonInit()
-end
-
-function SetupS204ButtonPressed()
-  Scenario = '2-04'
-  BotButtonInit()
-end
-
-function SetupS205ButtonPressed()
-  Scenario = '2-05'
-  BotButtonInit()
-end
-
-function SetupS206ButtonPressed()
-  Scenario = '2-06'
-  BotButtonInit()
-end
-
-function SetupS207ButtonPressed()
-  Scenario = '2-07'
-  VariantButtonInit()
-end
-
-function Variant_1_Selected()
-  Scenario_Variant = Scenario_List[Scenario].variants[1].code
-  BotButtonInit()
-end
-
-function Variant_2_Selected()
-  Scenario_Variant = Scenario_List[Scenario].variants[2].code
-  BotButtonInit()
-end
-
-function Variant_3_Selected()
-  Scenario_Variant = Scenario_List[Scenario].variants[3].code
-  BotButtonInit()
-end
-
-function Variant_4_Selected()
-  Scenario_Variant = Scenario_List[Scenario].variants[4].code
-  BotButtonInit()
-end
-
-function Variant_5_Selected()
-  Scenario_Variant = Scenario_List[Scenario].variants[5].code
-  BotButtonInit()
-end
-
-function Variant_6_Selected()
-  Scenario_Variant = Scenario_List[Scenario].variants[6].code
-  BotButtonInit()
-end
-
-function Realm_Button_Pressed_1()
-  ToggleBotConfig(1)
-end
-
-function Realm_Button_Pressed_2()
-  local btns = Setup_Button.getButtons()
-  ToggleBotConfig(2)
-end
-
-function Realm_Button_Pressed_3()
-  ToggleBotConfig(3)
-end
-
-function Realm_Button_Pressed_4()
-  ToggleBotConfig(4)
-end
-
-function Realm_Button_Pressed_5()
-  ToggleBotConfig(5)
-end
-
-function Realm_Button_Pressed_6()
-  ToggleBotConfig(6)
-end
-
-function ToggleBotConfig(number)
-  local btns = Setup_Button.getButtons()
-  local new_label = btns[(number + 2)].label
-  -- log('Current Label:' .. (new_label or ''))
-  if Bot_Locked[number] then
-    if Bot_Config[number] then
-      broadcastToAll("This realm is locked to be a bot.")
-    else
-      broadcastToAll("This realm can not be played by a bot.")
-    end
-    return false
-  end
-  if Bot_Config[number] then
-    new_label = (string.sub(new_label, 1, -6 ) .. '(Human)')
-    Bot_Config[number] = false
-  else
-    new_label = (string.sub(new_label, 1, -8 ) .. '(Bot)')
-    Bot_Config[number] = true
-  end
-  Setup_Button.editButton({
-    index          = (number + 1),
-    label          = new_label,
-  })
-  return true
 end
 
 
@@ -1075,7 +709,7 @@ function Setup_Game()
   Notes.setNotes("")
 
   -- Handle Manual Setup
-  if Scenario == '0-00' then
+  if UI_Data.scenario == '0-00' then
     local player_config = 
     {
       {seat = 1, color = 'blue' },
@@ -1111,19 +745,12 @@ function Setup_Game()
   end
 
   
+  -- Generate scenario data from selected scenario and variant
+  -- TODO: May be outdated by UI_Data storage
   local scenario_data = {}
-  local variant_list = Scenario_List[Scenario].variants
-  if #variant_list == 1 then
-    scenario_data = variant_list[1]
-  else
-    for i, variant in ipairs(variant_list) do
-      if variant.code == Scenario_Variant then
-        scenario_data = variant_list[i]
-        break
-      end
-    end
-  end
-
+  local variant_list = Scenario_List[UI_Data.scenario].variants
+  scenario_data = variant_list[UI_Data.variant_num]
+  
   local players = scenario_data.player_realms
 
   -- Configure main board
@@ -1134,22 +761,28 @@ function Setup_Game()
     end
   end
 
-  Scenario_Age = (scenario_data.age or 1)
+  UI_Data.start_age = (scenario_data.age or 1)
   
   -- Configure Bots
+  if TEST_MODE then log('Configuring bots') end
+  local active_count = 1
   local counter = 1
   for _, player in pairs(players) do
-    player.bot = Bot_Config[counter]
     if not player.inactive then
-      counter = counter + 1
+      player.bot = UI_Data.players[active_count].bot
+      active_count = active_count + 1
+    else
+      player.bot = true
     end
+    counter = counter + 1
   end
 
+  if TEST_MODE then log('Setting Event draw count') end
   local event_config = { }
   if scenario_data.draw_per_round then
     event_config.draw_per_round = scenario_data.draw_per_round
   else
-    event_config.draw_per_round = counter 
+    event_config.draw_per_round = active_count 
   end
   if scenario_data.reveal_per_round then
     event_config.reveal_per_round = scenario_data.reveal_per_round
@@ -1165,7 +798,7 @@ function Setup_Game()
     war =   {{Idea_Card_GUIDs.war.cannons, {}}, '', ''}
   }
   
-  if Scenario == '1-00' then
+  if UI_Data.scenario == '1-00' then
     broadcastToAll("Setting up: [u]Introductory Scenario (3 players)[/u]", {1,1,1})
 
     local deck_admin = getObjectFromGUID(Action_Deck_GUIDs.admin)
@@ -1196,22 +829,22 @@ function Setup_Game()
     end
 
 
-  elseif Scenario == '1-01' then
+  elseif UI_Data.scenario == '1-01' then
 
     -- Religion Token
     PlaceObjectsFromBag({ WesternMapReligion.andalucia }, Bag_GUIDs['cat_div'], true)
 
-    if Scenario_Variant == '3P' then
+    if UI_Data.variant_num == 1 then
       broadcastToAll("Setting up: [u]Discovery and Reformation (3 players)[/u]", {1,1,1})
       -- Left HRE markers
       PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
 
-    elseif Scenario_Variant == '4P' then
+    elseif UI_Data.variant_num == 2 then
       broadcastToAll("Setting up: [u]Discovery and Reformation (4 players)[/u]", {1,1,1})
       -- Left HRE markers
       PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
 
-    elseif Scenario_Variant == '5P' then
+    elseif UI_Data.variant_num == 3 then
       broadcastToAll("Setting up: [u]Discovery and Reformation (5 players)[/u]", {1,1,1})
       if players[REALM.denmark].bot then
         -- Left HRE markers
@@ -1234,9 +867,9 @@ function Setup_Game()
     CoreScenarioSetup(scenario_data)
 
 
-  elseif Scenario == '1-02' then
+  elseif UI_Data.scenario == '1-02' then
 
-    if Scenario_Variant == '1B' then
+    if UI_Data.variant_num == 1 then
       broadcastToAll("Setting up: [u]Imperial Waltz (3 players + 1 Bot)[/u]", {1,1,1})
       -- Left HRE markers
       PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
@@ -1251,15 +884,15 @@ function Setup_Game()
     
     CoreScenarioSetup(scenario_data)
    
-    -- Remind Netherlands to decide which towns to use
+    -- Remind Netherlands to decide which towns to use TODO: Let script determine this
     broadcastToAll("Netherlands player: Remember choose your two starting towns", {1,1,1})
 
       
-  elseif Scenario == '1-03' then
+  elseif UI_Data.scenario == '1-03' then
 
-    if Scenario_Variant == '3P' then
+    if UI_Data.variant_num == 1 then
       broadcastToAll("Setting up: [u]Sea Route to India (3 players)[/u]", {1,1,1})
-    elseif Scenario_Variant == '4P' then
+    elseif UI_Data.variant_num == 2 then
       broadcastToAll("Setting up: [u]Sea Route to India (4 players)[/u]", {1,1,1})
       if players[REALM.france].bot then
         if scenario_data.remove == nil then
@@ -1276,10 +909,10 @@ function Setup_Game()
     CoreScenarioSetup(scenario_data)
     
 
-  elseif Scenario == '1-04' then
-    if Scenario_Variant == '2P' then
+  elseif UI_Data.scenario == '1-04' then
+    if UI_Data.variant_num == 1 then
       broadcastToAll("Setting up: [u]The Wars of Religion (2 players, 0 bots)[/u]", {1,1,1})
-    elseif Scenario_Variant == '3P' then
+    elseif UI_Data.variant_num == 2 then
       broadcastToAll("Setting up: [u]The Wars of Religion (3 players)[/u]", {1,1,1})
       -- Remove marriage token for French bot due to lack of vassals
       if players[REALM.france].bot then
@@ -1290,7 +923,7 @@ function Setup_Game()
         table.insert(scenario_data.remove, {-8.41, 0.29, 'Cube'} )
         table.insert(scenario_data.remove, {-8.41, -0.08, 'Cube'} )
       end
-    elseif Scenario_Variant == '4P' then
+    elseif UI_Data.variant_num == 3 then
       broadcastToAll("Setting up: [u]The Wars of Religion (4 players)[/u]", {1,1,1})
       if players[REALM.france].bot then
         if scenario_data.remove == nil then
@@ -1301,7 +934,7 @@ function Setup_Game()
         table.insert(scenario_data.remove, {-8.41, -0.08, 'Cube'} )
       end
     else
-      broadcastToAll('Scenario variant not found: ' .. Scenario_Variant)
+      broadcastToAll('Scenario variant not found: ' .. UI_Data.variant_num)
     end
     
     -- Religion
@@ -1309,12 +942,12 @@ function Setup_Game()
 
     CoreScenarioSetup(scenario_data)
     
-  elseif Scenario == '1-05' then
+  elseif UI_Data.scenario == '1-05' then
 
-    if Scenario_Variant == '4P' then
+    if UI_Data.variant_num == 1 then
       broadcastToAll("Setting up: [u]The Bourbonic Plague (4 players)[/u]", {1,1,1})
 
-    elseif Scenario_Variant == '6P' then
+    elseif UI_Data.variant_num == 2 then
       broadcastToAll("Setting up: [u]The Bourbonic Plague (6 players)[/u]", {1,1,1})
 
       local book2 = getObjectFromGUID(Scenario_Book_2_GUID)
@@ -1332,7 +965,7 @@ function Setup_Game()
     broadcastToAll("Remember to only draw 4 event cards per round", {1,1,1})
 
 
-  elseif Scenario == '1-06' then
+  elseif UI_Data.scenario == '1-06' then
     broadcastToAll("Setting up: [u]The Ambitious Margrave (solo)[/u]", {1,1,1})
     -- Left HRE markers
     PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
@@ -1340,7 +973,7 @@ function Setup_Game()
     CoreScenarioSetup(scenario_data)
 
 
-  elseif Scenario == '2-01' then
+  elseif UI_Data.scenario == '2-01' then
     -- Setup S2-01: The Grand Campaign (6 players)
     broadcastToAll("Setting up: [u]The Grand Campaign (6 players)[/u]", {1,1,1})
 
@@ -1352,7 +985,7 @@ function Setup_Game()
       table.insert(scenario_data.remove, {8.21, 2.07, 'Cube'} )
     end
 
-    if Scenario_Variant == 'M' then
+    if UI_Data.variant_num == 2 then
       -- Remove influence cube for Muscovy bot due to lack of vassals
       if players[REALM.muscovy].bot then
         if scenario_data.remove == nil then
@@ -1370,19 +1003,19 @@ function Setup_Game()
     CoreScenarioSetup(scenario_data)
    
     
-  elseif Scenario == '2-02' then
+  elseif UI_Data.scenario == '2-02' then
 
-    if Scenario_Variant == '3P' then
+    if UI_Data.variant_num == 1 then
       broadcastToAll("Setting up: [u]Enemy at the Gates (3 players)[/u]", {1,1,1})
       -- Left HRE markers
       PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
 
-    elseif Scenario_Variant == '4P' then
+    elseif UI_Data.variant_num == 2 then
       broadcastToAll("Setting up: [u]Enemy at the Gates (4 players)[/u]", {1,1,1})
       -- Left HRE markers
       PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
 
-    elseif Scenario_Variant == 'D' then
+    elseif UI_Data.variant_num == 3 then
       broadcastToAll("Setting up: [u]Enemy at the Gates (5 players with Denmark)[/u]", {1,1,1})
       -- Remove influence cube for Denmark bot due to lack of vassals and remove area from HRE
       if players[REALM.denmark].bot then
@@ -1393,15 +1026,15 @@ function Setup_Game()
         PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
       end
 
-    elseif Scenario_Variant == 'S' then
+    elseif UI_Data.variant_num == 4 then
       broadcastToAll("Setting up: [u]Enemy at the Gates (5 players with Sweden)[/u]", {1,1,1})
 
-    elseif Scenario_Variant == 'M' then
+    elseif UI_Data.variant_num == 5 then
       broadcastToAll("Setting up: [u]Enemy at the Gates (5 players with Mamluks)[/u]", {1,1,1})
       -- Left HRE markers
       PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
 
-    elseif Scenario_Variant == '6P' then
+    elseif UI_Data.variant_num == 6 then
       broadcastToAll("Setting up: [u]Enemy at the Gates (6 players)[/u]", {1,1,1})
       -- Remove influence cube for Denmark bot due to lack of vassals and remove area from HRE
       if players[REALM.denmark].bot then
@@ -1415,15 +1048,15 @@ function Setup_Game()
 
     CoreScenarioSetup(scenario_data)
 
-  elseif Scenario == '2-03' then
+  elseif UI_Data.scenario == '2-03' then
 
     local objective_positions = {}
-    if Scenario_Variant == '5P' then
+    if UI_Data.variant_num == 1 then
       broadcastToAll("Setting up: [u]Mediterranean Dominance (5 players)[/u]", {1,1,1})
       objective_positions = { EasternMap.athina, WesternMap.baleares, EasternMap.cyprus, WesternMap.firenze, WesternMap.genova,
                               WesternMap.napoli, WesternMap.provence, EasternMap.rhodes, WesternMap.tangiers, WesternMap.tunis }
 
-    elseif Scenario_Variant == '6P' then
+    elseif UI_Data.variant_num == 2 then
       broadcastToAll("Setting up: [u]Mediterranean Dominance (6 players)[/u]", {1,1,1})
       objective_positions = { WesternMap.baleares, EasternMap.creta, EasternMap.cyprus, WesternMap.firenze, WesternMap.genova,
                               WesternMap.gibraltar, WesternMap.malta, WesternMap.provence, EasternMap.rhodes, WesternMap.tangiers }
@@ -1451,7 +1084,7 @@ function Setup_Game()
     CoreScenarioSetup(scenario_data)
     
     
-  elseif Scenario == '2-04' then
+  elseif UI_Data.scenario == '2-04' then
     broadcastToAll("Setting up: [u]Napoleon Rising (6 players)[/u]", {1,1,1})
 
     -- Left HRE markers
@@ -1460,7 +1093,7 @@ function Setup_Game()
     CoreScenarioSetup(scenario_data)
       
     
-  elseif Scenario == '2-05' then
+  elseif UI_Data.scenario == '2-05' then
     broadcastToAll("Setting up: [u]Here I Stand Once More (6 players)[/u]", {1,1,1})
 
     -- Religion
@@ -1481,7 +1114,7 @@ function Setup_Game()
     CoreScenarioSetup(scenario_data)
 
 
-  elseif Scenario == '2-06' then
+  elseif UI_Data.scenario == '2-06' then
     broadcastToAll("Setting up: [u]The Rise of the Purple Phoenix (solo)[/u]", {1,1,1})
 
     local deck_future_trade = getObjectFromGUID(Trade_Deck_GUIDs.future)
@@ -1499,10 +1132,10 @@ function Setup_Game()
     -- PlaceObjectsFromBag( {WesternMap.venezia}, Bag_GUIDs['rev_man'], true)
 
 
-  elseif Scenario == '2-07' then
-    if Scenario_Variant == 'N' then
+  elseif UI_Data.scenario == '2-07' then
+    if UI_Data.variant_num == 1 then
       broadcastToAll("Setting up: [u]Glory for Ulm (solo)[/u]", {1,1,1})
-    elseif Scenario_Variant == 'A' then
+    elseif UI_Data.variant_num == 2 then
       broadcastToAll("Setting up: [u]Glory for Ulm (solo with alternate start)[/u]", {1,1,1})
     end
     
@@ -1515,7 +1148,7 @@ function Setup_Game()
 
     
   else
-    broadcastToAll("Scenario not handled: " .. (Scenario or '') , {1,1,1})
+    broadcastToAll("Scenario not handled: " .. (UI_Data.scenario or '') , {1,1,1})
   end
 
 
@@ -1669,7 +1302,7 @@ function Setup_Game()
   end
 
   -- Late removal of cards specified by the scenario
-  if Scenario == '2-06' then
+  if UI_Data.scenario == '2-06' then
     local deck_future_trade = getObjectFromGUID(Trade_Deck_GUIDs.future)
     local pos = { deck_future_trade.getPosition()[1], 2, deck_future_trade.getPosition()[3] - 2.5}
     PlaceCardsByGUIDs(Milestone_Deck_GUIDs.age4.war, {
@@ -2716,17 +2349,17 @@ function SetupBotDecks()
       waitFrames(15)
       
       local current_age_deck = bot_decks[4]
-      if Scenario_Age > 1 then
+      if UI_Data.start_age > 1 then
         Removed_Components_Bag.putObject(bot_decks[4]) 
         current_age_deck = bot_decks[1]
         waitFrames(1)
       end
-      if Scenario_Age > 2 then
+      if UI_Data.start_age > 2 then
         Removed_Components_Bag.putObject(bot_decks[1]) 
         current_age_deck = bot_decks[2]
         waitFrames(1)
       end
-      if Scenario_Age > 3 then
+      if UI_Data.start_age > 3 then
         Removed_Components_Bag.putObject(bot_decks[2]) 
         current_age_deck = bot_decks[3]
         waitFrames(1)
@@ -2734,13 +2367,13 @@ function SetupBotDecks()
       current_age_deck.setPositionSmooth(pos)
       current_age_deck.setRotationSmooth(rot)
 
-      if Scenario_Age == 1 then
+      if UI_Data.start_age == 1 then
         bot_decks[2].setPositionSmooth({pos_current[1], 5 ,pos_current[3]})
         bot_decks[1].setPositionSmooth({pos_current[1], 10 ,pos_current[3]})
         waitFrames(1)
-      elseif Scenario_Age == 2 then
+      elseif UI_Data.start_age == 2 then
         bot_decks[2].setPosition({pos_current[1], 5 ,pos_current[3]})
-      elseif Scenario_Age == 3 then
+      elseif UI_Data.start_age == 3 then
         bot_decks[3].rotate({0,-90,0})
       end
     end
@@ -2864,8 +2497,8 @@ function PrepareIdeaDisplay(scenario_data)
   end
 
   -- Add Age 3 & 4 cards to the idea pool
-  if Scenario_Age ~= nil then
-    if Scenario_Age > 2 then
+  if UI_Data.start_age ~= nil then
+    if UI_Data.start_age > 2 then
       admin_deck.putObject(future_deck.takeObject({guid = Idea_Card_GUIDs.admin.absolute_monarchy }))
       admin_deck.putObject(future_deck.takeObject({guid = Idea_Card_GUIDs.admin.national_bank }))
       diplo_deck.putObject(future_deck.takeObject({guid = Idea_Card_GUIDs.diplo.trade_companies }))
@@ -2873,7 +2506,7 @@ function PrepareIdeaDisplay(scenario_data)
       war_deck.putObject(future_deck.takeObject({guid = Idea_Card_GUIDs.war.line_infantry }))
     end
     waitFrames(5)
-  if Scenario_Age > 3 then
+  if UI_Data.start_age > 3 then
       admin_deck.putObject(future_deck.takeObject({guid = Idea_Card_GUIDs.admin.industrial_revolution }))
       waitFrames(2)
       war_deck.putObject(future_deck)
