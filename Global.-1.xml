@@ -6,6 +6,7 @@
   <Button class="variant"  onClick="Global/ui_select_variant" active="False"/>
   <Button class="bot" onClick="Global/ui_toggle_bot"/>
   <Button class="option" onClick="Global/ui_toggle_option"/>
+  <HorizontalLayout class="option" onClick="Global/ui_show_option_info" />
 </Defaults>
 
 <Panel id="scenario" image="background" width="1430" height="906" active="false">
@@ -293,7 +294,7 @@
                 Option 2
               </Text>
               <Button class="option" id="opt2-btn">
-                <Text id="opt1-text" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
+                <Text id="opt2-text" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
                   On/Off
                 </Text>
               </Button>

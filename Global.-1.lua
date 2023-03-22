@@ -1,6 +1,6 @@
 TEST_MODE = false
 UI_PAGES = { scenario = 1, variant = 2, bots = 3, options = 4 }
-UI_Data = { page = UI_PAGES.scenario, scenario = '', variant = '', variant_num = 0, players = {} }
+UI_Data = { page = UI_PAGES.scenario, scenario = '', variant = '', variant_num = 0, players = {}, options = {}, }
 Scenario = ''
 Scenario_Variant = ''
 Scenario_Age = 1
@@ -525,6 +525,17 @@ function ui_set_active()
       end
     end
   elseif UI_Data.page == UI_PAGES.options then
+    for i = 1, 9 do
+      if UI_Data.options[i] ~= nil then
+        Global.UI.setAttribute(('opt'.. i), "active", true)
+        Global.UI.setAttribute(('opt'.. i ..'-desc'), "text", UI_Data.options[i].name)
+        Global.UI.setAttribute(('opt'.. i ..'-text'), "text", UI_Data.options[i].values[UI_Data.options[i].selected])
+        elements = elements + 1
+      else
+        Global.UI.setAttribute(('opt'.. i), "active", false)
+      end
+    end
+    Global.UI.setAttribute("option_panel", "height", (elements * 70))
   end
 end
 
@@ -559,6 +570,33 @@ function ui_generate_player_data(realms)
 end
 
 
+function ui_generate_options()
+  if Scenario_List[UI_Data.scenario] == nil then
+    UI_Data.options = {}
+    return
+  end
+  if Scenario_List[UI_Data.scenario].variants[UI_Data.variant_num] == nil then
+    UI_Data.options = {}
+    return
+  end
+  UI_Data.options = {}
+  for _, list in pairs({Scenario_List[UI_Data.scenario], Scenario_List[UI_Data.scenario].variants[UI_Data.variant_num]}) do
+    if list.options ~= nil then
+      for i = 1, 9 do
+        if list.options[i] ~= nil then
+          UI_Data.options[i] = {
+            name = list.options[i].name or 'NAME MISSING',
+            values = list.options[i].values or {'####'},
+            selected = list.options[i].default or 1,
+            info = list.options[i].info or '',
+          }
+        end
+      end
+    end
+  end
+end
+
+
 function ui_select_scenario(player, value, id)
   if value ~= "-1" then return end
   UI_Data.scenario = id
@@ -587,12 +625,31 @@ function ui_select_variant(player, value, id)
 end
 
 
-function ui_toggle_bot (player, value, id)
+function ui_toggle_bot(player, value, id)
   if value ~= "-1" then return end
   local num = tonumber(string.sub(id, 4, 4))
   if UI_Data.players[num] ~= nil then
     UI_Data.players[num].bot = not (UI_Data.players[num].bot)
   end
+  ui_set_active()
+end
+
+function ui_show_option_info(player, value, id)if value ~= "-1" then return end
+  local num = tonumber(string.sub(id, 4, 4))
+  Global.UI.setAttribute(('opt-description'), "text", UI_Data.options[num].info)
+  ui_set_active()
+end
+
+function ui_toggle_option(player, value, id)
+  if value ~= "-1" then return end
+  local num = tonumber(string.sub(id, 4, 4))
+  local i = UI_Data.options[num].selected
+  if UI_Data.options[num].values[(i+1)] ~= nil then
+    UI_Data.options[num].selected = i + 1
+  else
+    UI_Data.options[num].selected = 1
+  end
+  Global.UI.setAttribute(('opt-description'), "text", UI_Data.options[num].info)
   ui_set_active()
 end
 
@@ -631,7 +688,7 @@ function ui_start_game(player, value, id)
     ui_set_active()
   elseif UI_Data.page == UI_PAGES.bots then
     UI_Data.page = UI_PAGES.options
-    -- Switch to the options page
+    ui_generate_options()
     ui_set_active()
   else
     Global.UI.hide("scenario")

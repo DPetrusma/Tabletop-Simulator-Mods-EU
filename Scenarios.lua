@@ -52,6 +52,14 @@ Scenario_List['1-01'].description = [[This scenario is quite well suited for an 
 
 With the Deluxe Edition or the Fate of Empires Expansion you can play this scenario with five players instead of four, by adding ›Den­mark as a PR
 ]]
+Scenario_List['1-01'].options = {
+  [1] = {name = 'Ages to play:', values = {'1','2','3'}, default = 2, info = 'How many ages should the game be set up for?' },
+  [2] = {name = 'DNPR Protugal', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Portugal using green tokens?' },
+  [3] = {name = 'DNPR Denmark', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Denmark using pink tokens?' },
+  [3] = {name = 'Power Struggles', values = {'On','Off'}, default = 2, info = [[Set up power struggles:
+  
+If you decide to include Power Struggles in your game, we recommend using The Italian Wars as the first and Distant Trade as the second, both triggering in Age II. If also playing Age III, you may include Thirty Years' War, triggering on the first icon in Age III.]] },
+}
 Scenario_List['1-01'].variants = { 
   { name = '3 Players', code = '3P', handler = 'Variant_1_Selected', age = 1, book = {1,3}, player_realms = {
       [REALM.france] = { seat = 1, color = 'blue', realm = {REALM.france, '1444'}, rem_missions = {'4B', '4E'}, start_missions = {'1A','1B','1C'}, start = true },
@@ -122,6 +130,16 @@ Scenario_List['1-01'].variants = {
 Scenario_List['1-02'].description = [[In this scenario the players face the struggle of three minor nations fighting to survive, and eventually trying to grow and flourish, in the periphery of a Holy Roman Empire dominated by the powerful Em­peror, AustriaBot. The players must carefully plan their strategies, not getting over­confident in their advance within the Holy Roman Empire, as the Emperor will not tolerate anyone trying to outclass him and will be swift dealing with unprepared opponents. Playing through this scenario is a good way for players to familiar­ize themselves with the Solo & Bot rules, and learning how to handle Bots. It is also an interesting challenge to play as a minor Realm that has to weigh its options more carefully, using less brute force, and a more subtle approach, than when playing as a Major Power. At times the players will likely benefit from cooperating with one or even both of the other players. Sometimes they might also be able to take advantage of the actions of the Bot, or even manipulate the Bot into doing things that work in their favor.
 
 With careful resource management and skilled diplomacy each of these three minor Realms have the potential to grow into powerful states, eventually perhaps even eclipsing the might of the Emperor.]]
+Scenario_List['1-02'].options = {
+  [1] = {name = 'Netherlands start:', values = {'Amsterdam','Brugge','Antwepen'}, info = [[Starting towns for the Netherlands start:
+  Amsterdam & Zeeland
+  Brugge & Gent
+  Antwerpen & Breda]], },
+  [3] = {name = 'DNPR Denmark', values = {'On','Off'}, info = 'Set up a dynamic NPR for Denmark using pink tokens?', },
+  [4] = {name = 'Power Struggles', values = {'On','Off'}, default = 2, info = [[Set up power struggles:
+  
+  If you decide to include Power Struggles in your game, we recommend using The Italian Wars in Age II and Thirty Years' War in Age III, both triggering on the first, bright white, Power Struggle icon in each Age. Both will likely draw AustriaBot's attention towards targets close to the homelands of the other PRs, with ›Papal States seeing the most action during the first Power Struggle and ›Brandenburg the most during the last, while ›Netherlands will get a taste of it during both.]], },
+}
 Scenario_List['1-02'].variants = {
   { name = '3 Players + 1 Bot', code = '1B', handler = 'Variant_1_Selected', age = 1, book = {1,4}, board = MAIN_BOARD_STATE.s1_02, player_realms = {
     [REALM.papal] = { seat = 1, color = 'red', realm = {REALM.papal, '1444'}, rem_missions = {'3H', '4P'}, start_missions = {'1F','1A','1C'}, locked = true, start = true },
@@ -144,6 +162,7 @@ Scenario_List['1-02'].variants = {
       WesternMap.kobenhavn, WesternMap.gotland, WesternMap.lund, WesternMap.ostjylland, WesternMap.vestjylland, WesternMap.slesvig, WesternMap.holstein,
     }, manpower = { WesternMap.stockholm, WesternMap.danzig, WesternMap.poznan, WesternMap.kalisz, WesternMap.sieradz, WesternMap.pozsony, WesternMap.pest}, 
       powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.thirty_years_war }, remove = {{-5.43, -5.16, 'Cube'}, },
+      options = {[2] = {name = 'DNPR France', values = {'On','Off'}, info = 'Set up a dynamic NPR for France using blue tokens?', },},
   },
   { name = '3 Players + 2 Bots', code = '2B', handler = 'Variant_2_Selected', age = 1, book = {1,4}, board = MAIN_BOARD_STATE.s1_02, player_realms = {
     [REALM.papal] = { seat = 2, color = 'red', realm = {REALM.papal, '1444'}, rem_missions = {'3H', '4P'}, start_missions = {'1F','1A','1C'}, locked = true, start = true },
