@@ -876,7 +876,7 @@ function Setup_Game()
 
     else
       broadcastToAll("Setting up: [u]Imperial Waltz (3 players + 2 Bots)[/u]", {1,1,1})
-      broadcastToAll("Duplicate Event 256B replaced with 257B", {1,1,1})
+      broadcastToAll("Duplicate Event 256B replaced with 262B", {1,1,1})
       -- Left HRE markers
       PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
 
