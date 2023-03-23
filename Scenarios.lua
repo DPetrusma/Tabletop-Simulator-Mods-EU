@@ -54,7 +54,7 @@ With the Deluxe Edition or the Fate of Empires Expansion you can play this scena
 ]]
 Scenario_List['1-01'].options = {
   [1] = {name = 'Ages to play:', values = {'1','2','3'}, default = 2, info = 'How many ages should the game be set up for?' },
-  [2] = {name = 'DNPR Protugal', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Portugal using green tokens?' },
+  [2] = {name = 'DNPR Portugal', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Portugal using green tokens?' },
   [3] = {name = 'DNPR Denmark', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Denmark using pink tokens?' },
   [3] = {name = 'Power Struggles', values = {'On','Off'}, default = 2, info = [[Set up power struggles:
   
@@ -210,7 +210,7 @@ Scenario_List['1-03'].variants = {
     }, curia = {REALM.none, REALM.castile, REALM.portugal, REALM.england, }, trade_add_tags = {'Trade2'}, DNPR_Blue_L = { 
       WesternMap.paris, WesternMap.rennes, WesternMap.nantes, WesternMap.maine, WesternMap.normandie, WesternMap.caux, 
       WesternMap.picardie, WesternMap.artois, WesternMap.bordeaux, WesternMap.anjou, WesternMap.bourgogne, WesternMap.provence,
-    },
+    }, options = {[1] = {name = 'DNPR Austria', values = {'On','Off'}, info = 'Set up a dynamic NPR for Austria using blue tokens?', },},
   },
   { name = '4 Players', age = 1, book = {1,5}, player_realms = {
     [REALM.portugal] = { seat = 2, color = 'white', realm = {REALM.portugal, 'S103'}, rem_missions = {'2D - Found', '3B - Dominate'}, start_missions = {'1B','1D'}, start = true },
@@ -230,12 +230,19 @@ Scenario_List['1-03'].variants = {
   }, curia = {REALM.none, REALM.castile, REALM.france, REALM.portugal, REALM.england, }, trade_add_tags = {'Trade2'}, DNPR_Blue_L = { 
     WesternMap.wien, WesternMap.osterreich, WesternMap.steiermark, WesternMap.karnten, WesternMap.lienz, WesternMap.tirol,
     WesternMap.krain, WesternMap.sundgau, WesternMap.franchecomte, WesternMap.namur, WesternMap.luxembourg,
-  }, },
+  }, options = {[1] = {name = 'DNPR France', values = {'On','Off'}, info = 'Set up a dynamic NPR for France using blue tokens?', },}, },
 }
 
 
 Scenario_List['1-04'].description = [[This scenario starts at the beginning of Age II (skipping Age I). This means that this scenario's map situation will be very different from any scenarios that start in Age I. Two of the Major Powers in this scenario, ›France and ›Castile have firmly consolidated their territorial power bases. The same is true to some extent for ›Austria, but ›England is territorially in a weaker state compared to where it is when starting in Age I. ›Austria and ›England are compensated with some starting 0 as noted in the Setup Instructions. This means that this scenario is best suited for 2–3 players, using ›	England as a Bot, while the players assume control of ›France and ›	Castile. ›Austria can be either a third human player, or a second Bot. Larger territorial possessions and less space to expand into at the start of the game means that players are likely to enter conflict with each other relatively early. While Spain and Austria were historically united for most of the time period covered in this scenario, there are no special restrictions as to whom PRs may Ally with or against.
 ]]
+Scenario_List['1-04'].options = {
+  [1] = {name = 'DNPR Portugal', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Portugal using green tokens?' },
+  [2] = {name = 'DNPR Venice', values = {'On','Off'}, default = 2, info = 'Set up a dynamic NPR for Venice using blue tokens?' },
+  [4] = {name = 'Power Struggles', values = {'Ordered','Random','Off'}, default = 3, info = [[Set up power struggles:
+  
+  If you decide to include Power Struggles in your game, we recommend randomizing the order of The Italian Wars and Distant Trade as the first two Power Struggles, both triggering in Age II, and use Thirty Years' War as the third, triggering on the first Power Struggle symbol in Age III.]] },
+}
 Scenario_List['1-04'].variants = { 
   { name = '2 Players (no bots)', age = 2, book = {1,6}, draw_per_round = 4, player_realms = {
     [REALM.france] = { seat = 1, color = 'blue', realm = {REALM.france, 'S104'}, start_missions = {'2A','2B','2C'}, rem_missions = {'4B','4E'}, done_missions = {'1A','1B','1C'}, extra_mp = 2, locked = true, start = true },
@@ -253,7 +260,8 @@ Scenario_List['1-04'].variants = {
   curia = {REALM.none, REALM.castile, REALM.france, }, trade_add_all = true, DNPR_Green_L = {
     WesternMap.lisboa, WesternMap.porto, WesternMap.beira, WesternMap.ceuta, WesternMap.madeira, AfricaMap.angola, IndiaMap.goa, FarEastMap.malacca,
   }, manpower = { WesternMap.stockholm, WesternMap.danzig, WesternMap.poznan, WesternMap.kalisz, WesternMap.sieradz, WesternMap.pozsony, WesternMap.pest}, 
-  powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.distant_trade, PS_GUIDs.thirty_years_war }, },
+  powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.distant_trade, PS_GUIDs.thirty_years_war },
+  options = {[3] = {name = 'Add Extra DNPR', values = {'Off','Denmark','Poland'}, info = 'Set up a dynamic NPR for Denmark or Poland using pink tokens?', },}, },
   { name = '3 Players', age = 2, book = {1,6}, player_realms = {
     [REALM.france] = { seat = 1, color = 'blue', realm = {REALM.france, 'S104'}, start_missions = {'2A','2B','2C'}, rem_missions = {'4B','4E'}, done_missions = {'1A','1B','1C'}, extra_mp = 2, start = true },
     [REALM.castile] = { seat = 2, color = 'yellow', realm = {REALM.castile, 'S104'}, start_missions = {'2B','2C','3A'}, rem_missions = {'3E','4C'}, done_missions = {'1A','1B','1C','2A','2D'}, extra_mp = 2, },
@@ -292,7 +300,8 @@ Scenario_List['1-04'].variants = {
   curia = {REALM.none, REALM.castile, REALM.austria, REALM.france, REALM.england }, trade_add_all = true, DNPR_Green_L = {
     WesternMap.lisboa, WesternMap.porto, WesternMap.beira, WesternMap.ceuta, WesternMap.madeira, AfricaMap.angola, IndiaMap.goa, FarEastMap.malacca,
   }, manpower = { WesternMap.stockholm, WesternMap.danzig, WesternMap.poznan, WesternMap.kalisz, WesternMap.sieradz, WesternMap.pozsony, WesternMap.pest}, 
-  powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.distant_trade, PS_GUIDs.thirty_years_war }, },
+  powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.distant_trade, PS_GUIDs.thirty_years_war },
+  options = {[3] = {name = 'Add Extra DNPR', values = {'Off','Denmark','Poland'}, info = 'Set up a dynamic NPR for Denmark or Poland using pink tokens?', }, }, }
 }
 
 
@@ -304,6 +313,11 @@ Scenario_List['1-05'].description = [[>Spain I (Castile) will need to send their
 
 > Netherlands, being the smallest PR in the mix, will need to plan carefully to realize their ambition of reuniting the entirety of the Low Countries under their rule. Their Distant Provinces can provide the wealth needed to pay for life­saving Mercenary Armies.
 ]]
+Scenario_List['1-05'].options = {
+  [1] = {name = 'DNPR Hungary', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Hungary using pink tokens?' },
+  [2] = {name = 'DNPR Peru', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for the Viceroyalty of Peru using green tokens?' },
+  [3] = {name = 'DNPR New Spain', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for the Viceroyalty of New Spain using orange tokens?' },
+}
 Scenario_List['1-05'].variants = {
   { name = '4 Players', age = 3, book = {1,7}, board = MAIN_BOARD_STATE.base_1618, player_realms = {
     [REALM.austria] = { seat = 6, color = 'white', realm = {REALM.austria, '1618'}, start_missions = {'2A','2C','2D'}, rem_missions = {'4B','4E'}, done_missions = {'1A','1B','1C','2B','3B'}, extra_mp = 3, start = true },
@@ -324,7 +338,10 @@ Scenario_List['1-05'].variants = {
     AmericaMap.cuzco, AmericaMap.quito, AmericaMap.newgranada, AmericaMap.charcas, AmericaMap.chile, AmericaMap.laplata,    
   }, DNPR_Orange_S = { 
     AmericaMap.mexico, AmericaMap.centralamerica, AmericaMap.florida, AmericaMap.antilles,
-  }, powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.thirty_years_war }, remove = {{6.74, -0.30, 'SmallTown'}, }, },
+  }, powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.thirty_years_war }, remove = {{6.74, -0.30, 'SmallTown'}, },
+  options = {[4] = {name = 'Power Struggles', values = {'On','Off'}, default = 2, info = [[Set up power struggles:
+  
+  We recommend using The Italian Wars and Thirty Years' War, in random order. ›Spain I should count all Provinces Owned by ›Spain II as if they were their own when scoring Prestiege for Power Struggles.]]}, },},
   { name = '6 Players (Team)', age = 3, book = {1,7}, board = MAIN_BOARD_STATE.base_1618, player_realms = {
     [REALM.england] = { seat = 4, color = 'red', realm = {REALM.england, '1618'}, start_missions = {'1A','1B','1C'}, rem_missions = {'3E'}, extra_mp = 3, start = true },
     [REALM.austria] = { seat = 5, color = 'white', realm = {REALM.austria, '1618'}, start_missions = {'2A','2C','2D'}, rem_missions = {'4B','4E'}, done_missions = {'1A','1B','1C','2B','3B'}, extra_mp = 3, },
@@ -354,7 +371,9 @@ Scenario_List['1-05'].variants = {
   }, DNPR_Orange_S = { 
     AmericaMap.mexico, AmericaMap.centralamerica, AmericaMap.florida, AmericaMap.antilles,
   }, powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.thirty_years_war, PS_GUIDs.distant_trade, PS_GUIDs.war_of_spanish_succession, PS_GUIDs.seven_years_war },
-  remove = {{6.74, -0.30, 'SmallTown'}, }, },
+  remove = {{6.74, -0.30, 'SmallTown'}, }, options = {[4] = {name = 'Power Struggles', values = {'On','Off'}, default = 1, info = [[Set up power struggles:
+  
+  From The Italian Wars, Thirty Years' War, Distant Trade, War of Spanish Succession, and Seven Years' War, draw 4 cards at random and shuffle them in random order to form the deck.]]}, },},
 }
 
 
@@ -362,6 +381,9 @@ Scenario_List['1-06'].description = [[›	Brandenburg is a small Realm with a lo
 
 While building up for this confrontation, DenmarkBot will pro­vide early challenges. Once ›Branden burg eclipses one of their two Opponents, mighty FranceBot will wake up to dispute ›Branden­burg's claims to the region around the Rhine.
 ]]
+Scenario_List['1-06'].options = {
+  [1] = {name = 'DNPR France', values = {'On','Off'}, info = 'Set up a dynamic NPR for France using blue tokens?', },
+}
 Scenario_List['1-06'].variants = {
   { name = 'Default (Denmark)', age = 1, book = {1,8}, player_realms = {
     [REALM.brandenburg] = { seat = 6, color = 'blue', realm = {REALM.brandenburg, 'S106'}, locked = true, start_missions = {'1C','1E','1F'}, rem_missions = {'1A','2F - Baltic','2I - Join'}, add_missions = {'1E','2C','2E','3C','3H','4A','5A'}, start = true },
@@ -452,6 +474,17 @@ Scenario_List['2-01'].description = [[Poland, which starts the game without a Ru
 
 The ›Ottomans are on the verge of becoming a true empire, but they have many enemies and few friends. If they can build up their military strength to conquer what remains of ›Byzantium and Ana-tolia, they are well placed to expand into Europe, the Middle East, or the Mediterranean.
 ]]
+Scenario_List['2-01'].options = {
+  [1] = {name = 'Ages to play:', values = {'2','3','4'}, default = 3, info = 'How many ages should the game be set up for?' },
+  [2] = {name = 'DNPR Denmark', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Denmark using pink tokens?' },
+  [3] = {name = 'DNPR Portugal', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Portugal using green tokens?' },
+  [4] = {name = 'DNPR Mamluks', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for the Mamluks using orange tokens?' },
+  [5] = {name = 'Power Struggles', values = {'Ordered','Random','Off'}, default = 1, info = [[Set up power struggles:
+  
+  For your first Grand Campaign, we recommend using the following Power Struggles in the order listed below (for later playthroughs, you may randomize their order):
+  1. The Italian Wars, 2. Struggle for the Balkans, 3. Thirty Years' War,
+  4. War of Spanish Succession, 5. Seven Years’ War, 6. Napoleonic Wars]] },
+}
 Scenario_List['2-01'].variants = {
   { name = 'Default (Austria)', age = 1, book = {2,1}, board = MAIN_BOARD_STATE.s2_01, player_realms = {
     [REALM.ottomans] = { seat = 6, color = 'green', realm = {REALM.ottomans, '1444'}, start_missions = {'1A','1B','1C'}, start = true },
@@ -537,6 +570,16 @@ The Grand Duchy of ›Lithuania, with its Ruthenian lands, will likely be a regi
 
 The Balkans will be contested by ›Austria and the ›Ottomans, but the ›Polish also have dynastic claims to the ›Hungarian throne. And, who is to say that ›Austria will get the Holy Roman Empire all to themselves?
 ]]
+Scenario_List['2-02'].options = {
+  [1] = {name = 'Ages to play:', values = {'3','4'}, default = 1, info = 'How many ages should the game be set up for?' },
+  [2] = {name = 'DNPR Hungary', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Hungary using green tokens?' },
+  [4] = {name = 'DNPR Mamluks', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for the Mamluks using orange tokens?' },
+  [5] = {name = 'Power Struggles', values = {'Ordered','Random','Off'}, default = 3, info = [[Set up power struggles:
+  
+  For your first Grand Campaign, we recommend using the following Power Struggles in the order listed below (for later playthroughs, you may randomize their order):
+  1. The Italian Wars, 2. Struggle for the Balkans, 3. Thirty Years' War,
+  4. War of Spanish Succession, 5. Seven Years’ War, 6. Napoleonic Wars]] },
+}
 Scenario_List['2-02'].variants = {
   { name = '3 Players', age = 1, book = {2,2}, board = MAIN_BOARD_STATE.s2_02_4p, player_realms = {
     [REALM.ottomans] = { seat = 6, color = 'green', realm = {REALM. ottomans,'1444'}, start_missions = {'1A','1B','1C'}, start = true },
@@ -574,7 +617,7 @@ Scenario_List['2-02'].variants = {
     EasternMap.alquds, EasternMap.jaffa, EasternMap.dimashq, EasternMap.tarabulus, EasternMap.halab, AfricaMap.upperegypt, IndiaMap.hejaz,
   }, manpower = { WesternMap.piemont, WesternMap.geneve, WesternMap.sardenya, WesternMap.tunis },
   powerstruggles = { PS_GUIDs.struggle_for_the_balkans, PS_GUIDs.great_northern_war, PS_GUIDs.holy_league, PS_GUIDs.deluge },
-  },
+  }, options = {[3] = {name = 'DNPR Denmark', values = {'On','Off'}, info = 'Set up a dynamic NPR for Denmark using pink tokens?', },},
   { name = '4 Players', age = 1, book = {2,2}, board = MAIN_BOARD_STATE.s2_02_4p, player_realms = {
     [REALM.ottomans] = { seat = 6, color = 'green', realm = {REALM.ottomans,'1444'}, start_missions = {'1A','1B','1C'}, start = true },
     [REALM.austria] = { seat = 1, color = 'white', realm = {REALM.austria,'1444'}, start_missions = {'1A','1B','1C'}, },
@@ -611,7 +654,8 @@ Scenario_List['2-02'].variants = {
       EasternMap.qahirah, EasternMap.bangazi, EasternMap.iskandariyya, EasternMap.fayyum, EasternMap.dumyat, EasternMap.gazzah,
       EasternMap.alquds, EasternMap.jaffa, EasternMap.dimashq, EasternMap.tarabulus, EasternMap.halab, AfricaMap.upperegypt, IndiaMap.hejaz,
     }, manpower = { WesternMap.piemont, WesternMap.geneve, WesternMap.sardenya, WesternMap.tunis },
-    powerstruggles = { PS_GUIDs.struggle_for_the_balkans, PS_GUIDs.great_northern_war, PS_GUIDs.holy_league, PS_GUIDs.deluge, }, },
+    powerstruggles = { PS_GUIDs.struggle_for_the_balkans, PS_GUIDs.great_northern_war, PS_GUIDs.holy_league, PS_GUIDs.deluge, }, 
+    options = {[3] = {name = 'DNPR Denmark', values = {'On','Off'}, info = 'Set up a dynamic NPR for Denmark using pink tokens?', },},},
     { name = '5 Players (Denmark)', age = 1, book = {2,2}, board = MAIN_BOARD_STATE.s2_02_dk_se, player_realms = {
       [REALM.ottomans] = { seat = 6, color = 'green', realm = {REALM.ottomans,'1444'}, start_missions = {'1A','1B','1C'}, start = true },
       [REALM.austria] = { seat = 1, color = 'white', realm = {REALM.austria,'1444'}, start_missions = {'1A','1B','1C'}, },
@@ -716,7 +760,8 @@ Scenario_List['2-02'].variants = {
         WesternMap.pest, EasternMap.szabolcs, WesternMap.sopron, WesternMap.pozsony, EasternMap.szepes,
         EasternMap.torda, EasternMap.hunyad, EasternMap.beograd, WesternMap.zagreb, WesternMap.rijeka,
       }, manpower = { WesternMap.piemont, WesternMap.geneve, WesternMap.sardenya },
-      powerstruggles = { PS_GUIDs.struggle_for_the_balkans, PS_GUIDs.great_northern_war, PS_GUIDs.holy_league, PS_GUIDs.deluge }, },
+      powerstruggles = { PS_GUIDs.struggle_for_the_balkans, PS_GUIDs.great_northern_war, PS_GUIDs.holy_league, PS_GUIDs.deluge }, 
+      options = {[1] = {name = 'DNPR Denmark', values = {'On','Off'}, info = 'Set up a dynamic NPR for Denmark using pink tokens?', },},},
       { name = '6 Players', age = 1, book = {2,2}, board = MAIN_BOARD_STATE.s2_02_6p, player_realms = {
         [REALM.ottomans] = { seat = 6, color = 'green', realm = {REALM.ottomans,'1444'}, start_missions = {'1A','1B','1C'}, start = true },
         [REALM.mamluks] = { seat = 1, color = 'red', realm = {REALM.mamluks,'1444'}, start_missions = {'1A','1C','1D'}, rem_missions = {'1F','2C','2F'}, add_missions = {'1A','2G','3M'}, },
@@ -787,7 +832,10 @@ Scenario_List['2-03'].variants = {
   }, curia = {REALM.none, REALM.castile, REALM.venice, REALM.france, }, trade_add_tags = {'Trade2', 'Trade3'}, trade_add_names = {'T24-1'}, trade_remove_names = {'T16-1'},
   powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.struggle_for_the_balkans, PS_GUIDs.holy_league, PS_GUIDs.war_of_spanish_succession },
   remove = { {-9.02, 6.84, 'Cube'}, {-9.02, 7.22, 'Cube'}, {-7.80, 6.45, 'Alliance'} },
-  },
+  options = {[1] = {name = 'Power Struggles', values = {'Ordered','Random','Off'}, default = 3, info = [[Set up power struggles:
+  
+  We recommend not using Power Struggles for this scenario. However, if you would rather play for Prestiege only, and not compete for the Objectives listed in the Victory Conditions below, you can use the following Power Struggles in the listed order or randomized:
+1. The Italian Wars, 2. Struggle for the Balkans, 3. The Holy League, 4. War of Spanish Succession]]}, },},
   { name = '6 Players (Teams)', age = 3, book = {2,3}, board = MAIN_BOARD_STATE.s2_03_6p, draw_per_round = 6, player_realms = {
     [REALM.venice] = { seat = 6, color = 'red', realm = {REALM.venice,'S203-6P'}, no_missions = true, extra_mp = 3, start = true, },
     [REALM.rumelia] = { name = "Ottomans I", seat = 1, color = 'green', realm = {REALM.rumelia,'1618'}, no_missions = true, extra_mp = 3, },
@@ -823,6 +871,13 @@ With Events triggering the spread of the Revolution, Grand Coa-litions, coups, a
 
 Will the Revolution sweep the old monarchies aside? Will Na-poleon rise to power and form a new European Empire? Or, will the European Concert keep the revolutionary forces at bay?
 ]]
+Scenario_List['2-04'].options = {
+  [1] = {name = 'DNPR USA', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for the United States of America using pink (1) tokens?' },
+  [2] = {name = 'DNPR Netherlands', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for the Netherlands using orange tokens?' },
+  [3] = {name = 'DNPR Sweden', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Sweden using blue tokens?' },
+  [4] = {name = 'DNPR Sicily', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for the Two Sicilies using green tokens?' },
+  [5] = {name = 'DNPR Savoy', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Savoy using pink (2) tokens?' },
+}
 Scenario_List['2-04'].variants = {
 { name = '6 Players', age = 4, book = {2,4}, board = MAIN_BOARD_STATE.s2_04, draw_per_round = 6, player_realms = {
     [REALM.prussia] = { name = 'Prussia', seat = 5, color = 'purple', realm = {REALM.prussia,'S204'}, no_missions = true, extra_mp = 4, prestige= 10, start = true },
@@ -901,6 +956,10 @@ Scenario_List['2-06'].description = [[A challenging solo campaign, where you, as
 
 Despite the difficult start, a successful ›Byzantine player will be able to make gains against the ›Ottomans, to reclaim their former heartland. Once a power base has been secured, goals can include re-claiming all of Anatolia or even avenging the Fourth Crusade. Should further success ensue, the player may turn their eyes West and seek to restore as much of the former Roman Empire as possible, although new Opponents in ›Spain and ›France may have something to say about that.
 ]]
+Scenario_List['2-06'].options = {
+  [1] = {name = 'DNPR Hungary', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Hungary using green tokens?' },
+  [2] = {name = 'DNPR Mamluks', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for the Mamluks using orange tokens?' },
+}
 Scenario_List['2-06'].variants = {
   { name = '1 Player', age = 1, book = {2,6}, board = MAIN_BOARD_STATE.deluxe_1444, player_realms = {
     [REALM.byzantium] = { seat = 6, color = 'purple', realm = {REALM.byzantium,'S206'}, no_missions = true, locked = true, start = true  },
@@ -936,6 +995,12 @@ Scenario_List['2-06'].variants = {
 
 Scenario_List['2-07'].description = [[There may well be an alternative timeline, where ›Ulm's presence looms large way into the 21st century. Unfortunately for we fourth dimensional creatures that can only perceive a single timeline, we are not living that reality. Not since 1805 has ›Ulm made the headlines, and while headlines are still hard to come by, the After Action Report comic about ›Ulm's exploits in Europa Universalis III left a growing online community in its wake – much to the confusion of its original creator.
 ]]
+Scenario_List['2-07'].options = {
+  [1] = {name = 'DNPR Ferrara', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Ferrara using green tokens?' },
+  [2] = {name = 'DNPR Siena', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Siena using orange tokens?' },
+  [3] = {name = 'DNPR Palatinate', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for the Palatinate using blue tokens?' },
+  [4] = {name = 'DNPR Frankfurt', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Frankfurt using pink tokens?' },
+}
 Scenario_List['2-07'].variants = { 
   { name = 'Default Start', age = 1, book = {2,7}, board = MAIN_BOARD_STATE.deluxe_1444, player_realms = {
     [REALM.ulm] = { seat = 6, color = 'purple', realm = {REALM.ulm,'1444'}, no_missions = true, locked = true, start = true },

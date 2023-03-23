@@ -564,15 +564,20 @@ end
 
 
 function ui_generate_options()
+  UI_Data.options = {}
   if Scenario_List[UI_Data.scenario] == nil then
-    UI_Data.options = {}
     return
   end
   if Scenario_List[UI_Data.scenario].variants[UI_Data.variant_num] == nil then
-    UI_Data.options = {}
     return
   end
-  UI_Data.options = {}
+  UI_Data.options[9] = {
+    name = 'Randomize X-Events',
+    values = {'On','Off'},
+    selected = 2,
+    info = [[Randomize the distribution of events with an "x" symbol within an age according to optional Rule #6.
+  WARNING: This can cause erratic behavior in the mortality clock because two cards with the same symbol might show up in the same half of an age or even the same turn occasionally.]]
+  }
   for _, list in pairs({Scenario_List[UI_Data.scenario], Scenario_List[UI_Data.scenario].variants[UI_Data.variant_num]}) do
     if list.options ~= nil then
       for i = 1, 9 do
