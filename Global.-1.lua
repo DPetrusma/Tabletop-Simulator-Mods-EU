@@ -1991,7 +1991,11 @@ end
 function PrepareEventDecks(scenario_data)
   for _, list in ipairs({'age_1_events', 'age_2_events', 'age_3_events', 'age_4_events'}) do
     if scenario_data[list] ~= nil then
-      TakeCardsByCodes(scenario_data[list])
+      local cards = scenario_data[list]
+      if true then -- TODO: Check for randomization option
+        cards = RandomizeXEvents(scenario_data[list])
+      end
+      TakeCardsByCodes(cards)
       waitFrames(15)
     end
   end
@@ -3490,6 +3494,102 @@ function SetRulebookDate(date_string)
   end
 end
 
+-- Randomize events with X symbol
+function RandomizeXEvents(event_list)
+  if TEST_MODE then log('Randomizing X-Events') end
+  local result = {}
+  local x_events = {}
+  local stack1 = {position = 0, count=0, current = 0 }
+  local stack2 = {position = 0, count=0, current = 0 }
+
+  -- populate two stack positions:
+  for _, entry in ipairs(event_list) do
+    if stack1.position == 0 then
+      stack1.position = entry[2]
+    elseif stack1.position ~= entry[2] then
+      stack2.position = entry[2]
+    end
+  end
+
+  -- log('Stack 1 Position: ' .. stack1.position or 'unknown')
+  -- log('Stack 2 Position: ' .. stack2.position or 'unknown')
+  
+  -- handle list entries
+  for _, entry in ipairs(event_list) do
+    if stack1.position == entry[2] then
+      stack1.count = stack1.count + 1
+    elseif stack2.position == entry[2] then
+      stack2.count = stack2.count + 1
+    end
+    local is_x_card = false
+    local age = string.sub(entry[1],1,1)
+    if age == '1' then
+      x_card_list = Age1XCards
+    elseif age == '2' then
+      x_card_list = Age2XCards
+    elseif age == '3' then
+      x_card_list = Age3XCards
+    elseif age == '4' then
+      x_card_list = Age4XCards
+    end
+    for _, v in ipairs(x_card_list) do
+      if entry[1] == v then
+        is_x_card = true
+        break
+      end
+    end
+    if is_x_card then
+      table.insert(x_events, entry[1])
+    else
+      table.insert(result, entry)
+      if stack1.position == entry[2] then
+        stack1.current = stack1.current + 1
+      elseif stack2.position == entry[2] then
+        stack2.current = stack2.current + 1
+      end
+    end
+  end
+
+  -- log('Stack 1 Count: ' .. stack1.count or 'unknown')
+  -- log('Stack 2 Count: ' .. stack2.count or 'unknown')
+  
+  local shuffled_x_cards = {}
+  while #x_events > 0 do
+    local n = math.random(#x_events)
+    table.insert(shuffled_x_cards, table.remove(x_events, n))
+  end
+
+  -- distribute x cards
+  for _, card in ipairs(shuffled_x_cards) do
+    local stack_num = math.random(2)
+    if stack_num == 1 then
+      if stack1.count > stack1.current then
+        table.insert(result, {card, stack1.position})
+        stack1.current = stack1.current + 1
+      elseif stack2.count > stack2.current then
+        table.insert(result, {card, stack2.position})
+        stack2.current = stack2.current + 1
+      end
+    elseif stack_num == 2 then
+      if stack2.count > stack2.current then
+        table.insert(result, {card, stack2.position})
+        stack2.current = stack2.current + 1
+      elseif stack1.count > stack1.current then
+        table.insert(result, {card, stack1.position})
+        stack1.current = stack1.current + 1
+      end
+    end
+  end
+
+  --[[
+    log('Results:')
+    log(result)
+    log('X-Cards:')
+    log(x_events)
+  --]]
+  return result
+end
+
 
 --[[
   ------------------------------------------------
@@ -3663,6 +3763,15 @@ EasternMapReligion = {
   ['saratov'] = {19.95, 2.38}, ['serbiaalbania'] = {7.9, -4.85}, ['syria'] = {16.17, -9.33}, ['transylvania'] = {9.02, -1.09},
   ['wallachiabulgaria'] = {8.71, -3.93}, ['westernukraine'] = {13.07, -0.35}, ['whiteruthenia'] = {14.2, 3.0}, ['cyprus'] = {13.19, -9.94}
 }
+
+-- x-cards
+Age1XCards = { '11a-1', '12a-1', '12a-2', '13a-1', '14a-1', '14a-3', '151b', '152b', '153b', '154b', '156b', '160b' }
+
+Age2XCards = { '21a-1', '22a-1', '22a-2', '24a-3', '24a-4', '252b', '253b', '254b', '255b', '256b', '257b',  '259b', '261b', '262b', '263b', '264b' }
+
+Age3XCards = { '31a-1', '31a-2', '32a-1', '32a-2', '33a-1', '33a-2', '34a-3', '351b', '354b', '355b', '356b', '357b', '358b', '359b', '361b', '362b', '363b', '364b', }
+
+Age4XCards = { '41a-2', '42a-1', '44a-1', '452b', '453b', '454b', '455b' }
 
 require("EU.Realms")
 
