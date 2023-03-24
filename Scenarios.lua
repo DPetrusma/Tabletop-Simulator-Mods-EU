@@ -25,8 +25,9 @@ Scenario_List = {
 }
 
 Scenario_List['0-00'].description = [[This option lets you do the setup by hand. It places the play mats for all six players and their associated components. After this any additions and changes are left to the players to handle.]]
-
+  
 Scenario_List['1-00'].description = [[This scenario is intended for a group of players that are new to the game. The scenario begins at the standard 1444 starting point and lasts for two Rounds (the first half of Age I). This is enough to famil­iarize yourself with all of the basics, as well as the flow, of the game.]]
+Scenario_List['1-00'].options = { [9] = { name = 'hide'} }
 Scenario_List['1-00'].variants = { 
   { name = '3 Players', age = 1, book = {1,2}, player_realms = {
       [REALM.france] = { seat = 1, color = 'blue', realm = {REALM.france, '1444'}, rem_missions = {'4B', '4E'}, start_missions = {'1A','1B'}, start = true },
@@ -56,7 +57,7 @@ Scenario_List['1-01'].options = {
   [1] = {name = 'Ages to play:', values = {'1','2','3'}, default = 2, info = 'How many ages should the game be set up for?' },
   [2] = {name = 'DNPR Portugal', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Portugal using green tokens?' },
   [3] = {name = 'DNPR Denmark', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Denmark using pink tokens?' },
-  [3] = {name = 'Power Struggles', values = {'On','Off'}, default = 2, info = [[Set up power struggles:
+  [4] = {name = 'Power Struggles', values = {'On','Off'}, default = 2, info = [[Set up power struggles:
   
 If you decide to include Power Struggles in your game, we recommend using The Italian Wars as the first and Distant Trade as the second, both triggering in Age II. If also playing Age III, you may include Thirty Years' War, triggering on the first icon in Age III.]] },
 }
@@ -122,7 +123,7 @@ Scenario_List['1-01'].variants = {
     curia = {REALM.none, REALM.castile, REALM.austria, REALM.france, REALM.england, REALM.denmark, }, DNPR_Green_S = { 
       WesternMap.lisboa, WesternMap.porto, WesternMap.beira, WesternMap.ceuta, WesternMap.madeira,
     }, manpower = { WesternMap.stockholm, WesternMap.danzig, WesternMap.poznan, WesternMap.kalisz, WesternMap.sieradz, WesternMap.pozsony, WesternMap.pest}, 
-      powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.distant_trade, PS_GUIDs.thirty_years_war },
+      powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.distant_trade, PS_GUIDs.thirty_years_war }, options = { [3] = { name = 'hide'} }
   },
 }
 
@@ -210,7 +211,7 @@ Scenario_List['1-03'].variants = {
     }, curia = {REALM.none, REALM.castile, REALM.portugal, REALM.england, }, trade_add_tags = {'Trade2'}, DNPR_Blue_L = { 
       WesternMap.paris, WesternMap.rennes, WesternMap.nantes, WesternMap.maine, WesternMap.normandie, WesternMap.caux, 
       WesternMap.picardie, WesternMap.artois, WesternMap.bordeaux, WesternMap.anjou, WesternMap.bourgogne, WesternMap.provence,
-    }, options = {[1] = {name = 'DNPR Austria', values = {'On','Off'}, info = 'Set up a dynamic NPR for Austria using blue tokens?', },},
+    }, options = {[1] = {name = 'DNPR France', values = {'On','Off'}, info = 'Set up a dynamic NPR for France using blue tokens?', },},
   },
   { name = '4 Players', age = 1, book = {1,5}, player_realms = {
     [REALM.portugal] = { seat = 2, color = 'white', realm = {REALM.portugal, 'S103'}, rem_missions = {'2D - Found', '3B - Dominate'}, start_missions = {'1B','1D'}, start = true },
@@ -230,7 +231,7 @@ Scenario_List['1-03'].variants = {
   }, curia = {REALM.none, REALM.castile, REALM.france, REALM.portugal, REALM.england, }, trade_add_tags = {'Trade2'}, DNPR_Blue_L = { 
     WesternMap.wien, WesternMap.osterreich, WesternMap.steiermark, WesternMap.karnten, WesternMap.lienz, WesternMap.tirol,
     WesternMap.krain, WesternMap.sundgau, WesternMap.franchecomte, WesternMap.namur, WesternMap.luxembourg,
-  }, options = {[1] = {name = 'DNPR France', values = {'On','Off'}, info = 'Set up a dynamic NPR for France using blue tokens?', },}, },
+  }, options = {[1] = {name = 'DNPR Austria', values = {'On','Off'}, info = 'Set up a dynamic NPR for Austria using blue tokens?', },}, },
 }
 
 
@@ -259,6 +260,10 @@ Scenario_List['1-04'].variants = {
   }, empire = { authority = 4, },
   curia = {REALM.none, REALM.castile, REALM.france, }, trade_add_all = true, DNPR_Green_L = {
     WesternMap.lisboa, WesternMap.porto, WesternMap.beira, WesternMap.ceuta, WesternMap.madeira, AfricaMap.angola, IndiaMap.goa, FarEastMap.malacca,
+  }, DNPR_Blue_S = {
+    WesternMap.venezia, WesternMap.verona, WesternMap.treviso, WesternMap.brescia, WesternMap.zara,
+  }, DNPR_Pink_L = {
+    WesternMap.kobenhavn, WesternMap.gotland, WesternMap.lund, WesternMap.ostjylland, WesternMap.vestjylland, WesternMap.slesvig, WesternMap.holstein,
   }, manpower = { WesternMap.stockholm, WesternMap.danzig, WesternMap.poznan, WesternMap.kalisz, WesternMap.sieradz, WesternMap.pozsony, WesternMap.pest}, 
   powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.distant_trade, PS_GUIDs.thirty_years_war },
   options = {[3] = {name = 'Add Extra DNPR', values = {'Off','Denmark','Poland'}, info = 'Set up a dynamic NPR for Denmark or Poland using pink tokens?', },}, },
@@ -278,6 +283,8 @@ Scenario_List['1-04'].variants = {
   }, empire = { ruler = REALM.austria, authority = 4, influence = {HRE_Influence_Map_Pos.central_italy, HRE_Influence_Map_Pos.lombardy, HRE_Influence_Map_Pos.westphalia, HRE_Influence_Map_Pos.saxony} },
   curia = {REALM.none, REALM.castile, REALM.austria, REALM.france, }, trade_add_all = true, DNPR_Green_L = {
     WesternMap.lisboa, WesternMap.porto, WesternMap.beira, WesternMap.ceuta, WesternMap.madeira, AfricaMap.angola, IndiaMap.goa, FarEastMap.malacca,
+  }, DNPR_Blue_S = {
+    WesternMap.venezia, WesternMap.verona, WesternMap.treviso, WesternMap.brescia, WesternMap.zara,
   }, DNPR_Pink_L = {
     WesternMap.london, WesternMap.oxford, WesternMap.essex, WesternMap.shrewsbury, WesternMap.wales, WesternMap.wessex, WesternMap.lancashire, WesternMap.york, WesternMap.northumberland, WesternMap.pale,
   }, manpower = { WesternMap.stockholm, WesternMap.danzig, WesternMap.poznan, WesternMap.kalisz, WesternMap.sieradz, WesternMap.pozsony, WesternMap.pest}, 
@@ -299,6 +306,10 @@ Scenario_List['1-04'].variants = {
   }, empire = { ruler = REALM.austria, authority = 4, influence = {HRE_Influence_Map_Pos.central_italy, HRE_Influence_Map_Pos.lombardy, HRE_Influence_Map_Pos.westphalia, HRE_Influence_Map_Pos.saxony} },
   curia = {REALM.none, REALM.castile, REALM.austria, REALM.france, REALM.england }, trade_add_all = true, DNPR_Green_L = {
     WesternMap.lisboa, WesternMap.porto, WesternMap.beira, WesternMap.ceuta, WesternMap.madeira, AfricaMap.angola, IndiaMap.goa, FarEastMap.malacca,
+  }, DNPR_Blue_S = {
+    WesternMap.venezia, WesternMap.verona, WesternMap.treviso, WesternMap.brescia, WesternMap.zara,
+  }, DNPR_Pink_L = {
+    WesternMap.kobenhavn, WesternMap.gotland, WesternMap.lund, WesternMap.ostjylland, WesternMap.vestjylland, WesternMap.slesvig, WesternMap.holstein,
   }, manpower = { WesternMap.stockholm, WesternMap.danzig, WesternMap.poznan, WesternMap.kalisz, WesternMap.sieradz, WesternMap.pozsony, WesternMap.pest}, 
   powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.distant_trade, PS_GUIDs.thirty_years_war },
   options = {[3] = {name = 'Add Extra DNPR', values = {'Off','Denmark','Poland'}, info = 'Set up a dynamic NPR for Denmark or Poland using pink tokens?', }, }, }

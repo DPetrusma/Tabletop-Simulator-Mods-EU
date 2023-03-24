@@ -734,7 +734,7 @@ SETUP_DATA = {
       s_towns = { WesternMap.amsterdam, WesternMap.zeeland },
       allies = { WesternMap.bourgogne },
       marriages = { WesternMap.franchecomte },
-      influence = { {-2.52, 2.61}, {-2.52, 2.99}, {-2.21, 1.42}, {-2.21, 1.80},
+      influence = { {-2.52, 2.61}, {-2.52, 2.99}, {-2.21, 1.28}, {-2.21, 1.66},
                     {0.33, 3.38}, {-0.93, 2.96}, {-2.03, 0.16}, {-4.00, 0.06}},
       merchants = { {-3.44, 3.43}, {-5.50, 9.83} },
       ships = { {-4.43, 2.63}, {-2.93, 7.41}},
@@ -760,6 +760,14 @@ SETUP_DATA = {
       ships_bot = { {-4.76, 2.12}, {-2.90, 7.86}, {-11.01, -0.22}, {-15.56, 8.99},
                     {-18.34, -0.51}, {-14.48, -0.51}, {-14.45, -4.73}, {-14.38, -8.74} },
       army1 = { 2, 1, 1 },
+    },
+    ['S102B'] = {
+      parent = {REALM.netherlands, '1444'},
+      s_towns = { WesternMap.brugge, WesternMap.gent },
+    },
+    ['S102C'] = {
+      parent = {REALM.netherlands, '1444'},
+      s_towns = { WesternMap.antwerpen, WesternMap.breda },
     },
     ['S105'] = {
       parent = {REALM.netherlands, '1618'},

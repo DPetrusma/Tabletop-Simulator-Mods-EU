@@ -582,12 +582,16 @@ function ui_generate_options()
     if list.options ~= nil then
       for i = 1, 9 do
         if list.options[i] ~= nil then
-          UI_Data.options[i] = {
-            name = list.options[i].name or 'NAME MISSING',
-            values = list.options[i].values or {'####'},
-            selected = list.options[i].default or 1,
-            info = list.options[i].info or '',
-          }
+          if list.options[i].name == 'hide' then
+            UI_Data.options[i] = nil  
+          else
+            UI_Data.options[i] = {
+              name = list.options[i].name or 'NAME MISSING',
+              values = list.options[i].values or {'####'},
+              selected = list.options[i].default or 1,
+              info = list.options[i].info or '',
+            }
+          end
         end
       end
     end
@@ -836,24 +840,37 @@ function Setup_Game()
 
   elseif UI_Data.scenario == '1-01' then
 
+    -- Options
+    if UI_Data.options[2] ~= nil and UI_Data.options[2].selected == 2 then
+      scenario_data.DNPR_Green_S = nil -- Remove Portugal DNPR
+    end
+    if UI_Data.options[3] ~= nil then
+      if UI_Data.options[3].selected == 2 then
+        scenario_data.DNPR_Pink_L = nil -- Remove Denmark DNPR
+      else
+        PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false) -- Left HRE marker
+      end
+    end
+
     -- Religion Token
     PlaceObjectsFromBag({ WesternMapReligion.andalucia }, Bag_GUIDs['cat_div'], true)
 
     if UI_Data.variant_num == 1 then
       broadcastToAll("Setting up: [u]Discovery and Reformation (3 players)[/u]", {1,1,1})
       -- Left HRE markers
-      PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
+      -- TODO: REMOVE THIS LINE || PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
 
     elseif UI_Data.variant_num == 2 then
       broadcastToAll("Setting up: [u]Discovery and Reformation (4 players)[/u]", {1,1,1})
       -- Left HRE markers
-      PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
+      -- TODO: REMOVE THIS LINE || PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
 
     elseif UI_Data.variant_num == 3 then
       broadcastToAll("Setting up: [u]Discovery and Reformation (5 players)[/u]", {1,1,1})
       if players[REALM.denmark].bot then
         -- Left HRE markers
         PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
+
         -- Remove Influence
         if scenario_data.remove == nil then
           scenario_data.remove = {}
@@ -874,26 +891,46 @@ function Setup_Game()
 
   elseif UI_Data.scenario == '1-02' then
 
+    -- Options
+    if UI_Data.options[1] ~= nil then
+      if UI_Data.options[1].selected == 1 then
+        print('Option 1 Selected: Amsterdam & Zeeland')
+        scenario_data.player_realms[REALM.netherlands].realm = {REALM.netherlands, '1444'}
+      elseif UI_Data.options[1].selected == 2 then
+        print('Option 2 Selected: Brugge & Gent')
+        scenario_data.player_realms[REALM.netherlands].realm = {REALM.netherlands, 'S102B'}
+      elseif UI_Data.options[1].selected == 3 then
+        print('Option 3 Selected: Antwerpen & Breda')
+        scenario_data.player_realms[REALM.netherlands].realm = {REALM.netherlands, 'S102C'}
+      end
+    end
+    if UI_Data.options[2] ~= nil and UI_Data.options[2].selected == 2 then
+      scenario_data.DNPR_Blue_L = nil -- Remove France DNPR
+    end
+    if UI_Data.options[3] ~= nil then
+      if UI_Data.options[3].selected == 2 then
+        scenario_data.DNPR_Pink_S = nil -- Remove Denmark DNPR
+      else
+        PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false) -- Left HRE marker
+      end
+    end
+
     if UI_Data.variant_num == 1 then
       broadcastToAll("Setting up: [u]Imperial Waltz (3 players + 1 Bot)[/u]", {1,1,1})
-      -- Left HRE markers
-      PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
-
     else
       broadcastToAll("Setting up: [u]Imperial Waltz (3 players + 2 Bots)[/u]", {1,1,1})
-      broadcastToAll("Duplicate Event 256B replaced with 262B", {1,1,1})
-      -- Left HRE markers
-      PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
-
+      broadcastToAll("Duplicate Event 256B was replaced with 262B", {1,1,1})
     end
     
     CoreScenarioSetup(scenario_data)
-   
-    -- Remind Netherlands to decide which towns to use TODO: Let script determine this
-    broadcastToAll("Netherlands player: Remember choose your two starting towns", {1,1,1})
 
-      
+    
   elseif UI_Data.scenario == '1-03' then
+
+    -- Options
+    if UI_Data.options[1] ~= nil and UI_Data.options[1].selected == 2 then
+      scenario_data.DNPR_Blue_L = nil -- Remove France/Austria DNPR
+    end
 
     if UI_Data.variant_num == 1 then
       broadcastToAll("Setting up: [u]Sea Route to India (3 players)[/u]", {1,1,1})
@@ -915,6 +952,24 @@ function Setup_Game()
     
 
   elseif UI_Data.scenario == '1-04' then
+
+    -- Options
+    if UI_Data.options[1] ~= nil and UI_Data.options[1].selected == 2 then
+      scenario_data.DNPR_Green_L = nil -- Remove Portugal DNPR
+    end
+    if UI_Data.options[2] ~= nil and UI_Data.options[2].selected == 2 then
+      scenario_data.DNPR_Blue_S = nil -- Remove Venice DNPR
+    end
+    if UI_Data.options[3] ~= nil and UI_Data.variant_num ~=2 then
+      if UI_Data.options[3].selected == 1 then
+        scenario_data.DNPR_Pink_L = nil -- Remove Denmark/Poland DNPR
+      elseif UI_Data.options[3].selected == 2 then
+        PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false) -- Left HRE marker
+      elseif UI_Data.options[3].selected == 3 then
+        scenario_data.DNPR_Pink_L = {WesternMap.sieradz, WesternMap.poznan, WesternMap.kalisz, WesternMap.danzig, WesternMap.kulm}
+      end
+    end
+
     if UI_Data.variant_num == 1 then
       broadcastToAll("Setting up: [u]The Wars of Religion (2 players, 0 bots)[/u]", {1,1,1})
     elseif UI_Data.variant_num == 2 then
@@ -949,6 +1004,17 @@ function Setup_Game()
     
   elseif UI_Data.scenario == '1-05' then
 
+    -- Options
+    if UI_Data.options[1] ~= nil and UI_Data.options[1].selected == 2 then
+      scenario_data.DNPR_Pink_S = nil -- Remove Hungary DNPR
+    end
+    if UI_Data.options[2] ~= nil and UI_Data.options[2].selected == 2 then
+      scenario_data.DNPR_Green_L = nil -- Remove Peru DNPR
+    end
+    if UI_Data.options[3] ~= nil and UI_Data.options[3].selected == 2 then
+      scenario_data.DNPR_Orange_S = nil -- Remove New Spain DNPR
+    end
+
     if UI_Data.variant_num == 1 then
       broadcastToAll("Setting up: [u]The Bourbonic Plague (4 players)[/u]", {1,1,1})
 
@@ -971,6 +1037,12 @@ function Setup_Game()
 
 
   elseif UI_Data.scenario == '1-06' then
+    
+    -- Options
+    if UI_Data.options[1] ~= nil and UI_Data.options[1].selected == 2 then
+      scenario_data.DNPR_Blue_L = nil -- Remove France DNPR
+    end
+
     broadcastToAll("Setting up: [u]The Ambitious Margrave (solo)[/u]", {1,1,1})
     -- Left HRE markers
     PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
@@ -1997,8 +2069,10 @@ function PrepareEventDecks(scenario_data)
   for _, list in ipairs({'age_1_events', 'age_2_events', 'age_3_events', 'age_4_events'}) do
     if scenario_data[list] ~= nil then
       local cards = scenario_data[list]
-      if true then -- TODO: Check for randomization option
-        cards = RandomizeXEvents(scenario_data[list])
+      if UI_Data.options[9] ~= nil then
+        if UI_Data.options[9].selected == 1 then
+          cards = RandomizeXEvents(scenario_data[list])
+        end
       end
       TakeCardsByCodes(cards)
       waitFrames(15)
