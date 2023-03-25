@@ -857,13 +857,9 @@ function Setup_Game()
 
     if UI_Data.variant_num == 1 then
       broadcastToAll("Setting up: [u]Discovery and Reformation (3 players)[/u]", {1,1,1})
-      -- Left HRE markers
-      -- TODO: REMOVE THIS LINE || PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
 
     elseif UI_Data.variant_num == 2 then
       broadcastToAll("Setting up: [u]Discovery and Reformation (4 players)[/u]", {1,1,1})
-      -- Left HRE markers
-      -- TODO: REMOVE THIS LINE || PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
 
     elseif UI_Data.variant_num == 3 then
       broadcastToAll("Setting up: [u]Discovery and Reformation (5 players)[/u]", {1,1,1})
@@ -1051,7 +1047,22 @@ function Setup_Game()
 
 
   elseif UI_Data.scenario == '2-01' then
-    -- Setup S2-01: The Grand Campaign (6 players)
+
+    -- Options
+    if UI_Data.options[2] ~= nil then
+      if UI_Data.options[2].selected == 2 then
+        scenario_data.DNPR_Pink_L = nil -- Remove Denmark DNPR
+      else
+        PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false) -- Left HRE marker
+      end
+    end
+    if UI_Data.options[3] ~= nil and UI_Data.options[3].selected == 2 then
+      scenario_data.DNPR_Green_S = nil -- Remove Portugal DNPR
+    end
+    if UI_Data.options[4] ~= nil and UI_Data.options[4].selected == 2 then
+      scenario_data.DNPR_Orange_L = nil -- Remove Mamluks DNPR
+    end
+
     broadcastToAll("Setting up: [u]The Grand Campaign (6 players)[/u]", {1,1,1})
 
     -- Remove influence cube for Polish bot due to lack of vassals
@@ -1074,23 +1085,29 @@ function Setup_Game()
 
     end
     
-    -- Left HRE markers
-    PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
-
     CoreScenarioSetup(scenario_data)
    
     
   elseif UI_Data.scenario == '2-02' then
 
+    -- Options
+    if UI_Data.options[2] ~= nil and UI_Data.options[2].selected == 2 then
+      scenario_data.DNPR_Green_S = nil -- Remove Hungary DNPR
+    end
+    if UI_Data.options[3] ~= nil and UI_Data.options[3].selected == 1 then
+      PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false) -- Left HRE marker
+    else
+      scenario_data.DNPR_Pink_S = nil -- Remove Denmark DNPR
+    end
+    if UI_Data.options[4] ~= nil and UI_Data.options[4].selected == 2 then
+      scenario_data.DNPR_Orange_L = nil -- Remove Mamluks DNPR
+    end
+
     if UI_Data.variant_num == 1 then
       broadcastToAll("Setting up: [u]Enemy at the Gates (3 players)[/u]", {1,1,1})
-      -- Left HRE markers
-      PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
 
     elseif UI_Data.variant_num == 2 then
       broadcastToAll("Setting up: [u]Enemy at the Gates (4 players)[/u]", {1,1,1})
-      -- Left HRE markers
-      PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
 
     elseif UI_Data.variant_num == 3 then
       broadcastToAll("Setting up: [u]Enemy at the Gates (5 players with Denmark)[/u]", {1,1,1})
@@ -1108,8 +1125,6 @@ function Setup_Game()
 
     elseif UI_Data.variant_num == 5 then
       broadcastToAll("Setting up: [u]Enemy at the Gates (5 players with Mamluks)[/u]", {1,1,1})
-      -- Left HRE markers
-      PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false)
 
     elseif UI_Data.variant_num == 6 then
       broadcastToAll("Setting up: [u]Enemy at the Gates (6 players)[/u]", {1,1,1})
@@ -1162,6 +1177,24 @@ function Setup_Game()
     
     
   elseif UI_Data.scenario == '2-04' then
+
+    -- Options
+    if UI_Data.options[1] ~= nil and UI_Data.options[1].selected == 2 then
+      scenario_data.DNPR_Pink_S = nil -- Remove USA DNPR
+    end
+    if UI_Data.options[2] ~= nil and UI_Data.options[2].selected == 2 then
+      scenario_data.DNPR_Orange_L = nil -- Remove Netherlands DNPR
+    end
+    if UI_Data.options[3] ~= nil and UI_Data.options[3].selected == 2 then
+      scenario_data.DNPR_Blue_L = nil -- Remove Sweden DNPR
+    end
+    if UI_Data.options[4] ~= nil and UI_Data.options[4].selected == 2 then
+      scenario_data.DNPR_Green_S = nil -- Remove Sicily DNPR
+    end
+    if UI_Data.options[5] ~= nil and UI_Data.options[5].selected == 2 then
+      scenario_data.DNPR_Pink_L = nil -- Remove Savoy DNPR
+    end
+
     broadcastToAll("Setting up: [u]Napoleon Rising (6 players)[/u]", {1,1,1})
 
     -- Left HRE markers
@@ -1192,6 +1225,15 @@ function Setup_Game()
 
 
   elseif UI_Data.scenario == '2-06' then
+
+    -- Options
+    if UI_Data.options[1] ~= nil and UI_Data.options[1].selected == 2 then
+      scenario_data.DNPR_Green_S = nil -- Remove Hungary DNPR
+    end
+    if UI_Data.options[2] ~= nil and UI_Data.options[2].selected == 2 then
+      scenario_data.DNPR_Orange_L = nil -- Remove Mamluks DNPR
+    end
+
     broadcastToAll("Setting up: [u]The Rise of the Purple Phoenix (solo)[/u]", {1,1,1})
 
     local deck_future_trade = getObjectFromGUID(Trade_Deck_GUIDs.future)
@@ -1210,6 +1252,21 @@ function Setup_Game()
 
 
   elseif UI_Data.scenario == '2-07' then
+
+    -- Options
+    if UI_Data.options[1] ~= nil and UI_Data.options[1].selected == 2 then
+      scenario_data.DNPR_Green_L = nil -- Remove Ferrara DNPR
+    end
+    if UI_Data.options[2] ~= nil and UI_Data.options[2].selected == 2 then
+      scenario_data.DNPR_Orange_S = nil -- Remove Siena DNPR
+    end
+    if UI_Data.options[3] ~= nil and UI_Data.options[3].selected == 2 then
+      scenario_data.DNPR_Blue_L = nil -- Remove Palatinate DNPR
+    end
+    if UI_Data.options[4] ~= nil and UI_Data.options[4].selected == 2 then
+      scenario_data.DNPR_Pink_S = nil -- Remove Frankfurt DNPR
+    end
+
     if UI_Data.variant_num == 1 then
       broadcastToAll("Setting up: [u]Glory for Ulm (solo)[/u]", {1,1,1})
     elseif UI_Data.variant_num == 2 then

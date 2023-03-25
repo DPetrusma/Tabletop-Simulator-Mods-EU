@@ -584,6 +584,7 @@ The Balkans will be contested by ›Austria and the ›Ottomans, but the ›Poli
 Scenario_List['2-02'].options = {
   [1] = {name = 'Ages to play:', values = {'3','4'}, default = 1, info = 'How many ages should the game be set up for?' },
   [2] = {name = 'DNPR Hungary', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Hungary using green tokens?' },
+  [3] = {name = 'DNPR Denmark', values = {'On','Off'}, info = 'Set up a dynamic NPR for Denmark using pink tokens?', },
   [4] = {name = 'DNPR Mamluks', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for the Mamluks using orange tokens?' },
   [5] = {name = 'Power Struggles', values = {'Ordered','Random','Off'}, default = 3, info = [[Set up power struggles:
   
@@ -628,7 +629,7 @@ Scenario_List['2-02'].variants = {
     EasternMap.alquds, EasternMap.jaffa, EasternMap.dimashq, EasternMap.tarabulus, EasternMap.halab, AfricaMap.upperegypt, IndiaMap.hejaz,
   }, manpower = { WesternMap.piemont, WesternMap.geneve, WesternMap.sardenya, WesternMap.tunis },
   powerstruggles = { PS_GUIDs.struggle_for_the_balkans, PS_GUIDs.great_northern_war, PS_GUIDs.holy_league, PS_GUIDs.deluge },
-  }, options = {[3] = {name = 'DNPR Denmark', values = {'On','Off'}, info = 'Set up a dynamic NPR for Denmark using pink tokens?', },},
+  },
   { name = '4 Players', age = 1, book = {2,2}, board = MAIN_BOARD_STATE.s2_02_4p, player_realms = {
     [REALM.ottomans] = { seat = 6, color = 'green', realm = {REALM.ottomans,'1444'}, start_missions = {'1A','1B','1C'}, start = true },
     [REALM.austria] = { seat = 1, color = 'white', realm = {REALM.austria,'1444'}, start_missions = {'1A','1B','1C'}, },
@@ -666,7 +667,7 @@ Scenario_List['2-02'].variants = {
       EasternMap.alquds, EasternMap.jaffa, EasternMap.dimashq, EasternMap.tarabulus, EasternMap.halab, AfricaMap.upperegypt, IndiaMap.hejaz,
     }, manpower = { WesternMap.piemont, WesternMap.geneve, WesternMap.sardenya, WesternMap.tunis },
     powerstruggles = { PS_GUIDs.struggle_for_the_balkans, PS_GUIDs.great_northern_war, PS_GUIDs.holy_league, PS_GUIDs.deluge, }, 
-    options = {[3] = {name = 'DNPR Denmark', values = {'On','Off'}, info = 'Set up a dynamic NPR for Denmark using pink tokens?', },},},
+    },
     { name = '5 Players (Denmark)', age = 1, book = {2,2}, board = MAIN_BOARD_STATE.s2_02_dk_se, player_realms = {
       [REALM.ottomans] = { seat = 6, color = 'green', realm = {REALM.ottomans,'1444'}, start_missions = {'1A','1B','1C'}, start = true },
       [REALM.austria] = { seat = 1, color = 'white', realm = {REALM.austria,'1444'}, start_missions = {'1A','1B','1C'}, },
@@ -701,7 +702,9 @@ Scenario_List['2-02'].variants = {
       EasternMap.qahirah, EasternMap.bangazi, EasternMap.iskandariyya, EasternMap.fayyum, EasternMap.dumyat, EasternMap.gazzah,
       EasternMap.alquds, EasternMap.jaffa, EasternMap.dimashq, EasternMap.tarabulus, EasternMap.halab, AfricaMap.upperegypt, IndiaMap.hejaz,
     }, manpower = { WesternMap.piemont, WesternMap.geneve, WesternMap.sardenya, WesternMap.tunis },
-    powerstruggles = { PS_GUIDs.struggle_for_the_balkans, PS_GUIDs.great_northern_war, PS_GUIDs.holy_league, PS_GUIDs.deluge }, },
+    powerstruggles = { PS_GUIDs.struggle_for_the_balkans, PS_GUIDs.great_northern_war, PS_GUIDs.holy_league, PS_GUIDs.deluge }, 
+    options = {[3] = { name = 'hide'},},
+    },
     { name = '5 Players (Sweden)', age = 1, book = {2,2}, board = MAIN_BOARD_STATE.s2_02_dk_se, player_realms = {
       [REALM.ottomans] = { seat = 6, color = 'green', realm = {REALM.ottomans,'1444'}, start_missions = {'1A','1B','1C'}, start = true },
       [REALM.austria] = { seat = 1, color = 'white', realm = {REALM.austria,'1444'}, start_missions = {'1A','1B','1C'}, },
@@ -736,7 +739,9 @@ Scenario_List['2-02'].variants = {
         EasternMap.qahirah, EasternMap.bangazi, EasternMap.iskandariyya, EasternMap.fayyum, EasternMap.dumyat, EasternMap.gazzah,
         EasternMap.alquds, EasternMap.jaffa, EasternMap.dimashq, EasternMap.tarabulus, EasternMap.halab, AfricaMap.upperegypt, IndiaMap.hejaz,
       }, manpower = { WesternMap.piemont, WesternMap.geneve, WesternMap.sardenya, WesternMap.tunis },
-      powerstruggles = { PS_GUIDs.struggle_for_the_balkans, PS_GUIDs.great_northern_war, PS_GUIDs.holy_league, PS_GUIDs.deluge },},
+      powerstruggles = { PS_GUIDs.struggle_for_the_balkans, PS_GUIDs.great_northern_war, PS_GUIDs.holy_league, PS_GUIDs.deluge },
+      options = {[3] = { name = 'hide'},},
+      },
       { name = '5 Players (Mamluks)', age = 1, book = {2,2}, board = MAIN_BOARD_STATE.s2_02_m, player_realms = {
         [REALM.ottomans] = { seat = 6, color = 'green', realm = {REALM.ottomans,'1444'}, start_missions = {'1A','1B','1C'}, start = true },
         [REALM.mamluks] = { seat = 1, color = 'red', realm = {REALM.mamluks,'1444'}, start_missions = {'1A','1C','1D'}, rem_missions = {'1F','2C','2F'}, add_missions = {'1A','2G','3M'}, },
@@ -772,8 +777,9 @@ Scenario_List['2-02'].variants = {
         EasternMap.torda, EasternMap.hunyad, EasternMap.beograd, WesternMap.zagreb, WesternMap.rijeka,
       }, manpower = { WesternMap.piemont, WesternMap.geneve, WesternMap.sardenya },
       powerstruggles = { PS_GUIDs.struggle_for_the_balkans, PS_GUIDs.great_northern_war, PS_GUIDs.holy_league, PS_GUIDs.deluge }, 
-      options = {[1] = {name = 'DNPR Denmark', values = {'On','Off'}, info = 'Set up a dynamic NPR for Denmark using pink tokens?', },},},
-      { name = '6 Players', age = 1, book = {2,2}, board = MAIN_BOARD_STATE.s2_02_6p, player_realms = {
+      options = {[4] = { name = 'hide'},},
+    },
+    { name = '6 Players', age = 1, book = {2,2}, board = MAIN_BOARD_STATE.s2_02_6p, player_realms = {
         [REALM.ottomans] = { seat = 6, color = 'green', realm = {REALM.ottomans,'1444'}, start_missions = {'1A','1B','1C'}, start = true },
         [REALM.mamluks] = { seat = 1, color = 'red', realm = {REALM.mamluks,'1444'}, start_missions = {'1A','1C','1D'}, rem_missions = {'1F','2C','2F'}, add_missions = {'1A','2G','3M'}, },
         [REALM.austria] = { seat = 2, color = 'white', realm = {REALM.austria,'1444'}, start_missions = {'1A','1B','1C'}, },
@@ -806,6 +812,7 @@ Scenario_List['2-02'].variants = {
         EasternMap.torda, EasternMap.hunyad, EasternMap.beograd, WesternMap.zagreb, WesternMap.rijeka,
     }, manpower = { WesternMap.piemont, WesternMap.geneve, WesternMap.sardenya },
     powerstruggles = { PS_GUIDs.struggle_for_the_balkans, PS_GUIDs.great_northern_war, PS_GUIDs.holy_league, PS_GUIDs.deluge },
+    options = { [3] = { name = 'hide'}, [4] = { name = 'hide'} },
   },
 }
 
