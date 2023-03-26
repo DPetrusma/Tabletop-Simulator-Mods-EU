@@ -599,7 +599,7 @@ BOOK_INDEX = {
     {'ceuta', 'province', '', 'Ceuta', PROVINCES.ceuta},
     {'chagatai', 'provincerealm', '1444', 'Chagatai', PROVINCES.chagatai},
     {'champagne', 'trade', 'Champagne', {-3.71, -0.35}},
-    {'champagne', 'province', '', 'champagne', PROVINCES.champagne},
+    {'champagne', 'province', '', 'Champagne', PROVINCES.champagne},
     {'Change National Focus', 'index', { 13 }},
     {'Change State Religion', 'index', { 13 }},
     {'Character Mortality', 'index', { 20, 41 }},
