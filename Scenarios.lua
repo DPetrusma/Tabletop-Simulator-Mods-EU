@@ -588,11 +588,10 @@ Scenario_List['2-02'].options = {
   [2] = {name = 'DNPR Hungary', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Hungary using green tokens?' },
   [3] = {name = 'DNPR Denmark', values = {'On','Off'}, info = 'Set up a dynamic NPR for Denmark using pink tokens?', },
   [4] = {name = 'DNPR Mamluks', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for the Mamluks using orange tokens?' },
-  [5] = {name = 'Power Struggles', values = {'Ordered','Random','Off'}, default = 3, info = [[Set up power struggles:
+  [5] = {name = 'Power Struggles', values = {'Ordered','Random','Off'}, default = 1, info = [[Set up power struggles:
   
-  For your first Grand Campaign, we recommend using the following Power Struggles in the order listed below (for later playthroughs, you may randomize their order):
-  1. The Italian Wars, 2. Struggle for the Balkans, 3. Thirty Years' War,
-  4. War of Spanish Succession, 5. Seven Years’ War, 6. Napoleonic Wars]] },
+For your first playthrough, we recommend using the following Power Struggles in the listed below (for later playthroughs, you may randomize their order):
+1. Struggle for the Balkans, 2. Great Northern War, 3. The Holy League, 4. The Deluge]] },
 }
 Scenario_List['2-02'].variants = {
   { name = '3 Players', age = 1, last_age = 4, book = {2,2}, board = MAIN_BOARD_STATE.s2_02_4p, player_realms = {

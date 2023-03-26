@@ -863,6 +863,9 @@ function Setup_Game()
         PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false) -- Left HRE marker
       end
     end
+    if UI_Data.options[4] == nil or UI_Data.options[4].selected == 2 then
+      scenario_data.powerstruggles = nil
+    end
 
     -- Religion Token
     PlaceObjectsFromBag({ WesternMapReligion.andalucia }, Bag_GUIDs['cat_div'], true)
@@ -902,13 +905,13 @@ function Setup_Game()
     -- Options
     if UI_Data.options[1] ~= nil then
       if UI_Data.options[1].selected == 1 then
-        print('Option 1 Selected: Amsterdam & Zeeland')
+        if TEST_MODE then log('Option 1 Selected: Amsterdam & Zeeland') end
         scenario_data.player_realms[REALM.netherlands].realm = {REALM.netherlands, '1444'}
       elseif UI_Data.options[1].selected == 2 then
-        print('Option 2 Selected: Brugge & Gent')
+        if TEST_MODE then log('Option 2 Selected: Brugge & Gent') end
         scenario_data.player_realms[REALM.netherlands].realm = {REALM.netherlands, 'S102B'}
       elseif UI_Data.options[1].selected == 3 then
-        print('Option 3 Selected: Antwerpen & Breda')
+        if TEST_MODE then log('Option 3 Selected: Antwerpen & Breda') end
         scenario_data.player_realms[REALM.netherlands].realm = {REALM.netherlands, 'S102C'}
       end
     end
@@ -921,6 +924,9 @@ function Setup_Game()
       else
         PlaceObjectsFromBag({ {-0.37, 5.60} }, Bag_GUIDs['hre_man'], false) -- Left HRE marker
       end
+    end
+    if UI_Data.options[4] == nil or UI_Data.options[4].selected == 2 then
+      scenario_data.powerstruggles = nil
     end
 
     if UI_Data.variant_num == 1 then
@@ -977,6 +983,15 @@ function Setup_Game()
         scenario_data.DNPR_Pink_L = {WesternMap.sieradz, WesternMap.poznan, WesternMap.kalisz, WesternMap.danzig, WesternMap.kulm}
       end
     end
+    if UI_Data.options[4] ~= nil then
+      if UI_Data.options[4].selected == 2 then
+        scenario_data.powerstruggles = RandomizePartialList(scenario_data.powerstruggles, 1, 2)
+      elseif UI_Data.options[4].selected == 3 then
+        scenario_data.powerstruggles = nil
+      end
+    else
+      scenario_data.powerstruggles = nil
+    end
 
     if UI_Data.variant_num == 1 then
       broadcastToAll("Setting up: [u]The Wars of Religion (2 players, 0 bots)[/u]", {1,1,1})
@@ -1021,6 +1036,24 @@ function Setup_Game()
     end
     if UI_Data.options[3] ~= nil and UI_Data.options[3].selected == 2 then
       scenario_data.DNPR_Orange_S = nil -- Remove New Spain DNPR
+    end
+    if UI_Data.options[4] ~= nil then
+      if UI_Data.variant_num == 1 then
+        if UI_Data.options[4].selected == 1 then
+          scenario_data.powerstruggles = RandomizePartialList(scenario_data.powerstruggles, 1, 2)
+        elseif UI_Data.options[4].selected == 2 then
+          scenario_data.powerstruggles = nil
+        end
+      elseif UI_Data.variant_num == 2 then
+        if UI_Data.options[4].selected == 1 then
+          scenario_data.powerstruggles = RandomizePartialList(scenario_data.powerstruggles, 1, 5)
+          table.remove(scenario_data.powerstruggles, math.random(5))
+        elseif UI_Data.options[4].selected == 2 then
+          scenario_data.powerstruggles = nil
+        end
+      end
+    else
+      scenario_data.powerstruggles = nil
     end
 
     if UI_Data.variant_num == 1 then
@@ -1086,6 +1119,15 @@ function Setup_Game()
     if UI_Data.options[4] ~= nil and UI_Data.options[4].selected == 2 then
       scenario_data.DNPR_Orange_L = nil -- Remove Mamluks DNPR
     end
+    if UI_Data.options[5] ~= nil then
+      if UI_Data.options[5].selected == 2 then
+        scenario_data.powerstruggles = RandomizePartialList(scenario_data.powerstruggles, 1, 6)
+      elseif UI_Data.options[5].selected == 3 then
+        scenario_data.powerstruggles = nil
+      end
+    else
+      scenario_data.powerstruggles = nil
+    end
 
     broadcastToAll("Setting up: [u]The Grand Campaign (6 players)[/u]", {1,1,1})
 
@@ -1133,6 +1175,15 @@ function Setup_Game()
     if UI_Data.options[4] ~= nil and UI_Data.options[4].selected == 2 then
       scenario_data.DNPR_Orange_L = nil -- Remove Mamluks DNPR
     end
+    if UI_Data.options[5] ~= nil then
+      if UI_Data.options[5].selected == 2 then
+        scenario_data.powerstruggles = RandomizePartialList(scenario_data.powerstruggles, 1, 4)
+      elseif UI_Data.options[5].selected == 3 then
+        scenario_data.powerstruggles = nil
+      end
+    else
+      scenario_data.powerstruggles = nil
+    end
 
     if UI_Data.variant_num == 1 then
       broadcastToAll("Setting up: [u]Enemy at the Gates (3 players)[/u]", {1,1,1})
@@ -1172,6 +1223,17 @@ function Setup_Game()
     CoreScenarioSetup(scenario_data)
 
   elseif UI_Data.scenario == '2-03' then
+
+    -- Options
+    if UI_Data.options[1] ~= nil then
+      if UI_Data.options[1].selected == 2 then
+        scenario_data.powerstruggles = RandomizePartialList(scenario_data.powerstruggles, 1, 4)
+      elseif UI_Data.options[1].selected == 3 then
+        scenario_data.powerstruggles = nil
+      end
+    else
+      scenario_data.powerstruggles = nil
+    end
 
     local objective_positions = {}
     if UI_Data.variant_num == 1 then
@@ -1478,6 +1540,10 @@ function Setup_Game()
     }, pos, {0, 90, 180} )
   end
 
+  -- Flip Power Struggle deck if available:
+  FlipObjectsByPosition({Power_Struggle_Upcoming}, {'PowerStruggle'})
+  waitFrames(5)
+
   -- Check for wrong physics settings
   local physics_zone = getObjectFromGUID(Physics_Determination_Zone_GUID)
   local physics_zone_objects = physics_zone.getObjects()
@@ -1487,7 +1553,7 @@ function Setup_Game()
     end
   end
 
-  -- Remove inactive scripting zones
+    -- Remove inactive scripting zones
   DestructByGUID({ Deck_Shuffler_Zone_1_GUID, Deck_Shuffler_Zone_2_GUID, Event_Deck_Zone_GUID })
   DestructByGUID(Mission_Deck_Zone_GUIDs)
   DestructByGUID(Reference_Zone_GUIDs)
@@ -2557,12 +2623,15 @@ end
 -- Prepare PowerStruggleDeck
 function PreparePowerStruggles(scenario_data)
   local ps_deck = getObjectFromGUID(Power_Struggle_Deck_GUID)
-  if scenario_data.powerstruggles then
-    local count = #scenario_data.powerstruggles
-    for i = count, 1, -1 do
-      PlaceGuidObjectFromBag(Power_Struggle_Upcoming, Power_Struggle_Deck_GUID, true, scenario_data.powerstruggles[i], ps_deck)
-      waitFrames(5)
+  if ps_deck ~= nil then
+    if scenario_data.powerstruggles then
+      for i, _ in ipairs(scenario_data.powerstruggles) do
+        PlaceGuidObjectFromBag(Power_Struggle_Upcoming, Power_Struggle_Deck_GUID, true, scenario_data.powerstruggles[i], ps_deck)
+        waitFrames(5)
+      end
     end
+    Removed_Components_Bag.putObject(ps_deck)
+    waitFrames(5)
   end
 end
 
@@ -3678,6 +3747,7 @@ function SetRulebookDate(date_string)
   end
 end
 
+
 -- Randomize events with X symbol
 function RandomizeXEvents(event_list)
   if TEST_MODE then log('Randomizing X-Events') end
@@ -3694,9 +3764,6 @@ function RandomizeXEvents(event_list)
       stack2.position = entry[2]
     end
   end
-
-  -- log('Stack 1 Position: ' .. stack1.position or 'unknown')
-  -- log('Stack 2 Position: ' .. stack2.position or 'unknown')
   
   -- handle list entries
   for _, entry in ipairs(event_list) do
@@ -3733,9 +3800,6 @@ function RandomizeXEvents(event_list)
       end
     end
   end
-
-  -- log('Stack 1 Count: ' .. stack1.count or 'unknown')
-  -- log('Stack 2 Count: ' .. stack2.count or 'unknown')
   
   local shuffled_x_cards = {}
   while #x_events > 0 do
@@ -3765,14 +3829,44 @@ function RandomizeXEvents(event_list)
     end
   end
 
-  --[[
-    log('Results:')
-    log(result)
-    log('X-Cards:')
-    log(x_events)
-  --]]
   return result
 end
+
+
+-- Randomize partial list
+function RandomizePartialList(list, start_pos, end_pos)
+  if start_pos > end_pos then
+    local pos = end_pos
+    end_pos = start_pos
+    start_pos = pos
+  end
+  local result = {}
+  local random_list = {}
+  local end_list = {}
+  if #list < end_pos then
+    log('List is shorter than final position to be handled')
+    log(list)
+    return list
+  end
+  for i, entry in ipairs(list) do
+    if i < start_pos then
+      table.insert(result, entry)
+    elseif i >= start_pos and i <= end_pos then
+      table.insert(random_list, entry)
+    elseif i > end_pos then
+      table.insert(end_list, entry)
+    end
+  end
+  while #random_list > 0 do
+    local pos  = math.random(#random_list)
+    table.insert(result, table.remove(random_list, pos))
+  end
+  for _, entry in ipairs(end_list) do
+    table.insert(result, entry)
+  end
+  return result
+end
+
 
 
 --[[
