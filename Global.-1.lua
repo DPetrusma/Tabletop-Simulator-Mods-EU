@@ -841,6 +841,18 @@ function Setup_Game()
   elseif UI_Data.scenario == '1-01' then
 
     -- Options
+    if UI_Data.options[1] ~= nil then
+      if UI_Data.options[1].selected == 1 then
+        scenario_data.last_age = 1
+        scenario_data.age_2_events = nil
+        scenario_data.age_3_events = nil
+        -- TODO: Remove all future ideas
+      elseif UI_Data.options[1].selected == 2 then
+        scenario_data.last_age = 2
+        scenario_data.age_3_events = nil
+        -- TODO: Remove all future ideas
+      end
+    end
     if UI_Data.options[2] ~= nil and UI_Data.options[2].selected == 2 then
       scenario_data.DNPR_Green_S = nil -- Remove Portugal DNPR
     end
@@ -1049,6 +1061,18 @@ function Setup_Game()
   elseif UI_Data.scenario == '2-01' then
 
     -- Options
+    if UI_Data.options[1] ~= nil then
+      if UI_Data.options[1].selected == 1 then
+        scenario_data.last_age = 2
+        scenario_data.age_3_events = nil
+        scenario_data.age_4_events = nil
+        -- TODO: Remove all future ideas
+      elseif UI_Data.options[1].selected == 2 then
+        scenario_data.last_age = 3
+        scenario_data.age_4_events = nil
+        -- TODO: Remove all future ideas
+      end
+    end
     if UI_Data.options[2] ~= nil then
       if UI_Data.options[2].selected == 2 then
         scenario_data.DNPR_Pink_L = nil -- Remove Denmark DNPR
@@ -1091,6 +1115,13 @@ function Setup_Game()
   elseif UI_Data.scenario == '2-02' then
 
     -- Options
+    if UI_Data.options[1] ~= nil then
+      if UI_Data.options[1].selected == 1 then
+        scenario_data.last_age = 3
+        scenario_data.age_4_events = nil
+        -- TODO: Remove all future ideas
+      end
+    end
     if UI_Data.options[2] ~= nil and UI_Data.options[2].selected == 2 then
       scenario_data.DNPR_Green_S = nil -- Remove Hungary DNPR
     end
@@ -2744,8 +2775,11 @@ end
 function PrepareMilestones(scenario_data)
   local milestone_pos = Milestone_Deck_Positions.future
   local age = (scenario_data.age or 1)
-  local future_ages = { 'age4', 'age3', 'age2', }
+  local last_age = (scenario_data.last_age or 4)
+  last_age = math.max(age, last_age)
   local current_age = 'age1'
+  local future_ages = { 'age4', 'age3', 'age2', }
+  local remove_ages = { }
   if TEST_MODE then log('Preparing Milestones for Age ' .. age) end
   if age > 1 then
     for _, guid in pairs(Milestone_Deck_GUIDs.age1) do
@@ -2759,7 +2793,7 @@ function PrepareMilestones(scenario_data)
     current_age = 'age2'
   end
 
-  if age > 2 then
+  if age > 2 or last_age < 2 then
     for _, guid in pairs(Milestone_Deck_GUIDs.age2) do
       local deck = getObjectFromGUID(guid)
       if deck ~= nil then
@@ -2767,11 +2801,13 @@ function PrepareMilestones(scenario_data)
         waitFrames(5)
       end
     end
-    future_ages = { 'age4' }
-    current_age = 'age3'
+    if age > 2 then
+      future_ages = { 'age4' }
+      current_age = 'age3'
+    end
   end
 
-  if age > 3 then
+  if age > 3 or last_age < 3 then
     for _, guid in pairs(Milestone_Deck_GUIDs.age3) do
       local deck = getObjectFromGUID(guid)
       if deck ~= nil then
@@ -2779,8 +2815,20 @@ function PrepareMilestones(scenario_data)
         waitFrames(5)
       end
     end
-    future_ages = { }
-    current_age = 'age4'
+    if age > 3 then
+      future_ages = { }
+      current_age = 'age4'
+    end
+  end
+
+  if last_age < 4 then
+    for _, guid in pairs(Milestone_Deck_GUIDs.age4) do
+      local deck = getObjectFromGUID(guid)
+      if deck ~= nil then
+        Removed_Components_Bag.putObject(deck)
+        waitFrames(5)
+      end
+    end
   end
   
   for i, deck_type in ipairs({'eco', 'exp', 'pol', 'war'}) do
