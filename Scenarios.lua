@@ -157,11 +157,12 @@ Scenario_List['1-02'].variants = {
       {'31a-2', 3}, {'32a-2', 3}, {'33a-2', 3}, {'34a-2', 3}, {'351b', 3}, {'356b', 3}, {'301-2', 3}, {'311-2', 3}, {'312-2', 3}, {'313-2', 3}
     }, empire = { ruler = REALM.austria, authority = 3, influence = {HRE_Influence_Map_Pos.rhineland, HRE_Influence_Map_Pos.westphalia, HRE_Influence_Map_Pos.saxony} },
     curia = {REALM.papal, REALM.austria, REALM.netherlands, REALM.brandenburg, }, DNPR_Blue_L = { 
-      WesternMap.paris, WesternMap.champange, WesternMap.orleans, WesternMap.lyon, WesternMap.berry, WesternMap.bourbon, WesternMap.limousin,
+      WesternMap.paris, WesternMap.champagne, WesternMap.orleans, WesternMap.lyon, WesternMap.berry, WesternMap.bourbon, WesternMap.limousin,
       WesternMap.saintonge, WesternMap.poitou, WesternMap.armagnac, WesternMap.toulouse, WesternMap.montpellier,
     }, DNPR_Pink_S = { 
       WesternMap.kobenhavn, WesternMap.gotland, WesternMap.lund, WesternMap.ostjylland, WesternMap.vestjylland, WesternMap.slesvig, WesternMap.holstein,
-    }, manpower = { WesternMap.stockholm, WesternMap.danzig, WesternMap.poznan, WesternMap.kalisz, WesternMap.sieradz, WesternMap.pozsony, WesternMap.pest}, 
+    }, manpower = { WesternMap.stockholm, WesternMap.danzig, WesternMap.poznan, WesternMap.kalisz, WesternMap.sieradz, WesternMap.pozsony, WesternMap.pest,
+       WesternMap.sardenya, WesternMap.palermo, WesternMap.mesina,}, 
       powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.thirty_years_war }, remove = {{-5.43, -5.16, 'Cube'}, },
       options = {[2] = {name = 'DNPR France', values = {'On','Off'}, info = 'Set up a dynamic NPR for France using blue tokens?', },},
   },
@@ -182,8 +183,9 @@ Scenario_List['1-02'].variants = {
     }, empire = { ruler = REALM.austria, authority = 3, influence = {HRE_Influence_Map_Pos.rhineland, HRE_Influence_Map_Pos.westphalia, HRE_Influence_Map_Pos.saxony} },
       curia = {REALM.papal, REALM.austria, REALM.france, REALM.netherlands, REALM.brandenburg, }, DNPR_Pink_S = { 
       WesternMap.kobenhavn, WesternMap.gotland, WesternMap.lund, WesternMap.ostjylland, WesternMap.vestjylland, WesternMap.slesvig, WesternMap.holstein,
-    }, manpower = { WesternMap.stockholm, WesternMap.danzig, WesternMap.poznan, WesternMap.kalisz, WesternMap.sieradz, WesternMap.pozsony, WesternMap.pest}, 
-     powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.thirty_years_war }, remove = {{-5.43, -5.16, 'Cube'}, {-7.80, 6.45,'Alliance'}, {-9.02, 7.22,'Cube'}, {-9.02, 6.84,'Cube'},},
+    }, manpower = { WesternMap.stockholm, WesternMap.danzig, WesternMap.poznan, WesternMap.kalisz, WesternMap.sieradz, WesternMap.pozsony, WesternMap.pest,
+       WesternMap.sardenya, WesternMap.palermo, WesternMap.mesina,}, powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.thirty_years_war },
+       remove = {{-5.43, -5.16, 'Cube'}, {-7.80, 6.45,'Alliance'}, {-9.02, 7.22,'Cube'}, {-9.02, 6.84,'Cube'},},
   },
 }
 
@@ -412,7 +414,7 @@ Scenario_List['1-06'].variants = {
     {'31a-2', 3}, {'32a-2', 3}, {'33a-2', 3}, {'34a-2', 3}, {'356b', 3}, {'358b', 3}, {'301-2', 3}, {'313-2', 3},
   }, empire = { ruler = REALM.austria, authority = 3, influence = {HRE_Influence_Map_Pos.rhineland, HRE_Influence_Map_Pos.westphalia, HRE_Influence_Map_Pos.saxony} },
   curia = {REALM.none, REALM.austria, REALM.brandenburg, REALM.denmark, }, DNPR_Blue_L = { 
-    WesternMap.paris, WesternMap.champange, WesternMap.orleans, WesternMap.lyon, WesternMap.berry, WesternMap.bourbon, WesternMap.limousin,
+    WesternMap.paris, WesternMap.champagne, WesternMap.orleans, WesternMap.lyon, WesternMap.berry, WesternMap.bourbon, WesternMap.limousin,
     WesternMap.saintonge, WesternMap.poitou, WesternMap.armagnac, WesternMap.toulouse, WesternMap.montpellier,
   }, manpower = { WesternMap.stockholm, WesternMap.danzig, WesternMap.poznan, WesternMap.kalisz, WesternMap.sieradz, WesternMap.pozsony, WesternMap.pest},
   remove = {{0.25, 6.35, 'Cube'},}, },
@@ -432,7 +434,7 @@ Scenario_List['1-06'].variants = {
     {'31a-2', 3}, {'32a-2', 3}, {'33a-2', 3}, {'34a-2', 3}, {'356b', 3}, {'308-2', 3}, {'301-2', 3}, {'313-2', 3},
   }, empire = { ruler = REALM.austria, authority = 3, influence = {HRE_Influence_Map_Pos.rhineland, HRE_Influence_Map_Pos.westphalia, HRE_Influence_Map_Pos.saxony} },
       curia = {REALM.none, REALM.austria, REALM.brandenburg, REALM.kalmar, }, DNPR_Blue_L = { 
-        WesternMap.paris, WesternMap.champange, WesternMap.orleans, WesternMap.lyon, WesternMap.berry, WesternMap.bourbon, WesternMap.limousin,
+        WesternMap.paris, WesternMap.champagne, WesternMap.orleans, WesternMap.lyon, WesternMap.berry, WesternMap.bourbon, WesternMap.limousin,
         WesternMap.saintonge, WesternMap.poitou, WesternMap.armagnac, WesternMap.toulouse, WesternMap.montpellier,
     }, manpower = { WesternMap.stockholm, WesternMap.danzig, WesternMap.poznan, WesternMap.kalisz, WesternMap.sieradz, WesternMap.pozsony, WesternMap.pest
   }, remove = {{0.25, 6.35, 'Cube'},}, },
@@ -453,7 +455,7 @@ Scenario_List['1-06'].variants = {
     {'31a-2', 3}, {'32a-2', 3}, {'33a-2', 3}, {'34a-2', 3}, {'356b', 3}, {'358b', 3}, {'301-2', 3}, {'313-2', 3}, {'307-2', 3}, {'351b', 3},
   }, empire = { ruler = REALM.austria, authority = 3, influence = {HRE_Influence_Map_Pos.rhineland, HRE_Influence_Map_Pos.westphalia, HRE_Influence_Map_Pos.saxony} },
   curia = {REALM.none, REALM.austria, REALM.brandenburg, REALM.denmark, REALM.poland, }, DNPR_Blue_L = { 
-      WesternMap.paris, WesternMap.champange, WesternMap.orleans, WesternMap.lyon, WesternMap.berry, WesternMap.bourbon, WesternMap.limousin,
+      WesternMap.paris, WesternMap.champagne, WesternMap.orleans, WesternMap.lyon, WesternMap.berry, WesternMap.bourbon, WesternMap.limousin,
       WesternMap.saintonge, WesternMap.poitou, WesternMap.armagnac, WesternMap.toulouse, WesternMap.montpellier,
   }, remove = {{0.25, 6.35, 'Cube'}, {8.21, 2.07, 'Cube'}, }, },
   { name = 'Both', age = 1, book = {1,8}, board = MAIN_BOARD_STATE.deluxe_1444, player_realms = {
@@ -473,7 +475,7 @@ Scenario_List['1-06'].variants = {
     {'31a-2', 3}, {'32a-2', 3}, {'33a-2', 3}, {'34a-2', 3}, {'356b', 3}, {'308-2', 3}, {'301-2', 3}, {'313-2', 3}, {'307-2', 3}, {'351b', 3},
   }, empire = { ruler = REALM.austria, authority = 3, influence = {HRE_Influence_Map_Pos.rhineland, HRE_Influence_Map_Pos.westphalia, HRE_Influence_Map_Pos.saxony} },
   curia = {REALM.none, REALM.austria, REALM.brandenburg, REALM.kalmar, REALM.poland, }, DNPR_Blue_L = { 
-    WesternMap.paris, WesternMap.champange, WesternMap.orleans, WesternMap.lyon, WesternMap.berry, WesternMap.bourbon, WesternMap.limousin,
+    WesternMap.paris, WesternMap.champagne, WesternMap.orleans, WesternMap.lyon, WesternMap.berry, WesternMap.bourbon, WesternMap.limousin,
     WesternMap.saintonge, WesternMap.poitou, WesternMap.armagnac, WesternMap.toulouse, WesternMap.montpellier,
   }, remove = {{0.25, 6.35, 'Cube'}, {8.21, 2.07, 'Cube'}, }, },
 }
