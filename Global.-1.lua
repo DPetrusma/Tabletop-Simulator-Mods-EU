@@ -495,7 +495,8 @@ function ui_set_active()
   elseif UI_Data.page == UI_PAGES.bots then
     for i = 1, 6 do
       if UI_Data.players[i] ~= nil then
-        Global.UI.setAttribute(('bot'.. i ..'-cell'), "active", true)
+        Global.UI.setAttribute(('bot'.. i ..'-cell1'), "active", true)
+        Global.UI.setAttribute(('bot'.. i ..'-cell2'), "active", true)
         Global.UI.setAttribute(('bot'.. i ..'-realm'), "text", UI_Data.players[i].name)
         if UI_Data.players[i].bot then
           Global.UI.setAttribute(('bot'.. i ..'-type'), "text", 'Bot')
@@ -509,7 +510,8 @@ function ui_set_active()
         end
         elements = elements + 1
       else
-        Global.UI.setAttribute(('bot'.. i ..'-cell'), "active", false)
+        Global.UI.setAttribute(('bot'.. i ..'-cell1'), "active", false)
+        Global.UI.setAttribute(('bot'.. i ..'-cell2'), "active", false)
       end
       if UI_Data.variant_num == i then
         Global.UI.setAttribute('var0' .. i, "image", "button-selected")
