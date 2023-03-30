@@ -150,7 +150,7 @@
               <Cell>
                 <Button id="scn-start" scenario="" preferredHeight="60" padding="0 0" image="button-inactive" onClick="">
                   <Text id="scn-start-text" fontSize="20" color="White" alignment="MiddleCenter">
-                    Start game
+                    Start Game
                   </Text>
                 </Button>
               </Cell>
@@ -536,7 +536,7 @@
               <Cell>
                 <Button id="opt-start" scenario="" preferredHeight="60" padding="0 0" image="button" onClick="ui_start_game">
                   <Text fontSize="20" color="White" alignment="MiddleCenter">
-                    Continue
+                    Start Game
                   </Text>
                 </Button>
               </Cell>

@@ -614,7 +614,7 @@ function ui_select_scenario(player, value, id)
   Global.UI.setAttribute("var-description", "text", desc_text)
   Global.UI.setAttribute("scn-start", "active", true)
   if id == '0-00' then
-    Global.UI.setAttribute("scn-start-text", "text", 'Start')
+    Global.UI.setAttribute("scn-start-text", "text", 'Start Game')
   else
     Global.UI.setAttribute("scn-start-text", "text", 'Continue')
   end
@@ -627,6 +627,19 @@ function ui_select_variant(player, value, id)
   UI_Data.variant = id
   local num = string.sub(id, -2)
   UI_Data.variant_num = tonumber(num)
+  local variant = Scenario_List[UI_Data.scenario].variants[UI_Data.variant_num]
+  local desc_text = ""
+  if variant ~= nil and variant.description ~= nil and variant.description ~= "" then
+    desc_text = "Variant Information:\n" .. variant.description .. "\n\nScenario Information:\n" .. Scenario_List[UI_Data.scenario].description
+  else
+    desc_text = Scenario_List[UI_Data.scenario].description
+  end
+  local c = string.len(desc_text)
+  local _, count = string.gsub(desc_text, "\n", "")
+  local lines = (c / 55) + count
+  local height = math.max(300, 50 + (lines * 20))
+  Global.UI.setAttribute("var_desc-panel", "height", height)
+  Global.UI.setAttribute("var-description", "text", desc_text)
   ui_set_active()
 end
 
@@ -666,6 +679,10 @@ function ui_back(player, value, id)
     UI_Data.page = UI_PAGES.scenario
     UI_Data.variant = ''
     UI_Data.variant_num = 0
+    local height = Global.UI.getAttribute( "scn_desc-panel",  "height")
+    Global.UI.setAttribute("var_desc-panel", "height", height)
+    local desc_text = Global.UI.getAttribute( "scn-description",  "text")
+    Global.UI.setAttribute("var-description", "text", desc_text)
     ui_set_active()
   elseif UI_Data.page == UI_PAGES.bots then
     UI_Data.page = UI_PAGES.variant
