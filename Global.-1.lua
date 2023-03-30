@@ -504,19 +504,14 @@ function ui_set_active()
           Global.UI.setAttribute(('bot'.. i ..'-type'), "text", 'Human')
         end
         if UI_Data.players[i].locked then
-          Global.UI.setAttributes(('bot'.. i ..'-btn'), {image = "button-inactive", onClick = ""})
+          Global.UI.setAttributes(('bot'.. i ..'-btn'), {image = "small-button-inactive", onClick = ""})
         else
-          Global.UI.setAttributes(('bot'.. i ..'-btn'), {image = "button", onClick = "ui_toggle_bot"})
+          Global.UI.setAttributes(('bot'.. i ..'-btn'), {image = "small-button", onClick = "ui_toggle_bot"})
         end
         elements = elements + 1
       else
         Global.UI.setAttribute(('bot'.. i ..'-cell1'), "active", false)
         Global.UI.setAttribute(('bot'.. i ..'-cell2'), "active", false)
-      end
-      if UI_Data.variant_num == i then
-        Global.UI.setAttribute('var0' .. i, "image", "button-selected")
-      else
-        Global.UI.setAttribute('var0' .. i, "image", "button")
       end
     end
   elseif UI_Data.page == UI_PAGES.options then
@@ -608,8 +603,15 @@ function ui_select_scenario(player, value, id)
   Global.UI.setAttribute("var-num_players", "text", 3)
   Global.UI.setAttribute("scn-title", "text", Scenario_List[id].name)
   Global.UI.setAttribute("var-title", "text", Scenario_List[id].name)
-  Global.UI.setAttribute("scn-description", "text", Scenario_List[id].description)
-  Global.UI.setAttribute("var-description", "text", Scenario_List[id].description)
+  local desc_text = Scenario_List[id].description
+  local c = string.len(desc_text)
+  local _, count = string.gsub(desc_text, "\n", "")
+  local lines = (c / 55) + count
+  local height = math.max(300, 50 + (lines * 20))
+  Global.UI.setAttribute("scn_desc-panel", "height", height)
+  Global.UI.setAttribute("var_desc-panel", "height", height)
+  Global.UI.setAttribute("scn-description", "text", desc_text)
+  Global.UI.setAttribute("var-description", "text", desc_text)
   Global.UI.setAttribute("scn-start", "active", true)
   if id == '0-00' then
     Global.UI.setAttribute("scn-start-text", "text", 'Start')
@@ -671,7 +673,8 @@ function ui_back(player, value, id)
     ui_set_active()
   elseif UI_Data.page == UI_PAGES.options then
     UI_Data.page = UI_PAGES.bots
-    -- TODO: reset options
+    UI_Data.options = {}
+    Global.UI.setAttribute(('opt-description'), "text", "Click on an option to the left for more information")
     ui_set_active()
   end
 end
@@ -679,13 +682,9 @@ end
 
 function ui_start_game(player, value, id)
   if value ~= "-1" then return end
-  if UI_Data.page == UI_PAGES.scenario then
-    if UI_Data.scenario == '0-00' then
-      print('Call manual setup')
-    else
-      UI_Data.page = UI_PAGES.variant
-      ui_set_active()
-    end
+  if UI_Data.page == UI_PAGES.scenario and UI_Data.scenario ~= '0-00' then
+    UI_Data.page = UI_PAGES.variant
+    ui_set_active()
   elseif UI_Data.page == UI_PAGES.variant then
     UI_Data.page = UI_PAGES.bots
     ui_generate_player_data(Scenario_List[UI_Data.scenario]['variants'][UI_Data.variant_num]['player_realms'])

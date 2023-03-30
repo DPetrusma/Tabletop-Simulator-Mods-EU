@@ -1,8 +1,11 @@
 <Defaults>
-  <Text font="fonts/Goudy" />
-  <Text class="primaryText" font="fonts/Goudy" color="White" resizeTextForBestFit="True" />
-  <Text class="OptionText" font="fonts/Goudy" fontSize="20" color="White" Width="250" alignment="MiddleLeft" resizeTextForBestFit="False" />
-  <Text class="OptionButton" font="fonts/Goudy"  fontSize="20" color="White" Width="180" alignment="MiddleLeft" resizeTextForBestFit="False"/>
+  <Text font="font/Trajan"/>
+  <Text class="descriptionText" font="font/Garamond" color="White" fontSize="18" width="475"/>
+  <Text class="primaryText" color="White" fontSize="30" resizeTextForBestFit="False" />
+  <Text class="scenarioName" color="White" alignment="MiddleLeft" resizeTextForBestFit="True" resizeTextMinSize="8" resizeTextMaxSize="17"/>
+  <Text class="BotText" fontSize="24" color="White" Width="375" alignment="MiddleCenter" resizeTextForBestFit="False" />
+  <Text class="OptionText" fontSize="24" color="White" Width="250" alignment="MiddleLeft" resizeTextForBestFit="False" />
+  <Text class="OptionButton" color="White" alignment="MiddleCenter" resizeTextForBestFit="True" resizeTextMinSize="16" resizeTextMaxSize="24"/>
   <TableLayout class="BaseTable" width="1000" height="550" columnWidths="1000" cellPadding="0" />
   <TableLayout class="MainTable" width="1000" height="550" columnWidths="500 500" cellPadding="0" />
   <TableLayout class="RightTable" width="500" height="410" cellPadding="0" />
@@ -12,12 +15,12 @@
   <Row class="MainContentRow" preferredHeight="410" />
   <Row class="RightContentRow" preferredHeight="340" />
   <Cell dontUseTableCellBackground="true" cellBackgroundColor="clear"/>
-  <Toggle class="playercount" font="fonts/Goudy" rectalignment="MiddleLeft" preferredHeight="50" textcolor="White" resizeTextForBestFit="True" isOn="False" onValueChanged="ui_num_players_filter"/>
+  <Toggle class="playercount" font="font/Trajan" rectalignment="MiddleLeft" preferredHeight="50" textcolor="White" resizeTextForBestFit="True" isOn="False" onValueChanged="ui_num_players_filter"/>
   <Button padding="55 0 0 0" minHeight="70" image="button" active="True" preserveAspect="True"/>
-  <Button class="scenario" onClick="Global/ui_select_scenario" active="False"/>
-  <Button class="variant"  onClick="Global/ui_select_variant" active="False"/>
-  <Button class="bot" onClick="Global/ui_toggle_bot"/>
-  <Button class="option" onClick="Global/ui_toggle_option"/>
+  <Button class="scenario" padding="55 55 5 5" onClick="Global/ui_select_scenario" active="False"/>
+  <Button class="variant"  padding="65 0 0 0" onClick="Global/ui_select_variant" active="False"/>
+  <Button class="bot" image="small-button" padding="30 30 5 5" onClick="Global/ui_toggle_bot"/>
+  <Button class="option" image="small-button" padding="30 30 5 5" onClick="Global/ui_toggle_option"/>
   <Row class="option" onClick="Global/ui_show_option_info" />
 </Defaults>
 
@@ -33,10 +36,10 @@
         </Cell>
       </Row>
       <Row class="MainTableRow" >
-        <Cell overrideGlobalCellPadding="true" padding="15 15 10 10" > <!-- overrideGlobalCellPadding="true" padding="5 5 10 10" -->
-          <ToggleGroup preferredHeight="60"> <!-- TODO: Sizing inside group does not work -->
-            <HorizontalLayout childForceExpandHeight="False" preferredHeight="60">
-              <Image rectAlignment="MiddleLeft" image="people" preserveAspect="True" preferredHeight="50"/>
+        <Cell>
+          <ToggleGroup >
+            <HorizontalLayout childForceExpandHeight="False" preferredHeight="60" width="450">
+              <Image rectAlignment="MiddleCenter" image="people" preserveAspect="True" preferredHeight="60" offsetXY="0 -55" />
               <Toggle class="playercount" id="0" text="Any" isOn="True" />
               <Toggle class="playercount" id="1" text="1" />
               <Toggle class="playercount" id="2" text="2" />
@@ -48,88 +51,84 @@
           </ToggleGroup>
         </Cell>
         <Cell>
-          <Text id="scn-num_players" text="" alignment="MiddleRight" resizeTextForBestFit="True" resizeTextMaxSize="40" color="Orange"/>
-          <Image image="people" color="Orange" preserveAspect="True" preferredHeight="40"/>
         </Cell>
       </Row>
       <Row class="MainContentRow" dontUseTableRowBackground="true">
         <Cell>
           <VerticalScrollView id="scenario_list" flexibleHeight="1" scrollSensitivity="10" color="rgba(0,0,0,0)" noScrollbars="false" verticalScrollbarVisibility="AutoHideAndExpandViewport" movementType="Elastic">
-            <VerticalLayout id="scenario_panel" childForceExpandHeight="False" height="1200">
+            <VerticalLayout id="scenario_panel" childForceExpandHeight="False" width="475" height="1200">
               <Button class="scenario" id="0-00" padding="55 55 0 0">
                 <Text fontSize="20" color="White" Width="200" alignment="MiddleCenter">
                   Manual Setup
                 </Text>
               </Button>
               <Button class="scenario" id="1-00">
-                <Text fontSize="20" color="White" Width="200" alignment="MiddleLeft">
+                <Text class="scenarioName">
                   S1-00: Introductory Scenario
                 </Text>
               </Button>
               <Button class="scenario" id="1-01">
-                <Text fontSize="20" color="White" alignment="MiddleLeft">
-                  S1-01: Discovery and
-                  Reformation
+                <Text class="scenarioName">
+                  S1-01: Discovery and Reformation
                 </Text>
               </Button>
               <Button class="scenario" id="1-02">
-                <Text fontSize="20" color="White" alignment="MiddleLeft">
+                <Text class="scenarioName">
                   S1-02: Imperial Waltz
                 </Text>
               </Button>
               <Button class="scenario" id="1-03">
-                <Text fontSize="20" color="White" alignment="MiddleLeft">
+                <Text class="scenarioName">
                   S1-03: Sea Route to India
                 </Text>
               </Button>
               <Button class="scenario" id="1-04">
-                <Text fontSize="20" color="White" alignment="MiddleLeft">
+                <Text class="scenarioName">
                   S1-04:  The Wars of Religion
                 </Text>
               </Button>
               <Button class="scenario" id="1-05">
-                <Text fontSize="20" color="White" alignment="MiddleLeft">
+                <Text class="scenarioName">
                   S1-05: The Bourbonic Plague
                 </Text>
               </Button>
               <Button class="scenario" id="1-06">
-                <Text fontSize="20" color="White" alignment="MiddleLeft">
+                <Text class="scenarioName">
                   S1-06: The Ambitious Margrave
                 </Text>
               </Button>
               <Button class="scenario" id="2-01">
-                <Text fontSize="20" color="White" alignment="MiddleLeft">
+                <Text class="scenarioName">
                   S2-01: The Grand Campaign
                 </Text>
               </Button>
               <Button class="scenario" id="2-02">
-                <Text fontSize="20" color="White" alignment="MiddleLeft">
+                <Text class="scenarioName">
                   S2-02:  The Enemy at the Gates
                 </Text>
               </Button>
               <Button class="scenario" id="2-03">
-                <Text fontSize="20" color="White" alignment="MiddleLeft">
-                  S2-03: Mediterranean
-                  Dominance
+                <Text class="scenarioName">
+                  S2-03: Mediterranean Dominance
                 </Text>
               </Button>
               <Button class="scenario" id="2-04">
-                <Text fontSize="20" color="White" alignment="MiddleLeft">
+                <Text class="scenarioName">
                   S2-04: Napoleon Rising
                 </Text>
               </Button>
               <Button class="scenario" id="2-05">
-                <Text fontSize="20" color="White" alignment="MiddleLeft">
+                <Text class="scenarioName">
                   S2-05: Here I Stand Once More
                 </Text>
               </Button>
               <Button class="scenario" id="2-06">
-                <Text fontSize="20" color="White" alignment="MiddleLeft">
+                <Text class="scenarioName">
                   S2-06: The Rise of the Purple Phoenix
                 </Text>
               </Button>
               <Button class="scenario" id="2-07">
-                <Text fontSize="20" color="White" alignment="MiddleLeft">
+                <Text class="scenarioName">
                   S2-07: Glory for Ulm
                 </Text>
               </Button>
@@ -140,8 +139,10 @@
           <TableLayout class="RightTable">
           <Row class="RightContentRow" dontUseTableRowBackground="true">
               <Cell>
-                <VerticalScrollView preferredHeight="400" scrollSensitivity="10" color="rgba(0,0,0,0)" noScrollbars="False"  movementType="Unrestricted" spacing="30 30 30 30">
-                  <Text id="scn-description" color="White" fontSize="14" preferredHeight="1000"/>
+                <VerticalScrollView preferredHeight="410" scrollSensitivity="10" color="rgba(0,0,0,0)" noScrollbars="False" verticalScrollbarVisibility="AutoHide" movementType="Elastic" spacing="30 30 30 30">
+                  <VerticalLayout id="scn_desc-panel" padding="15 15 15 5" width="475" height="2000">
+                    <Text id="scn-description" class="descriptionText" resizeTextForBestFit="false" flexibleHeight="1" alignment="UpperCenter"/>
+                  </VerticalLayout>
                 </VerticalScrollView>
               </Cell>
             </Row>
@@ -181,13 +182,12 @@
           </Button>
         </Cell>
         <Cell>
-          <Text id="variantRightSecodaryText" text="Right Secondary Text" color="white" />
         </Cell>
       </Row>
       <Row class="MainContentRow" dontUseTableRowBackground="true">
         <Cell>
           <VerticalScrollView id="variant_list" flexibleHeight="1" scrollSensitivity="10" color="rgba(0,0,0,0)" noScrollbars="false" verticalScrollbarVisibility="AutoHideAndExpandViewport" movementType="Elastic">
-            <VerticalLayout id="variant_panel" childForceExpandHeight="False" height="1200">
+            <VerticalLayout id="variant_panel" childForceExpandHeight="False"  width="475" height="1200">
               <Button class="variant" id="var01">
                 <Text id="var01-text" fontSize="20" color="White" Width="200" alignment="MiddleLeft">
                   Variant 1
@@ -225,8 +225,10 @@
           <TableLayout class="RightTable">
           <Row class="RightContentRow" dontUseTableRowBackground="true">
               <Cell>
-                <VerticalScrollView preferredHeight="400" scrollSensitivity="10" color="rgba(0,0,0,0)" noScrollbars="False"  movementType="Unrestricted" spacing="30 30 30 30">
-                  <Text id="var-description" color="White" fontSize="14" preferredHeight="1000"/>
+                <VerticalScrollView preferredHeight="410" scrollSensitivity="10" color="rgba(0,0,0,0)" noScrollbars="False" verticalScrollbarVisibility="AutoHide" movementType="Elastic" spacing="30 30 30 30">
+                  <VerticalLayout id="var_desc-panel" padding="15 15 15 5" width="475" height="2000">
+                    <Text id="var-description" class="descriptionText" resizeTextForBestFit="false" flexibleHeight="1" alignment="UpperCenter"/>
+                  </VerticalLayout>
                 </VerticalScrollView>
               </Cell>
             </Row>
@@ -266,7 +268,6 @@
                 </Button>
               </Cell>
               <Cell>
-                <Text id="botsRightSecodaryText" text="Right Secondary Text" />
               </Cell>
             </Row>
           </TableLayout>
@@ -277,67 +278,67 @@
           <TableLayout class="BotTable">
             <Row class="MainTableRow" dontUseTableRowBackground="true">
               <Cell id="bot1-cell1">
-                <Text id="bot1-realm" fontSize="20" color="White" Width="375">
+                <Text id="bot1-realm" class="BotText">
                   Realm 1
                 </Text>
               </Cell>
               <Cell id="bot1-cell2">
                 <Button class="bot" id="bot1-btn">
-                  <Text id="bot1-type" text="Human" fontSize="20" color="White" Width="75"/>
+                  <Text id="bot1-type" class="OptionButton" text="Human" fontSize="20" color="White" Width="75"/>
                 </Button>
               </Cell>
               <Cell id="bot2-cell1">
-                <Text id="bot2-realm" fontSize="20" color="White" Width="375">
+                <Text id="bot2-realm" class="BotText">
                   Realm 2
                 </Text>
               </Cell>
               <Cell id="bot2-cell2">
                 <Button class="bot" id="bot2-btn">
-                  <Text id="bot2-type" text="Human" fontSize="20" color="White" Width="75"/>
+                  <Text id="bot2-type" class="OptionButton" text="Human" fontSize="20" color="White" Width="75"/>
                 </Button>
               </Cell>
             </Row>
             <Row class="MainTableRow" dontUseTableRowBackground="true">
               <Cell id="bot3-cell1">
-                <Text id="bot3-realm" fontSize="20" color="White" Width="375">
+                <Text id="bot3-realm" class="BotText">
                   Realm 3
                 </Text>
               </Cell>
               <Cell id="bot3-cell2">
                 <Button class="bot" id="bot3-btn">
-                  <Text id="bot3-type" text="Human" fontSize="20" color="White" Width="75"/>
+                  <Text id="bot3-type" class="OptionButton" text="Human" fontSize="20" color="White" Width="75"/>
                 </Button>
               </Cell>
               <Cell id="bot4-cell1">
-                <Text id="bot4-realm" fontSize="20" color="White" Width="375">
+                <Text id="bot4-realm" class="BotText">
                   Realm 4
                 </Text>
               </Cell>
               <Cell id="bot4-cell2">
                 <Button class="bot" id="bot4-btn">
-                  <Text id="bot4-type" text="Human" fontSize="20" color="White" Width="75"/>
+                  <Text id="bot4-type" class="OptionButton" text="Human" fontSize="20" color="White" Width="75"/>
                 </Button>
               </Cell>
             </Row>
             <Row class="MainTableRow" dontUseTableRowBackground="true">
               <Cell id="bot5-cell1">
-                <Text id="bot5-realm" fontSize="20" color="White" Width="375">
+                <Text id="bot5-realm" class="BotText">
                   Realm 5
                 </Text>
               </Cell>
               <Cell id="bot5-cell2">
                 <Button class="bot" id="bot5-btn">
-                  <Text id="bot5-type" text="Human" fontSize="20" color="White" Width="75"/>
+                  <Text id="bot5-type" class="OptionButton" text="Human" fontSize="20" color="White" Width="75"/>
                 </Button>
               </Cell>
               <Cell id="bot6-cell1">
-                <Text id="bot6-realm" fontSize="20" color="White" Width="375">
+                <Text id="bot6-realm" class="BotText">
                   Realm 6
                 </Text>
               </Cell>
               <Cell id="bot6-cell2">
                 <Button class="bot" id="bot6-btn">
-                  <Text id="bot6-type" text="Human" fontSize="20" color="White" Width="75"/>
+                  <Text id="bot6-type" class="OptionButton" text="Human" fontSize="20" color="White" Width="75"/>
                 </Button>
               </Cell>
             </Row>
@@ -365,11 +366,6 @@
 </Panel>
 
 
-
-
-
-
-
 <Panel id="options" image="background" width="1430" height="906" active="false">
   <Panel color="rgba(0,0,0,0.8)" width="1000" Height="550" offsetXY="0 -70">
     <TableLayout class="MainTable">
@@ -390,13 +386,12 @@
           </Button>
         </Cell>
         <Cell>
-          <Text id="opt-title" text="" alignment="MiddleLeft" resizeTextForBestFit="True" resizeTextMaxSize="25" color="Orange"/>
         </Cell>
       </Row>
       <Row class="MainContentRow" dontUseTableRowBackground="true">
         <Cell>
           <VerticalScrollView id="option_list" flexibleHeight="1" scrollSensitivity="10" color="rgba(0,0,0,0)" noScrollbars="false" verticalScrollbarVisibility="AutoHideAndExpandViewport" movementType="Elastic">
-            <TableLayout id="option_panel" class="OptTable" childForceExpandHeight="False" height="1200">
+            <TableLayout id="option_panel" class="OptTable" childForceExpandHeight="False"  width="475" height="1200">
               <Row id="opt1" class="MainTableRow option" dontUseTableRowBackground="true">
                 <Cell>
                   <Text id="opt1-desc" class="OptionText">
@@ -530,8 +525,10 @@
           <TableLayout class="RightTable">
           <Row class="RightContentRow" dontUseTableRowBackground="true">
               <Cell>
-                <VerticalScrollView preferredHeight="400" scrollSensitivity="10" color="rgba(0,0,0,0)" noScrollbars="False"  movementType="Unrestricted" spacing="30 30 30 30">
-                  <Text id="opt-description" color="White" fontSize="14" preferredHeight="1000"/>
+                <VerticalScrollView preferredHeight="410" scrollSensitivity="10" color="rgba(0,0,0,0)" noScrollbars="False" verticalScrollbarVisibility="AutoHide" movementType="Elastic" spacing="30 30 30 30">
+                  <VerticalLayout id="opt_desc-panel" padding="15 15 15 5" width="475" height="300">
+                    <Text id="opt-description" class="descriptionText" text="Click on an option to the left for more information" resizeTextForBestFit="false" flexibleHeight="1" alignment="UpperCenter"/>
+                  </VerticalLayout>
                 </VerticalScrollView>
               </Cell>
             </Row>

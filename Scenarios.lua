@@ -26,7 +26,7 @@ Scenario_List = {
 
 Scenario_List['0-00'].description = [[This option lets you do the setup by hand. It places the play mats for all six players and their associated components. After this any additions and changes are left to the players to handle.]]
   
-Scenario_List['1-00'].description = [[This scenario is intended for a group of players that are new to the game. The scenario begins at the standard 1444 starting point and lasts for two Rounds (the first half of Age I). This is enough to famil­iarize yourself with all of the basics, as well as the flow, of the game.]]
+Scenario_List['1-00'].description = [[This scenario is intended for a group of players that are new to the game. The scenario begins at the standard 1444 starting point and lasts for two Rounds (the first half of Age I). This is enough to familiarize yourself with all of the basics, as well as the flow, of the game.]]
 Scenario_List['1-00'].options = { [9] = { name = 'hide'} }
 Scenario_List['1-00'].variants = { 
   { name = '3 Players', age = 1, last_age = 1, book = {1,2}, player_realms = {
@@ -42,16 +42,16 @@ Scenario_List['1-00'].variants = {
 } 
 
 
-Scenario_List['1-01'].description = [[This scenario is quite well suited for an inexperienced group of play­ers, but if no one in the group has played before, we recommend watching the Extended Gameplay Example first (www.aegirgames.com/europa-universalis/resources).
+Scenario_List['1-01'].description = [[This scenario is quite well suited for an inexperienced group of players, but if no one in the group has played before, we recommend watching the Extended Gameplay Example first (www.aegirgames.com/europa-universalis/resources).
 
->France and ›England begin with a higher Tax Income than the two other Realms, but they are likely to get entangled in conflicts with each other while ›Castile and ›Austria can usually enjoy a quieter start. ›France might edge a head­on battle, but a strategic Alliance can change that. On the other hand, ›England enjoys a more protected po­sition on its island home base, with no other powerful enemies nearby.
+›France and ›England begin with a higher Tax Income than the two other Realms, but they are likely to get entangled in conflicts with each other while ›Castile and ›Austria can usually enjoy a quieter start. ›France might edge a headon battle, but a strategic Alliance can change that. On the other hand, ›England enjoys a more protected position on its island home base, with no other powerful enemies nearby.
 
-›	France will need to avoid having too many enemies at once.
-›	Castile may seem somewhat weaker at the outset, but they have a great chance of forging a diplomatic union with ›Aragon to be come a real powerhouse. ›Castile also has the best position for early­game exploration and building their colonial empire.
+›France will need to avoid having too many enemies at once.
+›Castile may seem somewhat weaker at the outset, but they have a great chance of forging a diplomatic union with ›Aragon to be come a real powerhouse. ›Castile also has the best position for earlygame exploration and building their colonial empire.
 
-> Austria is the most isolated of the four Realms. While their Realm is rather small, they also hold the Holy Roman Emperor title. This provides them with a great deal of additional power, which comes with extra responsibilities. ›Austria has a tougher second Age. As the Em­peror, they must be familiar with some extra rules.
+›Austria is the most isolated of the four Realms. While their Realm is rather small, they also hold the Holy Roman Emperor title. This provides them with a great deal of additional power, which comes with extra responsibilities. ›Austria has a tougher second Age. As the Emperor, they must be familiar with some extra rules.
 
-With the Deluxe Edition or the Fate of Empires Expansion you can play this scenario with five players instead of four, by adding ›Den­mark as a PR
+With the Deluxe Edition or the Fate of Empires Expansion you can play this scenario with five players instead of four, by adding ›Denmark as a PR
 ]]
 Scenario_List['1-01'].options = {
   [1] = {name = 'Ages to play:', values = {'1','2','3'}, default = 2, info = 'How many ages should the game be set up for?' },
@@ -128,11 +128,13 @@ Scenario_List['1-01'].variants = {
 }
 
 
-Scenario_List['1-02'].description = [[In this scenario the players face the struggle of three minor nations fighting to survive, and eventually trying to grow and flourish, in the periphery of a Holy Roman Empire dominated by the powerful Em­peror, AustriaBot. The players must carefully plan their strategies, not getting over­confident in their advance within the Holy Roman Empire, as the Emperor will not tolerate anyone trying to outclass him and will be swift dealing with unprepared opponents. Playing through this scenario is a good way for players to familiar­ize themselves with the Solo & Bot rules, and learning how to handle Bots. It is also an interesting challenge to play as a minor Realm that has to weigh its options more carefully, using less brute force, and a more subtle approach, than when playing as a Major Power. At times the players will likely benefit from cooperating with one or even both of the other players. Sometimes they might also be able to take advantage of the actions of the Bot, or even manipulate the Bot into doing things that work in their favor.
+Scenario_List['1-02'].description = [[In this scenario the players face the struggle of three minor nations fighting to survive, and eventually trying to grow and flourish, in the periphery of a Holy Roman Empire dominated by the powerful Emperor, AustriaBot.
+The players must carefully plan their strategies, not getting overconfident in their advance within the Holy Roman Empire, as the Emperor will not tolerate anyone trying to outclass him and will be swift dealing with unprepared opponents.
+Playing through this scenario is a good way for players to familiarize themselves with the Solo & Bot rules, and learning how to handle Bots. It is also an interesting challenge to play as a minor Realm that has to weigh its options more carefully, using less brute force, and a more subtle approach, than when playing as a Major Power. At times the players will likely benefit from cooperating with one or even both of the other players. Sometimes they might also be able to take advantage of the actions of the Bot, or even manipulate the Bot into doing things that work in their favor.
 
 With careful resource management and skilled diplomacy each of these three minor Realms have the potential to grow into powerful states, eventually perhaps even eclipsing the might of the Emperor.]]
 Scenario_List['1-02'].options = {
-  [1] = {name = 'Netherlands start:', values = {'Amsterdam','Brugge','Antwepen'}, info = [[Starting towns for the Netherlands start:
+  [1] = {name = 'Netherlands start:', values = {'Amsterdam','Brugge','Antwerpen'}, info = [[Starting provinces for the ›Netherlands:
   Amsterdam & Zeeland
   Brugge & Gent
   Antwerpen & Breda]], },
@@ -190,10 +192,10 @@ Scenario_List['1-02'].variants = {
 }
 
 
-Scenario_List['1-03'].description = [[This scenario starts with the second half of Age I. This means that there will be just two rounds for Age I. There are are some slight changes to each PR's setup, as compared to the 1444 Setup Cards. As the smallest Realm,
-› Portugal has a tough start. However, they have the upper hand in the colonial race since they have “Quest for the New World” researched from the beginning. They may have to divide their efforts between expanding and defending against their stronger neighbor to the east. Their alliance with ›England may prove valu­able – if the English are willing to stand by them.
-> Castile can wait for Columbus and start by consolidating the lands closest to them, or they may instead channel their efforts into be coming the new masters of the Distant Continents.
-> England and ›France have seemingly buried the hatchet. Will France now start looking beyond its immediate horizons, or will it once again put its trust in military prowess? Although ›England may have suffered from losing their continental posessions to ›France, they should be in a great position to focus on maritime efforts.
+Scenario_List['1-03'].description = [[This scenario starts with the second half of Age I. This means that there will be just two rounds for Age I. There are are some slight changes to each PR's setup, as compared to the 1444 Setup Cards.
+As the smallest Realm, ›Portugal has a tough start. However, they have the upper hand in the colonial race since they have “Quest for the New World” researched from the beginning. They may have to divide their efforts between expanding and defending against their stronger neighbor to the east. Their alliance with ›England may prove valuable – if the English are willing to stand by them.
+›Castile can wait for Columbus and start by consolidating the lands closest to them, or they may instead channel their efforts into be coming the new masters of the Distant Continents.
+›England and ›France have seemingly buried the hatchet. Will France now start looking beyond its immediate horizons, or will it once again put its trust in military prowess? Although ›England may have suffered from losing their continental posessions to ›France, they should be in a great position to focus on maritime efforts.
 ]]
 Scenario_List['1-03'].variants = {
   { name = '3 Players', age = 1, last_age = 3, book = {1,5}, player_realms = {
@@ -318,13 +320,13 @@ Scenario_List['1-04'].variants = {
 }
 
 
-Scenario_List['1-05'].description = [[>Spain I (Castile) will need to send their armies across Europe to de­fend their many domains across Italy, Burgundy, and the Low Coun­tries. Threats arise both in Europe and on the Distant Continents.
+Scenario_List['1-05'].description = [[›Spain I (Castile) will need to send their armies across Europe to defend their many domains across Italy, Burgundy, and the Low Countries. Threats arise both in Europe and on the Distant Continents.
 
-> France has a cohesive domain, but is surrounded by › Spanish holdings on all sides, and faces Religious Dissent in their lands. Can they find an opportunity to strike at the Habsburgs amidst all this?
+›France has a cohesive domain, but is surrounded by ›Spanish holdings on all sides, and faces Religious Dissent in their lands. Can they find an opportunity to strike at the Habsburgs amidst all this?
 
-> Austria must deal with the disruptions of the Thirty Years' War. As the Holy Roman Emperor, they must quell Protestant Revolts while defending their Imperial borders from ›France and the ›Otto­mans.
+›Austria must deal with the disruptions of the Thirty Years' War. As the Holy Roman Emperor, they must quell Protestant Revolts while defending their Imperial borders from ›France and the ›Ottomans.
 
-> Netherlands, being the smallest PR in the mix, will need to plan carefully to realize their ambition of reuniting the entirety of the Low Countries under their rule. Their Distant Provinces can provide the wealth needed to pay for life­saving Mercenary Armies.
+›Netherlands, being the smallest PR in the mix, will need to plan carefully to realize their ambition of reuniting the entirety of the Low Countries under their rule. Their Distant Provinces can provide the wealth needed to pay for lifesaving Mercenary Armies.
 ]]
 Scenario_List['1-05'].options = {
   [1] = {name = 'DNPR Hungary', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Hungary using pink tokens?' },
@@ -390,9 +392,9 @@ Scenario_List['1-05'].variants = {
 }
 
 
-Scenario_List['1-06'].description = [[›	Brandenburg is a small Realm with a lot of potential. At the start of the game they enjoy a shielded existence within the HRE, protect­ed but also restricted by the power of the Emperor (AustriaBot). Outsiders have a hard time penetrating too far into the HRE, and if ›	Brandenburg eats too many of their Imperial neighbors, they will attract the Emperor's wrath. Thus their development and expansion have to be carefully planned, to avoid facing too­early, potentially fatal confrontations. Cautiously expand through the northern Areas of the Empire, and outside its borders when possible, while also establishing diplomatic ties to the other Electors before making an open challenge for su­premacy over the German lands.
+Scenario_List['1-06'].description = [[›Brandenburg is a small Realm with a lot of potential. At the start of the game they enjoy a shielded existence within the HRE, protected but also restricted by the power of the Emperor (AustriaBot). Outsiders have a hard time penetrating too far into the HRE, and if ›	Brandenburg eats too many of their Imperial neighbors, they will attract the Emperor's wrath. Thus their development and expansion have to be carefully planned, to avoid facing tooearly, potentially fatal confrontations. Cautiously expand through the northern Areas of the Empire, and outside its borders when possible, while also establishing diplomatic ties to the other Electors before making an open challenge for supremacy over the German lands.
 
-While building up for this confrontation, DenmarkBot will pro­vide early challenges. Once ›Branden burg eclipses one of their two Opponents, mighty FranceBot will wake up to dispute ›Branden­burg's claims to the region around the Rhine.
+While building up for this confrontation, DenmarkBot will provide early challenges. Once ›Brandenburg eclipses one of their two Opponents, mighty FranceBot will wake up to dispute ›Brandenburg's claims to the region around the Rhine.
 ]]
 Scenario_List['1-06'].options = {
   [1] = {name = 'DNPR France', values = {'On','Off'}, info = 'Set up a dynamic NPR for France using blue tokens?', },
@@ -481,11 +483,16 @@ Scenario_List['1-06'].variants = {
 }
 
 
-Scenario_List['2-01'].description = [[Poland, which starts the game without a Ruler, has powerful neighbors to the west, east, and south. ›Poland's dynastic ties with
+Scenario_List['2-01'].description = [[›France and ›England begin with a higher Tax Income than the two other Realms, but they are likely to get entangled in conflicts with each other while ›Castile and ›Austria can usually enjoy a quieter start. ›France might edge a headon battle, but a strategic Alliance can change that. On the other hand, ›England enjoys a more protected position on its island home base, with no other powerful enemies nearby.
 
->Lithuania can be used to their advantage, if they are nurtured with diplomacy. As soon as a new Ruler ascends to the throne, ›Poland can also think about expanding militarily to the north or south.
+›France will need to avoid having too many enemies at once.
+›Castile may seem somewhat weaker at the outset, but they have a great chance of forging a diplomatic union with ›Aragon to be come a real powerhouse. ›Castile also has the best position for earlygame exploration and building their colonial empire.
 
-The ›Ottomans are on the verge of becoming a true empire, but they have many enemies and few friends. If they can build up their military strength to conquer what remains of ›Byzantium and Ana-tolia, they are well placed to expand into Europe, the Middle East, or the Mediterranean.
+›Austria is the most isolated of the four Realms. While their Realm is rather small, they also hold the Holy Roman Emperor title. This provides them with a great deal of additional power, which comes with extra responsibilities. ›Austria has a tougher second Age. As the Emperor, they must be familiar with some extra rules.
+
+›Poland, which starts the game without a Ruler, has powerful neighbors to the west, east, and south. ›Poland's dynastic ties with ›Lithuania can be used to their advantage, if they are nurtured with diplomacy. As soon as a new Ruler ascends to the throne, ›Poland can also think about expanding militarily to the north or south.
+
+The ›Ottomans are on the verge of becoming a true empire, but they have many enemies and few friends. If they can build up their military strength to conquer what remains of ›Byzantium and Anatolia, they are well placed to expand into Europe, the Middle East, or the Mediterranean.
 ]]
 Scenario_List['2-01'].options = {
   [1] = {name = 'Ages to play:', values = {'2','3','4'}, default = 3, info = 'How many ages should the game be set up for?' },
@@ -575,11 +582,11 @@ Scenario_List['2-01'].variants = {
 }
 
 
-Scenario_List['2-02'].description = [[This scenario takes place in Central and Eastern Europe, with most of Western Europe not in play – this changes the character of the game quite a bit. While there is more room to expand by military conquest on land, it is much harder to expand via Colonization. Trade is gener-ally less lucrative than in scenarios like S2-01, where access to mari-time Trade Nodes is a lot easier, but it can still generate needed cash.
+Scenario_List['2-02'].description = [[This scenario takes place in Central and Eastern Europe, with most of Western Europe not in play – this changes the character of the game quite a bit. While there is more room to expand by military conquest on land, it is much harder to expand via Colonization. Trade is generally less lucrative than in scenarios like S2-01, where access to maritime Trade Nodes is a lot easier, but it can still generate needed cash.
 
-> Muscovy is the strongest of the Russian princes, and can become a real empire once they see off their main rival to the North, the Re-public of ›Novgorod, and the remnants of the Mongol hordes.
+›Muscovy is the strongest of the Russian princes, and can become a real empire once they see off their main rival to the North, the Republic of ›Novgorod, and the remnants of the Mongol hordes.
 
-The Grand Duchy of ›Lithuania, with its Ruthenian lands, will likely be a region of conflict between the ›Muscovites and the ›Pol-ish, while the ›Ottomans will rival both of them for the steppes north of the Black Sea.
+The Grand Duchy of ›Lithuania, with its Ruthenian lands, will likely be a region of conflict between the ›Muscovites and the ›Polish, while the ›Ottomans will rival both of them for the steppes north of the Black Sea.
 
 The Balkans will be contested by ›Austria and the ›Ottomans, but the ›Polish also have dynastic claims to the ›Hungarian throne. And, who is to say that ›Austria will get the Holy Roman Empire all to themselves?
 ]]
@@ -818,11 +825,11 @@ Scenario_List['2-02'].variants = {
 }
 
 
-Scenario_List['2-03'].description = [[In this Scenario all players compete to gain Ownership of 4 Ob-jectives, which are key Mediterranean Provinces. Controlling any of these Provinces that are Lawfully Owned by an Opponent also counts for Victory purposes.
+Scenario_List['2-03'].description = [[In this Scenario all players compete to gain Ownership of 4 Objectives, which are key Mediterranean Provinces. Controlling any of these Provinces that are Lawfully Owned by an Opponent also counts for Victory purposes.
 
 Players should try to dominate the seas and coastlines to ensure Victory in the game, as this will improve their own mobility while also hindering that of their Opponents.
 
-The restricted play area creates fierce and intense competition right from the start. Short-term planning is crucial, since an un-checked Opponent can end the game at any moment. However, completely ignoring long-term planning will see you lose out if you are unable to get to the Objectives soon enough.
+The restricted play area creates fierce and intense competition right from the start. Short-term planning is crucial, since an unchecked Opponent can end the game at any moment. However, completely ignoring long-term planning will see you lose out if you are unable to get to the Objectives soon enough.
 
 This uneasy balance should see Alliances between players shifting dynamically as the board situation changes.
 ]]
@@ -886,9 +893,9 @@ Scenario_List['2-03'].variants = {
 
 Scenario_List['2-04'].description = [[This scenario starts in the middle of the Age of Revolutions and lasts for 3 Rounds, but it is not a very short scenario since there is a lot going on in Age IV.
 
-With Events triggering the spread of the Revolution, Grand Coa-litions, coups, and much more, this scenario should be action-packed and ripe for chaos and lots of player vs. player interaction. No Realm should escape unscathed in this game.
+With Events triggering the spread of the Revolution, Grand Coalitions, coups, and much more, this scenario should be action-packed and ripe for chaos and lots of player vs. player interaction. No Realm should escape unscathed in this game.
 
-Will the Revolution sweep the old monarchies aside? Will Na-poleon rise to power and form a new European Empire? Or, will the European Concert keep the revolutionary forces at bay?
+Will the Revolution sweep the old monarchies aside? Will Napoleon rise to power and form a new European Empire? Or, will the European Concert keep the revolutionary forces at bay?
 ]]
 Scenario_List['2-04'].options = {
   [1] = {name = 'DNPR USA', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for the United States of America using pink (1) tokens?' },
@@ -971,9 +978,9 @@ Scenario_List['2-05'].variants = {
 }
 
 
-Scenario_List['2-06'].description = [[A challenging solo campaign, where you, as ›Byzantium, face over-whelming odds against the encroaching ›Ottoman forces and addi-tional threats from your long-standing rival in ›Venice. This scenario is recommended for experienced players who are comfortable start-ing with fewer resources than their Bot Opponents.
+Scenario_List['2-06'].description = [[A challenging solo campaign, where you, as ›Byzantium, face overwhelming odds against the encroaching ›Ottoman forces and additional threats from your longstanding rival in ›Venice. This scenario is recommended for experienced players who are comfortable starting with fewer resources than their Bot Opponents.
 
-Despite the difficult start, a successful ›Byzantine player will be able to make gains against the ›Ottomans, to reclaim their former heartland. Once a power base has been secured, goals can include re-claiming all of Anatolia or even avenging the Fourth Crusade. Should further success ensue, the player may turn their eyes West and seek to restore as much of the former Roman Empire as possible, although new Opponents in ›Spain and ›France may have something to say about that.
+Despite the difficult start, a successful ›Byzantine player will be able to make gains against the ›Ottomans, to reclaim their former heartland. Once a power base has been secured, goals can include reclaiming all of Anatolia or even avenging the Fourth Crusade. Should further success ensue, the player may turn their eyes West and seek to restore as much of the former Roman Empire as possible, although new Opponents in ›Spain and ›France may have something to say about that.
 ]]
 Scenario_List['2-06'].options = {
   [1] = {name = 'DNPR Hungary', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Hungary using green tokens?' },
