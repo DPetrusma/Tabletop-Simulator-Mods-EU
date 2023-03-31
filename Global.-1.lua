@@ -733,7 +733,6 @@ end
   ------------------------------------------------
 --]]
 function Setup_Game()
-  Notes.setNotes("")
 
   -- Handle Manual Setup
   if UI_Data.scenario == '0-00' then
@@ -1581,6 +1580,7 @@ function Setup_Game()
   UpdateTuckZonePositions()
 
   waitFrames(10)
+  Notes.setNotes("")
   broadcastToAll("Set-up completed", {1,1,1})
   return 1
 end

@@ -24,7 +24,7 @@
   <Row class="option" onClick="Global/ui_show_option_info" />
 </Defaults>
 
-<Panel id="scenario" image="background" width="1430" height="906" active="false">
+<Panel id="scenario" image="splashscreen" width="1430" height="906" active="false">
   <Panel color="rgba(0,0,0,0.8)" width="1000" Height="550" offsetXY="0 -70">
     <TableLayout class="MainTable">
       <Row class="MainTableRow" >
@@ -162,7 +162,7 @@
   </Panel>
 </Panel>
 
-<Panel id="variant" image="background" width="1430" height="906" active="false">
+<Panel id="variant" image="splashscreen" width="1430" height="906" active="false">
   <Panel color="rgba(0,0,0,0.8)" width="1000" Height="550" offsetXY="0 -70">
     <TableLayout class="MainTable">
       <Row class="MainTableRow" dontUseTableRowBackground="true">
@@ -248,7 +248,7 @@
   </Panel>
 </Panel>
 
-<Panel id="bots" image="background" width="1430" height="906" active="false">
+<Panel id="bots" image="splashscreen" width="1430" height="906" active="false">
   <Panel color="rgba(0,0,0,0.8)" width="1000" Height="550" offsetXY="0 -70">
     <TableLayout class="BaseTable">
       <Row class="MainTableRow" dontUseTableRowBackground="true">
@@ -366,7 +366,7 @@
 </Panel>
 
 
-<Panel id="options" image="background" width="1430" height="906" active="false">
+<Panel id="options" image="splashscreen" width="1430" height="906" active="false">
   <Panel color="rgba(0,0,0,0.8)" width="1000" Height="550" offsetXY="0 -70">
     <TableLayout class="MainTable">
       <Row class="MainTableRow" dontUseTableRowBackground="true">
