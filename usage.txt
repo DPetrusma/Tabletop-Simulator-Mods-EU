@@ -1,13 +1,11 @@
 Usage notes to be pasted into the "Usage" section of the game's notebook:
 -------------------------------------------------------------------------
 
-1. Select scenario & variant and click on any player to change to bot & back
+1. Set up the game using the graphical user interface
 
-2. If playing with power struggles then the cards suggested for the scenario are separated but any further reduction and randomization has to be done by hand.
+2. After set-up is complete each player also draws three cards from any combination of the action card decks (unless a scenario spcifies otherwise)
 
-3. After set-up is complete each player also draws three cards from any combination of the action card decks (unless a scenario spcifies otherwise)
-
-4. If players can select their starting missions then all suitable missions will be dealt to their hand. Usually one of them has to be moved back to their mission deck.
+3. If players may select their starting missions then all suitable missions will be dealt to their hand. Usually one of them has to be moved back to their mission deck.
 
 - Tuck any leader cards by lowering them (hold LMB then also hold RMB) near the slot. Untuck them by right clicking the card and selecting "Detach Card" from the context menu. If you want to rearrange player boards you need to update the positions after doing so. Right click any human player's board and select "Update Tuck Zones" to update all of the zones for boards currently on the table.
 
@@ -25,4 +23,4 @@ Usage notes to be pasted into the "Usage" section of the game's notebook:
 
 - Manual setup: Components are all available from the bags and decks behind the hovering rulebook. The map board starts unlocked and the map to play on can be selected by right-clicking and selecting the desired state. After this the board will be non-interactible. Use the "Unlock Map" function in the right-click Menu of the "Options" button if you want to change the map another time.
 
-- Extended Logging: if you want to submit any errors during setup you can turn on extra logging information by flipping the "Options" button in the black box. If the script ends with an error it can help to see what the last messages in the log are.
+- Extended Logging: if you want to submit any errors during setup you can turn on extra logging information by flipping the "Options" button in the black zone (visible to the player in the black seat). If the script ends with an error it can help to see what the last messages in the log are.
