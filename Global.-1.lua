@@ -441,11 +441,6 @@ function onLoad()
   end
 end
 
-
-
-end
-
-
 --[[ --------------------------
        Handle XML UI Elements
      -------------------------- ]]
