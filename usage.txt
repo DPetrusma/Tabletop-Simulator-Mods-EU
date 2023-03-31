@@ -1,0 +1,26 @@
+Usage notes to be pasted into the "Usage" section of the game's notebook:
+-------------------------------------------------------------------------
+
+1. Set up the game using the graphical user interface
+
+2. After set-up is complete each player also draws three cards from any combination of the action card decks (unless a scenario spcifies otherwise)
+
+3. If players may select their starting missions then all suitable missions will be dealt to their hand. Usually one of them has to be moved back to their mission deck.
+
+- Tuck any leader cards by lowering them (hold LMB then also hold RMB) near the slot. Untuck them by right clicking the card and selecting "Detach Card" from the context menu. If you want to rearrange player boards you need to update the positions after doing so. Right click any human player's board and select "Update Tuck Zones" to update all of the zones for boards currently on the table.
+
+- Smart Trash bins: Putting an item on the black buttons will return the item to their respective container or discard pile. If the item would be removed from the game it will enter the button's bag. If the "Empty" button is pressed then the contents will be moved to a special bag in the black hidden zone. (Any infinite components are simply deleted). If any item's handling is ambiguous it will remain lying on the button and has to be handled manually (e.g. towns, player realm soldiers)
+
+- Searchable rulebook: The search covers any items listed in the index. Clicking on a result multiple times will cycle through pages listed in the index. The search can also highlight provinces, areas, realms and trade nodes on the map. Clearing the entry field will remove the marker from the board. Realms can be cycled through and will include any vassals last.
+
+- Dice rollers: Press the button on those multiple times (or press a number key from 1 to 9) to roll dice and display their results in chat. To manually roll dice you can pull them out from the outer parts of the button (where no red button indicator is displayed)
+
+- Merchants & Ships: Pressing "f" will put a merchant figure on the side and a ship flat on the board. This can be used to easily mark activations, damage and positioning in trade slots if needed.
+
+- Looking for a game component? The black hidden zone contains all bags and decks used by the game.
+
+- War & Truce token oddity: Due to technical constraints the preview for the roatation of these will look wrong but when placing them they should align to the board correctly.
+
+- Manual setup: Components are all available from the bags and decks behind the hovering rulebook. The map board starts unlocked and the map to play on can be selected by right-clicking and selecting the desired state. After this the board will be non-interactible. Use the "Unlock Map" function in the right-click Menu of the "Options" button if you want to change the map another time.
+
+- Extended Logging: if you want to submit any errors during setup you can turn on extra logging information by flipping the "Options" button in the black zone (visible to the player in the black seat). If the script ends with an error it can help to see what the last messages in the log are.
