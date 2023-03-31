@@ -11,6 +11,8 @@ Usage notes to be pasted into the "Usage" section of the game's notebook:
 
 - Smart Trash bins: Putting an item on the black buttons will return the item to their respective container or discard pile. If the item would be removed from the game it will enter the button's bag. If the "Empty" button is pressed then the contents will be moved to a special bag in the black hidden zone. (Any infinite components are simply deleted). If any item's handling is ambiguous it will remain lying on the button and has to be handled manually (e.g. towns, player realm soldiers)
 
+- Smart deletion: Pressing DEL will send an item to the smart trash instead of delting it. If it would not be allowed to enter it will simply remain where it is.
+
 - Searchable rulebook: The search covers any items listed in the index. Clicking on a result multiple times will cycle through pages listed in the index. The search can also highlight provinces, areas, realms and trade nodes on the map. Clearing the entry field will remove the marker from the board. Realms can be cycled through and will include any vassals last.
 
 - Dice rollers: Press the button on those multiple times (or press a number key from 1 to 9) to roll dice and display their results in chat. To manually roll dice you can pull them out from the outer parts of the button (where no red button indicator is displayed)
