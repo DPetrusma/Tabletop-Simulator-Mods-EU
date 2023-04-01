@@ -441,6 +441,7 @@ function onLoad()
   end
 end
 
+
 --[[ --------------------------
        Handle XML UI Elements
      -------------------------- ]]
@@ -573,7 +574,7 @@ function ui_generate_options()
       for i = 1, 9 do
         if list.options[i] ~= nil then
           if list.options[i].name == 'hide' then
-            UI_Data.options[i] = nil  
+            UI_Data.options[i] = nil
           else
             UI_Data.options[i] = {
               name = list.options[i].name or 'NAME MISSING',
@@ -729,7 +730,7 @@ function Setup_Game()
 
   -- Handle Manual Setup
   if UI_Data.scenario == '0-00' then
-    local player_config = 
+    local player_config =
     {
       {seat = 1, color = 'blue' },
       {seat = 2, color = 'yellow' },
@@ -763,13 +764,13 @@ function Setup_Game()
     return 1
   end
 
-  
+
   -- Generate scenario data from selected scenario and variant
   -- TODO: May be outdated by UI_Data storage
   local scenario_data = {}
   local variant_list = Scenario_List[UI_Data.scenario].variants
   scenario_data = variant_list[UI_Data.variant_num]
-  
+
   local players = scenario_data.player_realms
 
   -- Configure main board
@@ -781,7 +782,7 @@ function Setup_Game()
   end
 
   UI_Data.start_age = (scenario_data.age or 1)
-  
+
   -- Configure Bots
   if TEST_MODE then log('Configuring bots') end
   local active_count = 1
@@ -801,7 +802,7 @@ function Setup_Game()
   if scenario_data.draw_per_round then
     event_config.draw_per_round = scenario_data.draw_per_round
   else
-    event_config.draw_per_round = active_count 
+    event_config.draw_per_round = active_count
   end
   if scenario_data.reveal_per_round then
     event_config.reveal_per_round = scenario_data.reveal_per_round
@@ -816,7 +817,7 @@ function Setup_Game()
     diplo = {{Idea_Card_GUIDs.diplo.quest_for_the_new_world, {}}, '', ''},
     war =   {{Idea_Card_GUIDs.war.cannons, {}}, '', ''}
   }
-  
+
   if UI_Data.scenario == '1-00' then
     broadcastToAll("Setting up: [u]Introductory Scenario (3 players)[/u]", {1,1,1})
 
@@ -948,7 +949,7 @@ function Setup_Game()
 
     CoreScenarioSetup(scenario_data)
 
-    
+
   elseif UI_Data.scenario == '1-03' then
 
     -- Options
@@ -1034,7 +1035,7 @@ function Setup_Game()
     PlaceObjectsFromBag({ WesternMapReligion.andalucia }, Bag_GUIDs['cat_div'], false)
 
     CoreScenarioSetup(scenario_data)
-    
+
   elseif UI_Data.scenario == '1-05' then
 
     -- Options
@@ -1088,7 +1089,7 @@ function Setup_Game()
 
 
   elseif UI_Data.scenario == '1-06' then
-    
+
     -- Options
     if UI_Data.options[1] ~= nil and UI_Data.options[1].selected == 2 then
       scenario_data.DNPR_Blue_L = nil -- Remove France DNPR
@@ -1160,10 +1161,10 @@ function Setup_Game()
       end
 
     end
-    
+
     CoreScenarioSetup(scenario_data)
-   
-    
+
+
   elseif UI_Data.scenario == '2-02' then
 
     -- Options
@@ -1277,8 +1278,8 @@ function Setup_Game()
     PlaceObjectsFromBag( objective_positions, Bag_GUIDs['occ_bat'], false)
 
     CoreScenarioSetup(scenario_data)
-    
-    
+
+
   elseif UI_Data.scenario == '2-04' then
 
     -- Options
@@ -1304,8 +1305,8 @@ function Setup_Game()
     PlaceObjectsFromBag({ {-2.54, 2.70}, {-0.73, -2.29}, {-0.19, -3.26} }, Bag_GUIDs['hre_man'], false)
 
     CoreScenarioSetup(scenario_data)
-      
-    
+
+
   elseif UI_Data.scenario == '2-05' then
     broadcastToAll("Setting up: [u]Here I Stand Once More (6 players)[/u]", {1,1,1})
 
@@ -2598,17 +2599,17 @@ function SetupBotDecks()
 
       local current_age_deck = bot_decks[4]
       if UI_Data.start_age > 1 then
-        Removed_Components_Bag.putObject(bot_decks[4]) 
+        Removed_Components_Bag.putObject(bot_decks[4])
         current_age_deck = bot_decks[1]
         waitFrames(1)
       end
       if UI_Data.start_age > 2 then
-        Removed_Components_Bag.putObject(bot_decks[1]) 
+        Removed_Components_Bag.putObject(bot_decks[1])
         current_age_deck = bot_decks[2]
         waitFrames(1)
       end
       if UI_Data.start_age > 3 then
-        Removed_Components_Bag.putObject(bot_decks[2]) 
+        Removed_Components_Bag.putObject(bot_decks[2])
         current_age_deck = bot_decks[3]
         waitFrames(1)
       end
@@ -2910,7 +2911,7 @@ function PrepareMilestones(scenario_data)
       end
     end
   end
-  
+
   for i, deck_type in ipairs({'eco', 'exp', 'pol', 'war'}) do
     local deck = getObjectFromGUID(Milestone_Deck_GUIDs[current_age][deck_type])
     if deck ~= nil then
@@ -3575,9 +3576,196 @@ function onObjectSpawn(o)
     o.sticky = false -- BW all objects are no longer sticky - should be easier to manipulate stacking objects now
 end
 
+function getRotationValueIndexTable(o)
+	local rotationValue = o.getRotationValue()
+	if not rotationValue then return end
+	local rotationValues = o.getRotationValues() or {}
+	for i,t in ipairs(rotationValues) do
+		if t.value == rotationValue then
+			return i, rotationValues
+		end
+	end
+	return nil, {}
+end
+
+function changeRotationValue(o, n)
+	if o == nil then return end
+	if type(o) ~= "userdata" then return end
+	if o.isDestroyed() then return end
+	local rotationValueIndex, rotationValues = getRotationValueIndexTable(o)
+	if #rotationValues == 0 then return end
+	rotationValueIndex = rotationValueIndex + n
+	while rotationValueIndex > #rotationValues do
+		rotationValueIndex = rotationValueIndex - #rotationValues
+	end
+	while rotationValueIndex < 1 do
+		rotationValueIndex = rotationValueIndex + #rotationValues
+	end
+	local newRotationValue = rotationValues[rotationValueIndex]
+	o.setRotation(newRotationValue.rotation)
+	return newRotationValue.value
+end
+
+local tagToBehaviour = {
+    RoundStatus = {
+        forbidPlayerActions = {
+            [Player.Action.Copy] = "You cannot copy a Round Status marker (sit in Black to do so)",
+            [Player.Action.Paste] = "You cannot paste a Round Status marker (sit in Black to do so)",
+            [Player.Action.Delete] = "You cannot delete a Round Status marker (sit in Black or drop into a bin to do so)",
+        }
+    },
+    LargeCard = {
+        forbidPlayerActions = {
+            [Player.Action.Copy] = "You cannot copy a Large Card (sit in Black to do so)",
+            [Player.Action.Paste] = "You cannot paste a Large Card (sit in Black to do so)",
+        }
+    },
+    SmallCard = {
+        forbidPlayerActions = {
+            [Player.Action.Copy] = "You cannot copy a Small Card (sit in Black to do so)",
+            [Player.Action.Paste] = "You cannot paste a Small Card (sit in Black to do so)",
+            [Player.Action.Delete] = "You cannot delete a Small Card (sit in Black or drop into a bin to do so)",
+        }
+    },
+    Religion = {
+        forbidPlayerActions = {
+            [Player.Action.Copy] = "You cannot copy a Religion token (sit in Black to do so)",
+            [Player.Action.Paste] = "You cannot paste a Religion token (sit in Black to do so)",
+        }
+    },
+    Figurine = {
+        forbidPlayerActions = {
+            [Player.Action.Copy] = "You cannot copy a Figurine (sit in Black to do so)",
+            [Player.Action.Paste] = "You cannot paste a Figurine (sit in Black to do so)",
+        }
+    },
+    SmallTown = {
+        forbidPlayerActions = {
+            [Player.Action.Copy] = "You cannot copy a Small Town (sit in Black to do so)",
+            [Player.Action.Paste] = "You cannot paste a Small Town (sit in Black to do so)",
+        }
+    },
+    LargeTown = {
+        forbidPlayerActions = {
+            [Player.Action.Copy] = "You cannot copy a Large Town (sit in Black to do so)",
+            [Player.Action.Paste] = "You cannot paste a Large Town (sit in Black to do so)",
+        }
+    },
+    Claim = {
+        forbidPlayerActions = {
+            [Player.Action.Copy] = "You cannot copy a Claim token (sit in Black to do so)",
+            [Player.Action.Paste] = "You cannot paste a Claim token (sit in Black to do so)",
+        }
+    },
+    Cube = {
+        forbidPlayerActions = {
+            [Player.Action.Copy] = "You cannot copy an Influence Cube (sit in Black to do so)",
+            [Player.Action.Paste] = "You cannot paste an Influence Cube (sit in Black to do so)",
+        }
+    },
+    NavalUnit = {
+        forbidPlayerActions = {
+            [Player.Action.Copy] = "You cannot copy a Naval Unit (sit in Black to do so)",
+            [Player.Action.Paste] = "You cannot paste a Naval Unit (sit in Black to do so)",
+        },
+		[Player.Action.FlipOver] = function(o)
+			Wait.frames(function()
+				if changeRotationValue(o, -1) == "#side" then
+					o.setPosition(o.getPosition() + Vector(0,0,-0.1))
+				else
+					o.setPosition(o.getPosition() + Vector(0,0,0.1))
+				end
+			end,1)
+		end,
+		[Player.Action.RotateIncrementalLeft] = function(o)
+			Wait.frames(function()
+				if changeRotationValue(o, -1) == "#side" then
+					o.setPosition(o.getPosition() + Vector(0,0,-0.1))
+				else
+					o.setPosition(o.getPosition() + Vector(0,0,0.1))
+				end
+			end,1)
+		end,
+		[Player.Action.RotateIncrementalRight] = function(o)
+			Wait.frames(function()
+				if changeRotationValue(o, -1) == "#side" then
+					o.setPosition(o.getPosition() + Vector(0,0,-0.1))
+				else
+					o.setPosition(o.getPosition() + Vector(0,0,0.1))
+				end
+			end,1)
+		end
+    },
+    LandUnit = {
+        forbidPlayerActions = {
+            [Player.Action.Copy] = "You cannot copy a Land Unit (sit in Black to do so)",
+            [Player.Action.Paste] = "You cannot paste a Land Unit (sit in Black to do so)",
+        }
+    },
+    Marriage = {
+        forbidPlayerActions = {
+            [Player.Action.Copy] = "You cannot copy a Marriage token (sit in Black to do so)",
+            [Player.Action.Paste] = "You cannot paste a Marriage token (sit in Black to do so)",
+        }
+    },
+    Merchant = {
+        forbidPlayerActions = {
+            [Player.Action.Copy] = "You cannot copy a Merchant (sit in Black to do so)",
+            [Player.Action.Paste] = "You cannot paste a Merchant (sit in Black to do so)",
+        },
+		[Player.Action.FlipOver] = function(o)
+			Wait.frames(function()
+				changeRotationValue(o, 1)
+			end,1)
+		end,
+		[Player.Action.RotateIncrementalLeft] = function(o)
+			Wait.frames(function()
+				changeRotationValue(o, -1)
+			end,1)
+		end,
+		[Player.Action.RotateIncrementalRight] = function(o)
+			Wait.frames(function()
+				changeRotationValue(o, 1)
+			end,1)
+		end
+    },
+    Alliance = {
+        forbidPlayerActions = {
+            [Player.Action.Copy] = "You cannot copy an Alliance token (sit in Black to do so)",
+            [Player.Action.Paste] = "You cannot paste an Alliance token (sit in Black to do so)",
+        }
+    },
+    Vassal = {
+        forbidPlayerActions = {
+            [Player.Action.Copy] = "You cannot copy a Vassal token (sit in Black to do so)",
+            [Player.Action.Paste] = "You cannot paste a Vassal token (sit in Black to do so)",
+        }
+    },
+}
+
+
 function onPlayerAction(player, action, targets)
-    local trashBinObject = getClosesTrashBin(player.getPointerPosition())
+    for _,o in ipairs(targets) do
+        for tag,behaviour in pairs(tagToBehaviour) do
+            if o.hasTag(tag) then
+                if behaviour.forbidPlayerActions then
+                    if behaviour.forbidPlayerActions[action] then
+                        broadcastToColor(behaviour.forbidPlayerActions[action], player.color, "Orange")
+                        return false
+                    end
+                end
+            end
+        end
+		for tag,behaviour in pairs(tagToBehaviour) do
+			if o.hasTag(tag) then
+				if behaviour[action] then
+					behaviour[action](o)
+				end
+			end
+		end
+    end
     if action == Player.Action.Delete then
+	    local trashBinObject = getClosesTrashBin(player.getPointerPosition())
         for _,o in ipairs (targets) do
 			if getHandZone(o) then
 				o.use_hands = false
@@ -3850,7 +4038,7 @@ function RandomizeXEvents(event_list)
       stack2.position = entry[2]
     end
   end
-  
+
   -- handle list entries
   for _, entry in ipairs(event_list) do
     if stack1.position == entry[2] then
@@ -3886,7 +4074,7 @@ function RandomizeXEvents(event_list)
       end
     end
   end
-  
+
   local shuffled_x_cards = {}
   while #x_events > 0 do
     local n = math.random(#x_events)

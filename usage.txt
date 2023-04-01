@@ -13,11 +13,13 @@ Usage notes to be pasted into the "Usage" section of the game's notebook:
 
 - Smart deletion: Pressing DEL will send an item to the smart trash instead of delting it. If it would not be allowed to enter it will simply remain where it is.
 
+- Copying and deleting of limited components is prevented for anyone except the player using back as their color
+
 - Searchable rulebook: The search covers any items listed in the index. Clicking on a result multiple times will cycle through pages listed in the index. The search can also highlight provinces, areas, realms and trade nodes on the map. Clearing the entry field will remove the marker from the board. Realms can be cycled through and will include any vassals last.
 
 - Dice rollers: Press the button on those multiple times (or press a number key from 1 to 9) to roll dice and display their results in chat. To manually roll dice you can pull them out from the outer parts of the button (where no red button indicator is displayed)
 
-- Merchants & Ships: Pressing "f" will put a merchant figure on the side and a ship flat on the board. This can be used to easily mark activations, damage and positioning in trade slots if needed.
+- Merchants & Ships: Pressing "f", "q" or "e" will put a merchant figure on the side and a ship flat on the board. This can be used to easily mark activations, damage and positioning in trade slots if needed.
 
 - Looking for a game component? The black hidden zone contains all bags and decks used by the game.
 
