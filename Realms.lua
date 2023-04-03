@@ -428,7 +428,7 @@ SETUP_DATA = {
                   WesternMap.limousin, WesternMap.berry, WesternMap.bourbon, WesternMap.toulouse,
                   WesternMap.montpellier, WesternMap.maine, WesternMap.normandie, WesternMap.caux },
       vassals = { WesternMap.milano, WesternMap.milano, WesternMap.cremona, WesternMap.nantes, WesternMap.rennes },
-      allies = { WesternMap.lothian, WesternMap.provence },
+      allies = { WesternMap.lothian },
       claims = { {-3.67, 0.59} },
       core = { {-5.05, -3.55}, {-6.39, -0.57}, },
       influence = { {-8.48, 0.28}, {-8.48, -0.10}, {-8.97, 6.94}, {-8.97, 7.32}, {-0.42, -3.27}, {-2.04, -0.15}, {0.98, -4.33} },
