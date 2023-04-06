@@ -940,7 +940,7 @@ SETUP_DATA = {
       ruler = {deck_guid = Setup_Card_Deck_GUID, card_guid = 'fb0d8b', flip = true, ill = false },
       l_towns = { EasternMap.qahirah, EasternMap.halab, AfricaMap.upperegypt },
       s_towns = { EasternMap.iskandariyya, EasternMap.dumyat, EasternMap.gazzah, EasternMap.jaffa, EasternMap.alquds,
-                  EasternMap.dimashq, EasternMap.jaffa, EasternMap.tarabulus, EasternMap.adana, EasternMap.karaman, 
+                  EasternMap.dimashq, EasternMap.tarabulus, EasternMap.adana, EasternMap.karaman, 
                   EasternMap.amasya, EasternMap.trebizond, EasternMap.erzurum, EasternMap.mush, EasternMap.urfa, EasternMap.mosul,
                   EasternMap.tikrit, EasternMap.kirkuk, EasternMap.baghdad, EasternMap.bangazi, IndiaMap.yemen, EasternMap.cyprus },
       vassals = { WesternMap.tripoli, WesternMap.tunis, WesternMap.sousse, WesternMap.bizerte, WesternMap.qafsah, WesternMap.qusantinah,
