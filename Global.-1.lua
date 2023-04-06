@@ -972,6 +972,7 @@ function Setup_Game()
 
     -- Religion
     PlaceObjectsFromBag({ WesternMapReligion.andalucia }, Bag_GUIDs['cat_div'], false)
+    PlaceObjectsFromBag({ WesternMapReligion.northernmorocco }, Bag_GUIDs['ort_mus'], true)
 
     CoreScenarioSetup(scenario_data)
 
@@ -1575,7 +1576,7 @@ function Setup_Game()
 
   waitFrames(10)
   Notes.setNotes("")
-  broadcastToAll("Set-up completed", {1,1,1})
+  broadcastToAll("Set-up completed\nRemember to draw additional action cards according to the scenario instructions", {1,1,1})
   return 1
 end
 

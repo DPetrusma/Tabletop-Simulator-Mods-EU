@@ -764,7 +764,10 @@ Scenario_List['2-02'].variants = {
         {'41a-2', 1}, {'42a-2', 1}, {'43a-2', 1}, {'44a-2', 1}, {'452b', 1}, {'458b', 1}, {'456b', 1},
         {'401-2', 1}, {'405-2', 1}, {'406-2', 1}, {'407-2', 1}, {'409-2', 1},
       }, empire = { ruler = REALM.austria, authority = 3, influence = {HRE_Influence_Map_Pos.rhineland, HRE_Influence_Map_Pos.westphalia, HRE_Influence_Map_Pos.saxony} },
-      curia = {REALM.none, REALM.austria, REALM.poland, REALM.sweden, }, trade_add_tags = {'TradeStar'}, trade_remove_names = {'T22-1'}, DNPR_Green_S = { 
+      curia = {REALM.none, REALM.austria, REALM.poland, REALM.sweden, }, trade_add_tags = {'TradeStar'}, trade_remove_names = {'T22-1'}, DNPR_Pink_S = { 
+        WesternMap.kobenhavn, WesternMap.gotland, WesternMap.lund, WesternMap.ostjylland,
+        WesternMap.vestjylland, WesternMap.slesvig, WesternMap.holstein,
+      }, DNPR_Green_S = { 
         WesternMap.pest, EasternMap.szabolcs, WesternMap.sopron, WesternMap.pozsony, EasternMap.szepes,
         EasternMap.torda, EasternMap.hunyad, EasternMap.beograd, WesternMap.zagreb, WesternMap.rijeka,
       }, DNPR_Orange_L = { 
@@ -772,7 +775,6 @@ Scenario_List['2-02'].variants = {
         EasternMap.alquds, EasternMap.jaffa, EasternMap.dimashq, EasternMap.tarabulus, EasternMap.halab, AfricaMap.upperegypt, IndiaMap.hejaz,
       }, manpower = { WesternMap.piemont, WesternMap.geneve, WesternMap.sardenya, WesternMap.tunis },
       powerstruggles = { PS_GUIDs.struggle_for_the_balkans, PS_GUIDs.great_northern_war, PS_GUIDs.holy_league, PS_GUIDs.deluge },
-      options = {[3] = { name = 'hide'},},
     },
     { name = '5 Players (Mamluks)', age = 1, last_age = 4, book = {2,2}, board = MAIN_BOARD_STATE.s2_02_m, description = "This scenario can be played with 5 players, by adding a fifth PR. The addition of ›Mamluks puts more pressure on ›Ottomans. However, this somewhat adjusts itself if the affected players focus their attention more in the other direction (northward in the case of ›Ottomans).",
       player_realms = {
