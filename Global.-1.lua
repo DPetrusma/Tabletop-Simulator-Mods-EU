@@ -666,6 +666,31 @@ function ui_toggle_option(player, value, id)
   ui_set_active()
 end
 
+function ui_toggle_logging(player, value, id)
+  if value ~= "-1" then return end
+  if TEST_MODE then
+    Global.UI.setAttribute(('log_txt_1'), "text", "Logging: Off")
+    Global.UI.setAttribute(('log_txt_2'), "text", "Logging: Off")
+    Global.UI.setAttribute(('log_txt_3'), "text", "Logging: Off")
+    Global.UI.setAttribute(('log_txt_4'), "text", "Logging: Off")
+    Global.UI.setAttribute(('log_btn_1'), "image", "small-button")
+    Global.UI.setAttribute(('log_btn_2'), "image", "small-button")
+    Global.UI.setAttribute(('log_btn_3'), "image", "small-button")
+    Global.UI.setAttribute(('log_btn_4'), "image", "small-button")
+    TEST_MODE = false
+  else
+    Global.UI.setAttribute(('log_txt_1'), "text", "Logging: On")
+    Global.UI.setAttribute(('log_txt_2'), "text", "Logging: On")
+    Global.UI.setAttribute(('log_txt_3'), "text", "Logging: On")
+    Global.UI.setAttribute(('log_txt_4'), "text", "Logging: On")
+    Global.UI.setAttribute(('log_btn_1'), "image", "small-button-selected")
+    Global.UI.setAttribute(('log_btn_2'), "image", "small-button-selected")
+    Global.UI.setAttribute(('log_btn_3'), "image", "small-button-selected")
+    Global.UI.setAttribute(('log_btn_4'), "image", "small-button-selected")
+    TEST_MODE = true
+  end
+end
+
 
 function ui_back(player, value, id)
   if value ~= "-1" then return end
