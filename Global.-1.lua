@@ -227,7 +227,7 @@ Income_Token_GUIDs = { 'e144a8', '1480cc', '1a0674', 'f5ee76', '4ca903', '621d3a
 Bag_GUIDs = {
   mercs = 'a7061d', npr_land = 'db613d', npr_sea = 'f1f1b1', cat_div = '41dd44', ort_mus = '6e524b', cou_pro = '11fd73',
   rev_man = 'ad8c36', exp_man = '16b0a2', dnpr_og = '2eec48', dnpr_pb = '909920', hre_man = 'fc669a', papal = '8a5392',
-  ill_int = '8697b5', rebel = 'da5324',  occ_bat = '5be8c4', i_coin = '870321', v_coin = '73e47a', x_coin = 'a76ba7'
+  ill_int = '8697b5', rebel = 'da5324',  occ_bat = '5be8c4', i_coin = '505382', v_coin = '846392', x_coin = '9a6ed7'
 }
 
 Setup_Bag_GUIDs = {
