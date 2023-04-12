@@ -83,7 +83,7 @@ Scenario_List['1-01'].variants = {
     }, manpower = { WesternMap.stockholm, WesternMap.danzig, WesternMap.poznan, WesternMap.kalisz, WesternMap.sieradz, WesternMap.pozsony, WesternMap.pest},
     powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.distant_trade, PS_GUIDs.thirty_years_war },
   },
-  { name = '4 Players', age = 1, last_age = 1, book = {1,3}, description = "The default version of the Scenario with ›France, ›Castile, ›England and ›Austria as PRs.",
+  { name = '4 Players', age = 1, last_age = 3, book = {1,3}, description = "The default version of the Scenario with ›France, ›Castile, ›England and ›Austria as PRs.",
     player_realms = {
       [REALM.france] = { seat = 1, color = 'blue', realm = {REALM.france, '1444'}, rem_missions = {'4B', '4E'}, start_missions = {'1A','1B','1C'}, start = true },
       [REALM.castile] = { seat = 2, color = 'yellow', realm = {REALM.castile, '1444'}, rem_missions = {'3E', '4C'}, start_missions = {'1A','1B','1C'}, },
@@ -106,7 +106,7 @@ Scenario_List['1-01'].variants = {
     }, manpower = { WesternMap.stockholm, WesternMap.danzig, WesternMap.poznan, WesternMap.kalisz, WesternMap.sieradz, WesternMap.pozsony, WesternMap.pest},
     powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.distant_trade, PS_GUIDs.thirty_years_war },
   },
-  { name = '5 Players', age = 1, last_age = 1, book = {1,3}, description = "You can play this scenario with five players instead of four, by adding ›Denmark as a PR.",
+  { name = '5 Players', age = 1, last_age = 3, book = {1,3}, description = "You can play this scenario with five players instead of four, by adding ›Denmark as a PR.",
     player_realms = {
       [REALM.france] = { seat = 1, color = 'blue', realm = {REALM.france, '1444'}, rem_missions = {'4B','4E'}, start_missions = {'1A','1B','1C'}, start = true },
       [REALM.castile] = { seat = 2, color = 'yellow', realm = {REALM.castile, '1444'}, rem_missions = {'3E','4C'}, start_missions = {'1A','1B','1C'} },
