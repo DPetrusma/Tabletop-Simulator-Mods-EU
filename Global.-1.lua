@@ -1693,7 +1693,7 @@ end
 function SetupRealm(player)
   local realmTable = {}
   if player.inactive then
-    local dataTable =  GetRealmData(player.realm[1], player.realm[2])
+    local dataTable = GetRealmData(player.realm[1], player.realm[2])
     realmTable = GetRealmData('000', 'default')
     realmTable.setup_bag_guid = dataTable.setup_bag_guid
     realmTable.ruler = dataTable.ruler
@@ -1704,6 +1704,8 @@ function SetupRealm(player)
   else
     realmTable = GetRealmData(player.realm[1], player.realm[2])
   end
+  realmTable.realm_name = player.name or REALM_NAME[player.realm[1]]
+  if TEST_MODE then log('Created Realm table for ' .. realmTable.realm_name or 'unknown') end
   local seat = player.seat
   local color = player.color
   local is_bot = player.bot
@@ -1714,6 +1716,8 @@ function SetupRealm(player)
   local main_tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
   local army_tableau = getObjectFromGUID(Army_Tableau_GUIDs[color])
   local fleet_tableau = getObjectFromGUID(Fleet_Tableau_GUIDs[color])
+  local prestige_marker = getObjectFromGUID(Prestige_Marker_GUIDs[color])
+  local status_marker = getObjectFromGUID(Round_Status_Marker_GUIDs[color])
 
   local positions = {}
   local new_pos = {}
@@ -1792,6 +1796,26 @@ function SetupRealm(player)
       new_pos = main_tableau.positionToWorld(Main_Tableau_Local_Positions.missions)
     end
     PlaceObjectsFromBag({ { new_pos[1], new_pos[3] } }, realmTable.setup_bag_guid, true, 'MissionCard', main_tableau)
+  end
+
+  -- Name main tableau, army tableau, fleet tableau with realm name; turn tooltip off
+  for _,o in ipairs({main_tableau, army_tableau, fleet_tableau}) do
+    if type(o) == "userdata" then
+      if not o.isDestroyed() then
+        o.setName(realmTable.realm_name or "")
+        o.tooltip = false -- turn tooltip off for main user boards as they will be hovered all the time
+      end
+    end
+  end
+
+  -- Name score markers and round status with realm namel; turn tooltip on (helps with color blind players)
+  for _,o in ipairs({prestige_marker, status_marker}) do
+    if type(o) == "userdata" then
+      if not o.isDestroyed() then
+        o.setName(realmTable.realm_name or "")
+        o.tooltip = true -- turn tooltip on for the markers to easily see which one will be picked up
+      end
+    end
   end
 
   -- Ruler & inactive bot events
@@ -2031,6 +2055,8 @@ function SetupRealm(player)
   if prestige then
     local marker = getObjectFromGUID(Prestige_Marker_GUIDs[player.color])
     marker.setPositionSmooth(PrestigeToPos(prestige))
+    waitFrames(5)
+    onObjectDrop(nil, marker)
   end
 
 end
@@ -3771,17 +3797,17 @@ local tagToBehaviour = {
 
 
 function onPlayerAction(player, action, targets)
-    for _,o in ipairs(targets) do
-        for tag,behaviour in pairs(tagToBehaviour) do
-            if o.hasTag(tag) then
-                if behaviour.forbidPlayerActions and player.color ~= 'Black' then
-                    if behaviour.forbidPlayerActions[action] then
-                        broadcastToColor(behaviour.forbidPlayerActions[action], player.color, "Orange")
-                        return false
-                    end
-                end
-            end
+  for _,o in ipairs(targets) do
+    for tag,behaviour in pairs(tagToBehaviour) do
+      if o.hasTag(tag) then
+        if behaviour.forbidPlayerActions and player.color ~= 'Black' then
+          if behaviour.forbidPlayerActions[action] then
+            broadcastToColor(behaviour.forbidPlayerActions[action], player.color, "Orange")
+            return false
+          end
         end
+      end
+    end
 		for tag,behaviour in pairs(tagToBehaviour) do
 			if o.hasTag(tag) then
 				if behaviour[action] then
@@ -3789,22 +3815,22 @@ function onPlayerAction(player, action, targets)
 				end
 			end
 		end
+  end
+  if action == Player.Action.Delete then
+    local trashBinObject = getClosesTrashBin(player.getPointerPosition())
+    for _,o in ipairs (targets) do
+      if getHandZone(o) then
+        o.use_hands = false
+        Wait.frames(function() if o ~= nil then o.use_hands = true end end,10) -- BW BW_NOTE_A this does not always result in resetting use_hands so is safeguarded in onObjectSpawn too
+      end
+      if CheckRemovedEnter(o, trashBinObject) then
+        trashBinObject.putObject(o) -- all objects that would be destroyed (by players) will instead go to the nearest bin
+      else
+        -- already handled by CheckRemovedEnter
+      end
     end
-    if action == Player.Action.Delete then
-	    local trashBinObject = getClosesTrashBin(player.getPointerPosition())
-        for _,o in ipairs (targets) do
-			if getHandZone(o) then
-				o.use_hands = false
-				Wait.frames(function() if o ~= nil then o.use_hands = true end end,10) -- BW BW_NOTE_A this does not always result in resetting use_hands so is safeguarded in onObjectSpawn too
-			end
-            if CheckRemovedEnter(o, trashBinObject) then
-                trashBinObject.putObject(o) -- all objects that would be destroyed (by players) will instead go to the nearest bin
-            else
-                -- already handled by CheckRemovedEnter
-            end
-        end
-        return false -- prevents normal delete behaviour
-    end
+    return false -- prevents normal delete behaviour
+  end
 end
 
 function getHandZone(o)
@@ -4167,6 +4193,86 @@ function RandomizePartialList(list, start_pos, end_pos)
   return result
 end
 
+
+--[[
+  ------------------------------------------------
+  ------------------------------------------------
+            Print Victory Point Score
+  ------------------------------------------------
+  ------------------------------------------------
+--]]
+
+Victory_Point_Init_Positions = {
+  [1] = Vector(-20.33, 0, -11.70),
+  [60] =  Vector(-19.49, 0, 11.58)
+}
+Victory_Point_Score_To_Position = {
+  [0] = Vector(-19.92, 0, -12.69)
+}
+
+function outputDroppedScoreObjectScore(obj)
+  local dropPos = obj.getPosition():setAt("y", 0)
+  local closestDist, closestScorePos, closestScore = 999, nil, nil
+  for score = 0, 60 do
+    local scorePos =  Victory_Point_Score_To_Position[score]
+    local dist = Vector.distance(scorePos, dropPos)
+    if dist < 0.7 then
+      if dist < closestDist then
+        closestDist = dist
+        closestScorePos = scorePos
+        closestScore = score
+      end
+    end
+  end
+  if obj.is_face_down then closestScore = closestScore + 60 end
+
+  local c = GetColorFromTag(obj) or "Grey"
+  local name = obj.getName()
+  local outString = ""
+  if name ~= "" then
+    outString = name
+  else
+    outString = c
+  end
+
+  local previousScore = tonumber(obj.getDescription()) or 0
+
+  if closestScore then
+    outString = outString.."'s Prestige set to "..closestScore
+    obj.setDescription(closestScore)
+  else
+    closestScore = 0
+    outString = outString.."'s Prestige dropped off the track "
+    obj.setDescription("")
+  end
+  
+  local scoreMod = closestScore - previousScore
+  if scoreMod == 0 then
+    return
+  elseif scoreMod > 0 then
+    scoreMod = "+"..scoreMod
+  end
+  outString = outString.." ["..scoreMod.."]"
+
+  printToAll(outString, c)
+end
+
+function onObjectDrop(player_color, dropped_object)
+  if dropped_object.hasTag("Score") then
+    Wait.condition(
+      function() outputDroppedScoreObjectScore(dropped_object) end,
+      function() return dropped_object.resting end,
+      5,
+      function() outputDroppedScoreObjectScore(dropped_object) end
+    )
+  end
+end
+
+for x = Victory_Point_Init_Positions[1].x, Victory_Point_Init_Positions[60].x, Victory_Point_Init_Positions[60].x-Victory_Point_Init_Positions[1].x do
+  for z = Victory_Point_Init_Positions[1].z, Victory_Point_Init_Positions[60].z, (Victory_Point_Init_Positions[60].z-Victory_Point_Init_Positions[1].z) / 29 do
+    table.insert(Victory_Point_Score_To_Position, Vector(x, 0, z))
+  end
+end
 
 
 --[[
