@@ -3774,7 +3774,7 @@ function onPlayerAction(player, action, targets)
     for _,o in ipairs(targets) do
         for tag,behaviour in pairs(tagToBehaviour) do
             if o.hasTag(tag) then
-                if behaviour.forbidPlayerActions then
+                if behaviour.forbidPlayerActions and player.color ~= 'Black' then
                     if behaviour.forbidPlayerActions[action] then
                         broadcastToColor(behaviour.forbidPlayerActions[action], player.color, "Orange")
                         return false
