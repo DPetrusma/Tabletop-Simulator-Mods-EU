@@ -1257,6 +1257,16 @@ function Setup_Game()
       end
     end
 
+    if UI_Data.variant_num > 1 then
+      -- Remove influence cube for Polish bot due to lack of vassals
+      if players[REALM.poland].bot then
+        if scenario_data.remove == nil then
+          scenario_data.remove = {}
+        end
+        table.insert(scenario_data.remove, {8.21, 2.07, 'Cube'} )
+      end
+    end
+
     CoreScenarioSetup(scenario_data)
 
   elseif UI_Data.scenario == '2-03' then
@@ -3797,17 +3807,17 @@ local tagToBehaviour = {
 
 
 function onPlayerAction(player, action, targets)
-  for _,o in ipairs(targets) do
-    for tag,behaviour in pairs(tagToBehaviour) do
-      if o.hasTag(tag) then
-        if behaviour.forbidPlayerActions and player.color ~= 'Black' then
-          if behaviour.forbidPlayerActions[action] then
-            broadcastToColor(behaviour.forbidPlayerActions[action], player.color, "Orange")
-            return false
-          end
+    for _,o in ipairs(targets) do
+        for tag,behaviour in pairs(tagToBehaviour) do
+            if o.hasTag(tag) then
+                if behaviour.forbidPlayerActions and player.color ~= 'Black' then
+                    if behaviour.forbidPlayerActions[action] then
+                        broadcastToColor(behaviour.forbidPlayerActions[action], player.color, "Orange")
+                        return false
+                    end
+                end
+            end
         end
-      end
-    end
 		for tag,behaviour in pairs(tagToBehaviour) do
 			if o.hasTag(tag) then
 				if behaviour[action] then
@@ -3815,22 +3825,22 @@ function onPlayerAction(player, action, targets)
 				end
 			end
 		end
-  end
-  if action == Player.Action.Delete then
-    local trashBinObject = getClosesTrashBin(player.getPointerPosition())
-    for _,o in ipairs (targets) do
-      if getHandZone(o) then
-        o.use_hands = false
-        Wait.frames(function() if o ~= nil then o.use_hands = true end end,10) -- BW BW_NOTE_A this does not always result in resetting use_hands so is safeguarded in onObjectSpawn too
-      end
-      if CheckRemovedEnter(o, trashBinObject) then
-        trashBinObject.putObject(o) -- all objects that would be destroyed (by players) will instead go to the nearest bin
-      else
-        -- already handled by CheckRemovedEnter
-      end
     end
-    return false -- prevents normal delete behaviour
-  end
+    if action == Player.Action.Delete then
+	    local trashBinObject = getClosesTrashBin(player.getPointerPosition())
+        for _,o in ipairs (targets) do
+			if getHandZone(o) then
+				o.use_hands = false
+				Wait.frames(function() if o ~= nil then o.use_hands = true end end,10) -- BW BW_NOTE_A this does not always result in resetting use_hands so is safeguarded in onObjectSpawn too
+			end
+            if CheckRemovedEnter(o, trashBinObject) then
+                trashBinObject.putObject(o) -- all objects that would be destroyed (by players) will instead go to the nearest bin
+            else
+                -- already handled by CheckRemovedEnter
+            end
+        end
+        return false -- prevents normal delete behaviour
+    end
 end
 
 function getHandZone(o)
