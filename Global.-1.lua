@@ -1257,6 +1257,15 @@ function Setup_Game()
       end
     end
 
+    -- Remove influence cube for Muscovy bot due to lack of vassals
+    if players[REALM.muscovy].bot then
+      if scenario_data.remove == nil then
+        scenario_data.remove = {}
+      end
+      table.insert(scenario_data.remove, {15.57, 7.53, 'Cube'} )
+      table.insert(scenario_data.remove, {15.75, 6.33, 'Cube'} )
+    end
+
     if UI_Data.variant_num > 1 then
       -- Remove influence cube for Polish bot due to lack of vassals
       if players[REALM.poland].bot then
