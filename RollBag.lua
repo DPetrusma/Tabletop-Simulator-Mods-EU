@@ -252,6 +252,18 @@ function cleanupDice()
     Timer.destroy("clickRoller_cleanup_"..self.getGUID())
 end
 
+local dieBBCodesByImage = {
+    ["http://cloud-3.steamusercontent.com/ugc/1737799984107282058/817FABC869F85CA8B7406ED03FA69949BA326E27/"] = "[E4843D]", -- Cavalry
+    ["http://cloud-3.steamusercontent.com/ugc/1737799984107280248/70BB617953AB9E09465FAF3E59E04F9B988514C3/"] = "[EEEEEE]", -- Infantry
+    ["http://cloud-3.steamusercontent.com/ugc/1737799984107283689/7274AB94DBAABC6D447BEC7A1CB79E9B4D82B4E8/"] = "[46A59D]", -- Arty
+    ["http://cloud-3.steamusercontent.com/ugc/1737799984107231352/D7216419A062BC7738B7FD8C3AFC466BEAAA690C/"] = "[BB0000]", -- Unrest
+    ["http://cloud-3.steamusercontent.com/ugc/952982844373113532/F99161F234DEE1438C8F52157E8E0B49A9C2FA64/"] = "[5B5E78]", -- Explore
+}
+function getDieBBCodeFromObject(o)
+    local c = o.getCustomObject()
+    return dieBBCodesByImage[c.image] or Color.fromString("White")
+end
+
 function displayResults(color)
     local s, valueTable = "", {}
 
@@ -270,7 +282,10 @@ function displayResults(color)
         --Get values in table
         for _, die in ipairs(spawnedDice) do
             if die ~= nil then
-                table.insert(valueTable, tostring(die.getRotationValue()))
+                table.insert(valueTable, {
+                    rotationValue = tostring(die.getRotationValue()),
+                    bbCode = getDieBBCodeFromObject(die)
+                })
             end
         end
         --Order them
@@ -280,8 +295,8 @@ function displayResults(color)
     --Individual values
     if setting.print.individual == true then
         --Add values to string
-        for i, value in ipairs(valueTable) do
-            s = s .. value
+        for i, t in ipairs(valueTable) do
+            s = s .. t.bbCode..t.rotationValue.."[-]"
             if i < #valueTable then
                 s = s .. ", "
             end
@@ -294,9 +309,9 @@ function displayResults(color)
     --Total (will be void if there are no numbers)
     if setting.print.total == true then
         local total, hadNumber = 0, false
-        for _, value in ipairs(valueTable) do
-            if tonumber(value) ~= nil then
-                total = total + tonumber(value)
+        for _, t in ipairs(valueTable) do
+            if tonumber(t.value) ~= nil then
+                total = total + tonumber(t.value)
                 hadNumber = true
             end
         end
@@ -495,7 +510,7 @@ end
 function alphanumsort(o)
     local function padnum(d) return ("%03d%s"):format(#d, d) end
     table.sort(o, function(a,b)
-    return tostring(a):gsub("%d+",padnum) < tostring(b):gsub("%d+",padnum) end)
+    return tostring(a.rotationValue):gsub("%d+",padnum) < tostring(b.rotationValue):gsub("%d+",padnum) end)
     return o
 end
 
