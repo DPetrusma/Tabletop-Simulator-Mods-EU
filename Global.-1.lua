@@ -3734,6 +3734,13 @@ local tagToBehaviour = {
             [Player.Action.Paste] = "You cannot paste an Influence Cube (sit in Black to do so)",
         }
     },
+    Imperial_Influence = {
+      forbidPlayerActions = {
+          [Player.Action.Copy] = "You cannot copy an Imperial Influence Cube (sit in Black to do so)",
+          [Player.Action.Paste] = "You cannot paste an Imperial Influence Cube (sit in Black to do so)",
+          [Player.Action.Delete] = "You cannot delete an Imperial Influence Cube (sit in Black or drop into a bin to do so)",
+      }
+  },
     NavalUnit = {
         forbidPlayerActions = {
             [Player.Action.Copy] = "You cannot copy a Naval Unit (sit in Black to do so)",
