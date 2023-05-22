@@ -181,18 +181,25 @@ end
 
 
 --Monitors dice to come to rest
-function monitorDice(color)
+function monitorDice(color, maxTimeSeconds)
+    local endTime = os.clock() + (maxTimeSeconds or 5) -- BW add maximum monitor time in case dice to not rest
     function coroutine_monitorDice()
         repeat
             local allRest = true
-            for _, die in ipairs(spawnedDice) do
-                if die ~= nil and die.resting == false then
-                    allRest = false
+            if os.clock() < endTime then
+                for _, die in ipairs(spawnedDice) do
+                    if die ~= nil and die.resting == false then
+                        allRest = false
+                    end
                 end
+            else
+                for _, die in ipairs(spawnedDice) do
+                    die.setLock(true)
+                end                
             end
             coroutine.yield(0)
         until allRest == true
-        for _, die in ipairs(spawnedDice) do --BW prevents later collisions changing die face
+        for _, die in ipairs(spawnedDice) do -- BW prevents later collisions changing die face
             die.setLock(true)
         end
 
