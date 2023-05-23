@@ -2016,25 +2016,28 @@ function SetupRealm(player)
   end
 
   -- Place Soldiers on Boards
+  if TEST_MODE then log('Placing soldiers for ' .. color .. ' player') end
   PlaceObjectsFromBag( positions, Setup_Bag_Item_GUIDs[color]['soldier'], false, false, main_tableau)
 
   -- Place extra manpower tokens on Board
   if is_bot then
     if player.realm[1] == REALM.netherlands or player.realm[1] == REALM.brandenburg then
+      if TEST_MODE then log('Adding extra manpower to ' .. color .. ' bot player') end
       realmTable['extra_manpower'] = realmTable['extra_manpower']  + 1
     end
   end
   if realmTable['extra_manpower']  > 0 then
     if is_bot then
       positions = RepeatPosition(main_tableau.positionToWorld(Bot_Tableau_Local_Positions.manpower_12), realmTable['extra_manpower'])
-      PlaceObjectsFromBag( positions, Bag_GUIDs['rev_man'], true, false, main_tableau)
+      PlaceObjectsFromBag( positions, Bag_GUIDs['hre_man'], true, false, main_tableau)
     else
       positions = RepeatPosition(main_tableau.positionToWorld(Main_Tableau_Local_Positions.treasury_4), realmTable['extra_manpower'])
-      PlaceObjectsFromBag( positions, Bag_GUIDs['rev_man'], true, false, main_tableau)
+      PlaceObjectsFromBag( positions, Bag_GUIDs['hre_man'], true, false, main_tableau)
     end
   end
 
   -- Place Fleet Ships on Board
+  if TEST_MODE then log('Placing fleet ships on player mats for ' .. color .. ' player') end
   if not is_bot and realmTable['fleet'] ~= 0 then
     if TEST_MODE then log('Building Fleet for ' .. color) end
     positions = {}
@@ -2045,6 +2048,7 @@ function SetupRealm(player)
   end
 
   -- Place units on map
+  if TEST_MODE then log('Placing units on map board for ' .. color .. ' player') end
   if is_bot then
     PlaceObjectsFromBag( realmTable['ships_bot'], Setup_Bag_Item_GUIDs[color]['ship'], false)
   else
