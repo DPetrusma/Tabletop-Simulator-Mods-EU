@@ -442,6 +442,16 @@ function onLoad()
 end
 
 
+--[[ ----------------------------------
+       Game Option Button Handlers
+     ---------------------------------- ]]
+function UnlockButtonPressed()
+  local mainboard = getObjectsWithTag('MainBoard')
+  if mainboard ~= nil then
+    mainboard[1].interactable = true
+  end
+end
+
 --[[ --------------------------
        Handle XML UI Elements
      -------------------------- ]]
@@ -1516,8 +1526,12 @@ function Setup_Game()
 
   -- Lock Rules & References
   local references = getObjectsWithTag('Reference')
+  local targeting = getObjectsWithTag('Targeting')
   local rules = getObjectsWithTag('Rules')
   for _, o in ipairs(references) do
+    o.setLock(true)
+  end
+  for _, o in ipairs(targeting) do
     o.setLock(true)
   end
   for _, o in ipairs(rules) do
@@ -1796,7 +1810,7 @@ function SetupRealm(player)
     PlaceObjectsFromBag({ { new_pos[1], new_pos[3] } }, realmTable.setup_bag_guid , false, 'Rules', main_tableau )
     waitFrames(5)
     new_pos = main_tableau.positionToWorld(Bot_Tableau_Local_Positions.targeting_chart)
-    PlaceObjectsFromBag({ { new_pos[1], new_pos[3] } }, realmTable.setup_bag_guid , false, 'Reference', main_tableau )
+    PlaceObjectsFromBag({ { new_pos[1], new_pos[3] } }, realmTable.setup_bag_guid , false, 'Targeting', main_tableau )
     waitFrames(5)
     new_pos = main_tableau.positionToWorld(Bot_Tableau_Local_Positions.die)
     spawnObject({
