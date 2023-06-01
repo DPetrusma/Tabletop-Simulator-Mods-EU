@@ -1306,6 +1306,10 @@ function Setup_Game()
       broadcastToAll("Setting up: [u]Mediterranean Dominance (5 players)[/u]", {1,1,1})
       objective_positions = { EasternMap.athina, WesternMap.baleares, EasternMap.cyprus, WesternMap.firenze, WesternMap.genova,
                               WesternMap.napoli, WesternMap.provence, EasternMap.rhodes, WesternMap.tangiers, WesternMap.tunis }
+      if scenario_data.remove == nil then
+        scenario_data.remove = {}
+      end
+      table.insert(scenario_data.remove, {13.10, -11.95, 'Cube'} )
 
     elseif UI_Data.variant_num == 2 then
       broadcastToAll("Setting up: [u]Mediterranean Dominance (6 players)[/u]", {1,1,1})
