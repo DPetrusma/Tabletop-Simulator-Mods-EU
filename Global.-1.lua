@@ -1638,7 +1638,7 @@ function Setup_Game()
 
   waitFrames(10)
   Notes.setNotes("")
-  broadcastToAll("Set-up completed\nRemember to draw additional action cards according to the scenario instructions", {1,1,1})
+  broadcastToAll("Set-up completed\nRemember to draw three additional action cards and appoint advisors and leaders. You may keep up to four action cards and two missions in your hand (unless otherwise specified by the scenario)", {1,1,1})
   return 1
 end
 
@@ -3760,7 +3760,7 @@ local tagToBehaviour = {
       forbidPlayerActions = {
           [Player.Action.Copy] = "You cannot copy an Imperial Influence Cube (sit in Black to do so)",
           [Player.Action.Paste] = "You cannot paste an Imperial Influence Cube (sit in Black to do so)",
-          [Player.Action.Delete] = "You cannot delete an Imperial Influence Cube (sit in Black or drop into a bin to do so)",
+          [Player.Action.Delete] = "You cannot delete an Imperial Influence Cube (sit in Black to do so)",
       }
   },
     NavalUnit = {
@@ -3947,7 +3947,7 @@ function CheckRemovedEnter(object, trashBinObject)
   end
 
 
-  if object.hasTag('Town') or object.hasTag('Vassal') then
+  if object.hasTag('Town') or object.hasTag('Vassal') or object.hasTag('Imperial_Influence') then
     return false
   end
 

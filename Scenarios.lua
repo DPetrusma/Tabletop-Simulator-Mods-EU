@@ -884,7 +884,7 @@ Scenario_List['2-03'].variants = {
       {'302-1', 4}, {'304-1', 4}, {'306-1', 4}, {'314-1', 4}, {'315-1', 4},
       {'31a-2', 3}, {'32a-2', 3}, {'33a-2', 3}, {'34a-2', 3}, {'351b', 3}, {'354b', 3}, {'362b', 3},
       {'302-2', 3}, {'304-2', 3}, {'306-2', 3}, {'314-2', 3}, {'315-2', 3},
-    }, curia = {REALM.none, REALM.castile, REALM.venice, REALM.france, }, trade_add_tags = {'Trade2', 'Trade3'}, trade_add_names = {'T24-1'}, trade_remove_names = {'T16-1'},
+    }, curia = {REALM.none, REALM.castile, REALM.venice, REALM.france, }, trade_add_tags = {'Trade2', 'Trade3'}, trade_remove_names = {'T16-1'},
     powerstruggles = { PS_GUIDs.italian_wars, PS_GUIDs.struggle_for_the_balkans, PS_GUIDs.holy_league, PS_GUIDs.war_of_spanish_succession },
     remove = { {-9.02, 6.84, 'Cube'}, {-9.02, 7.22, 'Cube'}, {-7.80, 6.45, 'Alliance'} },
     options = {[1] = {name = 'Power Struggles', values = {'Ordered','Random','Off'}, default = 3, info = [[Set up power struggles:
