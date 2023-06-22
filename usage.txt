@@ -11,7 +11,7 @@ Usage notes to be pasted into the "Usage" section of the game's notebook:
 
 - Smart Trash bins: Putting an item on the black buttons will return the item to their respective container or discard pile. If the item would be removed from the game it will enter the button's bag. If the "Empty" button is pressed then the contents will be moved to a special bag in the black hidden zone. (Any infinite components are simply deleted). If any item's handling is ambiguous it will remain lying on the button and has to be handled manually (e.g. towns, player realm soldiers)
 
-- Smart deletion: Pressing DEL will send an item to the smart trash instead of delting it. If it would not be allowed to enter it will simply remain where it is.
+- Smart deletion: Pressing DEL will send an item to the smart trash instead of deleting it. If it would not be allowed to enter it will simply remain where it is.
 
 - Copying and deleting of limited components is prevented for anyone except the player using back as their color
 
