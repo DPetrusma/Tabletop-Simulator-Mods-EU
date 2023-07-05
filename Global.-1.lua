@@ -1638,7 +1638,9 @@ function Setup_Game()
 
   waitFrames(10)
   Notes.setNotes("")
-  broadcastToAll("Set-up completed\nRemember to draw three additional action cards and appoint advisors and leaders. You may keep up to four action cards and two missions in your hand (unless otherwise specified by the scenario)", {1,1,1})
+  broadcastToAll("See chat for required user actions", {1,1,1})
+  broadcastToAll("Set-up completed", {1,1,1})
+  printToAll("Remember to draw three additional action cards and appoint advisors and leaders.\nYou may keep up to four action cards and two missions in your hand (unless otherwise specified by the scenario)", {1,1,1})
   return 1
 end
 
@@ -4026,6 +4028,9 @@ function CheckRemovedEnter(object, trashBinObject)
     elseif origin.hasTag('SetupBag') then
       return false
     else
+      if TEST_MODE then log('Rotating Object on Entering Container') end
+      local rot = origin.getRotation()
+      object.setRotation(rot)
       origin.putObject(object)
       return false
     end
