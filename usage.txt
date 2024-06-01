@@ -26,5 +26,6 @@ Usage notes to be pasted into the "Usage" section of the game's notebook:
 - War & Truce token oddity: Due to technical constraints the preview for the roatation of these will look wrong but when placing them they should align to the board correctly.
 
 - Manual setup: Components are all available from the bags and decks behind the hovering rulebook. The map board starts unlocked and the map to play on can be selected by right-clicking and selecting the desired state. After this the board will be non-interactible. Use the "Unlock Map" function in the right-click Menu of the "Options" button if you want to change the map another time.
+There are buttons near each player board to remove that player's pieces, to swap that player's pieces with another player's, and to select a realm for that player by clicking on the realm's capital on the map. The setup will be based on the current year of the boad - 1444 or 1618.
 
 - Extended Logging: if you want to submit any errors during setup you can turn on extra logging information by flipping the "Options" button in the black zone (visible to the player in the black seat). If the script ends with an error it can help to see what the last messages in the log are.

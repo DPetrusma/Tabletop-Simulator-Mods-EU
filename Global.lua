@@ -20,14 +20,29 @@ REALM = {
   none = '000', austria = '001', castile = '002', spain = '002', england = '003', great_britain = '003', france = '004', muscovy = '005', russia = '005',
   ottomans = '006', rumelia = '006', poland = '007', denmark = '008', kalmar = '008', sweden = '009', portugal = '010', netherlands = '011',
   papal = '012', brandenburg = '013', prussia = '013', venice = '014', mamluks = '015', egypt = '015', byzantium = '016', ulm = '017',  aragon = '018',
+  burgundy = '019', bohemia = '020', lithuania = '021', hungary = '022', novgorod = '023', great_horde = '024', morocco = '025', norway = '026',
+  qara_qoyunlu = '027', teutonic_order = '028', tunis = '029', persia = '030', scotland = '031', saxony = '032', bavaria = '033', milan = '034', genoa = '035',
+  naples = '036', livonian_order = '037', crimea = '038', aq_qoyunlu = '039', savoy = '040', tuscany = '041'
 }
 REALM_NAME = {
   ['000'] = 'None', ['001'] = 'Austria', ['002'] =  'Castile', ['003'] = 'England', ['004'] = 'France', ['005'] = 'Muscovy',
   ['006'] = 'Ottomans', ['007'] = 'Poland', ['008'] = 'Denmark', ['009'] = 'Sweden', ['010'] = 'Portugal', ['011'] = 'Netherlands',
   ['012'] = 'Papal States', ['013'] = 'Brandenburg', ['014'] = 'Venice', ['015'] = 'Mamluks', ['016'] = 'Byzantium', ['017'] = 'Ulm', ['018'] = 'Aragon',
+  ['019'] = 'Burgundy', ['020'] = 'Bohemia', ['021'] = 'Lithuania', ['022'] = 'Hungary', ['023'] = 'Novgorod', ['024'] = 'Great Horde', ['025'] = 'Morocco', ['026'] = 'Norway',
+  ['027'] = 'Qara Qoyunlu', ['028'] = 'Teutonic Order', ['029'] = 'Tunis', ['030'] = 'Persia', ['031'] = 'Scotland', ['032'] = 'Saxony', ['033'] = 'Bavaria', ['034'] = 'Milan', ['035'] = 'Genoa',
+  ['036'] = 'Naples', ['037'] = 'Livonian Order', ['038'] = 'Crimea', ['039'] = 'Aq Qoyunlu', ['040'] = 'Savoy', ['041'] = 'Tuscany'
 }
 
 RELIGION = { none = 0, catholic = 1, diverse = 2, protestant = 3, counter_reformed = 4, muslim = 5, orthodox = 6, revolutionary = 7 }
+
+COLOR_RGB_CODES = { -- The RGB codes need to be scaled to between 0 and 1
+  red = {224/255, 22/255, 23/255, 255/255},
+  yellow = {237/255, 227/255, 0/255, 255/255},
+  blue = {47/255, 67/255, 150/255, 255/255},
+  green = {33/255, 177/255, 155/255, 255/255},
+  purple = {161/255, 78/255, 154/255, 255/255},
+  white = {255/255, 255/255, 254/255, 255/255}
+}
 
 --[[ ------------------
         Object GUIDs
@@ -441,6 +456,89 @@ function onLoad()
   end
 end
 
+--[[ ----------------------------------
+       Helpers for manual setup
+     ---------------------------------- ]]
+--For now, the positions of each colour are fixed, so we just need the colour as input
+function CreateRealmButtons()
+  --This will track the actual buttons and what realm they are associated with
+  RealmSetupButtons = {}
+  --Trying to avoid placing duplicate tiles for realm pairs like England and Great Britian
+  RealmsWithButtons = {}
+  PlayerInSetup.color = Select_Realm_Target_Color
+
+  --This is only used for seat 2 to put some things in a different spot
+  PlayerInSetup.seat = Player_Seat_From_Color[Select_Realm_Target_Color]
+  --Work out what year of the board is face up to determine what realms are selectable
+  local mainboard = getObjectsWithTag('MainBoard')
+  local mainboardYear = MAIN_BOARD_DATE[mainboard[1].getStateId()]
+  PlayerInSetup.year = mainboardYear
+
+  for name, code in pairs(REALM) do
+    --First, we need to check if that realm is already taken, or
+    --if a button has already been placed
+    if code ~= '000' and SelectedRealms[code] == nil and RealmsWithButtons[code] == nil then
+      --Then we need to make sure the relevant year exists for this realm's setup
+      if SETUP_DATA[code][mainboardYear] ~= nil then
+        --Then make sure we have a capital defined
+        if SETUP_DATA[code][mainboardYear]['capital'] ~= nil then            
+          local spawn_pos = SETUP_DATA[code][mainboardYear]['capital']
+          local realmButton = spawnObject({
+              type = "reversi_chip",
+              position = {spawn_pos[1],2.0,spawn_pos[2]}, --This spawn the object just above the main board
+              scale = {0.3,0.3,0.3},
+              sound = false,
+          })
+          --Store a table of the buttons we've placed to reference later
+          RealmSetupButtons[realmButton] = code
+          --Track which realms we've placed a button for this time
+          RealmsWithButtons[code] = true
+          --This tag is used to define the behaviour when it's flipped
+          realmButton.addTag('RealmSetupButton')
+          realmButton.setName(REALM_NAME[code])
+          --This is so it's obvious which player it is for
+          realmButton.setColorTint(COLOR_RGB_CODES[PlayerInSetup.color])
+        end
+      end
+    end
+  end
+
+  --After all pieces are moved, I need to delete the buttons.
+  for button,data in pairs(Buttons_To_Swap) do
+    if ( data.seat == PlayerInSetup.seat or data.target_color == PlayerInSetup.color ) and not button.isDestroyed() then
+      button.destroy()
+      waitFrames(5)
+    end
+  end
+
+  for button,seat in pairs(Buttons_For_Realm_Selection) do
+    if ( seat == PlayerInSetup.seat ) and not button.isDestroyed() then
+      button.destroy()
+    end
+  end
+
+  for button,seat in pairs(Buttons_To_Remove_Player) do
+    if ( seat == PlayerInSetup.seat ) and not button.isDestroyed() then
+      button.destroy()
+    end
+  end
+  return 1
+end
+
+function AutoSetupRealm()
+  -- Remove the buttons before placing other tokens
+  for button,code in pairs(RealmSetupButtons) do
+    button.destruct()
+  end
+   --Make sure this realm is not selected again
+  SelectedRealms[PlayerInSetup.realm] = true
+  SetupRealm({ seat = PlayerInSetup.seat, color = PlayerInSetup.color, realm = { PlayerInSetup.realm, PlayerInSetup.year}, })
+  --Clear out this table so that someone else can choose a realm
+  PlayerInSetup = {}
+  Is_Realm_Selecting = false
+  return 1
+end
+
 
 --[[ ----------------------------------
        Game Option Button Handlers
@@ -765,24 +863,39 @@ function Setup_Game()
 
   -- Handle Manual Setup
   if UI_Data.scenario == '0-00' then
-    local player_config =
+    --Keep these in sync for the later color-swapping features
+    Player_Seat_From_Color =
     {
-      {seat = 1, color = 'blue' },
-      {seat = 2, color = 'yellow' },
-      {seat = 3, color = 'red' },
-      {seat = 4, color = 'white' },
-      {seat = 5, color = 'purple' },
-      {seat = 6, color = 'green' },
+      blue = 1,
+      yellow = 2,
+      red = 3,
+      white = 4,
+      purple = 5,
+      green = 6
     }
 
-    for _, p in ipairs(player_config) do
-      PlaceTableausAndBags(p.seat, p.color)
-      local player_hand = getObjectFromGUID(Player_Hand_GUIDs[p.color])
+    Player_Color_From_Seat =
+    {
+      'blue',
+      'yellow',
+      'red',
+      'white',
+      'purple',
+      'green'
+    }
+
+    --These are used for the manual setup helpers
+    PlayerInSetup = {}
+    SelectedRealms = {}
+
+    for seat, color in pairs(Player_Color_From_Seat) do
+      PlaceTableausAndBags(seat, color)
+      local player_hand = getObjectFromGUID(Player_Hand_GUIDs[color])
       if player_hand == nil then
         log('Could not find player hand object')
       else
-        player_hand.setPosition(Player_Hand_Positions[p.seat])
-        player_hand.setRotation(Player_Hand_Rotations[p.seat])
+        player_hand.setPosition(Player_Hand_Positions[seat])
+        player_hand.setRotation(Player_Hand_Rotations[seat])
       end
     end
 
@@ -796,6 +909,12 @@ function Setup_Game()
     DestructByGUID(Reference_Zone_GUIDs)
     DestructByGUID({ Physics_Determination_Zone_GUID })
     UpdateTuckZonePositions()
+
+    --Create buttons for removing a color and swapping them around
+    CreateButtonsForRealms()
+    -- testCreateDeleteButtons()
+
+    broadcastToAll("Right-click the map to select the starting state, then click the Select Realm tile to choose your realm from the map", {1,1,1})
     return 1
   end
 
@@ -1858,21 +1977,23 @@ function SetupRealm(player)
   end
 
   -- Ruler & inactive bot events
-  if not is_bot then
+  if not is_bot and realmTable.ruler ~= nil then
     new_pos = main_tableau.positionToWorld(Main_Tableau_Local_Positions.ruler)
     PlaceGuidObjectFromBag( { new_pos[1], new_pos[3] }, realmTable.ruler.deck_guid, realmTable.ruler.flip, realmTable.ruler.card_guid, main_tableau)
     if realmTable.ruler.ill then
       PlaceObjectsFromBag({ { new_pos[1], new_pos[3] } }, Bag_GUIDs['ill_int'], false, false, main_tableau)
     end
   elseif player.inactive then
-    if seat == 2 then
-      new_pos = main_tableau.positionToWorld(Bot_Tableau_Local_Positions.setup_card_left)
-    else
-      new_pos = main_tableau.positionToWorld(Bot_Tableau_Local_Positions.setup_card)
+    if realmTable.ruler ~= nil then
+      if seat == 2 then
+        new_pos = main_tableau.positionToWorld(Bot_Tableau_Local_Positions.setup_card_left)
+      else
+        new_pos = main_tableau.positionToWorld(Bot_Tableau_Local_Positions.setup_card)
+      end
+      PlaceGuidObjectFromBag( { new_pos[1], new_pos[3] }, realmTable.ruler.deck_guid, realmTable.ruler.flip, realmTable.ruler.card_guid, main_tableau)
     end
-    PlaceGuidObjectFromBag( { new_pos[1], new_pos[3] }, realmTable.ruler.deck_guid, realmTable.ruler.flip, realmTable.ruler.card_guid, main_tableau)
     waitFrames(2)
-    if realmTable.events ~= {} then
+    if realmTable.events ~= nil then
       if seat == 2 then
         new_pos = main_tableau.positionToWorld(Bot_Tableau_Local_Positions.event_cards_left)
       else
@@ -3843,6 +3964,20 @@ local tagToBehaviour = {
             [Player.Action.Paste] = "You cannot paste a Vassal token (sit in Black to do so)",
         }
     },
+    --These could probably be replaced with actual buttons, but for now, it's a tile you try to pick up
+    RealmSetupButton = {
+      [Player.Action.PickUp] = function(o)
+        Wait.frames(function()
+          PlayerInSetup.realm = RealmSetupButtons[o]
+          startLuaCoroutine(Global, 'AutoSetupRealm')
+        end,1)
+      end,
+      forbidPlayerActions = {
+        [Player.Action.FlipOver] = "Please click on the piece to set up that realm",
+        [Player.Action.Copy] = "Please click on the piece to set up that realm",
+        [Player.Action.Delete] = "Please click on the piece to set up that realm",        
+      }
+    }
 }
 
 
@@ -4244,6 +4379,317 @@ function RandomizePartialList(list, start_pos, end_pos)
     table.insert(result, entry)
   end
   return result
+end
+
+
+--[[
+  ------------------------------------------------
+  ------------------------------------------------
+            Functions to facilitate
+            swap, delete, and select
+            realm buttons
+  ------------------------------------------------
+  ------------------------------------------------
+--]]
+-- Swap two pieces, used for swapping two entire colours
+function SwapTwoObjects(piece_1, piece_2)
+  local p1_pos = piece_1.getPosition()
+  local p2_pos = piece_2.getPosition()
+  local p1_rot = piece_1.getRotation()
+  local p2_rot = piece_2.getRotation()
+
+  piece_1.setPositionSmooth(p2_pos)
+  piece_1.setRotationSmooth(p2_rot)
+  piece_2.setPositionSmooth(p1_pos)
+  piece_2.setRotationSmooth(p1_rot)
+end
+
+function SwapTwoColors()
+  local color_to_swap_1 = Color_Swapping_Table[1]
+  local color_to_swap_2 = Color_Swapping_Table[2]
+
+  if color_to_swap_1 == color_to_swap_2 then
+    log("No action on swapping a color with itself")
+    Is_Color_Swapping = false
+    return 1
+  end
+  --We need Color_Swapping_Table to be set beforehand with 2 entries
+  if TEST_MODE then log('Swapping pieces for '..color_to_swap_1..' and '..color_to_swap_2) end
+  --Also, since I will run 3 loops, best to store the objects themselves, their positions and rotations
+  -- We are assuming that both lists are the same size
+  local objects_to_swap = {}
+
+  --Update the tables first so that if you click another button it will use the new location
+  local intermediate_seat = Player_Seat_From_Color[color_to_swap_1]
+  Player_Seat_From_Color[color_to_swap_1] = Player_Seat_From_Color[color_to_swap_2]
+  Player_Seat_From_Color[color_to_swap_2] = intermediate_seat
+
+  Player_Color_From_Seat[Player_Seat_From_Color[color_to_swap_2]] = color_to_swap_2
+  Player_Color_From_Seat[Player_Seat_From_Color[color_to_swap_1]] = color_to_swap_1
+
+  --We want to store, for each piece type in the setup area, the piece itself, the location and rotation
+  --for both colours so we can easily reference and swap later
+  for piece_name,_ in pairs(Setup_Bag_Item_GUIDs[color_to_swap_1]) do
+    objects_to_swap[piece_name] = {
+      piece_1 = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_1][piece_name]),
+      piece_1_pos = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_1][piece_name]).getPosition(),
+      piece_1_rot = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_1][piece_name]).getRotation(),
+      
+      piece_2 = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_2][piece_name]),
+      piece_2_pos = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_2][piece_name]).getPosition(),
+      piece_2_rot = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_2][piece_name]).getRotation()
+    }
+  end
+  
+  --Swap the mats
+  SwapTwoObjects(getObjectFromGUID(Main_Tableau_GUIDs[color_to_swap_1]), getObjectFromGUID(Main_Tableau_GUIDs[color_to_swap_2]))
+  SwapTwoObjects(getObjectFromGUID(Army_Tableau_GUIDs[color_to_swap_1]), getObjectFromGUID(Army_Tableau_GUIDs[color_to_swap_2]))
+  SwapTwoObjects(getObjectFromGUID(Fleet_Tableau_GUIDs[color_to_swap_1]), getObjectFromGUID(Fleet_Tableau_GUIDs[color_to_swap_2]))
+
+  waitFrames(5)
+
+  --Swap all the pieces
+  for _,pieces in pairs(objects_to_swap) do
+    pieces.piece_1.setPositionSmooth({
+      pieces.piece_2_pos[1],
+      pieces.piece_2_pos[2],
+      pieces.piece_2_pos[3]
+    })
+    pieces.piece_1.setRotationSmooth(pieces.piece_2_rot)
+
+    pieces.piece_2.setPositionSmooth({
+      pieces.piece_1_pos[1],
+      pieces.piece_1_pos[2],
+      pieces.piece_1_pos[3]
+    })
+    pieces.piece_2.setRotationSmooth(pieces.piece_1_rot)
+    waitFrames(5)
+  end
+
+  --Swap the player hand positions
+  local player_hand1 = getObjectFromGUID(Player_Hand_GUIDs[color_to_swap_1])
+  local player_hand2 = getObjectFromGUID(Player_Hand_GUIDs[color_to_swap_2])
+  if player_hand1 == nil or player_hand2 == nil then
+    log('Could not find player hand object')
+  else
+    player_hand1.setPosition(Player_Hand_Positions[Player_Seat_From_Color[color_to_swap_1]])
+    player_hand1.setRotation(Player_Hand_Rotations[Player_Seat_From_Color[color_to_swap_1]])
+    player_hand2.setPosition(Player_Hand_Positions[Player_Seat_From_Color[color_to_swap_2]])
+    player_hand2.setRotation(Player_Hand_Rotations[Player_Seat_From_Color[color_to_swap_2]])
+  end
+
+  --Just to make sure everthing is done
+  waitFrames(60)
+  Is_Color_Swapping = false
+
+  return 1
+end
+
+--This will be used to move all pieces back into a bag after manual setup
+function removePlayerPieces()
+  if TEST_MODE then log('Removing pieces for '..Color_To_Remove) end
+  local bag = getObjectFromGUID(Setup_Bag_GUIDs[Color_To_Remove])
+
+  for _,piece_guid in pairs(Setup_Bag_Item_GUIDs[Color_To_Remove]) do
+    local piece = getObjectFromGUID(piece_guid)
+    bag.putObject(piece)
+    waitFrames(5)
+  end
+
+  local Main_Tableau = getObjectFromGUID(Main_Tableau_GUIDs[Color_To_Remove])
+  local Army_Tableau = getObjectFromGUID(Army_Tableau_GUIDs[Color_To_Remove])
+  local Fleet_Tableau = getObjectFromGUID(Fleet_Tableau_GUIDs[Color_To_Remove])
+
+  bag.putObject(Main_Tableau)
+  bag.putObject(Army_Tableau)
+  bag.putObject(Fleet_Tableau)
+
+  --We also need to delete all of the buttons for swapping
+  for button,data in pairs(Buttons_To_Swap) do
+    if ( data.seat == Player_Seat_From_Color[Color_To_Remove] or data.target_color == Color_To_Remove ) and not button.isDestroyed() then
+      button.destroy()
+      waitFrames(5)
+    end
+  end
+
+  for button,seat in pairs(Buttons_For_Realm_Selection) do
+    if ( seat == Player_Seat_From_Color[Color_To_Remove] ) and not button.isDestroyed() then
+      button.destroy()
+    end
+  end
+
+  for button,seat in pairs(Buttons_To_Remove_Player) do
+    if ( seat == Player_Seat_From_Color[Color_To_Remove] ) and not button.isDestroyed() then
+      button.destroy()
+    end
+  end
+
+  return 1
+end
+
+function swapColorsButtonPress(obj)
+  --Try to make sure we don't get mixed up with multiple things going
+  if not Is_Color_Swapping then
+    Is_Color_Swapping = true
+    Color_Swapping_Table = {
+      Player_Color_From_Seat[Buttons_To_Swap[obj].seat],
+      Buttons_To_Swap[obj].target_color
+    }
+    if not Color_Swapping_Table then
+      log("Could not colors to swap")
+      return
+    end
+
+    startLuaCoroutine(Global,"SwapTwoColors")
+  else
+    broadcastToAll("Please wait for the swap the finish")
+  end
+end
+
+function selectRealmButtonPress(obj)
+  --Try to make sure we don't get mixed up with multiple things going
+  if not Is_Realm_Selecting then
+    Is_Realm_Selecting = true
+    Select_Realm_Target_Color = Player_Color_From_Seat[Buttons_For_Realm_Selection[obj]]
+    if not Select_Realm_Target_Color then
+      log("Could not find a color to select a realm for")
+      return
+    end
+
+    startLuaCoroutine(Global,"CreateRealmButtons")
+    broadcastToAll("Select a realm by clicking the counter on their capital")
+    obj.destroy()
+  else
+    broadcastToAll("Another player is selecting a realm. Please wait for them to finish.")
+  end
+end
+
+function removeColorButtonPress(obj)
+  Color_To_Remove = Player_Color_From_Seat[Buttons_To_Remove_Player[obj]]
+  if not Color_To_Remove then
+    log("Could not find a color to remove")
+    return
+  end
+  startLuaCoroutine(Global,"removePlayerPieces")
+end
+
+
+--[[
+  ------------------------------------------------
+  ------------------------------------------------
+            Create buttons for removing
+            color, swapping colors, and
+            selecting realms
+  ------------------------------------------------
+  ------------------------------------------------
+--]]
+function CreateButtonsForRealms()
+  Buttons_To_Swap = {}
+  Buttons_For_Realm_Selection = {}
+  Buttons_To_Remove_Player = {}
+
+  local color_swap_button_offsets = {
+    red = {-6.0, -8.00},
+    yellow = {-4.50, -8.00},
+    blue = {-3.0, -8.0},
+    green = {-1.50, -8.00},
+    purple = {0.00, -8.00},
+    white = {1.50, -8.00}
+  }
+  local remove_player_button_offset = {-6.90, -5.08}
+  local realm_selection_button_offset = {0.00, -5.08}
+
+  for color1,_ in pairs(COLOR_RGB_CODES) do
+    local seat = Player_Seat_From_Color[color1]
+    local rot = Main_Tableau_Rotations[seat]
+
+    --Create a button here for removing this player's pieces
+    if TEST_MODE then log('Placing remove button for ' .. color1 .. ' player') end
+    local position = GetOffset(Main_Tableau_Positions[seat],remove_player_button_offset,seat,1)
+    local remove_button = spawnObject({
+      type = "BlockSquare",
+      position = position,
+      sound = false,
+      scale = {2,0.2,1.5},
+      rotation = rot
+    })
+    remove_button.createButton({
+      click_function = 'removeColorButtonPress',
+      label = "Remove\nthis color",
+      width = 800,
+      height = 600,
+      font_size = 150,
+      position = {x=0, y=1.1, z=0},
+      scale = {0.5,1,0.67}
+    })
+
+    Buttons_To_Remove_Player[remove_button] = seat
+    remove_button.setColorTint("Grey")
+    remove_button.setLock(true)
+    waitFrames(5)
+
+    --Create a button here for selecting this player's realm
+    if TEST_MODE then log('Placing realm button for ' .. color1 .. ' player') end
+    position = GetOffset(Main_Tableau_Positions[seat],realm_selection_button_offset,seat,1)
+    local select_realm_button = spawnObject({
+      type = "BlockSquare",
+      position = position,
+      sound = false,
+      scale = {6,0.2,1.5},
+      rotation = rot
+    })
+    select_realm_button.createButton({
+      click_function = 'selectRealmButtonPress',
+      label = "Click to select\nRealm from map",
+      font_size = 300,
+      width = 2600,
+      height = 700,
+      position = {x=0, y=1.1, z=0},
+      scale = {1/6,1,1/1.5},
+    })
+
+    Buttons_For_Realm_Selection[select_realm_button] = seat
+    select_realm_button.setColorTint("Grey")
+    select_realm_button.setLock(true)
+    waitFrames(5)
+
+    if TEST_MODE then log('Placing swap buttons for ' .. color1 .. ' player') end
+    for color2,_ in pairs(COLOR_RGB_CODES) do
+      position = GetOffset(Main_Tableau_Positions[seat],color_swap_button_offsets[color2],seat,1)
+
+      --Create a button here for swapping
+      local swap_button = spawnObject({
+        type = "BlockSquare",
+        position = position,
+        sound = false,
+        scale = {1.5,0.2,1},
+        rotation = rot
+      })
+
+      local button_font_color = "White"
+      if color2 == "yellow" or color2 == "white" then
+        button_font_color = "Black"
+      end
+      swap_button.createButton({
+        click_function = 'swapColorsButtonPress',
+        label = "Swap with\n"..color2,
+        width = 600,
+        height = 400,
+        position = {x=0, y=1.1, z=0},
+        scale = {0.67,1,1},
+        color = COLOR_RGB_CODES[color2],
+        font_color = button_font_color
+      })
+
+      Buttons_To_Swap[swap_button] = {
+        seat = Player_Seat_From_Color[color1],
+        target_color = color2
+      }
+      swap_button.setColorTint(COLOR_RGB_CODES[color2])
+      swap_button.setLock(true)
+      waitFrames(5)
+    end
+  end
 end
 
 
