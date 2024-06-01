@@ -1,0 +1,13 @@
+1. Choose a folder to keep your TTS working files in. For example, "Documents\Tabletop Simulator Mods". Inside that folder, create a folder named "EU" and clone this repo into that folder.
+2. VSCode is recommended. Install the extensions [Tabletop Simulator Editor](https://marketplace.visualstudio.com/items?itemName=sebaestschjin.tts-editor) and [Lua](https://marketplace.visualstudio.com/items?itemName=sumneko.lua). Restart VSCode.
+3. Open TTS and from the Workshop menu, open the Europa Universalis: The Price of Power mod, and create a new save game. To hide the initial splash screen, you can open the console by pressing ` (next to 1) and typing in the command *lua Global.UI.Hide("Scenario")*
+4. Open the working folder in VSCode, e.g. "Documents\Tabletop Simulator Mods". Use the extension to Get Scripts, or press Ctrl+Alt+L
+5. There will be a .tts folder in your working folder containing the object data. You can edit scripts on those objects, and Save and Play (Ctrl+Alt+S) to push those changes to TTS
+Lua scripts are stored in the EU folder.
+6. Some objects will not have the script on them, but will reference an object in the EU folder or subfolders, such as .tts\Global.lua referencing EU\Global.lua. This means you can change the contents of EU\Global.lua, Save and Play, and those changes will be pushed to TTS, and you can commit to git directly. The syntax used is *require*, which basically means *copy the code from that file and paste it right here*.
+7. For those scripts that are not in the EU folder, once you are happy with the changes, copy any changes to the respective EU files:
+    - Rulebook.lua
+
+The other files in EU can be edited and those files are alreay referenced in the .tts files. Some objects, such as containers, do not have their scripts in source control as of 2024-06-01.
+
+8. Once all changes have been made to the TTS save and the .lua files, do a final test by loading the save game from the main menu of TTS, commit all changes to git, and pass on to Eivind to upload. Note that the file *EU\usage.txt* is the text in the Grey notepad called Usage.
