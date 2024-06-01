@@ -24,7 +24,9 @@ Scenario_List = {
   ['2-07'] = { players = { true, false, false, false, false, false}, active = true, name = 'Glory for Ulm (solo)' },
 }
 
-Scenario_List['0-00'].description = [[This option lets you do the setup by hand. It places the play mats for all six players and their associated components. After this any additions and changes are left to the players to handle.]]
+Scenario_List['0-00'].description = [[This option lets you do the setup by hand. It places the play mats for all six players and their associated components.
+  
+There are buttons for each player to select a realm from the map, to swap places with another player, and to remove all pieces for that player. After this any additions and changes are left to the players to handle.]]
   
 Scenario_List['1-00'].description = [[This scenario is intended for a group of players that are new to the game. The scenario begins at the standard 1444 starting point and lasts for two Rounds (the first half of Age I). This is enough to familiarize yourself with all of the basics, as well as the flow, of the game.]]
 Scenario_List['1-00'].options = { [9] = { name = 'hide'} }
@@ -246,7 +248,7 @@ Scenario_List['1-03'].variants = {
 }
 
 
-Scenario_List['1-04'].description = [[This scenario starts at the beginning of Age II (skipping Age I). This means that this scenario's map situation will be very different from any scenarios that start in Age I. Two of the Major Powers in this scenario, ›France and ›Castile have firmly consolidated their territorial power bases. The same is true to some extent for ›Austria, but ›England is territorially in a weaker state compared to where it is when starting in Age I. ›Austria and ›England are compensated with some starting Prestige as noted in the Setup Instructions. This means that this scenario is best suited for 2–3 players, using ›	England as a Bot, while the players assume control of ›France and ›	Castile. ›Austria can be either a third human player, or a second Bot. Larger territorial possessions and less space to expand into at the start of the game means that players are likely to enter conflict with each other relatively early. While Spain and Austria were historically united for most of the time period covered in this scenario, there are no special restrictions as to whom PRs may Ally with or against.
+Scenario_List['1-04'].description = [[This scenario starts at the beginning of Age II (skipping Age I). This means that this scenario's map situation will be very different from any scenarios that start in Age I. Two of the Major Powers in this scenario, ›France and ›Castile have firmly consolidated their territorial power bases. The same is true to some extent for ›Austria, but ›England is territorially in a weaker state compared to where it is when starting in Age I. ›Austria and ›England are compensated with some starting Prestige as noted in the Setup Instructions. This means that this scenario is best suited for 2–3 players, using ›England as a Bot, while the players assume control of ›France and ›Castile. ›Austria can be either a third human player, or a second Bot. Larger territorial possessions and less space to expand into at the start of the game means that players are likely to enter conflict with each other relatively early. While Spain and Austria were historically united for most of the time period covered in this scenario, there are no special restrictions as to whom PRs may Ally with or against.
 ]]
 Scenario_List['1-04'].options = {
   [1] = {name = 'DNPR Portugal', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Portugal using green tokens?' },

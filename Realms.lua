@@ -50,6 +50,7 @@ SETUP_DATA = {
       figurines = { {4.19, -1.70} },
       ships = { {4.17, -5.45} },
       ships_bot = { {3.86, -5.02} },
+      capital = WesternMap.wien
     },
     ['1618'] = {
       parent = {'000', 'default'},
@@ -69,6 +70,7 @@ SETUP_DATA = {
       ships = { {4.33, -5.51} },
       ships_bot = { {3.86, -5.02} },
       army1 = { 2, 1, 1 },
+      capital = WesternMap.wien
     },
     ['S104'] = {
       parent = {REALM.austria, '1444'},
@@ -117,6 +119,7 @@ SETUP_DATA = {
       ships = { {-5.24, -8.30}, {-13.04, -6.36} },
       ships_bot = { {-13.10, -5.64}, {-5.95, -8.78} },
       events = {{'402-2', 1}, {'402-1', 1}, {'302-2', 1}, {'302-1', 1}, {'202-2', 1}, {'202-1', 1}},
+      capital = WesternMap.madrid
     },
     ['1618'] = {
       parent = {'000', 'default'},
@@ -136,6 +139,7 @@ SETUP_DATA = {
       ships = { {-12.96, -6.44}, {-15.03, 9.19}, {-14.58, 5.25}, {-16.65, 6.63}, {-18.32, -10.33} },
       ships_bot = { {-12.94, -5.59}, {-14.62, 8.73}, {-14.37, 5.84}, {-17.15, 7.23}, {-16.95, -8.32} },
       army1 = { 2, 1, 1 },
+      capital = WesternMap.madrid
     },
     ['S103'] = {
       parent = {REALM.castile, '1444'},
@@ -227,6 +231,7 @@ SETUP_DATA = {
       figurines = { {-5.66, 3.66} },
       ships = { {-6.13, 1.38}, {-12.31, -0.74}, {-5.22, 1.80} },
       ships_bot = { {-7.19, 1.33}, {-12.41, -0.08} },
+      capital = WesternMap.london
     },
     ['1618'] = {
       parent = {'000', 'default'},
@@ -246,6 +251,7 @@ SETUP_DATA = {
       ships_bot = { {-7.27, 1.33}, {-6.03, 5.96}, {-9.10, 9.60}, {-13.04, -1.27}, {-15.31, 11.78} },
       army1 = { 2, 0, 1 },
       fleet = { 0, 2, 0 },
+      capital = WesternMap.london
     },
     ['S103'] = {
       parent = {REALM.england, '1444'},
@@ -322,6 +328,7 @@ SETUP_DATA = {
       army1 = { 2, 1, 0 },
       army2 = { 1, 0, 0 },
       events = {{'404-2', 1}, {'404-1', 1}, {'304-2', 1}, {'304-1', 1}, {'204-2', 1}, {'204-1', 1}},
+      capital = WesternMap.paris
     },
     ['1618'] = {
       parent = {'000', 'default'},
@@ -341,7 +348,8 @@ SETUP_DATA = {
       ships = { {-2.55, -5.64}, {-8.85, -2.68}, {-11.95, -0.23}, {-14.26, 11.04} },
       ships_bot = { {-2.90, -4.94}, {-8.84, -1.88}, {-14.39, 11.77}, {-12.40, -0.04} },
       army1 = { 2, 1, 1 },
-      fleet = { 0, 1, 0 }
+      fleet = { 0, 1, 0 },
+      capital = WesternMap.paris
     },
     ['S103'] = {
       parent = {REALM.france, '1444'},
@@ -459,6 +467,7 @@ SETUP_DATA = {
       merchants = { {20.02, 3.59}, {12.38, 6.69} },
       figurines = { {15.17, 3.99} },
       army1 = { 2, 1, 0 },
+      capital = EasternMap.moskva
     },
     ['1618'] = {
       parent = {'000', 'default'},
@@ -477,6 +486,7 @@ SETUP_DATA = {
       merchants = { {20.48, 3.46}, {12.44, 6.72} },
       figurines = { {14.27, 5.46} },
       army1 = { 2, 1, 1 },
+      capital = EasternMap.moskva
     },
     ['S204'] = {
       parent = {REALM.muscovy, '1618'},
@@ -520,6 +530,7 @@ SETUP_DATA = {
       army1 = { 2, 1, 0 },
       fleet = { 0, 0, 3 },
       events = {{'406-2', 1}, {'406-1', 1}, {'306-2', 1}, {'306-1', 1}, {'206-2', 1}, {'206-1', 1}},
+      capital = EasternMap.edirne
     },
     ['1618'] = {
       parent = {'000', 'default'},
@@ -542,6 +553,7 @@ SETUP_DATA = {
       ships_bot = { {9.73, -6.42}, {13.28, -3.06} },
       army1 = { 2, 1, 1 },
       fleet = { 0, 0, 3 },
+      capital = EasternMap.constantinople
     },
     ['S205'] = {
       parent = {REALM.ottomans, '1444'},
@@ -579,6 +591,7 @@ SETUP_DATA = {
       merchants = { {7.27, 1.78}, {11.29, 1.32} },
       figurines = { {6.90, 2.97} },
       events = {{'407-2', 1}, {'407-1', 1}, {'307-2', 1}, {'307-1', 1}, {'207-2', 1}, {'207-1', 1}},
+      capital = EasternMap.krakow
     },
     ['1618'] = {
       parent = {'000', 'default'},
@@ -597,6 +610,7 @@ SETUP_DATA = {
       ships = { {5.23, 5.38} },
       ships_bot = {5.52, 6.24},
       army1 = { 2, 1, 1 },
+      capital = EasternMap.warszawa
     }
   },
   [REALM.denmark] = {
@@ -615,6 +629,7 @@ SETUP_DATA = {
       figurines = { {0.58, 7.05} },
       ships = { {-3.82, 7.27}, {1.62, 7.72}},
       ships_bot = { {-3.84, 7.87}, {1.27, 8.19} },
+      capital = WesternMap.kobenhavn
     },
     ['1618'] = {
       parent = {'000', 'default'},
@@ -633,6 +648,7 @@ SETUP_DATA = {
       ships = { {1.58, 7.60}, {-1.07, 7.54}, {6.03, 5.45}, {1.64, 7.07} },
       ships_bot = { {1.67, 4.85}, {4.25, 5.92}, {-0.63, 7.52} },
       army1 = { 2, 1, 1 },
+      capital = WesternMap.kobenhavn
     },
     ['S106'] = {
       parent = {REALM.denmark, '1444'},
@@ -665,6 +681,7 @@ SETUP_DATA = {
       figurines = { {3.05, 8.87} },
       ships = { {5.16, 5.42} },
       ships_bot = {{5.13, 6.11} },
+      capital = WesternMap.stockholm
     },
     ['1618'] = {
       parent = {'000', 'default'},
@@ -682,6 +699,7 @@ SETUP_DATA = {
       ships = { {5.16, 5.42}, {6.79, 9.20}, {1.97, 6.65} },
       ships_bot = { {3.15, 5.53}, {5.13, 6.11}, {5.94, 9.52} },
       army1 = { 2, 1, 1 },
+      capital = WesternMap.stockholm
     }
   },
   [REALM.portugal] = {
@@ -699,6 +717,7 @@ SETUP_DATA = {
       figurines = { {-10.33, -5.08} },
       ships = { {-12.99, -6.30}, {-12.20, -6.30} },
       ships_bot = { {-12.21, -5.78} },
+      capital = WesternMap.lisboa
     },
     ['1618'] = {
       parent = {'000', 'default'},
@@ -718,6 +737,7 @@ SETUP_DATA = {
       ships = { {-12.99, -6.30}, {-14.57, 5.13}, {-17.43, 0.62}, {-14.31, 1.33}, {-16.14, -4.24}, {-18.27, -10.96}, {-12.20, 1.07, -6.30} },
       ships_bot = { {-12.08, -5.77}, {-14.07, 6.28}, {-17.42, 1.56}, {-14.14, -0.66}, {-14.46, -4.66}, {-16.62, -10.44} },
       army1 = { 2, 1, 0 },
+      capital = WesternMap.lisboa
     },
     ['S103'] = {
       parent = {REALM.portugal, '1444'},
@@ -740,6 +760,7 @@ SETUP_DATA = {
       ships = { {-4.43, 2.63}, {-2.93, 7.41}},
       ships_bot = { {-2.90, 7.93}, {-3.73, 2.70} },
       army1 = 0,
+      capital = WesternMap.amsterdam
     },
     ['1618'] = {
       parent = {'000', 'default'},
@@ -760,6 +781,7 @@ SETUP_DATA = {
       ships_bot = { {-4.76, 2.12}, {-2.90, 7.86}, {-11.01, -0.22}, {-15.56, 8.99},
                     {-18.34, -0.51}, {-14.48, -0.51}, {-14.45, -4.73}, {-14.38, -8.74} },
       army1 = { 2, 1, 1 },
+      capital = WesternMap.amsterdam
     },
     ['S102B'] = {
       parent = {REALM.netherlands, '1444'},
@@ -786,6 +808,7 @@ SETUP_DATA = {
       merchants = { {-1.09, -6.50}, {5.33, -7.68} },
       figurines = { {2.15, -5.16} },
       army1 = { 1, 0 ,0 },
+      capital = WesternMap.roma
     },
     ['1618'] = {
       parent = {'000', 'default'},
@@ -801,6 +824,7 @@ SETUP_DATA = {
       ships = { {2.60, -7.82}, {5.14, -5.87} },
       ships_bot = { {2.70, -7.25}, {6.51, -7.04} },
       army1 = { 2, 0, 1 },
+      capital = WesternMap.roma
     },
     ['S205'] = {
       parent = {REALM.papal, '1444'},
@@ -827,6 +851,7 @@ SETUP_DATA = {
       merchants = { {0.91, 0.93}, {3.05, -0.66} },
       figurines = { {4.25, 3.34} },
       army1 = { 1, 0, 0 },
+      capital = WesternMap.berlin
     },
     ['1618'] = {
       parent = {'000', 'default'},
@@ -842,6 +867,7 @@ SETUP_DATA = {
       ships = { {6.71, 5.40} },
       ships_bot = { {7.00, 6.74} },
       army1 = { 2, 1, 1 },
+      capital = WesternMap.berlin
     },
     ['S106'] = {
       parent = {REALM.brandenburg, '1444'},
@@ -887,7 +913,8 @@ SETUP_DATA = {
       figurines = { {3.90, -2.70}, 'none', 'none', {3.16, -4.16} },
       ships = { {5.07, -5.87}, {7.00, -9.93}, {10.17, -7.17} },
       ships_bot = { {3.16, -4.16}, {9.11, -10.74}, {10.02, -7.70} },
-      fleet = { 0, 0, 2 }
+      fleet = { 0, 0, 2 },
+      capital = WesternMap.venezia
     },
     ['1618'] = {
       parent = {'000', 'default'},
@@ -903,7 +930,8 @@ SETUP_DATA = {
       ships = { {4.17, -5.45}, {8.59, -9.96}, {10.17, -7.31} },
       ships_bot = { {3.16, -4.16}, {8.59, -10.42}, {9.96, -7.78} },
       army1 = { 2, 1, 1 },
-      fleet = 0
+      fleet = 0,
+      capital = WesternMap.venezia
     },
     ['S203-6P'] = {
       parent = {REALM.venice, '1618'},
@@ -932,7 +960,8 @@ SETUP_DATA = {
       ships = { {7.76, -9.86} },
       ships_bot = { {7.23, -8.83} },
       army1 = { 2, 1, 0 },
-      fleet = { 0, 0, 2 }
+      fleet = { 0, 0, 2 },
+      capital = EasternMap.qahirah
     },
     ['1618'] = {
       parent = {'000', 'default'},
@@ -953,7 +982,8 @@ SETUP_DATA = {
       ships = { {7.00, -9.90}, {-16.60, -3.91}, },
       ships_bot = { {7.24, -8.97}, {-14.34, -4.03} },
       army1 = { 2, 1, 1 },
-      fleet = { 0, 0, 2}
+      fleet = { 0, 0, 2},
+      capital = EasternMap.qahirah
     }
   },
   [REALM.byzantium] = {
@@ -972,6 +1002,7 @@ SETUP_DATA = {
       figurines = { {11.14, -4.92} },
       ships = { {14.13, -3.85} },
       ships_bot = { {14.97, -3.87} },
+      capital = EasternMap.constantinople
     },
     ['S206'] = {
       parent = {REALM.byzantium, '1444'},
@@ -988,9 +1019,20 @@ SETUP_DATA = {
       merchants = { {3.13, -0.84}, {0.63, 0.87}},
       figurines = { {0.30, -0.63} },
       army1 = { 1, 0, 0 },
+      capital = WesternMap.ulm
     },
   },
   [REALM.aragon] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      setup_bag_guid = '3012c6',
+      religion = RELIGION.catholic,
+      l_towns = { WesternMap.valencia},
+      s_towns = { WesternMap.zaragoza, WesternMap.barcelona, WesternMap.baleares, WesternMap.sardenya, WesternMap.palermo, WesternMap.mesina,
+      WesternMap.Malta, },
+      vassals = { WesternMap.napoli, WesternMap.napoli, WesternMap.salerno, WesternMap.bari },
+      capital = WesternMap.valencia,
+    },
     ['1618'] = {
       parent = {'000', 'default'},
       setup_bag_guid = '3012c6',
@@ -1008,6 +1050,7 @@ SETUP_DATA = {
       ships = { {-4.34, -8.21}, {1.80, -7.84} },
       ships_bot = { {-3.09, -7.96}, {1.66, -7.21} },
       army1 = { 2, 1, 1 },
+      capital = WesternMap.valencia,
     },
     ['S203-6P'] = {
       parent = {REALM.aragon, '1618'},
@@ -1015,6 +1058,267 @@ SETUP_DATA = {
       WesternMap.cremona, WesternMap.franchecomte, WesternMap.artois, WesternMap.sardenya, WesternMap.palermo, WesternMap.mesina,
       WesternMap.tlemcen, WesternMap.oran },
       unrest = { },
+    },
+  },
+  [REALM.burgundy] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      setup_bag_guid = 'a413a1',
+      religion = RELIGION.catholic,
+      l_towns = { WesternMap.bourgogne, },
+      s_towns = { WesternMap.franchecomte, WesternMap.namur, WesternMap.luxembourg, WesternMap.picardie, WesternMap.artois, },
+      vassals = { WesternMap.brugge, WesternMap.gent, WesternMap.antwerpen, WesternMap.amsterdam, WesternMap.zeeland, WesternMap.breda, },
+      capital = WesternMap.bourgogne
+    },
+  },
+  [REALM.bohemia] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      setup_bag_guid = '9a43c0',
+      religion = RELIGION.catholic,
+      l_towns = { WesternMap.praha, },
+      s_towns = { WesternMap.rudohori, WesternMap.budejovice, WesternMap.olomouc, },
+      vassals = { WesternMap.silesia, },
+      capital = WesternMap.praha
+    },
+    ['1618'] = {
+      parent = {'000', 'default'},
+      setup_bag_guid = '9a43c0',
+      religion = RELIGION.catholic,
+      l_towns = { WesternMap.praha, },
+      s_towns = { WesternMap.rudohori, WesternMap.budejovice, WesternMap.olomouc, },
+      vassals = { WesternMap.silesia, },
+      capital = WesternMap.praha
+    },
+  },
+  [REALM.lithuania] = {
+    ['1444'] = {
+        parent = {'000', 'default'},
+        setup_bag_guid = '115a58',
+        religion = RELIGION.catholic,
+        s_towns = { EasternMap.zemaitija, EasternMap.kaunas, EasternMap.vilnius, EasternMap.polockas, EasternMap.smolenskas, EasternMap.minskas,
+        EasternMap.naugardukas, EasternMap.voluine, EasternMap.cernigovas, EasternMap.poltava, EasternMap.kijevas, EasternMap.edisanas, },
+        marriages = { EasternMap.krakow },
+        capital = EasternMap.vilnius
+    },
+  },
+  [REALM.hungary] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      setup_bag_guid = '8527ea',
+      religion = RELIGION.catholic,
+      s_towns = { WesternMap.pozsony, WesternMap.sopron, WesternMap.pest, EasternMap.szepes, EasternMap.szabolcs, EasternMap.torda, EasternMap.hunyad,
+      EasternMap.beograd },
+      vassals = { WesternMap.zagreb, WesternMap.rijeka, },
+      marriages = { WesternMap.wien },
+      capital = WesternMap.pest
+    },
+  },
+  [REALM.novgorod] = {
+    ['1444'] = {
+        parent = {'000', 'default'},
+        setup_bag_guid = '08ede6',
+        religion = RELIGION.catholic,
+        l_towns = { EasternMap.novgorod, },
+        s_towns = { EasternMap.arkhangelsk, EasternMap.kargopol, EasternMap.olonets, EasternMap.ladoga, EasternMap.neva, },
+        capital = EasternMap.novgorod
+    },
+  },
+  [REALM.great_horde] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      -- setup_bag_guid = '',
+      religion = RELIGION.muslim,
+      s_towns = { EasternMap.tambov, EasternMap.saratov, EasternMap.don, EasternMap.sarai, EasternMap.astrakhan, EasternMap.majar, EasternMap.terek, },
+      capital = EasternMap.saratov
+    },
+  },
+  [REALM.morocco] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      -- setup_bag_guid = '',
+      religion = RELIGION.muslim,
+      s_towns = { WesternMap.tangiers, WesternMap.fez, WesternMap.gharb, WesternMap.marrakech, WesternMap.sus, WesternMap.tafilalt, },
+      capital = WesternMap.fez
+    },
+    ['1618'] = {
+      parent = {'000', 'default'},
+      -- setup_bag_guid = '',
+      religion = RELIGION.muslim,
+      s_towns = { WesternMap.fez, WesternMap.gharb, WesternMap.marrakech, WesternMap.sus, WesternMap.tafilalt, },
+      capital = WesternMap.fez
+    },
+  },
+  [REALM.norway] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      -- setup_bag_guid = '',
+      religion = RELIGION.catholic,
+      s_towns = { WesternMap.trondheim, WesternMap.bergenhus, WesternMap.akershus, WesternMap.borgarsysla, },
+      capital = WesternMap.akershus
+    },
+  },
+  [REALM.qara_qoyunlu] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      -- setup_bag_guid = '',
+      religion = RELIGION.muslim,
+      l_towns = { EasternMap.tabriz },
+      s_towns = { EasternMap.yerevan, EasternMap.mosul, EasternMap.kirkuk, EasternMap.tikrit, EasternMap.baghdad, },
+      vassals = { EasternMap.bitlis, },
+      capital = EasternMap.tabriz
+    },
+  },
+  [REALM.teutonic_order] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      -- setup_bag_guid = '',
+      religion = RELIGION.catholic,
+      s_towns = { WesternMap.danzig, WesternMap.kulm, EasternMap.marienburg, EasternMap.konigsberg, },
+      capital = WesternMap.marienburg
+    },
+  },
+  [REALM.tunis] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      -- setup_bag_guid = '',
+      religion = RELIGION.muslim,
+      s_towns = { WesternMap.mitidja, WesternMap.kabylia, WesternMap.bizerte, WesternMap.tunis, WesternMap.sousse, WesternMap.tripoli, },
+      capital = WesternMap.tunis
+    },
+  },
+  [REALM.persia] = {
+    ['1618'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.muslim,
+      l_towns = { EasternMap.tabriz, IndiaMap.isfahan, IndiaMap.herat, },
+      s_towns = { EasternMap.shirvan, EasternMap.tblisi, EasternMap.yerevan, IndiaMap.fars },
+      capital = IndiaMap.isfahan
+    },
+  },
+  [REALM.scotland] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      s_towns = { WesternMap.aberdeen, WesternMap.perth, WesternMap.lothian, WesternMap.ayrshire, },
+      capital = WesternMap.lothian
+    },
+    ['1618'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      s_towns = { WesternMap.aberdeen, WesternMap.perth, WesternMap.lothian, WesternMap.ayrshire, },
+      capital = WesternMap.lothian
+    },
+  },
+  [REALM.saxony] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      s_towns = { WesternMap.wittenberg, WesternMap.dresden, WesternMap.leipzig, },
+      capital = WesternMap.dresden
+    },
+    ['1618'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      s_towns = { WesternMap.wittenberg, WesternMap.dresden, WesternMap.leipzig, },
+      capital = WesternMap.dresden
+    },
+  },
+  [REALM.bavaria] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      s_towns = { WesternMap.regensburg, WesternMap.landshut, WesternMap.munchen, },
+      capital = WesternMap.munchen
+    },
+    ['1618'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      s_towns = { WesternMap.regensburg, WesternMap.landshut, WesternMap.munchen, },
+      capital = WesternMap.munchen
+    },
+  },
+  [REALM.milan] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      l_towns = { WesternMap.milano, },
+      s_towns = { WesternMap.cremona, WesternMap.parma, },
+      capital = WesternMap.milano
+    },
+  },
+  [REALM.genoa] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      l_towns = { WesternMap.genova, },
+      s_towns = { WesternMap.corsica, EasternMap.caffa, },
+      capital = WesternMap.genova
+    },
+    ['1618'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      l_towns = { WesternMap.genova, },
+      s_towns = { WesternMap.corsica, },
+      capital = WesternMap.genova
+    },
+  },
+  [REALM.naples] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      l_towns = { WesternMap.napoli, },
+      s_towns = { WesternMap.bari, WesternMap.salerno, },
+      capital = WesternMap.napoli
+    },
+  },
+  [REALM.livonian_order] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      s_towns = { EasternMap.livland, EasternMap.reval, EasternMap.goldingen, },
+      capital = EasternMap.livland
+    },
+  },
+  [REALM.crimea] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.muslim,
+      s_towns = { EasternMap.crimea, EasternMap.yedishkul, EasternMap.kyzylyar, EasternMap.azov, },
+      capital = EasternMap.crimea
+    },
+  },
+  [REALM.aq_qoyunlu] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.muslim,
+      s_towns = { EasternMap.erzurum, EasternMap.mush, EasternMap.urfa, },
+      capital = EasternMap.mush
+    },
+  },
+  [REALM.savoy] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      l_towns = { WesternMap.savoie, },
+      s_towns = { WesternMap.geneve, WesternMap.piemonte, },
+      capital = WesternMap.savoie
+    },
+    ['1618'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      l_towns = { WesternMap.savoie, },
+      s_towns = { WesternMap.piemonte, },
+      capital = WesternMap.savoie
+    },
+  },
+  [REALM.tuscany] = {
+    ['1618'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      l_towns = { WesternMap.firenze, },
+      s_towns = { WesternMap.pisa, WesternMap.siena, },
+      capital = WesternMap.firenze
     },
   },
 }
