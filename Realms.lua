@@ -302,7 +302,25 @@ SETUP_DATA = {
       figurines = { {-5.66, 3.66} },
       ships = { {-6.13, 1.38}, {-12.31, -0.74}, {-5.25, 5.69}, {-5.22, 1.80} },
       ships_bot = { {-7.21, 1.36}, {-6.20, 6.06}, {-12.60, -0.10} },
-    }
+    },
+    ['S304'] = {
+      parent = {'000', 'default'},
+      setup_bag_guid = '275517',
+      ruler = {deck_guid = Event_Deck_GUIDs.age1r, card_guid = '189a25', flip = false, ill = false },
+      l_towns = { WesternMap.london, WesternMap.paris, WesternMap.champagne },
+      s_towns = { WesternMap.artois, WesternMap.picardie, WesternMap.caux, WesternMap.normandie, WesternMap.maine, WesternMap.essex,
+                  WesternMap.oxford, WesternMap.wessex, WesternMap.wales, WesternMap.shrewsbury, WesternMap.lancashire, WesternMap.york,
+                  WesternMap.northumberland, WesternMap.pale },
+      allies = { WesternMap.lothian },
+      truces = { WesternMap.orleans },
+      claims = { {-2.29, -0.71}, },
+      influence = { {-7.91, 7.54}, {-10.56, 5.11}, {-6.58, -0.01}, {-2.55, 2.90}, {-2.80, 1.66} },
+      merchants = { {-4.31, 3.66}, {-3.94, -0.54} },
+      figurines = { {-5.66, 3.66} },
+      ships = { {-6.13, 1.38}, {-12.31, -0.74}, {-5.22, 1.80} },
+      ships_bot = { {-7.19, 1.33}, {-12.41, -0.08} },
+      army1 = { 2, 1, 0 },
+    },
   },
   [REALM.france] = {
     ['1444'] = {
@@ -444,6 +462,24 @@ SETUP_DATA = {
       ruler = {deck_guid = Event_Deck_GUIDs.age1r, card_guid = '57c370', flip = false, ill = false },
       bot_power = 5
     },
+    ['S304'] = {
+      parent = {'000', 'default'},
+      setup_bag_guid = '346c88',
+      ruler = {deck_guid = Event_Deck_GUIDs.age1r, card_guid = '493690', flip = false, ill = false },
+      l_towns = { WesternMap.orleans, WesternMap.lyon, WesternMap.bourgogne, WesternMap.provence, WesternMap.bordeaux },
+      s_towns = { WesternMap.saintonge, WesternMap.poitou, WesternMap.armagnac, WesternMap.limousin,
+                  WesternMap.berry, WesternMap.bourbon, WesternMap.toulouse, WesternMap.montpellier, WesternMap.anjou, },
+      allies = { WesternMap.firenze, },
+      core = { {-5.05, -3.55} },
+      claims = { {-3.95, 0.65}, {-6.39, -0.57} },
+      truces = { WesternMap.london },
+      influence = { {-0.43, -3.04}, {-0.43, -3.41}, {2.64, -5.07}, {3.01, -5.07}, {-5.38, -5.22} },
+      merchants = { {-1.92, -6.78}, {-10.34, -2.96} },
+      figurines = { {-3.78, -2.59} },
+      ships = { {-8.91, -2.66}, {-2.61, -5.52} },
+      ships_bot = { {-8.89, -1.89}, {-2.68, -4.92} },
+      army1 = { 2, 1, 0 },
+    },
   },
   [REALM.muscovy] = {
     ['1444'] = {
@@ -563,6 +599,27 @@ SETUP_DATA = {
       army1 = { 3, 1, 1 },
       fleet = { 0, 0, 3 }
     },
+    ['S304'] = {
+      parent = {'000', 'default'},
+      setup_bag_guid = '58331e',
+      religion = RELIGION.muslim,
+      ruler = {deck_guid = Setup_Card_Deck_GUID, card_guid = 'b0bdfb', flip = false, ill = true },
+      l_towns = { EasternMap.edirne, EasternMap.hudavendigar },
+      s_towns = { EasternMap.selanik, EasternMap.yanya, EasternMap.kastamonu, EasternMap.ankara,
+                  EasternMap.izmir, EasternMap.kutahya, EasternMap.teke, EasternMap.mentese,
+                  EasternMap.amasya, EasternMap.sivas, EasternMap.trebizond },
+      vassals = { EasternMap.karaman, EasternMap.konya, EasternMap.adana, WesternMap.tunis,
+                  WesternMap.bizerte, WesternMap.sousse, WesternMap.tripoli, WesternMap.mitidja,
+                  WesternMap.kabylia },
+      claims = { {9.17, -6.26}, {10.43, -3.69} },
+      influence = { {15.10, -7.49}, {0.21, -10.59}, {17.46, -8.22}, {14.44, -1.47}, {6.43, -5.45} },
+      merchants = { {12.99, -5.26}, {11.82, -9.52} },
+      figurines = { {7.91, -5.78}, 'none', 'none', {9.76, -9.05} },
+      ships = { {9.39, -7.21}, {7.05, -9.9}, {1.75, -7.79} },
+      ships_bot = { {9.76, -9.05}, {10.43, -10.47}, {1.67, -7.12} },
+      army1 = { 2, 1, 0 },
+      fleet = { 0, 0, 3 },
+    },
   },
   [REALM.poland] = {
     ['1444'] = {
@@ -597,7 +654,27 @@ SETUP_DATA = {
       ships = { {5.23, 5.38} },
       ships_bot = {5.52, 6.24},
       army1 = { 2, 1, 1 },
-    }
+    },
+    ['S304'] = {
+      parent = {'000', 'default'},
+      setup_bag_guid = 'aca61e',
+      religion = RELIGION.catholic,
+      ruler = {deck_guid = Event_Deck_GUIDs.age1r, card_guid = 'ecc58b', flip = false, ill = false },
+      l_towns = { EasternMap.krakow},
+      s_towns = { EasternMap.lublin, EasternMap.sandomierz, WesternMap.poznan, WesternMap.kalisz,
+                  WesternMap.sieradz, EasternMap.lwow, EasternMap.podole,
+                  EasternMap.szepes, WesternMap.pozsony, WesternMap.sopron, WesternMap.pest,
+                  EasternMap.szabolcs },
+      vassals = { EasternMap.warszawa, EasternMap.beograd, EasternMap.torda, EasternMap.hunyad,
+                  WesternMap.zagreb, WesternMap.rijeka, EasternMap.tirgoviste, EasternMap.buzau,
+                  EasternMap.sofya, EasternMap.silistre },
+      core = { {7.37, -0.26} }, --Royal Hungary
+      claims = { {7.99, 4.30} }, --Prussia
+      influence = { {8.40, -1.39}, {6.15, -3.17}, {8.81, -3.37}, {8.21, 2.07}, },
+      merchants = { {7.27, 1.78}, {11.29, 1.32} },
+      figurines = { {6.90, 2.97} },
+      army1 = { 2, 1, 0 },
+    },
   },
   [REALM.denmark] = {
     ['1444'] = {
@@ -649,6 +726,24 @@ SETUP_DATA = {
       setup_bag_guid = '10b4da',
       ruler = {deck_guid = Setup_Card_Deck_GUID, card_guid = '367f59', flip = false, ill = false },
       events = {{'408-2', 1}, {'408-1', 1}, {'308-2', 1}, {'308-1', 1}, {'208-2', 1}, {'208-1', 1}},
+    },
+    ['S304'] = {
+      parent = {'000', 'default'},
+      setup_bag_guid = '3ff171',
+      ruler = {deck_guid = Event_Deck_GUIDs.age1r, card_guid = 'f51740', flip = false, ill = false },
+      l_towns = { WesternMap.kobenhavn, WesternMap.lund },
+      s_towns = { WesternMap.gotland, WesternMap.vestjylland, WesternMap.ostjylland, WesternMap.slesvig, WesternMap.holstein,
+                  WesternMap.borgarsysla, WesternMap.akershus, WesternMap.bergenhus, WesternMap.trondheim, WesternMap.lubeck },
+      vassals = { WesternMap.stockholm, WesternMap.bergslagen, WesternMap.ostergotland, WesternMap.halsingland,
+      EasternMap.osterbotten, EasternMap.abo, EasternMap.nyland },
+      marriages = { WesternMap.stockholm, },
+      claims = { {4.35, 4.18} }, --Pomerania
+      influence = { {4.20, 6.95}, {-2.16, 2.89}, {1.21, 3.55}, {2.98, 3.96}, {5.83, 3.87} },
+      merchants = { {4.34, 5.52}, {-5.65, 10.38} },
+      figurines = { {0.58, 7.05} },
+      ships = { {-3.82, 7.27}, {1.62, 7.72}, {1.56, 7.11}},
+      ships_bot = { {-3.84, 7.87}, {1.27, 8.19} },
+      army1 = { 2, 1, 0 }
     },
   },
   [REALM.sweden] = {
@@ -724,7 +819,24 @@ SETUP_DATA = {
       ruler = {deck_guid = Event_Deck_GUIDs.age1r, card_guid = 'b6dc3b', flip = false, ill = false },
       s_towns = { WesternMap.porto, WesternMap.beira, WesternMap.madeira, WesternMap.ceuta, WesternMap.tangiers },
       influence = { {-4.90, -5.64}, {-4.90, -5.27}, {-9.09, -10.39}, {2.92, -5.32} },
-    }
+    },
+    ['S304'] = {
+      parent = {'000', 'default'},
+      setup_bag_guid = '5cf225',
+      ruler = {deck_guid = Event_Deck_GUIDs.age1r, card_guid = '8ce2da', flip = false, ill = false },
+      l_towns = { WesternMap.lisboa },
+      s_towns = { WesternMap.porto, WesternMap.beira, WesternMap.madeira, WesternMap.ceuta, WesternMap.galicia, WesternMap.canarias, AfricaMap.angola },
+      vassals = { WesternMap.salamanca, WesternMap.salamanca, WesternMap.madrid, WesternMap.madrid, WesternMap.sevilla, WesternMap.sevilla,
+                  WesternMap.badajoz, WesternMap.burgos, WesternMap.murcia, WesternMap.cordoba },
+      marriages = { WesternMap.madrid },
+      claims = { AfricaMap.natal },
+      influence = { {-8.24, -7.18}, {-7.89, -7.18}, {-9.43, -5.22}, {-8.95, -8.70}, {2.64, -4.71} },
+      merchants = { {-10.28, -9.07}, {-17.84, -0.46} },
+      figurines = { {-10.33, -5.08} },
+      ships = { {-12.99, -6.30}, {-12.20, -6.30}, {-14.66, -0.14}, {-18.28, 0.63} },
+      ships_bot = { {-12.21, -5.78}, {-17.76, 1.63}, {-15.38, -0.74} },
+      army1 = { 2, 1, 0 }
+    },
   },
   [REALM.netherlands] = {
     ['1444'] = {
@@ -1016,5 +1128,5 @@ SETUP_DATA = {
       WesternMap.tlemcen, WesternMap.oran },
       unrest = { },
     },
-  },
+  }
 }

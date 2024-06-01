@@ -140,6 +140,11 @@
                   S2-07: Glory for Ulm
                 </Text>
               </Button>
+              <Button class="scenario" id="3-04">
+                <Text class="scenarioName">
+                  S3-04: Turning the Table
+                </Text>
+              </Button>
             </VerticalLayout>
           </VerticalScrollView>
         </Cell>

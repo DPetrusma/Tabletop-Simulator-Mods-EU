@@ -22,6 +22,8 @@ Scenario_List = {
   ['2-05'] = { players = {false, false, false, false, false,  true}, active = true, name = 'Here I Stand Once More (6p)', },
   ['2-06'] = { players = { true, false, false, false, false, false}, active = true, name = 'The Rise of the Purple Phoenix (solo)' },
   ['2-07'] = { players = { true, false, false, false, false, false}, active = true, name = 'Glory for Ulm (solo)' },
+  ['3-02'] = { players = { true, false, false, false, false, false}, active = true, name = 'The Italian Job (2p)' },
+  ['3-04'] = { players = { false, false, false, false, false, true}, active = true, name = 'Turning the Table (6p)' },
 }
 
 Scenario_List['0-00'].description = [[This option lets you do the setup by hand. It places the play mats for all six players and their associated components. After this any additions and changes are left to the players to handle.]]
@@ -1113,5 +1115,201 @@ Scenario_List['2-07'].variants = {
     DNPR_Pink_S = { WesternMap.frankfurt, }, 
     empire = { ruler = REALM.austria, authority = 3, influence = {HRE_Influence_Map_Pos.rhineland, HRE_Influence_Map_Pos.westphalia, HRE_Influence_Map_Pos.saxony} },
     curia = {REALM.none, REALM.austria, REALM.venice, REALM.ulm, }, trade_add_tags = {'TradeStar'}, 
+  },
+}
+
+Scenario_List['3-02'].description = [[The Italian Wars]]
+Scenario_List['3-02'].options = {
+  [1] = {name = 'DNPR Austria', values = {'On','Off'}, default = 1, info = 'Set up a dynamic NPR for Austria using pink (1) tokens?' },
+  [2] = {name = 'Power Struggles', values = {'On','Off'}, default = 2, info = [[Set up power struggles:
+  
+If you decide to include Power Struggles in your game, we recommend using The Italian Wars as the upcoming Power Struggle in Round 2, and the active Power Struggle in Round 3.]] },
+}
+-- Handle trade deck, taking most of the cards out. Handle taking some milestones out. In GLOBAL, handle the left HRE markers
+Scenario_List['3-02'].variants = {
+  { name = 'Default', age = 1, last_age = 2, board = MAIN_BOARD_STATE.base_1444, player_realms = {
+    [REALM.france] = { seat = 1, color = 'blue', realm = {REALM.france,'1444'}, locked = true, bot = true, start = true, },
+    [REALM.papal] = { seat = 2, color = 'white', realm = {REALM.papal,'1444'} },
+    [REALM.venice] = { seat = 3, color = 'red', realm = {REALM.papal,'1444'}, },
+    [REALM.spain] = { name = 'Spain', seat = 4, color = 'yellow', realm = {REALM.spain,'1444'}, locked = true, bot = true },
+    }, age_1_events = {
+    {'12a-2', 7}, {'14a-2', 7}, { '155b', 7}, { '159b', 7}, {'112-2', 7},
+    }, age_2_events = {
+    {'21a-1', 6}, {'22a-1', 6}, { '23a-1', 6}, { '24a-3', 6}, {'255b', 6},
+    {'259b', 6}, { '202-1', 6}, { '204-1', 6}, { '212-1', 6}, { '214-1', 6},
+    },
+    ideas = {
+        admin = {
+        {Idea_Card_GUIDs.admin.tolerance, {}},
+        {Idea_Card_GUIDs.admin.church_attendance_duty, {}},
+        {Idea_Card_GUIDs.admin.inquisition, {}},
+        },
+        diplo = {
+        {Idea_Card_GUIDs.diplo.benign_diplomats, {}},
+        {Idea_Card_GUIDs.diplo.shrewd_trade_practices, {}},
+        {Idea_Card_GUIDs.diplo.efficient_spies, {}}
+        },
+        war = {
+        {Idea_Card_GUIDs.war.cannons, { REALM.france }},
+        {Idea_Card_GUIDs.war.tercios_janissaries, { REALM.spain }},
+        {Idea_Card_GUIDs.war.defensive_mentality, {}},
+        },
+    },
+  --xxx This is new. I need logic to remove these milestones from the deck
+    rem_milestones = {
+        Milestone_Card_GUIDs.age1.eco.high_income, Milestone_Card_GUIDs.age2.eco.global,
+        Milestone_Card_GUIDs.age1.exp.new_continents, Milestone_Card_GUIDs.age2.exp.circumnavigation, Milestone_Card_GUIDs.age2.exp.expand,
+        Milestone_Card_GUIDs.age2.pol.colonial,
+        Milestone_Card_GUIDs.age1.war.crusader,
+    },
+    empire = { ruler = REALM.austria, authority = 2, influence = {} },
+    curia = {REALM.papal, REALM.france, REALM.spain, REALM.venice, 'blocked' },
+    DNPR_Pink_S = { WesternMap.wien, WesternMap.tirol, }, --XXX there are others here
+    powerstruggles = { PS_GUIDs.italian_wars },
+  },
+
+{ name = 'Austria', age = 1, last_age = 2, board = MAIN_BOARD_STATE.base_1444, description = "This scenario can be played for a sterner challenge with 3 Bots, by adding Austria Bot from the start.",
+    player_realms = {
+        [REALM.france] = { seat = 1, color = 'blue', realm = {REALM.france,'1444'}, locked = true, bot = true, start = true, },
+        [REALM.papal] = { seat = 2, color = 'white', realm = {REALM.papal,'1444'} },
+        [REALM.venice] = { seat = 3, color = 'red', realm = {REALM.papal,'1444'}, },
+        [REALM.spain] = { name = 'Spain', seat = 4, color = 'yellow', realm = {REALM.spain,'1444'}, locked = true, bot = true },
+        [REALM.austria] = { seat = 5, color = 'purple', realm = {REALM.austria,'1444'}, locked = true, bot = true },
+    }, age_1_events = {
+        {'12a-2', 7}, {'101-2', 7}, { '155b', 7}, { '159b', 7}, {'112-2', 7},
+    }, age_2_events = {
+        {'21a-1', 6}, {'22a-1', 6}, { '23a-1', 6}, { '24a-3', 6}, {'201-2', 6},
+        {'259b', 6}, { '202-1', 6}, { '204-1', 6}, { '212-1', 6}, { '214-1', 6},
+    },
+    ideas = {
+        admin = {
+            {Idea_Card_GUIDs.admin.tolerance, {}},
+            {Idea_Card_GUIDs.admin.church_attendance_duty, {}},
+            {Idea_Card_GUIDs.admin.inquisition, {}},
+        },
+        diplo = {
+            {Idea_Card_GUIDs.diplo.benign_diplomats, {}},
+            {Idea_Card_GUIDs.diplo.shrewd_trade_practices, {}},
+            {Idea_Card_GUIDs.diplo.efficient_spies, {}}
+        },
+        war = {
+            {Idea_Card_GUIDs.war.cannons, { REALM.france }},
+            {Idea_Card_GUIDs.war.tercios_janissaries, { REALM.spain }},
+            {Idea_Card_GUIDs.war.defensive_mentality, {}},
+        },
+    },
+    --xxx This is new. I need logic to remove these milestones from the deck
+      rem_milestones = {
+          Milestone_Card_GUIDs.age1.eco.high_income, Milestone_Card_GUIDs.age2.eco.global,
+          Milestone_Card_GUIDs.age1.exp.new_continents, Milestone_Card_GUIDs.age2.exp.circumnavigation, Milestone_Card_GUIDs.age2.exp.expand,
+          Milestone_Card_GUIDs.age2.pol.colonial,
+          Milestone_Card_GUIDs.age1.war.crusader,
+    },
+    empire = { ruler = REALM.austria, authority = 2, influence = {} },
+    curia = {REALM.papal, REALM.france, REALM.spain, REALM.venice, REALM.austria, 'blocked' },
+    powerstruggles = { PS_GUIDs.italian_wars },
+},
+
+  { name = 'No bots', age = 1, last_age = 3, board = MAIN_BOARD_STATE.base_1444, description = "This variant replaces FranceBot and SpainBot with DNPRs for a 2-player game.",
+    player_realms = {
+        [REALM.papal] = { seat = 1, color = 'white', realm = {REALM.papal,'1444'}, start = true, },
+        [REALM.venice] = { seat = 2, color = 'red', realm = {REALM.papal,'1444'}, },
+    }, age_1_events = {
+        {'12a-2', 7}, {'14a-2', 7}, { '155b', 7}, { '159b', 7}, {'112-2', 7},
+    }, age_2_events = {
+        {'21a-1', 6}, {'22a-1', 6}, { '23a-1', 6}, { '24a-3', 6}, {'255b', 6},
+        {'259b', 6}, { '254b', 6}, { '257b', 6}, { '212-1', 6}, { '214-1', 6},
+    },
+    ideas = {
+        admin = {
+            {Idea_Card_GUIDs.admin.tolerance, {}},
+            {Idea_Card_GUIDs.admin.church_attendance_duty, {}},
+            {Idea_Card_GUIDs.admin.inquisition, {}},
+        },
+        diplo = {
+            {Idea_Card_GUIDs.diplo.benign_diplomats, {}},
+            {Idea_Card_GUIDs.diplo.shrewd_trade_practices, {}},
+            {Idea_Card_GUIDs.diplo.efficient_spies, {}}
+        },
+        war = {
+            {Idea_Card_GUIDs.war.cannons, {}},
+            {Idea_Card_GUIDs.war.tercios_janissaries, {}},
+            {Idea_Card_GUIDs.war.defensive_mentality, {}},
+        },
+    },
+    --xxx This is new. I need logic to remove these milestones from the deck
+      rem_milestones = {
+          Milestone_Card_GUIDs.age1.eco.high_income,
+          Milestone_Card_GUIDs.age1.exp.new_continents,
+          Milestone_Card_GUIDs.age1.war.crusader,
+          Milestone_Card_GUIDs.age2.eco.global,
+          Milestone_Card_GUIDs.age2.exp.circumnavigation,
+          Milestone_Card_GUIDs.age2.exp.expand,
+          Milestone_Card_GUIDs.age2.pol.colonial,
+    },
+    empire = { ruler = REALM.austria, authority = 2, influence = {} },
+    curia = {REALM.papal, REALM.venice, {}, {} },
+    DNPR_Blue_L = { WesternMap.lyon, WesternMap.provence, WesternMap.toulouse, WesternMap.montpellier, },
+    DNPR_Orange_L = { WesternMap.palermo, WesternMap.mesina, WesternMap.malta, WesternMap.sardenya, },
+    powerstruggles = { PS_GUIDs.italian_wars },
+},
+}
+
+Scenario_List['3-04'].description = [[ This scenario places the players in a "what if?"-scenario starting with the second half of Age I, as we imagine that some of the pivotal moments in history leading up to the scenario's start date had very different outcomes than their historical counterparts.
+
+All Realms are more or less balanced in power at the start. Only ›Portugal is a bit smaller in size, however it enjoys of a favourable position, away from immediate threats. ]]
+Scenario_List['3-04'].variants = {
+  { name = 'Default', age = 1, last_age = 3, board = MAIN_BOARD_STATE.s2_01, description = "The default variant of the Scenario with the ›Ottomans, ›France, ›Portugal, ›England, ›Denmark and ›Poland as PRs. Russia and North Asia are off-limits, as shown by the shaded area on the map.",
+    player_realms = {
+      [REALM.england] = { seat = 1, color = 'red', realm = {REALM.england, 'S304'}, no_missions = true, start = true },
+      [REALM.denmark] = { seat = 2, color = 'white', realm = {REALM.denmark, 'S304'}, no_missions = true, },
+      [REALM.poland] = { seat = 3, color = 'purple', realm = {REALM.poland, 'S304'}, no_missions = true, },
+      [REALM.ottomans] = { seat = 4, color = 'green', realm = {REALM.ottomans, 'S304'}, no_missions = true, },
+      [REALM.france] ={ seat = 5, color = 'blue', realm = {REALM.france, 'S304'}, no_missions = true, },
+      [REALM.portugal] = { seat = 6, color = 'yellow', realm = {REALM.portugal, 'S304'}, no_missions = true, },
+    },
+    age_1_events = {
+      {'11a-3', 7}, {'12a-1', 7}, {'13a-2', 7}, {'14a-1', 7}, {'155b', 7},  {'159b', 7},
+      {'103-2', 7}, {'104-2', 7}, {'106-2', 7}, {'107-2', 7},  {'108-2', 7}, {'110-2', 7},
+    },
+    age_2_events = {
+      {'21a-1', 6}, {'22a-1', 6}, {'23a-1', 6}, {'24a-1', 6}, {'251b', 6}, {'254b', 6},
+      {'203-1', 6}, {'204-1', 6}, {'206-1', 6}, {'207-1', 6}, {'208-1', 6}, {'210-1', 6},
+      {'21a-2', 5}, {'22a-2', 5}, {'23a-2', 5}, {'24a-2', 5}, {'255b', 5}, {'259b', 5},
+      {'203-2', 5}, {'204-2', 5}, {'206-2', 5}, {'207-2', 5}, {'208-2', 5}, {'210-2', 5},
+    },
+    age_3_events = {
+      {'31a-1', 4}, {'32a-1', 4}, {'33a-1', 4}, {'34a-3', 4}, {'351b', 4}, {'362b', 4},
+      {'303-1', 4}, {'304-1', 4}, {'306-1', 4}, {'307-1', 4}, {'308-1', 4}, {'310-1', 4},
+      {'31a-2', 3}, {'32a-2', 3}, {'33a-2', 3}, {'34a-2', 3}, {'355b', 3}, {'364b', 3},
+      {'303-2', 3}, {'304-2', 3}, {'306-2', 3}, {'307-2', 3}, {'308-2', 3}, {'310-2', 3}
+    },
+    draw_per_round = 6,
+    trade_add_tags = { 'Trade2' },
+    empire = { authority = 4, },
+    curia = {REALM.none, REALM.portugal, REALM.poland, REALM.france, REALM.england, REALM.denmark, },
+    ideas = {
+        admin = {
+            {Idea_Card_GUIDs.admin.tolerance, { REALM.poland, REALM.ottomans }},
+            '',
+            '',
+        },
+        diplo = {
+            {Idea_Card_GUIDs.diplo.quest_for_the_new_world, { REALM.portugal }},
+            {Idea_Card_GUIDs.diplo.benign_diplomats, { REALM.denmark }},
+            '',
+        },
+        war = {
+            {Idea_Card_GUIDs.war.cannons, { REALM.england, REALM.france }},
+            {Idea_Card_GUIDs.war.tercios_janissaries, { REALM.ottomans }},
+            '',
+        },
+    },
+    DNPR_Pink_L = { EasternMap.vilnius, },
+    DNPR_Green_S = { 
+      WesternMap.wien, WesternMap.franchecomte, WesternMap.luxembourg, WesternMap.namur, WesternMap.milano, WesternMap.cremona,
+      WesternMap.parma, WesternMap.praha, WesternMap.rudohori, WesternMap.budejovice, WesternMap.olomouc, WesternMap.silesia,
+    },
+    powerstruggles = { PS_GUIDs.thirty_years_war, PS_GUIDs.war_of_spanish_succession, PS_GUIDs.seven_years_war, },
   },
 }

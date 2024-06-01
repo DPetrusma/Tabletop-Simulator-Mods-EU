@@ -1443,6 +1443,28 @@ function Setup_Game()
     PlaceGuidObjectFromBag( { new_pos[1], new_pos[3] }, Action_Deck_GUIDs.diplo, false, '04259f', Main_Tableau_GUIDs[seat])
     PlaceGuidObjectFromBag( { new_pos[1], new_pos[3] }, Action_Deck_GUIDs.diplo, false, '545fdd', Main_Tableau_GUIDs[seat])
 
+  elseif UI_Data.scenario == '3-04' then
+
+    -- Options
+    broadcastToAll("Setting up: [u]Turning the Table (6 players)[/u]", {1,1,1})
+
+    scenario_data.powerstruggles = RandomizePartialList(scenario_data.powerstruggles, 1, 4)
+
+    --Religion tokens
+    PlaceObjectsFromBag({ WesternMapReligion.andalucia }, Bag_GUIDs['cat_div'], true)
+    PlaceObjectsFromBag({ EasternMapReligion.transylvania }, Bag_GUIDs['cat_div'], true)
+    PlaceObjectsFromBag({ WesternMapReligion.croatiabosnia }, Bag_GUIDs['cat_div'], true)
+    PlaceObjectsFromBag({ EasternMapReligion.redruthenia }, Bag_GUIDs['ort_mus'], false)
+    PlaceObjectsFromBag({ EasternMapReligion.westernukraine }, Bag_GUIDs['ort_mus'], false)
+    PlaceObjectsFromBag({ EasternMapReligion.serbiaalbania }, Bag_GUIDs['ort_mus'], false)
+    PlaceObjectsFromBag({ EasternMapReligion.wallachiabulgaria }, Bag_GUIDs['ort_mus'], false)
+    PlaceObjectsFromBag({ EasternMapReligion.macedoniathrace }, Bag_GUIDs['ort_mus'], false)
+    PlaceObjectsFromBag({ EasternMapReligion.greece }, Bag_GUIDs['ort_mus'], false)
+    PlaceObjectsFromBag({ WesternMapReligion.rum }, Bag_GUIDs['cat_div'], true)
+    
+    --Check for extranneous influence for bots
+
+    CoreScenarioSetup(scenario_data)
 
   else
     broadcastToAll("Scenario not handled: " .. (UI_Data.scenario or '') , {1,1,1})
@@ -2957,6 +2979,12 @@ function PrepareMilestones(scenario_data)
   local future_ages = { 'age4', 'age3', 'age2', }
   local remove_ages = { }
   if TEST_MODE then log('Preparing Milestones for Age ' .. age) end
+
+  ---XXX Something like this to remove milestones?
+  -- if scenario_data.rem_milestones then
+  --   MoveBetweenDecksByNamesOrTags(trade_deck, future_deck, scenario_data.trade_remove_names, false)
+  -- end
+
   if age > 1 then
     for _, guid in pairs(Milestone_Deck_GUIDs.age1) do
       local deck = getObjectFromGUID(guid)
@@ -4476,7 +4504,7 @@ WesternMapReligion = {
   ['algiers'] = {-5.15, -10.66}, ['andalucia'] = {-7.52, -8.46}, ['aquitaine'] = {-5.51, -2.87}, ['aragon'] = {-6.46, -5.08},
   ['austria'] = {4.06, -1.68}, ['bavariaswabia'] = {0.53, -0.74}, ['bohemia'] = {4.4, 0.65}, ['brandenburg'] = {3.6, 2.51},
   ['brittanynormandy'] = {-7.89, -0.03}, ['burgundy'] = {-3.27, -1.11}, ['castile'] = {-7.3, -6.62}, ['centralitaly'] = {2.26, -5.36},
-  ['corsicasardinia'] = {0.26, -6.68}, ['dalmatia'] = {4.22, -3.91}, ['eastanglia'] = {-6.11, 4.12}, ['flanderswallonia'] = {-2.29, 1.14},
+  ['corsicasardinia'] = {0.26, -6.68}, ['croatiabosnia'] = {5.87, -4.17}, ['dalmatia'] = {4.22, -3.91}, ['eastanglia'] = {-6.11, 4.12}, ['flanderswallonia'] = {-2.29, 1.14},
   ['gotalandskane'] = {3.08, 7.53}, ['hungarianplain'] = {5.88, -2.04}, ['ireland'] = {-11.16, 4.92}, ['jutland'] = {0.24, 5.82},
   ['languedoc'] = {-2.28, -3.95}, ['leon'] = {-9.35, -4.07}, ['loire'] = {-3.71, -3.31}, ['lombardy'] = {-0.74, -4.07},
   ['lowersaxony'] = {1.21, 2.9}, ['macaronesia'] = {-12.93, -11.22}, ['naples'] = {4.36, -6.72}, ['netherlands'] = {-1.08, 3.84},
