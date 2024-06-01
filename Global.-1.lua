@@ -46,11 +46,11 @@ Generic_Mission_Deck_GUID = 'cadfa8'
 Scenario_Book_1_GUID = '1ae561'
 Scenario_Book_2_GUID = '79893d'
 
-Player_Hand_GUIDs = { red = '7a5107', yellow = '4f7aff', blue = '3320f7', green = '82f3dd', purple = 'b29a91', white = 'a98fd0' }
-Main_Tableau_GUIDs = { red = '388336', yellow = '90ffbf', blue = '1418fd', green = '82efa3', purple = 'ad4d79', white = '30484d' }
-Army_Tableau_GUIDs = { red = '655dff', yellow = 'd20799', blue = 'a076d6', green = 'e8a3ab', purple = 'c8a406', white = 'be9e18' }
-Fleet_Tableau_GUIDs = { red = 'ddf4d4', yellow = '005750', blue = 'fbdfa1', green = '558a42', purple = 'a76ad9', white = '3f02c4' }
-Bot_Tableau_GUIDs = { red = 'cd844f', yellow = 'c2add8', blue = '7fa64c', green = '3cfa64', purple = 'd06ee7', white = '3fed49' }
+Player_Hand_GUIDs = { red = '7a5107', yellow = '4f7aff', blue = '3320f7', green = '82f3dd', purple = 'b29a91', white = 'a98fd0', brown = '652140', teal = '61f580' }
+Main_Tableau_GUIDs = { red = '388336', yellow = '90ffbf', blue = '1418fd', green = '82efa3', purple = 'ad4d79', white = '30484d', brown = '70c4bc', teal = '61904b' }
+Army_Tableau_GUIDs = { red = '655dff', yellow = 'd20799', blue = 'a076d6', green = 'e8a3ab', purple = 'c8a406', white = 'be9e18', brown = 'a9e19e', teal = '485332' }
+Fleet_Tableau_GUIDs = { red = 'ddf4d4', yellow = '005750', blue = 'fbdfa1', green = '558a42', purple = 'a76ad9', white = '3f02c4', brown = '76a366', teal = '85bde4' }
+Bot_Tableau_GUIDs = { red = 'cd844f', yellow = 'c2add8', blue = '7fa64c', green = '3cfa64', purple = 'd06ee7', white = '3fed49', brown = '631b0f', teal = '' }
 
 Setup_Card_Deck_GUID = '6c6621'
 Event_Deck_GUIDs = {
@@ -197,11 +197,11 @@ PS_GUIDs = {
 }
 
 Prestige_Marker_GUIDs = {
-  red = 'a34738', yellow = '917e57', blue = 'b6350f', green = 'b1f322', purple = 'c3dffe', white = '24d817'
+  red = 'a34738', yellow = '917e57', blue = 'b6350f', green = 'b1f322', purple = 'c3dffe', white = '24d817', brown = 'b46c9e', teal = 'b4d541'
 }
 
 Round_Status_Marker_GUIDs = {
-  red = 'f8fe6f', yellow = 'e7476a', blue = '3a5740', green = '842237', purple = '0476d7', white = '72c3bd'
+  red = 'f8fe6f', yellow = 'e7476a', blue = '3a5740', green = '842237', purple = '0476d7', white = '72c3bd', brown = 'ed85d5', teal = 'ba367d'
 }
 
 Figurine_GUIDs = {
@@ -210,7 +210,9 @@ Figurine_GUIDs = {
   blue   = {'196789', '6f49ec', 'f4ea35', '357ceb' },
   green  = {'f49823', 'b2ccc9', '390ccb', '1d9350' },
   purple = {'18b918', '84a1a8', 'a3fbd1', '66a7e9' },
-  white  = {'9dfd9b', '849af8', 'ea745a', '2c826c' }
+  white  = {'9dfd9b', '849af8', 'ea745a', '2c826c' },
+  brown  = {'07aa38', '2f259d', '8332be', 'd6cc36' },
+  teal   = {'b98973', 'ba4d4c', '4dcf8d', 'f4c7d9' }
 }
 
 Merchant_GUIDs = {
@@ -219,7 +221,9 @@ Merchant_GUIDs = {
   blue   = {'f30cd6', '17dd06', 'dc0f3e' },
   green  = {'5ec83e', '16ce9d', 'f02763' },
   purple = {'0cceef', 'ff439f', 'd8da5c' },
-  white  = {'29421f', '778c3f', '7d16fe' }
+  white  = {'29421f', '778c3f', '7d16fe' },
+  brown  = {'5dfc9f', '61d2ae', 'a721ef' },
+  teal   = {'b84479', '0589c9', '9f2ed6' }
 }
 
 Income_Token_GUIDs = { 'e144a8', '1480cc', '1a0674', 'f5ee76', '4ca903', '621d3a' }
@@ -231,7 +235,7 @@ Bag_GUIDs = {
 }
 
 Setup_Bag_GUIDs = {
-  red = '5073e8', yellow = '8fa43c', blue = '7a2239', green = 'ddbf73', purple = 'fdd7a0', white = 'deaa34'
+  red = '5073e8', yellow = '8fa43c', blue = '7a2239', green = 'ddbf73', purple = 'fdd7a0', white = 'deaa34', brown = '2e9596', teal = '957e83'
 }
 
 Setup_Bag_Item_GUIDs = {
@@ -258,7 +262,15 @@ Setup_Bag_Item_GUIDs = {
   white  = { stability = 'b27422', ruler_general = 'd90cf4', ship = '455429', soldier = '0f16c8', cube = 'df9f2a',
              vassal = 'c1f2d4', s_town = '56e7e7', l_town = '78bff9', claim = 'a9c9a9', alliance = 'ab7108', marriage = 'b4c14b',
              war = 'c35452', tag_chit = '6d1ef0', merchant_1 = '778c3f', merchant_2 = '29421f', merchant_3 = '7d16fe',
-             army_1 = '9dfd9b', army_2 = '849af8', army_3 = 'ea745a', fleet = '2c826c' }
+             army_1 = '9dfd9b', army_2 = '849af8', army_3 = 'ea745a', fleet = '2c826c' },
+  brown  = { stability = 'a37f2e', ruler_general = '7a36bc', ship = 'a47f1c', soldier = '45b2df', cube = '5ba8ee',
+             vassal = 'ed84de', s_town = '5c9dde', l_town = '2208ad', claim = '366e0f', alliance = 'd4192c', marriage = '60091a',
+             war = '7340d5', tag_chit = 'a6b0de', merchant_1 = '5dfc9f', merchant_2 = '61d2ae', merchant_3 = 'a721ef',
+             army_1 = '07aa38', army_2 = '2f259d', army_3 = '8332be', fleet = 'd6cc36' },
+  teal  = { stability = '4b29d4', ruler_general = 'cef0e6', ship = '703f24', soldier = '1e1ac8', cube = '9123fa',
+             vassal = '7f78d1', s_town = '591d40', l_town = '812992', claim = 'c3113d', alliance = '6fb5bb', marriage = '633664',
+             war = 'bcca57', tag_chit = 'fdaf40', merchant_1 = 'b84479', merchant_2 = '0589c9', merchant_3 = '9f2ed6',
+             army_1 = 'b98973', army_2 = 'ba4d4c', army_3 = '4dcf8d', fleet = 'f4c7d9' }
 }
 
 HRE_Influence_Cube_GUIDs = {
@@ -317,19 +329,19 @@ Papal_Curia_Positions = {
 }
 
 Main_Tableau_Positions = {
-  {-11.09, 1, -23.47}, {-33.80, 1, -11.95}, {-33.80, 1, 11.23}, {-14.98, 1, 25.06}, {18.28, 1, 25.07}, {27.33, 1, -23.51}
+  {-11.09, 1, -23.47}, {-33.80, 1, -11.95}, {-33.80, 1, 11.23}, {-14.98, 1, 25.06}, {18.28, 1, 25.07}, {27.33, 1, -23.51}, {37.96, 1, 15.42}, {37.96, 1, -4.78}
 }
 
 Main_Tableau_Rotations = {
-  {0.00, 180.00, 0.00}, {0.00, 270.00, 0.00}, {0.00, 270.00, 0.00}, {0.00, 0.00, 0.00}, {0.00, 0.00, 0.00}, {0.00, 180.00, 0.00}
+  {0.00, 180.00, 0.00}, {0.00, 270.00, 0.00}, {0.00, 270.00, 0.00}, {0.00, 0.00, 0.00}, {0.00, 0.00, 0.00}, {0.00, 180.00, 0.00}, {0.00, 90.00, 0.00}, {0.00, 90.00, 0.00}
 }
 
 Player_Hand_Positions = {
-  {-14.66, 3.35, -36.00}, {-46.00, 3.35, -15.41}, {-46.00, 3.35, 14.62}, {-11.01, 3.35, 37.50}, {21.22, 3.35, 37.50}, {23.67, 3.35, -36.00}
+  {-14.66, 3.35, -36.00}, {-46.00, 3.35, -15.41}, {-46.00, 3.35, 14.62}, {-11.01, 3.35, 37.50}, {21.22, 3.35, 37.50}, {23.67, 3.35, -36.00}, {48.61 , 3.35, 11.76}, {48.61 , 3.35, -9.70}
 }
 
 Player_Hand_Rotations = {
-  {0.00, 0.00, 0.00}, {0.00, 90.00, 0.00}, {0.00, 90.00, 0.00}, {0.00, 180.00, 0.00}, {0.00, 180.80, 0.00}, {0.00, 0.00, 0.00}
+  {0.00, 0.00, 0.00}, {0.00, 90.00, 0.00}, {0.00, 90.00, 0.00}, {0.00, 180.00, 0.00}, {0.00, 180.80, 0.00}, {0.00, 0.00, 0.00}, {0.00, 270.00, 0.00}, {0.00, 270.00, 0.00}
 }
 
 Main_Tableau_Offset_Positions = {
@@ -773,6 +785,8 @@ function Setup_Game()
       {seat = 4, color = 'white' },
       {seat = 5, color = 'purple' },
       {seat = 6, color = 'green' },
+      {seat = 7, color = 'brown' },
+      {seat = 8, color = 'teal' },
     }
 
     for _, p in ipairs(player_config) do
@@ -2212,6 +2226,9 @@ function GetOffset(position, offset2D, seat, height)
   elseif (seat == 4) or (seat == 5) then
     new_pos[1] = position[1] - offset2D[1]
     new_pos[3] = position[3] - offset2D[2]
+  elseif (seat == 7) or (seat == 8) then
+    new_pos[1] = position[1] - offset2D[2]
+    new_pos[3] = position[3] + offset2D[1]
   end
   return new_pos
 end
@@ -2296,7 +2313,7 @@ end
 
 -- Remove Hands and scoring markers for unused colors
 function ManageHandsAndPrestige(players)
-  local used_colors = { red = false, yellow = false, blue = false, green = false, purple = false, white = false}
+  local used_colors = { red = false, yellow = false, blue = false, green = false, purple = false, white = false, brown = false, teal = false }
   for _, p in pairs(players) do
     local player_hand = getObjectFromGUID(Player_Hand_GUIDs[p.color])
     if player_hand == nil then
@@ -4051,6 +4068,10 @@ function GetColorFromTag(object)
     return 'White'
   elseif object.hasTag('Color_Yellow') then
     return 'Yellow'
+  elseif object.hasTag('Color_Brown') then
+    return 'Brown'
+  elseif object.hasTag('Color_Teal') then
+    return 'Teal'
   end
 return false
 end
