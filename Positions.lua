@@ -170,3 +170,214 @@ AfricaMap = {
     ['saratov'] = {19.95, 2.38}, ['serbiaalbania'] = {7.9, -4.85}, ['syria'] = {16.17, -9.33}, ['transylvania'] = {9.02, -1.09},
     ['wallachiabulgaria'] = {8.71, -3.93}, ['westernukraine'] = {13.07, -0.35}, ['whiteruthenia'] = {14.2, 3.0}, ['cyprus'] = {13.19, -9.94}
   }
+
+  TradeProtectionSlots = {
+    [{1.77,-7.90}] = 'Central Mediterranean',
+    [{2.55,-7.90}] = 'Central Mediterranean',
+    [{-5.13,-8.31}] = 'Western Mediterranean'
+
+    --[[
+    {12.60, 1.20, -4.03} = 'Black Sea'
+    {13.31, 1.20, -4.03} = 'Black Sea'
+    {14.05, 1.20, -4.03} = 'Black Sea'
+    {9.37, 1.20, -7.31} = 'Aegean Sea'
+    {10.08, 1.20, -7.32} = 'Aegean Sea'
+    {7.02, 1.20, -10.07} = 'Eastern Mediterranean'
+    {7.76, 1.20, -10.03} = 'Eastern Mediterranean'
+    {8.49, 1.20, -10.03} = 'Eastern Mediterranean'
+
+    {4.23, 1.20, -5.74} = 'Adriatic Sea'
+    {4.23, 1.20, -5.74} = 'Adriatic Sea'
+    {5.90, 1.20, -6.10} = 'Adriatic Sea'
+    {-1.10, 1.20, -5.82} = 'Gulf of Lion'
+    {-1.79, 1.20, -5.80} = 'Gulf of Lion'
+    {-2.55, 1.20, -5.81} = 'Gulf of Lion'
+
+    {-4.34, 1.20, -8.44} = 'Western Mediterranean'
+    {-5.10, 1.20, -8.44} = 'Western Mediterranean'
+
+    {-12.21, 1.20, -6.61} = 'Central Atlantic'
+    {-12.94, 1.20, -6.59} = 'Central Atlantic'
+    {-12.57, 1.20, -7.22} = 'Central Atlantic'
+    {-7.39, 1.20, -2.80} = 'Bay of Biscay'
+    {-8.12, 1.20, -2.80} = 'Bay of Biscay'
+    {-8.88, 1.20, -2.80} = 'Bay of Biscay'
+    {-11.56, 1.20, -1.01} = 'Eastern Atlantic'
+    {-12.28, 1.20, -0.99} = 'Eastern Atlantic'
+    {-6.04, 1.20, 1.05} = 'English Channel'
+    {-5.30, 1.20, 1.44} = 'English Channel'
+    {-4.47, 1.20, 2.34} = 'English Channel'
+    {-5.25, 1.20, 5.49} = 'Doggerbank'
+    {-4.48, 1.20, 5.49} = 'Doggerbank'
+    {-3.75, 1.20, 7.09} = 'North Sea'
+    {-2.99, 1.20, 7.09} = 'North Sea'
+    {-3.79, 1.20, 10.46} = 'Norwegian Sea'
+    {-4.52, 1.20, 10.46} = 'Norwegian Sea'
+    {-7.31, 1.20, 9.82} = 'Northeastern Atlantic'
+    {-8.04, 1.20, 9.82} = 'Northeastern Atlantic'
+    {1.51, 1.20, 7.50} = 'Skagerrak'
+    {1.49, 1.20, 6.94} = 'Skagerrak'
+    {1.97, 1.20, 6.51} = 'Skagerrak'
+    {5.25, 1.20, 5.25} = 'Baltic Sea'
+    {5.96, 1.20, 5.25} = 'Baltic Sea'
+    {6.69, 1.20, 5.24} = 'Baltic Sea'
+    {6.76, 1.20, 8.99} = 'Gulf of Bothnia'
+    {6.76, 1.20, 9.63} = 'Gulf of Bothnia'
+    {6.76, 1.20, 10.25} = 'Gulf of Bothnia'
+    {-14.30, 1.20, 10.87} = 'Northwestern Atlantic'
+    {-15.02, 1.20, 10.87} = 'Northwestern Atlantic'
+    {-14.31, 1.20, 9.20} = 'Caribbean Sea'
+    {-14.96, 1.20, 8.98} = 'Caribbean Sea'
+    {-15.65, 1.20, 9.35} = 'Caribbean Sea'
+    {-14.64, 1.20, 5.05} = 'Southwestern Atlantic'
+    {-15.37, 1.20, 5.05} = 'Southwestern Atlantic'
+    {-16.65, 1.20, 6.36} = 'Southeasten Pacific'
+    {-17.37, 1.20, 6.36} = 'Southeasten Pacific'
+    {-18.10, 1.20, 6.36} = 'Southeasten Pacific'
+    {-14.30, 1.20, 1.17} = 'East Africa Coast'
+    {-14.69, 1.20, -0.26} = 'East Africa Coast'
+    {-17.50, 1.20, 0.43} = 'Southeastern Atlantic'
+    {-18.29, 1.20, 0.43} = 'Southeastern Atlantic'
+    {-18.29, 1.20, -0.18} = 'Southeastern Atlantic'
+
+    {-17.38, 1.20, -11.86} = 'Great Australian Bight'
+    {-18.10, 1.20, -11.86} = 'Great Australian Bight'
+    {-18.33, 1.20, -11.16} = 'East Indies'
+    {-18.33, 1.20, -10.57} = 'East Indies'
+    {-18.33, 1.20, -9.97} = 'East Indies'
+    {-15.99, 1.20, -7.46} = 'Sea of Japan'
+    {-15.26, 1.20, -7.46} = 'Sea of Japan'
+    {-14.57, 1.20, -7.46} = 'Sea of Japan'
+    {-16.19, 1.20, -5.00} = 'Indian Ocean'
+    {-16.20, 1.20, -4.45} = 'Indian Ocean'
+    {-16.60, 1.20, -4.02} = 'Indian Ocean'
+    --]]
+  }
+
+function generateMapSnapPoints()
+
+    local main_map = getObjectFromGUID('a19848')
+    local main_map_scale = main_map.getScale()
+
+    local all_snap_points = {
+      ['Province'] = {
+          AfricaMap,
+          AmericaMap,
+          IndiaMap,
+          FarEastMap,
+          CentralAsiaMap,
+          WesternMap,
+          EasternMap
+      },
+      ['Religion'] = {
+          WesternMapReligion,
+          EasternMapReligion
+      }
+    }
+
+  -- log(all_snap_points)
+
+  SNAP_POINTS_TO_GENERATE = {{
+    position ={0,1,0},
+    rotation = {0, 180, 0},
+    rotation_snap = true,
+    tags = {"Centre"}
+  }}
+
+  for tag,location_tables in pairs(all_snap_points) do
+    log("Tag: "..tag)
+    -- log(#location_tables)
+    for _,table in pairs(location_tables) do
+      -- log(#table)
+      for name,location in pairs(table) do
+        -- log("Location Name: "..name)
+        -- log(location)
+        -- log({location[1],0,location[2]})
+        -- local sp_loc = main_map.positionToLocal({
+        --   location[1]/main_map_scale.x, --Too far out for some reason
+        --   0.6,
+        --   location[2]/main_map_scale.z
+        -- })
+        local sp_loc = main_map.positionToLocal({
+          location[1],
+          1.0,
+          location[2]
+        })
+        local sp = {
+          position = sp_loc,
+          rotation_snap = true,
+          tags = {tag}
+        }
+        -- log(sp)
+        -- if snap_points_to_generate == nil then
+        --   snap_points_to_generate = {}
+        -- end
+        -- log(snap_points_to_generate)
+        --table.insert(snap_points_to_generate, sp)
+        SNAP_POINTS_TO_GENERATE[#SNAP_POINTS_TO_GENERATE+1] = sp
+        -- table.insert(snap_points_to_generate, {p=1,c=2})
+        -- log("Point inserted")
+        end
+      end
+  end
+
+  local tag = "NavalUnit"
+  for point,zone in pairs(TradeProtectionSlots) do
+    local sp_loc = main_map.positionToLocal({
+      point[1],
+      1.0,
+      point[2]
+    })
+    local sp = {
+      position = sp_loc,
+      rotation_snap = true,
+      tags = {tag}
+    }
+    SNAP_POINTS_TO_GENERATE[#SNAP_POINTS_TO_GENERATE+1] = sp
+  end
+
+  ROUNDED_TPS = {}
+  for point,zone in pairs(TradeProtectionSlots) do
+    local rounded_point = {
+      x = math.floor(point[1]*20+0.5)/20,
+      y = 1.06,
+      z = math.floor(point[2]*20+0.5)/20
+    }
+    ROUNDED_TPS[rounded_point.x..'||'..rounded_point.z] = true
+  end
+
+  return 1
+end
+
+function onObjectDrop(pc,o)
+
+  if o.hasTag("NavalUnit") then
+    log("Naval Unit Dropped")
+
+    Wait.condition(
+    function() -- Executed after our condition is met
+      local pos = o.getPosition() --This triggers as soon as it is dropped. Really, we should wait for it to land and stop moving
+      local rounded_pos = {
+        x = math.floor(pos.x*20+0.5)/20,
+        y = 1.06,
+        z = math.floor(pos.z*20+0.5)/20,
+      }
+      
+      log(rounded_pos)
+      log(ROUNDED_TPS[rounded_pos.x..'||'..rounded_pos.z]) --Also, this returns an error if it doesn't match the x position. Probably a better way to do it.
+
+      if ROUNDED_TPS[rounded_pos.x..'||'..rounded_pos.z] then
+        if changeRotationValue(o, -1) == "#side" then
+          o.setPosition(o.getPosition() + Vector(0,0,-0.1))
+        else
+          o.setPosition(o.getPosition() + Vector(0,0,0.1))
+        end
+      end
+
+    end,
+    function() -- Condition function
+      return o.isDestroyed() or o.resting
+    end
+    )
+  end
+end
