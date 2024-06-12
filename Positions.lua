@@ -254,6 +254,21 @@ AfricaMap = {
     --]]
   }
 
+  --Something like this
+  PrestigeLocations = {
+    [0] = {x = -19.92, z = -12.69}, --Below the track, in between 1 and 31. Not useful
+    [1] = {x = -20.33, z = -11.70}, --On the track
+    [60] = {x = -19.49, z = 11.58} -- On the track
+  }
+
+  local i = 1
+  for x = PrestigeLocations[1].x, PrestigeLocations[60].x, PrestigeLocations[60].x-PrestigeLocations[1].x do --Start, End, Step
+    for z = PrestigeLocations[1].z, PrestigeLocations[60].z, (PrestigeLocations[60].z-PrestigeLocations[1].z) / 29 do --Start, End, Step
+      PrestigeLocations[i]= {x = x, z = z}
+      i = i + 1
+    end
+  end
+
 function generateMapSnapPoints()
 
     local main_map = getObjectFromGUID('a19848')
@@ -346,17 +361,32 @@ function generateMapSnapPoints()
     ROUNDED_TPS[rounded_point.x..'||'..rounded_point.z] = true
   end
 
+  local tag = "Score"
+  for score,point in pairs(PrestigeLocations) do
+    local sp_loc = main_map.positionToLocal({
+      point.x,
+      1.0,
+      point.z
+    })
+    local sp = {
+      position = sp_loc,
+      rotation_snap = true,
+      tags = {tag}
+    }
+    SNAP_POINTS_TO_GENERATE[#SNAP_POINTS_TO_GENERATE+1] = sp
+  end
+
   return 1
 end
 
-function onObjectDrop(pc,o)
+function onObjectDrop(pc,dropped_object)
 
-  if o.hasTag("NavalUnit") then
+  if dropped_object.hasTag("NavalUnit") then
     log("Naval Unit Dropped")
 
     Wait.condition(
     function() -- Executed after our condition is met
-      local pos = o.getPosition() --This triggers as soon as it is dropped. Really, we should wait for it to land and stop moving
+      local pos = dropped_object.getPosition() --This triggers as soon as it is dropped. Really, we should wait for it to land and stop moving
       local rounded_pos = {
         x = math.floor(pos.x*20+0.5)/20,
         y = 1.06,
@@ -367,17 +397,27 @@ function onObjectDrop(pc,o)
       log(ROUNDED_TPS[rounded_pos.x..'||'..rounded_pos.z]) --Also, this returns an error if it doesn't match the x position. Probably a better way to do it.
 
       if ROUNDED_TPS[rounded_pos.x..'||'..rounded_pos.z] then
-        if changeRotationValue(o, -1) == "#side" then
-          o.setPosition(o.getPosition() + Vector(0,0,-0.1))
+        if changeRotationValue(dropped_object, -1) == "#side" then
+          dropped_object.setPosition(dropped_object.getPosition() + Vector(0,0,-0.1))
         else
-          o.setPosition(o.getPosition() + Vector(0,0,0.1))
+          dropped_object.setPosition(dropped_object.getPosition() + Vector(0,0,0.1))
         end
       end
 
     end,
     function() -- Condition function
-      return o.isDestroyed() or o.resting
+      return dropped_object.isDestroyed() or dropped_object.resting
     end
+    )
+  end
+
+  -- The old code
+  if dropped_object.hasTag("Score") then
+    Wait.condition(
+      function() outputDroppedScoreObjectScore(dropped_object) end,
+      function() return dropped_object.resting end,
+      5,
+      function() outputDroppedScoreObjectScore(dropped_object) end
     )
   end
 end
