@@ -1084,7 +1084,7 @@ SETUP_DATA = {
       influence = {
         {-2.35, -0.85}, --Burgundy
         {-1.09, -0.03}, --Rhineland
-        {-2.06, 1.99}, --Fland. and Wall.
+        {-1.98, 2.05}, --Fland. and Wall.
         {-1.30, 3.51} --Netherlands
       },
       figurines = { {-1.98, -3.11} },
@@ -1169,7 +1169,7 @@ SETUP_DATA = {
     ['1444'] = {
         parent = {'000', 'default'},
         setup_bag_guid = '08ede6',
-        religion = RELIGION.catholic,
+        religion = RELIGION.orthodox,
         l_towns = { EasternMap.novgorod, },
         s_towns = { EasternMap.arkhangelsk, EasternMap.kargopol, EasternMap.olonets, EasternMap.ladoga, EasternMap.neva, },
         influence = {
@@ -1240,8 +1240,8 @@ SETUP_DATA = {
         {3.15, 8.67}, -- Svaeland
         {-8.01, 7.61} -- Scotland
       },
-      allies = { {2.07, 5.83} },
-      marriages = { {2.07, 5.83}, {5.68, 8.39} },
+      allies = { WesternMap.kobenhavn },
+      marriages = { WesternMap.kobenhavn, WesternMap.stockholm },
       merchants = { {-5.45, 9.95}, {4.02, 5.55} },
       army1 = { 1, 0, 0 },
       figurines = { {0.80, 9.18} },
@@ -1283,6 +1283,7 @@ SETUP_DATA = {
       },
       merchants = { {-4.60, -11.66}, {-1.48, -7.10} },
       army1 = { 1, 1, 0 },
+      fleet = { 0, 0, 2 },
       figurines = { {0.22, -10.51}, 'none', 'none', {-0.50, -8.45} },
       ships = { {2.52, -7.86} },
       ships_bot = { {2.17, -10.81} },
@@ -1292,7 +1293,7 @@ SETUP_DATA = {
   [REALM.persia] = {
     ['1444'] = {
       parent = {'000', 'default'},
-      religion = RELIGION.muslim,
+      religion = RELIGION.muslim, -- TODO Need to change this to Shia once we have tokens
       l_towns = { EasternMap.tabriz, },
       s_towns = { EasternMap.mosul, EasternMap.kirkuk, EasternMap.yerevan, EasternMap.tikrit, EasternMap.baghdad },
       vassals = { EasternMap.bitlis },
@@ -1301,8 +1302,8 @@ SETUP_DATA = {
         {17.27, -8.59}, -- Kurdistan
         {20.19, -4.48} -- Caucasus
       },
-      claims = { {17.62, -8.17} }, -- Kurdistan
-      merchants = { {20.41, -2.72}, {20.41, -2.72} },
+      claims = { {17.66, -8.17} }, -- Kurdistan
+      merchants = { {20.41, -2.72}, {17.31, -10.05} },
       army1 = { 0, 2, 0 },
       figurines = { {18.80, -5.72} },
       capital = EasternMap.tabriz
@@ -1323,10 +1324,10 @@ SETUP_DATA = {
       influence = {
         {-10.60, 5.16}, -- Ireland
         {-7.80, 5.42}, -- Northumbria
-        {-7.80, 5.42}, -- Seine
+        {-4.46, 0.77}, -- Seine
         {-0.50, 8.48} -- Vestlandet
       },
-      allies = { WesternMap.Paris },
+      allies = { WesternMap.paris },
       merchants = { {-6.38, 10.04}, {-3.93, 4.05} },
       figurines = { {-8.48, 6.59} },
       ships = { {-4.48, 5.67}, {-8.05, 9.96} },
@@ -1403,7 +1404,7 @@ SETUP_DATA = {
       claims = { {-0.71, -4.25} }, -- Lombardy
       merchants = { {-3.42, -0.52}, {3.26, -0.90} },
       army1 = { 1, 0, 0 },
-      figurines = { {0.04, -3.64} },
+      figurines = { {-0.03, -3.77} },
       capital = WesternMap.milano
     },
   },
@@ -1469,7 +1470,7 @@ SETUP_DATA = {
         {-1.70, -3.93}, -- Languedoc
         {-1.12, 0.32} -- Rhineland
       },
-      merchants = { {-3.80, -0.21}, {-3.80, -0.21} },
+      merchants = { {-3.80, -0.21}, {0.57, 0.92} },
       figurines = { {-2.86, -1.99} },
       capital = WesternMap.savoie
     },
