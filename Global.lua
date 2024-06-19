@@ -22,7 +22,7 @@ REALM = {
   papal = '012', brandenburg = '013', prussia = '013', venice = '014', mamluks = '015', egypt = '015', byzantium = '016', ulm = '017',  aragon = '018',
   burgundy = '019', bohemia = '020', lithuania = '021', hungary = '022', novgorod = '023', great_horde = '024', morocco = '025', norway = '026',
   qara_qoyunlu = '027', teutonic_order = '028', tunis = '029', persia = '030', scotland = '031', saxony = '032', bavaria = '033', milan = '034', genoa = '035',
-  naples = '036', livonian_order = '037', crimea = '038', aq_qoyunlu = '039', savoy = '040', tuscany = '041'
+  naples = '036', livonian_order = '037', crimea = '038', aq_qoyunlu = '039', savoy = '040', tuscany = '041', florence = '042'
 }
 REALM_NAME = {
   ['000'] = 'None', ['001'] = 'Austria', ['002'] =  'Castile', ['003'] = 'England', ['004'] = 'France', ['005'] = 'Muscovy',
@@ -30,7 +30,7 @@ REALM_NAME = {
   ['012'] = 'Papal States', ['013'] = 'Brandenburg', ['014'] = 'Venice', ['015'] = 'Mamluks', ['016'] = 'Byzantium', ['017'] = 'Ulm', ['018'] = 'Aragon',
   ['019'] = 'Burgundy', ['020'] = 'Bohemia', ['021'] = 'Lithuania', ['022'] = 'Hungary', ['023'] = 'Novgorod', ['024'] = 'Great Horde', ['025'] = 'Morocco', ['026'] = 'Norway',
   ['027'] = 'Qara Qoyunlu', ['028'] = 'Teutonic Order', ['029'] = 'Tunis', ['030'] = 'Persia', ['031'] = 'Scotland', ['032'] = 'Saxony', ['033'] = 'Bavaria', ['034'] = 'Milan', ['035'] = 'Genoa',
-  ['036'] = 'Naples', ['037'] = 'Livonian Order', ['038'] = 'Crimea', ['039'] = 'Aq Qoyunlu', ['040'] = 'Savoy', ['041'] = 'Tuscany'
+  ['036'] = 'Naples', ['037'] = 'Livonian Order', ['038'] = 'Crimea', ['039'] = 'Aq Qoyunlu', ['040'] = 'Savoy', ['041'] = 'Tuscany', ['042'] = 'Florence'
 }
 
 RELIGION = { none = 0, catholic = 1, diverse = 2, protestant = 3, counter_reformed = 4, muslim = 5, orthodox = 6, revolutionary = 7 }
