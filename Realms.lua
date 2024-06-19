@@ -1029,7 +1029,7 @@ SETUP_DATA = {
       marriages = { WesternMap.navarra, WesternMap.napoli },
       l_towns = { WesternMap.valencia},
       s_towns = { WesternMap.zaragoza, WesternMap.barcelona, WesternMap.baleares, WesternMap.sardenya, WesternMap.palermo, WesternMap.mesina,
-      WesternMap.Malta, },
+      WesternMap.malta, },
       vassals = { WesternMap.napoli, WesternMap.napoli, WesternMap.salerno, WesternMap.bari },
       influence = {
         {-7.35, -5.58}, {-7.35, -5.96}, --Castille
@@ -1038,7 +1038,7 @@ SETUP_DATA = {
         {3.50, -5.91} --Naples
       },
       merchants = { {-1.87, -6.30}, {-10.93, -9.12} },
-      figurines = { {-5.35, -5.09}, 'none', 'none', {-0.82, -7.40} }, --Aragon, C. Med.
+      figurines = { {-5.35, -5.09}, 'none', 'none', {1.25, -6.99} }, --Aragon, C. Med.
       ships = { {-1.77, -5.56} }, --Gulf of Lion
       ships_bot = { {-1.77, -5.56}, {-0.82, -7.40}},
       fleet = { 0, 0, 2},
@@ -1090,7 +1090,7 @@ SETUP_DATA = {
       figurines = { {-1.98, -3.11} },
       ships = { {-4.49, 2.52} },
       ships_bot = { {-3.94, 2.76} },
-      merchants = { {-3.35, -0.48}, {-3.41, 3.26}},
+      merchants = { {-3.89, -0.63}, {-3.41, 3.26}},
       capital = WesternMap.bourgogne
     },
   },
@@ -1152,11 +1152,11 @@ SETUP_DATA = {
       EasternMap.beograd },
       vassals = { WesternMap.zagreb, WesternMap.rijeka, },
       influence = {
-        {5.48, 1.20, -2.87}, {5.85, 1.20, -2.87}, --Cr & Bo
-        {5.14, 1.20, -4.82}, --Dalmatia
-        {6.92, 1.20, -4.24}, --Se & Al
-        {4.66, 1.20, -0.33}, --Austria
-        {4.83, 1.20, 0.23} --Bohemia
+        {5.48, -2.87}, {5.85, -2.87}, --Cr & Bo
+        {5.14, -4.82}, --Dalmatia
+        {6.92, -4.24}, --Se & Al
+        {4.66, -0.33}, --Austria
+        {4.83, 0.23} --Bohemia
       },
       marriages = { WesternMap.wien, WesternMap.praha },
       merchants = { {7.27, 1.32}, {3.59, -0.84} },
@@ -1210,6 +1210,15 @@ SETUP_DATA = {
       -- setup_bag_guid = '',
       religion = RELIGION.muslim,
       s_towns = { WesternMap.tangiers, WesternMap.fez, WesternMap.gharb, WesternMap.marrakech, WesternMap.sus, WesternMap.tafilalt, },
+      influence = {
+        {-6.37, -11.02}, {-5.99, -11.02}, -- Algiers
+        {-7.30, -8.64} -- Andalucia
+      },
+      merchants = { {-10.15, -9.70}, {-5.35, -11.91} },
+      army1 = { 1, 1, 0 },
+      figurines = { {-9.77, -10.60} },
+      ships = { {-12.57, -7.05} },
+      ships_bot = { {-12.03, -9.36} },
       capital = WesternMap.fez
     },
     ['1618'] = {
@@ -1226,18 +1235,19 @@ SETUP_DATA = {
       -- setup_bag_guid = '',
       religion = RELIGION.catholic,
       s_towns = { WesternMap.trondheim, WesternMap.bergenhus, WesternMap.akershus, WesternMap.borgarsysla, },
+      influence = {
+        {0.27, 6.92}, -- Jutland
+        {3.15, 8.67}, -- Svaeland
+        {-8.01, 7.61} -- Scotland
+      },
+      allies = { {2.07, 5.83} },
+      marriages = { {2.07, 5.83}, {5.68, 8.39} },
+      merchants = { {-5.45, 9.95}, {4.02, 5.55} },
+      army1 = { 1, 0, 0 },
+      figurines = { {0.80, 9.18} },
+      ships = { {1.56, 7.64}, {-3.80, 10.63} },
+      ships_bot = { {1.38, 8.11}, {-2.91, 11.01} },
       capital = WesternMap.akershus
-    },
-  },
-  [REALM.qara_qoyunlu] = {
-    ['1444'] = {
-      parent = {'000', 'default'},
-      -- setup_bag_guid = '',
-      religion = RELIGION.muslim,
-      l_towns = { EasternMap.tabriz },
-      s_towns = { EasternMap.yerevan, EasternMap.mosul, EasternMap.kirkuk, EasternMap.tikrit, EasternMap.baghdad, },
-      vassals = { EasternMap.bitlis, },
-      capital = EasternMap.tabriz
     },
   },
   [REALM.teutonic_order] = {
@@ -1246,7 +1256,19 @@ SETUP_DATA = {
       -- setup_bag_guid = '',
       religion = RELIGION.catholic,
       s_towns = { WesternMap.danzig, WesternMap.kulm, EasternMap.marienburg, EasternMap.konigsberg, },
-      capital = WesternMap.marienburg
+      influence = {
+        {8.29, 5.99}, {8.66, 5.99}, -- Es. & Li.
+        {4.35, 4.11}, -- Pomerania
+        {4.29, 3.37}, -- Brandenburg
+        {2.88, 2.26} -- Saxony
+      },
+      merchants = { {4.48, 5.05}, {7.08, 1.74} },
+      army1 = { 1, 1, 0 },
+      figurines = { {7.93, 4.45}, 'none', 'none', {6.74, 6.29} },
+      fleet = { 0, 0, 1 },
+      ships = { {6.68, 5.35} },
+      ships_bot = { {6.68, 5.35} },
+      capital = EasternMap.marienburg
     },
   },
   [REALM.tunis] = {
@@ -1255,10 +1277,36 @@ SETUP_DATA = {
       -- setup_bag_guid = '',
       religion = RELIGION.muslim,
       s_towns = { WesternMap.mitidja, WesternMap.kabylia, WesternMap.bizerte, WesternMap.tunis, WesternMap.sousse, WesternMap.tripoli, },
+      influence = {
+        {-1.44, -9.83}, -- Algiers
+        {-1.26, -10.99} -- N. Sahara
+      },
+      merchants = { {-4.60, -11.66}, {-1.48, -7.10} },
+      army1 = { 1, 1, 0 },
+      figurines = { {0.22, -10.51}, 'none', 'none', {-0.50, -8.45} },
+      ships = { {2.52, -7.86} },
+      ships_bot = { {2.17, -10.81} },
       capital = WesternMap.tunis
     },
   },
   [REALM.persia] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.muslim,
+      l_towns = { EasternMap.tabriz, },
+      s_towns = { EasternMap.mosul, EasternMap.kirkuk, EasternMap.yerevan, EasternMap.tikrit, EasternMap.baghdad },
+      vassals = { EasternMap.bitlis },
+      influence = {
+        {20.27, -5.38}, {20.65, -5.38}, -- Transcaucasia
+        {17.27, -8.59}, -- Kurdistan
+        {20.19, -4.48} -- Caucasus
+      },
+      claims = { {17.62, -8.17} }, -- Kurdistan
+      merchants = { {20.41, -2.72}, {20.41, -2.72} },
+      army1 = { 0, 2, 0 },
+      figurines = { {18.80, -5.72} },
+      capital = EasternMap.tabriz
+    },
     ['1618'] = {
       parent = {'000', 'default'},
       religion = RELIGION.muslim,
@@ -1272,6 +1320,17 @@ SETUP_DATA = {
       parent = {'000', 'default'},
       religion = RELIGION.catholic,
       s_towns = { WesternMap.aberdeen, WesternMap.perth, WesternMap.lothian, WesternMap.ayrshire, },
+      influence = {
+        {-10.60, 5.16}, -- Ireland
+        {-7.80, 5.42}, -- Northumbria
+        {-7.80, 5.42}, -- Seine
+        {-0.50, 8.48} -- Vestlandet
+      },
+      allies = { WesternMap.Paris },
+      merchants = { {-6.38, 10.04}, {-3.93, 4.05} },
+      figurines = { {-8.48, 6.59} },
+      ships = { {-4.48, 5.67}, {-8.05, 9.96} },
+      ships_bot = { {-9.41, 9.53}, {-5.87, 7.11} },
       capital = WesternMap.lothian
     },
     ['1618'] = {
@@ -1286,6 +1345,16 @@ SETUP_DATA = {
       parent = {'000', 'default'},
       religion = RELIGION.catholic,
       s_towns = { WesternMap.wittenberg, WesternMap.dresden, WesternMap.leipzig, },
+      influence = {
+        {1.09, 1.57}, -- Saxony
+        {1.30, 2.50}, -- L. Saxony
+        {0.26, 1.82}, -- Westphalia
+        {-0.36, 0.27}, -- Rhineland
+        {0.94, 0.23} -- Bavaria & Swabia
+      },
+      merchants = { {0.58, 1.36}, {3.17, -0.45} },
+      army1 = { 1, 0, 0 },
+      figurines = { {2.14, 1.62} },
       capital = WesternMap.dresden
     },
     ['1618'] = {
@@ -1324,6 +1393,17 @@ SETUP_DATA = {
       religion = RELIGION.catholic,
       l_towns = { WesternMap.milano, },
       s_towns = { WesternMap.cremona, WesternMap.parma, },
+      influence = {
+        {-0.50, -2.88}, {-0.50, -3.25}, -- Lombardy
+        {1.99, -5.73}, -- C. Italy
+        {-0.93, -2.50}, -- Switzerland
+        {-2.08, -3.17}, -- Burgundy
+        {2.06, -2.57} -- Venetia
+      },
+      claims = { {-0.71, -4.25} }, -- Lombardy
+      merchants = { {-3.42, -0.52}, {3.26, -0.90} },
+      army1 = { 1, 0, 0 },
+      figurines = { {0.04, -3.64} },
       capital = WesternMap.milano
     },
   },
@@ -1382,6 +1462,15 @@ SETUP_DATA = {
       religion = RELIGION.catholic,
       l_towns = { WesternMap.savoie, },
       s_towns = { WesternMap.geneve, WesternMap.piemont, },
+      influence = {
+        {-2.15, -1.64}, -- Burgundy
+        {0.50, -2.60}, -- Lombardy
+        {-0.59, -2.40}, -- Switzerland
+        {-1.70, -3.93}, -- Languedoc
+        {-1.12, 0.32} -- Rhineland
+      },
+      merchants = { {-3.80, -0.21}, {-3.80, -0.21} },
+      figurines = { {-2.86, -1.99} },
       capital = WesternMap.savoie
     },
     ['1618'] = {

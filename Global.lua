@@ -21,7 +21,7 @@ REALM = {
   ottomans = '006', rumelia = '006', poland = '007', denmark = '008', kalmar = '008', sweden = '009', portugal = '010', netherlands = '011',
   papal = '012', brandenburg = '013', prussia = '013', venice = '014', mamluks = '015', egypt = '015', byzantium = '016', ulm = '017',  aragon = '018',
   burgundy = '019', bohemia = '020', lithuania = '021', hungary = '022', novgorod = '023', great_horde = '024', morocco = '025', norway = '026',
-  qara_qoyunlu = '027', teutonic_order = '028', tunis = '029', persia = '030', scotland = '031', saxony = '032', bavaria = '033', milan = '034', genoa = '035',
+  teutonic_order = '028', tunis = '029', persia = '030', scotland = '031', saxony = '032', bavaria = '033', milan = '034', genoa = '035',
   naples = '036', livonian_order = '037', crimea = '038', aq_qoyunlu = '039', savoy = '040', tuscany = '041', florence = '042'
 }
 REALM_NAME = {
@@ -29,7 +29,7 @@ REALM_NAME = {
   ['006'] = 'Ottomans', ['007'] = 'Poland', ['008'] = 'Denmark', ['009'] = 'Sweden', ['010'] = 'Portugal', ['011'] = 'Netherlands',
   ['012'] = 'Papal States', ['013'] = 'Brandenburg', ['014'] = 'Venice', ['015'] = 'Mamluks', ['016'] = 'Byzantium', ['017'] = 'Ulm', ['018'] = 'Aragon',
   ['019'] = 'Burgundy', ['020'] = 'Bohemia', ['021'] = 'Lithuania', ['022'] = 'Hungary', ['023'] = 'Novgorod', ['024'] = 'Great Horde', ['025'] = 'Morocco', ['026'] = 'Norway',
-  ['027'] = 'Qara Qoyunlu', ['028'] = 'Teutonic Order', ['029'] = 'Tunis', ['030'] = 'Persia', ['031'] = 'Scotland', ['032'] = 'Saxony', ['033'] = 'Bavaria', ['034'] = 'Milan', ['035'] = 'Genoa',
+  ['028'] = 'Teutonic Order', ['029'] = 'Tunis', ['030'] = 'Persia', ['031'] = 'Scotland', ['032'] = 'Saxony', ['033'] = 'Bavaria', ['034'] = 'Milan', ['035'] = 'Genoa',
   ['036'] = 'Naples', ['037'] = 'Livonian Order', ['038'] = 'Crimea', ['039'] = 'Aq Qoyunlu', ['040'] = 'Savoy', ['041'] = 'Tuscany', ['042'] = 'Florence'
 }
 
@@ -2097,20 +2097,16 @@ function SetupRealm(player)
   FlipObjectsByPosition(realmTable['unrest'], {'Town', 'Vassal'})
 
   -- Tokens
-  -- table.insert(Deferred_Placements, { realmTable['allies'], Setup_Bag_Item_GUIDs[color]['alliance'] })
-  -- table.insert(Deferred_Placements, { realmTable['marriages'], Setup_Bag_Item_GUIDs[color]['marriage'] })
-  -- table.insert(Deferred_Placements, { realmTable['truces'], Setup_Bag_Item_GUIDs[color]['war'] })
-  -- for _, v in ipairs(realmTable['truces']) do
-  --   table.insert(Change_Rotation, { v, 'War'})
-  -- end
+  table.insert(Deferred_Placements, { realmTable['allies'], Setup_Bag_Item_GUIDs[color]['alliance'] })
+  table.insert(Deferred_Placements, { realmTable['marriages'], Setup_Bag_Item_GUIDs[color]['marriage'] })
+  table.insert(Deferred_Placements, { realmTable['truces'], Setup_Bag_Item_GUIDs[color]['war'] })
+  for _, v in ipairs(realmTable['truces']) do
+    table.insert(Change_Rotation, { v, 'War'})
+  end
 
   PlaceObjectsFromBag( realmTable['influence'], Setup_Bag_Item_GUIDs[color]['cube'], false)
   PlaceObjectsFromBag( realmTable['claims'], Setup_Bag_Item_GUIDs[color]['claim'], false)
   PlaceObjectsFromBag( realmTable['core'], Setup_Bag_Item_GUIDs[color]['claim'], true, 'Core')
-
-  PlaceObjectsFromBag( realmTable['allies'], Setup_Bag_Item_GUIDs[color]['alliance'], false)
-  PlaceObjectsFromBag( realmTable['marriages'], Setup_Bag_Item_GUIDs[color]['marriage'], false)
-  PlaceObjectsFromBag( realmTable['truces'], Setup_Bag_Item_GUIDs[color]['war'], false)
   if is_bot then
     PlaceObjectsFromList( {realmTable['merchants'][1]}, Merchant_GUIDs, color, false)
   else
