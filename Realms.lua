@@ -1131,7 +1131,15 @@ SETUP_DATA = {
         religion = RELIGION.catholic,
         s_towns = { EasternMap.zemaitija, EasternMap.kaunas, EasternMap.vilnius, EasternMap.polockas, EasternMap.smolenskas, EasternMap.minskas,
         EasternMap.naugardukas, EasternMap.voluine, EasternMap.cernigovas, EasternMap.poltava, EasternMap.kijevas, EasternMap.edisanas, },
+        influence = {
+          {15.31, 2.46}, --Mo & Ry
+          {12.46, 5.76}, --Novgorod
+          {9.80, 5.94} --Es & Li
+        },
         marriages = { EasternMap.krakow },
+        merchants = { {6.82, 1.53}, {11.82, 1.32} },
+        army1 = { 2, 1, 0 },
+        figurines = { {10.21, 4.07} },
         capital = EasternMap.vilnius
     },
   },
@@ -1143,7 +1151,17 @@ SETUP_DATA = {
       s_towns = { WesternMap.pozsony, WesternMap.sopron, WesternMap.pest, EasternMap.szepes, EasternMap.szabolcs, EasternMap.torda, EasternMap.hunyad,
       EasternMap.beograd },
       vassals = { WesternMap.zagreb, WesternMap.rijeka, },
-      marriages = { WesternMap.wien },
+      influence = {
+        {5.48, 1.20, -2.87}, {5.85, 1.20, -2.87}, --Cr & Bo
+        {5.14, 1.20, -4.82}, --Dalmatia
+        {6.92, 1.20, -4.24}, --Se & Al
+        {4.66, 1.20, -0.33}, --Austria
+        {4.83, 1.20, 0.23} --Bohemia
+      },
+      marriages = { WesternMap.wien, WesternMap.praha },
+      merchants = { {7.27, 1.32}, {3.59, -0.84} },
+      army1 = { 2, 1, 0 },
+      figurines = { {6.76, -1.40} },
       capital = WesternMap.pest
     },
   },
@@ -1154,6 +1172,17 @@ SETUP_DATA = {
         religion = RELIGION.catholic,
         l_towns = { EasternMap.novgorod, },
         s_towns = { EasternMap.arkhangelsk, EasternMap.kargopol, EasternMap.olonets, EasternMap.ladoga, EasternMap.neva, },
+        influence = {
+          {12.03, 5.79}, --Novgorod,
+          {15.79, 5.95}, --C. Russia
+          {15.16, 7.61}, --Vologda
+          {14.57, 5.03}, --Mo & Ry
+          {10.33, 6.77} --Es & Li
+        },
+        merchants = { {7.56, 7.78}, {20.23, 3.95} },
+        figurines = { {13.80, 6.77} },
+        ships = { {6.75, 9.20} },
+        ships_bot = { {5.92, 9.78} },
         capital = EasternMap.novgorod
     },
   },
@@ -1166,7 +1195,7 @@ SETUP_DATA = {
       influence = {
         {16.12, 3.33}, -- Mo & Ry
         {20.56, 4.87}, -- Kazan
-        {20.56, 4.87}, -- Crimea
+        {16.05, -0.52}, -- Crimea
         {20.31, -3.22} -- Caucasus
       },
       merchants = { {20.80, 3.46}, {20.02, -2.43} },
