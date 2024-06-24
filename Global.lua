@@ -2097,16 +2097,20 @@ function SetupRealm(player)
   FlipObjectsByPosition(realmTable['unrest'], {'Town', 'Vassal'})
 
   -- Tokens
-  table.insert(Deferred_Placements, { realmTable['allies'], Setup_Bag_Item_GUIDs[color]['alliance'] })
-  table.insert(Deferred_Placements, { realmTable['marriages'], Setup_Bag_Item_GUIDs[color]['marriage'] })
-  table.insert(Deferred_Placements, { realmTable['truces'], Setup_Bag_Item_GUIDs[color]['war'] })
-  for _, v in ipairs(realmTable['truces']) do
-    table.insert(Change_Rotation, { v, 'War'})
-  end
+  -- table.insert(Deferred_Placements, { realmTable['allies'], Setup_Bag_Item_GUIDs[color]['alliance'] })
+  -- table.insert(Deferred_Placements, { realmTable['marriages'], Setup_Bag_Item_GUIDs[color]['marriage'] })
+  -- table.insert(Deferred_Placements, { realmTable['truces'], Setup_Bag_Item_GUIDs[color]['war'] })
+  -- for _, v in ipairs(realmTable['truces']) do
+  --   table.insert(Change_Rotation, { v, 'War'})
+  -- end
 
   PlaceObjectsFromBag( realmTable['influence'], Setup_Bag_Item_GUIDs[color]['cube'], false)
   PlaceObjectsFromBag( realmTable['claims'], Setup_Bag_Item_GUIDs[color]['claim'], false)
   PlaceObjectsFromBag( realmTable['core'], Setup_Bag_Item_GUIDs[color]['claim'], true, 'Core')
+
+  PlaceObjectsFromBag( realmTable['allies'], Setup_Bag_Item_GUIDs[color]['alliance'], false)
+  PlaceObjectsFromBag( realmTable['marriages'], Setup_Bag_Item_GUIDs[color]['marriage'], false)
+  PlaceObjectsFromBag( realmTable['truces'], Setup_Bag_Item_GUIDs[color]['war'], false)
   if is_bot then
     PlaceObjectsFromList( {realmTable['merchants'][1]}, Merchant_GUIDs, color, false)
   else
