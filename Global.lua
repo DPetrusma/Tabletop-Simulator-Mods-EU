@@ -459,7 +459,7 @@ end
 --[[ ----------------------------------
        Helpers for manual setup
      ---------------------------------- ]]
---For now, the positions of each colour are fixed, so we just need the colour as input
+
 function CreateRealmButtons()
   --This will track the actual buttons and what realm they are associated with
   RealmSetupButtons = {}
@@ -493,7 +493,7 @@ function CreateRealmButtons()
           RealmSetupButtons[realmButton] = code
           --Track which realms we've placed a button for this time
           RealmsWithButtons[code] = true
-          --This tag is used to define the behaviour when it's flipped
+          --This tag is used to define the behaviour when it's selected
           realmButton.addTag('RealmSetupButton')
           realmButton.setName(REALM_NAME[code])
           --This is so it's obvious which player it is for
@@ -503,7 +503,8 @@ function CreateRealmButtons()
     end
   end
 
-  --After all pieces are moved, I need to delete the buttons.
+  -- At this point, we can't handle swapping or removing this seat, so
+  -- destroy those buttons
   for button,data in pairs(Buttons_To_Swap) do
     if ( data.seat == PlayerInSetup.seat or data.target_color == PlayerInSetup.color ) and not button.isDestroyed() then
       button.destroy()
@@ -522,6 +523,7 @@ function CreateRealmButtons()
       button.destroy()
     end
   end
+
   return 1
 end
 
@@ -536,6 +538,20 @@ function AutoSetupRealm()
   --Clear out this table so that someone else can choose a realm
   PlayerInSetup = {}
   Is_Realm_Selecting = false
+
+  -- At this point, I need to check if all colours have been dealt with. If so, place
+  -- the deferred pieces and other final steps
+  ManualSetupRealmsDealtWithCount = ManualSetupRealmsDealtWithCount + 1
+  if ManualSetupRealmsDealtWithCount == 6 then
+    DeferredPlacements()
+    RotateMissionDecks()
+    DealActionCards()
+    RotateTruceAndRemoveBags()
+    printToAll("Remember to draw three additional action cards and appoint advisors and leaders.\nYou may keep up to four action cards and two missions in your hand (unless otherwise specified by the scenario)", {1,1,1})
+  else
+    broadcastToAll('Marriage and Alliance tokens will be placed after all colors have a realm selected or have been removed')
+  end
+
   return 1
 end
 
@@ -876,17 +892,19 @@ function Setup_Game()
 
     Player_Color_From_Seat =
     {
-      'blue',
-      'yellow',
-      'red',
-      'white',
-      'purple',
-      'green'
+      [Player_Seat_From_Color.blue] = 'blue',
+      [Player_Seat_From_Color.yellow] = 'yellow',
+      [Player_Seat_From_Color.red] = 'red',
+      [Player_Seat_From_Color.white] = 'white',
+      [Player_Seat_From_Color.purple] = 'purple',
+      [Player_Seat_From_Color.green] = 'green'
     }
 
     --These are used for the manual setup helpers
     PlayerInSetup = {}
     SelectedRealms = {}
+    --Once the below counter hits 6, we will place the deferred pieces
+    ManualSetupRealmsDealtWithCount = 0
 
     for seat, color in pairs(Player_Color_From_Seat) do
       PlaceTableausAndBags(seat, color)
@@ -910,9 +928,8 @@ function Setup_Game()
     DestructByGUID({ Physics_Determination_Zone_GUID })
     UpdateTuckZonePositions()
 
-    --Create buttons for removing a color and swapping them around
+    --Create buttons for selecting a realm, removing a color and swapping them around
     CreateButtonsForRealms()
-    -- testCreateDeleteButtons()
 
     broadcastToAll("Right-click the map to select the starting state, then click the Select Realm tile to choose your realm from the map", {1,1,1})
     return 1
@@ -1572,42 +1589,9 @@ function Setup_Game()
       --- End setup for all scenarios ---
       -----------------------------------
 
-  if TEST_MODE then log('Starting deferred placements') end
-  for _, v in ipairs(Deferred_Placements) do
-    PlaceObjectsFromBag( v[1], v[2], false)
-    waitFrames(5)
-  end
-  if TEST_MODE then log('Deferred placements completed') end
+  DeferredPlacements()
 
-  if TEST_MODE then log('Rotating mission decks') end
-  local tagged_mission_objects = getObjectsWithTag('MissionCard')
-  local missions_decks = {}
-  for i, deck in pairs(tagged_mission_objects) do
-    if deck.type == 'Deck' then
-      local pos = deck.getPosition()
-      if pos[1] < 50 then
-        table.insert(missions_decks, deck)
-        deck.rotate({x=0, y=-90, z=0})
-      end
-    end
-  end
-  if TEST_MODE then
-    log('Sorting Mission decks\nObjects with matching tag found:')
-    waitFrames(1)
-    log(missions_decks)
-  end
-  waitFrames(30)
-  for _, deck in pairs(missions_decks) do
-    if deck == nil then
-      if TEST_MODE then log('Entry in deck list is nil') end
-    else
-      if deck.type == 'Deck' then
-        if TEST_MODE then log('Next deck to be sorted:' .. (deck.guid or 'unknown')) end
-        SortDeck(deck)
-      end
-    end
-  end
-  if TEST_MODE then log('Mission deck preparation completed') end
+  RotateMissionDecks()
 
   if TEST_MODE then log('Starting bot deck coroutine') end
   startLuaCoroutine(Global, 'SetupBotDecks')
@@ -1681,35 +1665,9 @@ function Setup_Game()
   end
   waitFrames(10)
 
-  -- Deal Action Cards
-  local action_deck = {}
-  for _, value in ipairs({'admin', 'diplo', 'war'}) do
-    action_deck = getObjectFromGUID(Action_Deck_GUIDs[value])
-    if action_deck ~= nil then
-      for _, p in pairs(players) do
-        if not p.bot then
-          local cap_color = p.color:gsub("^%l", string.upper)
-          -- action_deck.dealToColorWithOffset({-6, 0, 0}, true, cap_color) -- This currently deals the card upside down
-          action_deck.deal(1, cap_color)
-          waitFrames(3)
-        end
-      end
-    end
-  end
+  DealActionCards()
 
-
-  if TEST_MODE then log('Changing Rotations for Truce tokens') end
-  for _, entry in ipairs(Change_Rotation) do
-    SwitchRotationByPosAndTag( entry[1], {0, 90, 180} ,entry[2] )
-    waitFrames(2)
-  end
-
-  -- Remove Large Town and Vassal Bags
-  local objects_to_remove = getObjectsWithTag('RemoveAfterSetup')
-  for _, o in ipairs(objects_to_remove) do
-    Removed_Components_Bag.putObject(o)
-    waitFrames(3)
-  end
+  RotateTruceAndRemoveBags()
 
   -- Remove any objects specified by the scenario
   if scenario_data.remove then
@@ -2097,20 +2055,17 @@ function SetupRealm(player)
   FlipObjectsByPosition(realmTable['unrest'], {'Town', 'Vassal'})
 
   -- Tokens
-  -- table.insert(Deferred_Placements, { realmTable['allies'], Setup_Bag_Item_GUIDs[color]['alliance'] })
-  -- table.insert(Deferred_Placements, { realmTable['marriages'], Setup_Bag_Item_GUIDs[color]['marriage'] })
-  -- table.insert(Deferred_Placements, { realmTable['truces'], Setup_Bag_Item_GUIDs[color]['war'] })
-  -- for _, v in ipairs(realmTable['truces']) do
-  --   table.insert(Change_Rotation, { v, 'War'})
-  -- end
+  table.insert(Deferred_Placements, { realmTable['allies'], Setup_Bag_Item_GUIDs[color]['alliance'] })
+  table.insert(Deferred_Placements, { realmTable['marriages'], Setup_Bag_Item_GUIDs[color]['marriage'] })
+  table.insert(Deferred_Placements, { realmTable['truces'], Setup_Bag_Item_GUIDs[color]['war'] })
+  for _, v in ipairs(realmTable['truces']) do
+    table.insert(Change_Rotation, { v, 'War'})
+  end
 
   PlaceObjectsFromBag( realmTable['influence'], Setup_Bag_Item_GUIDs[color]['cube'], false)
   PlaceObjectsFromBag( realmTable['claims'], Setup_Bag_Item_GUIDs[color]['claim'], false)
   PlaceObjectsFromBag( realmTable['core'], Setup_Bag_Item_GUIDs[color]['claim'], true, 'Core')
 
-  PlaceObjectsFromBag( realmTable['allies'], Setup_Bag_Item_GUIDs[color]['alliance'], false)
-  PlaceObjectsFromBag( realmTable['marriages'], Setup_Bag_Item_GUIDs[color]['marriage'], false)
-  PlaceObjectsFromBag( realmTable['truces'], Setup_Bag_Item_GUIDs[color]['war'], false)
   if is_bot then
     PlaceObjectsFromList( {realmTable['merchants'][1]}, Merchant_GUIDs, color, false)
   else
@@ -2792,6 +2747,92 @@ function PlaceDNPRs(scenario_data)
   PlaceObjectsFromBag(pink_s_towns, Bag_GUIDs['dnpr_pb'], true, 'DNPR_Two')
   PlaceObjectsFromBag(blue_l_towns, Bag_GUIDs['dnpr_pb'], false, 'DNPR_One')
   PlaceObjectsFromBag(blue_s_towns, Bag_GUIDs['dnpr_pb'], false, 'DNPR_Two')
+end
+
+-- Deferred placement of alliance, marriages, and truce tokens so they are
+-- not underneath towns
+function DeferredPlacements()
+    if TEST_MODE then log('Starting deferred placements') end
+    for _, v in ipairs(Deferred_Placements) do
+    PlaceObjectsFromBag( v[1], v[2], false)
+    waitFrames(5)
+    end
+    if TEST_MODE then log('Deferred placements completed') end
+
+    return 1
+end
+
+-- Rotate mission decks
+function RotateMissionDecks()
+    if TEST_MODE then log('Rotating mission decks') end
+    local tagged_mission_objects = getObjectsWithTag('MissionCard')
+    local missions_decks = {}
+    for i, deck in pairs(tagged_mission_objects) do
+    if deck.type == 'Deck' then
+        local pos = deck.getPosition()
+        if pos[1] < 50 then
+        table.insert(missions_decks, deck)
+        deck.rotate({x=0, y=-90, z=0})
+        end
+    end
+    end
+    if TEST_MODE then
+    log('Sorting Mission decks\nObjects with matching tag found:')
+    waitFrames(1)
+    log(missions_decks)
+    end
+    waitFrames(30)
+    for _, deck in pairs(missions_decks) do
+    if deck == nil then
+        if TEST_MODE then log('Entry in deck list is nil') end
+    else
+        if deck.type == 'Deck' then
+        if TEST_MODE then log('Next deck to be sorted:' .. (deck.guid or 'unknown')) end
+        SortDeck(deck)
+        end
+    end
+    end
+    if TEST_MODE then log('Mission deck preparation completed') end
+
+    return 1
+end
+
+-- Deal 1 action card of each type to each player
+function DealActionCards()
+    -- Deal Action Cards
+    local action_deck = {}
+    for _, value in ipairs({'admin', 'diplo', 'war'}) do
+      action_deck = getObjectFromGUID(Action_Deck_GUIDs[value])
+      if action_deck ~= nil then
+        for _, p in pairs(players) do
+          if not p.bot then
+            local cap_color = p.color:gsub("^%l", string.upper)
+            -- action_deck.dealToColorWithOffset({-6, 0, 0}, true, cap_color) -- This currently deals the card upside down
+            action_deck.deal(1, cap_color)
+            waitFrames(3)
+          end
+        end
+      end
+    end
+  
+    return 1
+end
+
+function RotateTruceAndRemoveBags()
+    if TEST_MODE then log('Changing Rotations for Truce tokens') end
+    for _, entry in ipairs(Change_Rotation) do
+      SwitchRotationByPosAndTag( entry[1], {0, 90, 180} ,entry[2] )
+      waitFrames(2)
+    end
+  
+    -- Remove Large Town and Vassal Bags
+    local objects_to_remove = getObjectsWithTag('RemoveAfterSetup')
+    for _, o in ipairs(objects_to_remove) do
+      Removed_Components_Bag.putObject(o)
+      waitFrames(3)
+    end
+  
+    return 1
 end
 
 -- Set-up Bot Decks
@@ -4529,6 +4570,19 @@ function removePlayerPieces()
     end
   end
 
+  -- At this point, I need to check if all colours have been dealt with. If so, place
+  -- the deferred pieces and other final steps
+  ManualSetupRealmsDealtWithCount = ManualSetupRealmsDealtWithCount + 1
+  if ManualSetupRealmsDealtWithCount == 6 then
+    DeferredPlacements()
+    RotateMissionDecks()
+    DealActionCards()
+    RotateTruceAndRemoveBags()
+    printToAll("Remember to draw three additional action cards and appoint advisors and leaders.\nYou may keep up to four action cards and two missions in your hand (unless otherwise specified by the scenario)", {1,1,1})
+  else
+    broadcastToAll('Marriage and Alliance tokens will be placed after all colors have a realm selected or have been removed')
+  end
+  
   return 1
 end
 
