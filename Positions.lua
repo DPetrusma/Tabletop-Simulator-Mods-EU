@@ -171,88 +171,378 @@ AfricaMap = {
     ['wallachiabulgaria'] = {8.71, -3.93}, ['westernukraine'] = {13.07, -0.35}, ['whiteruthenia'] = {14.2, 3.0}, ['cyprus'] = {13.19, -9.94}
   }
 
-  TradeProtectionSlots = {
-    --All of these have had the Z position increased by 0.1
-    [{1.77,-7.90}] = 'Central Mediterranean',
-    [{2.55,-7.90}] = 'Central Mediterranean',
-    [{-5.13,-8.31}] = 'Western Mediterranean',
-
-    ----[[
-    [{12.60, -3.93}] = 'Black Sea',
-    [{13.31, -3.93}] = 'Black Sea',
-    [{14.05, -3.93}] = 'Black Sea',
-    [{9.37, -7.21}] = 'Aegean Sea',
-    [{10.08, -7.22}] = 'Aegean Sea',
-    [{7.02, -9.97}] = 'Eastern Mediterranean',
-    [{7.76, -9.93}] = 'Eastern Mediterranean',
-    [{8.49, -9.93}] = 'Eastern Mediterranean',
-
-    [{4.23, -5.64}] = 'Adriatic Sea',
-    [{4.23, -5.64}] = 'Adriatic Sea',
-    [{5.90, -6.00}] = 'Adriatic Sea',
-    [{-1.10, -5.72}] = 'Gulf of Lion',
-    [{-1.79, -5.70}] = 'Gulf of Lion',
-    [{-2.55, -5.71}] = 'Gulf of Lion',
-    [{-4.34, -8.34}] = 'Western Mediterranean',
-    [{-5.10, -8.34}] = 'Western Mediterranean',
-    [{-12.21, -6.51}] = 'Central Atlantic',
-    [{-12.94, -6.49}] = 'Central Atlantic',
-    [{-12.57, -7.12}] = 'Central Atlantic',
-    [{-7.39, -2.70}] = 'Bay of Biscay',
-    [{-8.12, -2.70}] = 'Bay of Biscay',
-    [{-8.88, -2.70}] = 'Bay of Biscay',
-    [{-11.56, -0.91}] = 'Eastern Atlantic',
-    [{-12.28, -0.89}] = 'Eastern Atlantic',
-    [{-6.04, 1.15}] = 'English Channel',
-    [{-5.30, 1.54}] = 'English Channel',
-
-    [{-4.47, 2.44}] = 'English Channel',
-    [{-5.25, 5.59}] = 'Doggerbank',
-    [{-4.48, 5.59}] = 'Doggerbank',
-    [{-3.75, 7.19}] = 'North Sea',
-    [{-2.99, 7.19}] = 'North Sea',
-    [{-3.79, 10.56}] = 'Norwegian Sea',
-    [{-4.52, 10.56}] = 'Norwegian Sea',
-    [{-7.31, 9.92}] = 'Northeastern Atlantic',
-    [{-8.04, 9.92}] = 'Northeastern Atlantic',
-    [{1.51, 7.60}] = 'Skagerrak',
-    [{1.49, 7.04}] = 'Skagerrak',
-    [{1.97, 6.61}] = 'Skagerrak',
-    [{5.25, 5.35}] = 'Baltic Sea',
-    [{5.96, 5.35}] = 'Baltic Sea',
-    [{6.69, 5.34}] = 'Baltic Sea',
-    [{6.76, 9.09}] = 'Gulf of Bothnia',
-    [{6.76, 9.73}] = 'Gulf of Bothnia',
-    [{6.76, 10.35}] = 'Gulf of Bothnia',
-    [{-14.30, 10.97}] = 'Northwestern Atlantic',
-    [{-15.02, 10.97}] = 'Northwestern Atlantic',
-
-    [{-14.31, 9.30}] = 'Caribbean Sea',
-    [{-14.96, 9.08}] = 'Caribbean Sea',
-    [{-15.65, 9.45}] = 'Caribbean Sea',
-    [{-14.64, 5.15}] = 'Southwestern Atlantic',
-    [{-15.37, 5.15}] = 'Southwestern Atlantic',
-    [{-16.65, 6.46}] = 'Southeasten Pacific',
-    [{-17.37, 6.46}] = 'Southeasten Pacific',
-    [{-18.10, 6.46}] = 'Southeasten Pacific',
-    [{-14.30, 1.27}] = 'East Africa Coast',
-    [{-14.69, -0.16}] = 'East Africa Coast',
-    [{-17.50, 0.53}] = 'Southeastern Atlantic',
-    [{-18.29, 0.53}] = 'Southeastern Atlantic',
-    [{-18.29, -0.08}] = 'Southeastern Atlantic',
-    [{-17.38, -11.76}] = 'Great Australian Bight',
-    [{-18.10, -11.76}] = 'Great Australian Bight',
-    [{-18.33, -11.06}] = 'East Indies',
-    [{-18.33, -10.47}] = 'East Indies',
-    [{-18.33, -9.87}] = 'East Indies',
-    [{-15.99, -7.36}] = 'Sea of Japan',
-    [{-15.26, -7.36}] = 'Sea of Japan',
-    [{-14.57, -7.36}] = 'Sea of Japan',
-    [{-16.19, -4.90}] = 'Indian Ocean',
-    [{-16.20, -4.35}] = 'Indian Ocean',
-    [{-16.60, -3.92}] = 'Indian Ocean',
-    --]]
+  TradeNodeLocations = {
+    ['adriatic sea'] = {},
+    ['aleppo'] = {},
+    ['alexandria'] = {},
+    ['astrakhan'] = {},
+    ['baltic sea'] = {},
+    ['blacksea'] = {},
+    ['bordeaux'] = {},
+    ['champagne'] = {},
+    ['chinaandjapan'] = {},
+    ['eastindies'] = {},
+    ['englishchannel'] = {},
+    ['genoa'] = {},
+    ['indianocean'] = {},
+    ['ivorycoast'] = {},
+    ['kazan'] = {},
+    ['kiev'] = {},
+    ['krakow'] = {},
+    ['lubeck'] = {},
+    ['maghreb'] = {},
+    ['northamerica'] = {},
+    ['northsea'] = {},
+    ['novgorod'] = {},
+    ['southamerica'] = {},
+    ['saxony'] = {},
+    ['sevilla'] = {},
+    ['wien'] = {},
   }
+
+  -- From this position, the below offsets will be used to determine the location of the 5 maximum influence tokens
+  -- Hopefully it works well enough for all regions
+  InfluenceLocations = {
+    ['algiers'] = {}, ['andalucia'] = {}, ['aquitaine'] = {}, ['aragon'] = {},
+    ['austria'] = {}, ['bavariaswabia'] = {}, ['bohemia'] = {}, ['brandenburg'] = {},
+    ['brittanynormandy'] = {}, ['burgundy'] = {}, ['castile'] = {}, ['centralitaly'] = {},
+    ['corsicasardinia'] = {}, ['dalmatia'] = {}, ['eastanglia'] = {}, ['flanderswallonia'] = {},
+    ['gotalandskane'] = {}, ['hungarianplain'] = {}, ['ireland'] = {}, ['jutland'] = {},
+    ['languedoc'] = {}, ['leon'] = {}, ['loire'] = {}, ['lombardy'] = {},
+    ['lowersaxony'] = {}, ['macaronesia'] = {}, ['naples'] = {}, ['netherlands'] = {},
+    ['northernmorocco'] = {}, ['northumbria'] = {}, ['ostlandet'] = {}, ['pomerania'] = {},
+    ['portugal'] = {}, ['prussia'] = {}, ['rhineland'] = {}, ['royalhungary'] = {},
+    ['saxony'] = {}, ['scotland'] = {}, ['seine'] = {}, ['sicily'] = {},
+    ['sjaellandfyn'] = {}, ['southernmorocco'] = {}, ['svealand'] = {}, ['switzerland'] = {},
+    ['tirol'] = {}, ['tunisia'] = {}, ['venetia'] = {}, ['waleswesex'] = {},
+    ['westphalia'] = {}, ['wielkopoland'] = {},
+
+    ['aegeanarchipelago'] = {}, ['transcaucasia'] = {}, ['astrakhan'] = {}, ['aydin'] = {},
+    ['caucasus'] = {}, ['centralrussia'] = {}, ['circassia'] = {}, ['crimea'] = {},
+    ['easternukraine'] = {}, ['egypt'] = {}, ['estonialivonia'] = {}, ['finland'] = {},
+    ['greece'] = {}, ['iraq'] = {}, ['karaman'] = {}, ['karelia'] = {},
+    ['kurdistan'] = {}, ['lithuania'] = {}, ['macedoniathrace'] = {}, ['mazoviamalopolska'] = {},
+    ['moldavia'] = {}, ['moscowryazan'] = {}, ['northernanatolia'] = {}, ['novgorod'] = {},
+    ['palestine'] = {}, ['perm'] = {}, ['redruthenia'] = {}, ['rum'] = {},
+    ['saratov'] = {}, ['serbiaalbania'] = {}, ['syria'] = {}, ['transylvania'] = {},
+    ['wallachiabulgaria'] = {}, ['westernukraine'] = {}, ['whiteruthenia'] = {}, ['cyprus'] = {}
+  }
+
+  InfluenceOffsets = {
+    {},
+    {},
+    {},
+    {},
+    {},
+  }
+
+  SeaZoneLocations = {
+    ['Central Mediterranean'] = {
+        TradeProtectionSlots = {
+            {1.77, -7.90},
+            {2.55, -7.90}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Western Mediterranean'] = {
+        TradeProtectionSlots = {
+            {-5.13, -8.31},
+            {-4.34, -8.34},
+            {-5.10, -8.34}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Eastern Mediterranean'] = {
+        TradeProtectionSlots = {
+            {7.02, -9.97},
+            {7.76, -9.93},
+            {8.49, -9.93}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Black Sea'] = {
+        TradeProtectionSlots = {
+            {12.60, -3.93},
+            {13.31, -3.93},
+            {14.05, -3.93}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Aegean Sea'] = {
+        TradeProtectionSlots = {
+            {9.37, -7.21},
+            {10.08, -7.22}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Adriatic Sea'] = {
+        TradeProtectionSlots = {
+            {4.23, -5.64},
+            {4.23, -5.64},
+            {5.90, -6.00}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Gulf of Lion'] = {
+        TradeProtectionSlots = {
+            {-1.10, -5.72},
+            {-1.79, -5.70},
+            {-2.55, -5.71}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Central Atlantic'] = {
+        TradeProtectionSlots = {
+            {-12.21, -6.51},
+            {-12.94, -6.49},
+            {-12.57, -7.12}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Eastern Atlantic'] = {
+        TradeProtectionSlots = {
+            {-11.56, -0.91},
+            {-12.28, -0.89}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Northeastern Atlantic'] = {
+        TradeProtectionSlots = {
+            {-7.31, 9.92},
+            {-8.04, 9.92}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Northwestern Atlantic'] = {
+        TradeProtectionSlots = {
+            {-14.30, 10.97},
+            {-15.02, 10.97}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Southwestern Atlantic'] = {
+        TradeProtectionSlots = {
+            {-14.64, 5.15},
+            {-15.37, 5.15}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Southeastern Atlantic'] = {
+        TradeProtectionSlots = {
+            {-17.50, 0.53},
+            {-18.29, 0.53},
+            {-18.29, -0.08}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Bay of Biscay'] = {
+        TradeProtectionSlots = {
+            {-7.39, -2.70},
+            {-8.12, -2.70},
+            {-8.88, -2.70}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['English Channel'] = {
+        TradeProtectionSlots = {
+            {-6.04, 1.15},
+            {-5.30, 1.54},
+            {-4.47, 2.44}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Doggerbank'] = {
+        TradeProtectionSlots = {
+            {-5.25, 5.59},
+            {-4.48, 5.59}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['North Sea'] = {
+        TradeProtectionSlots = {
+            {-3.75, 7.19},
+            {-2.99, 7.19}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Norwegian Sea'] = {
+        TradeProtectionSlots = {
+            {-3.79, 10.56},
+            {-4.52, 10.56}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Skagerrak'] = {
+        TradeProtectionSlots = {
+            {1.51, 7.60},
+            {1.49, 7.04},
+            {1.97, 6.61}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Baltic Sea'] = {
+        TradeProtectionSlots = {
+            {5.25, 5.35},
+            {5.96, 5.35},
+            {6.69, 5.34}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Gulf of Bothnia'] = {
+        TradeProtectionSlots = {
+            {6.76, 9.09},
+            {6.76, 9.73},
+            {6.76, 10.35}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Caribbean Sea'] = {
+        TradeProtectionSlots = {
+            {-14.31, 9.30},
+            {-14.96, 9.08},
+            {-15.65, 9.45}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Southeasten Pacific'] = {
+        TradeProtectionSlots = {
+            {-16.65, 6.46},
+            {-17.37, 6.46},
+            {-18.10, 6.46}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['East Africa Coast'] = {
+        TradeProtectionSlots = {
+            {-14.30, 1.27},
+            {-14.69, -0.16}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Great Australian Bight'] = {
+        TradeProtectionSlots = {
+            {-17.38, -11.76},
+            {-18.10, -11.76}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['East Indies'] = {
+        TradeProtectionSlots = {
+            {-18.33, -11.06},
+            {-18.33, -10.47},
+            {-18.33, -9.87}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Sea of Japan'] = {
+        TradeProtectionSlots = {
+            {-15.99, -7.36},
+            {-15.26, -7.36},
+            {-14.57, -7.36}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+    ['Indian Ocean'] = {
+        TradeProtectionSlots = {
+            {-16.19, -4.90},
+            {-16.20, -4.35},
+            {-16.60, -3.92}
+        },
+        Fleets = {
+            {0,0},
+            {0,0}
+        }
+    },
+  }
+
+  TradeProtectionSlots = {}
+
+  for sea_zone,locations in pairs(SeaZoneLocations) do
+    for _,loc in pairs(locations.TradeProtectionSlots) do
+        TradeProtectionSlots[loc] = sea_zone
+    end
+  end
 
   --Something like this
   PrestigeLocations = {
