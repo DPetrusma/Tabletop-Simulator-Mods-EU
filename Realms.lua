@@ -46,7 +46,7 @@ SETUP_DATA = {
       marriages = { WesternMap.pest },
       influence = { {1.57, -0.63}, {1.57, -0.25}, {6.23, 0.09}, {6.23, -0.28}, {3.78, 1.61}, {-0.36, -3.42},
                     {2.17, -4.68}, {4.26, -3.45}, },
-      merchants = { {3.42, -0.43}, {0.71, 1.27} },
+      merchants = { {3.64, -0.55}, {0.91, 1.21} }, --Wien, Saxony
       figurines = { {4.19, -1.70} },
       ships = { {4.17, -5.45} },
       ships_bot = { {3.86, -5.02} },
@@ -847,7 +847,7 @@ SETUP_DATA = {
       s_towns = { WesternMap.berlin, WesternMap.potsdam, WesternMap.altmark },
       influence = { {4.27, 4.36}, {4.27, 3.98}, {5.68, 3.88}, {0.33, 4.65},
                     {1.29, 3.56}, {-0.31, 2.09}, {2.86, 0.78} },
-      merchants = { {0.91, 0.93}, {3.05, -0.66} },
+      merchants = { {0.46, 0.80}, {3.18, -0.96} }, --Saxony, Wien
       figurines = { {4.25, 3.34} },
       army1 = { 1, 0, 0 },
       capital = WesternMap.berlin
@@ -1110,7 +1110,7 @@ SETUP_DATA = {
         {5.34, -0.88} -- Royal Hungary
       },
       marriages = { WesternMap.pest },
-      merchants = { {3.82, -0.89}, {0.71, 0.88} },
+      merchants = { {3.18, -0.55}, {0.46, 1.21} }, --Wien, Saxony
       figurines = { {2.80, 0.57} },
       capital = WesternMap.praha
     },
@@ -1159,7 +1159,7 @@ SETUP_DATA = {
         {4.83, 0.23} --Bohemia
       },
       marriages = { WesternMap.wien, WesternMap.praha },
-      merchants = { {7.27, 1.32}, {3.59, -0.84} },
+      merchants = { {7.27, 1.32}, {3.64, -0.96} }, --Krakow, Wien
       army1 = { 2, 1, 0 },
       figurines = { {6.76, -1.40} },
       capital = WesternMap.pest
@@ -1353,7 +1353,7 @@ SETUP_DATA = {
         {-0.36, 0.27}, -- Rhineland
         {0.94, 0.23} -- Bavaria & Swabia
       },
-      merchants = { {0.58, 1.36}, {3.17, -0.45} },
+      merchants = { {3.64, -0.55}, {0.91, 1.21} }, --Wien, Saxony
       army1 = { 1, 0, 0 },
       figurines = { {2.14, 1.62} },
       capital = WesternMap.dresden
@@ -1376,7 +1376,7 @@ SETUP_DATA = {
         {-0.22, 0.17}, --Rh
         {1.73, -1.82} --T
       },
-      merchants = { {0.35, 0.96}, {3.07, -0.71}},
+      merchants = { {3.64, -0.96}, {0.91, 0.80}}, --Wien, Saxony
       figurines = { {0.92, 0.28} },
       army1 = { 1, 0, 0 },
       capital = WesternMap.munchen
@@ -1402,7 +1402,7 @@ SETUP_DATA = {
         {2.06, -2.57} -- Venetia
       },
       claims = { {-0.71, -4.25} }, -- Lombardy
-      merchants = { {-3.42, -0.52}, {3.26, -0.90} },
+      merchants = { {-3.42, -0.52}, {3.18, -0.96} }, --Champagne, Wien
       army1 = { 1, 0, 0 },
       figurines = { {-0.03, -3.77} },
       capital = WesternMap.milano

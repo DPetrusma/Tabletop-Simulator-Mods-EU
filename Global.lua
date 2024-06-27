@@ -545,7 +545,18 @@ function AutoSetupRealm()
   if ManualSetupRealmsDealtWithCount == 6 then
     DeferredPlacements()
     RotateMissionDecks()
-    DealActionCards()
+
+    local players = {} -- Work out which players are left
+    for color,seat in pairs(Player_Seat_From_Color) do
+      if getObjectFromGUID(Player_Hand_GUIDs[color]) ~= nil then
+        players[seat] = {
+          bot = false,
+          color = color
+        }
+      end
+    end
+
+    DealActionCards(players)
     RotateTruceAndRemoveBags()
     printToAll("Remember to draw three additional action cards and appoint advisors and leaders.\nYou may keep up to four action cards and two missions in your hand (unless otherwise specified by the scenario)", {1,1,1})
   else
@@ -1665,7 +1676,7 @@ function Setup_Game()
   end
   waitFrames(10)
 
-  DealActionCards()
+  DealActionCards(players)
 
   RotateTruceAndRemoveBags()
 
@@ -2798,7 +2809,7 @@ function RotateMissionDecks()
 end
 
 -- Deal 1 action card of each type to each player
-function DealActionCards()
+function DealActionCards(players)
     -- Deal Action Cards
     local action_deck = {}
     for _, value in ipairs({'admin', 'diplo', 'war'}) do
@@ -4551,6 +4562,7 @@ function removePlayerPieces()
   bag.putObject(Fleet_Tableau)
 
   --We also need to delete all of the buttons for swapping
+  --TODO Abstract this logic a little and create a function to be used here and inside CreateRealmButtons()
   for button,data in pairs(Buttons_To_Swap) do
     if ( data.seat == Player_Seat_From_Color[Color_To_Remove] or data.target_color == Color_To_Remove ) and not button.isDestroyed() then
       button.destroy()
@@ -4570,13 +4582,29 @@ function removePlayerPieces()
     end
   end
 
+  -- Destroy the player's hand zone so no-one can swap to that colour and
+  -- they won't be dealt cards
+  local player_hand = getObjectFromGUID(Player_Hand_GUIDs[Color_To_Remove])
+  player_hand.destroy()
+
   -- At this point, I need to check if all colours have been dealt with. If so, place
   -- the deferred pieces and other final steps
   ManualSetupRealmsDealtWithCount = ManualSetupRealmsDealtWithCount + 1
   if ManualSetupRealmsDealtWithCount == 6 then
     DeferredPlacements()
     RotateMissionDecks()
-    DealActionCards()
+
+    local players = {} -- Work out which players are left
+    for color,seat in pairs(Player_Seat_From_Color) do
+      if getObjectFromGUID(Player_Hand_GUIDs[color]) ~= nil then
+        players[seat] = {
+          bot = false,
+          color = color
+        }
+      end
+    end
+
+    DealActionCards(players)
     RotateTruceAndRemoveBags()
     printToAll("Remember to draw three additional action cards and appoint advisors and leaders.\nYou may keep up to four action cards and two missions in your hand (unless otherwise specified by the scenario)", {1,1,1})
   else
