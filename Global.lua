@@ -47,7 +47,9 @@ COLOR_RGB_CODES = { -- The RGB codes need to be scaled to between 0 and 1
   blue = {47/255, 67/255, 150/255, 255/255},
   green = {33/255, 177/255, 155/255, 255/255},
   purple = {161/255, 78/255, 154/255, 255/255},
-  white = {255/255, 255/255, 254/255, 255/255}
+  white = {255/255, 255/255, 254/255, 255/255},
+  teal = {113/255, 208/255, 255/255, 255/255},
+  brown = {113/255, 59/255, 23/255, 255/255}
 }
 
 --[[ ------------------
@@ -67,11 +69,11 @@ Generic_Mission_Deck_GUID = 'cadfa8'
 Scenario_Book_1_GUID = '1ae561'
 Scenario_Book_2_GUID = '79893d'
 
-Player_Hand_GUIDs = { red = '7a5107', yellow = '4f7aff', blue = '3320f7', green = '82f3dd', purple = 'b29a91', white = 'a98fd0' }
-Main_Tableau_GUIDs = { red = '388336', yellow = '90ffbf', blue = '1418fd', green = '82efa3', purple = 'ad4d79', white = '30484d' }
-Army_Tableau_GUIDs = { red = '655dff', yellow = 'd20799', blue = 'a076d6', green = 'e8a3ab', purple = 'c8a406', white = 'be9e18' }
-Fleet_Tableau_GUIDs = { red = 'ddf4d4', yellow = '005750', blue = 'fbdfa1', green = '558a42', purple = 'a76ad9', white = '3f02c4' }
-Bot_Tableau_GUIDs = { red = 'cd844f', yellow = 'c2add8', blue = '7fa64c', green = '3cfa64', purple = 'd06ee7', white = '3fed49' }
+Player_Hand_GUIDs = { red = '7a5107', yellow = '4f7aff', blue = '3320f7', green = '82f3dd', purple = 'b29a91', white = 'a98fd0', brown = '652140', teal = '61f580' }
+Main_Tableau_GUIDs = { red = '388336', yellow = '90ffbf', blue = '1418fd', green = '82efa3', purple = 'ad4d79', white = '30484d', brown = '70c4bc', teal = '61904b' }
+Army_Tableau_GUIDs = { red = '655dff', yellow = 'd20799', blue = 'a076d6', green = 'e8a3ab', purple = 'c8a406', white = 'be9e18', brown = 'a9e19e', teal = '485332' }
+Fleet_Tableau_GUIDs = { red = 'ddf4d4', yellow = '005750', blue = 'fbdfa1', green = '558a42', purple = 'a76ad9', white = '3f02c4', brown = '76a366', teal = '85bde4' }
+Bot_Tableau_GUIDs = { red = 'cd844f', yellow = 'c2add8', blue = '7fa64c', green = '3cfa64', purple = 'd06ee7', white = '3fed49', brown = '631b0f', teal = '' }
 
 Setup_Card_Deck_GUID = '6c6621'
 Event_Deck_GUIDs = {
@@ -218,11 +220,11 @@ PS_GUIDs = {
 }
 
 Prestige_Marker_GUIDs = {
-  red = 'a34738', yellow = '917e57', blue = 'b6350f', green = 'b1f322', purple = 'c3dffe', white = '24d817'
+  red = 'a34738', yellow = '917e57', blue = 'b6350f', green = 'b1f322', purple = 'c3dffe', white = '24d817', brown = 'b46c9e', teal = 'b4d541'
 }
 
 Round_Status_Marker_GUIDs = {
-  red = 'f8fe6f', yellow = 'e7476a', blue = '3a5740', green = '842237', purple = '0476d7', white = '72c3bd'
+  red = 'f8fe6f', yellow = 'e7476a', blue = '3a5740', green = '842237', purple = '0476d7', white = '72c3bd', brown = 'ed85d5', teal = 'ba367d'
 }
 
 Figurine_GUIDs = {
@@ -231,7 +233,9 @@ Figurine_GUIDs = {
   blue   = {'196789', '6f49ec', 'f4ea35', '357ceb' },
   green  = {'f49823', 'b2ccc9', '390ccb', '1d9350' },
   purple = {'18b918', '84a1a8', 'a3fbd1', '66a7e9' },
-  white  = {'9dfd9b', '849af8', 'ea745a', '2c826c' }
+  white  = {'9dfd9b', '849af8', 'ea745a', '2c826c' },
+  brown  = {'07aa38', '2f259d', '8332be', 'd6cc36' },
+  teal   = {'b98973', 'ba4d4c', '4dcf8d', 'f4c7d9' }
 }
 
 Merchant_GUIDs = {
@@ -240,7 +244,9 @@ Merchant_GUIDs = {
   blue   = {'f30cd6', '17dd06', 'dc0f3e' },
   green  = {'5ec83e', '16ce9d', 'f02763' },
   purple = {'0cceef', 'ff439f', 'd8da5c' },
-  white  = {'29421f', '778c3f', '7d16fe' }
+  white  = {'29421f', '778c3f', '7d16fe' },
+  brown  = {'5dfc9f', '61d2ae', 'a721ef' },
+  teal   = {'b84479', '0589c9', '9f2ed6' }
 }
 
 Income_Token_GUIDs = { 'e144a8', '1480cc', '1a0674', 'f5ee76', '4ca903', '621d3a' }
@@ -252,7 +258,7 @@ Bag_GUIDs = {
 }
 
 Setup_Bag_GUIDs = {
-  red = '5073e8', yellow = '8fa43c', blue = '7a2239', green = 'ddbf73', purple = 'fdd7a0', white = 'deaa34'
+  red = '5073e8', yellow = '8fa43c', blue = '7a2239', green = 'ddbf73', purple = 'fdd7a0', white = 'deaa34', brown = '2e9596', teal = '957e83'
 }
 
 Setup_Bag_Item_GUIDs = {
@@ -286,6 +292,16 @@ Setup_Bag_Item_GUIDs = {
              war = 'c35452', tag_chit = '6d1ef0', merchant_1 = '778c3f', merchant_2 = '29421f', merchant_3 = '7d16fe',
              army_1 = '9dfd9b', army_2 = '849af8', army_3 = 'ea745a', fleet = '2c826c',
              army_1_middle_eastern = '74172a', army_2_middle_eastern = 'eb5823', army_3_middle_eastern = '29cae0', fleet_middle_eastern = '7ac729' },
+  brown  = { stability = 'a37f2e', ruler_general = '7a36bc', ship = 'a47f1c', soldier = '45b2df', cube = '5ba8ee',
+             vassal = 'ed84de', s_town = '5c9dde', l_town = '2208ad', claim = '366e0f', alliance = 'd4192c', marriage = '60091a',
+             war = '7340d5', tag_chit = 'a6b0de', merchant_1 = '5dfc9f', merchant_2 = '61d2ae', merchant_3 = 'a721ef',
+             army_1 = '07aa38', army_2 = '2f259d', army_3 = '8332be', fleet = 'd6cc36',
+             army_1_middle_eastern = '', army_2_middle_eastern = '', army_3_middle_eastern = '', fleet_middle_eastern = '' },
+  teal  = { stability = '4b29d4', ruler_general = 'cef0e6', ship = '703f24', soldier = '1e1ac8', cube = '9123fa',
+             vassal = '7f78d1', s_town = '591d40', l_town = '812992', claim = 'c3113d', alliance = '6fb5bb', marriage = '633664',
+             war = 'bcca57', tag_chit = 'fdaf40', merchant_1 = 'b84479', merchant_2 = '0589c9', merchant_3 = '9f2ed6',
+             army_1 = 'b98973', army_2 = 'ba4d4c', army_3 = '4dcf8d', fleet = 'f4c7d9',
+             army_1_middle_eastern = '', army_2_middle_eastern = '', army_3_middle_eastern = '', fleet_middle_eastern = '' }
 }
 
 HRE_Influence_Cube_GUIDs = {
@@ -832,7 +848,9 @@ function Player_Seat_From_Color(color)
       red = 3,
       white = 4,
       purple = 5,
-      green = 6
+      green = 6,
+      brown = 7,
+      teal = 8
     }
 
     local main_tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
@@ -2276,6 +2294,9 @@ function GetOffset(position, offset2D, seat, height)
   elseif (seat == 4) or (seat == 5) then
     new_pos[1] = position[1] - offset2D[1]
     new_pos[3] = position[3] - offset2D[2]
+  elseif (seat == 7) or (seat == 8) then
+    new_pos[1] = position[1] - offset2D[2]
+    new_pos[3] = position[3] + offset2D[1]
   end
   return new_pos
 end
@@ -2360,7 +2381,7 @@ end
 
 -- Remove Hands and scoring markers for unused colors
 function ManageHandsAndPrestige(players)
-  local used_colors = { red = false, yellow = false, blue = false, green = false, purple = false, white = false}
+  local used_colors = { red = false, yellow = false, blue = false, green = false, purple = false, white = false, brown = false, teal = false }
   for _, p in pairs(players) do
     local player_hand = getObjectFromGUID(Player_Hand_GUIDs[p.color])
     if player_hand == nil then
@@ -4499,6 +4520,10 @@ function GetColorFromTag(object)
     return 'White'
   elseif object.hasTag('Color_Yellow') then
     return 'Yellow'
+  elseif object.hasTag('Color_Brown') then
+    return 'Brown'
+  elseif object.hasTag('Color_Teal') then
+    return 'Teal'
   end
 return false
 end
@@ -4859,7 +4884,7 @@ function removePlayerPieces()
   -- At this point, I need to check if all colours have been dealt with. If so, place
   -- the deferred pieces and other final steps
   ManualSetupRealmsDealtWithCount = ManualSetupRealmsDealtWithCount + 1
-  if ManualSetupRealmsDealtWithCount == 6 then
+  if ManualSetupRealmsDealtWithCount == 8 then
     DeferredPlacements()
     RotateMissionDecks()
     DestructByGUID(Reference_Zone_GUIDs)
@@ -4960,7 +4985,9 @@ function CreateButtonsForRealms()
     blue = {-3.0, -8.0},
     green = {-1.50, -8.00},
     purple = {0.00, -8.00},
-    white = {1.50, -8.00}
+    white = {1.50, -8.00},
+    brown = {3.00, -8.00},
+    teal = {4.50, -8.00}
   }
   local remove_player_button_offset = {-6.90, -5.08}
   local realm_selection_button_offset = {-2.00, -5.08}
