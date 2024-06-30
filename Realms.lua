@@ -587,7 +587,7 @@ SETUP_DATA = {
       vassals = { EasternMap.warszawa, EasternMap.suceava, EasternMap.basarabia },
       marriages = { EasternMap.vilnius },
       influence = { {10.76, 4.60}, {10.76, 4.23}, {8.21, 2.07}, {9.09, 0.96}, {7.86, -0.32}, {4.25, 1.25} },
-      merchants = { {7.27, 1.78}, {11.29, 1.32} },
+      merchants = { {6.85, 1.68}, {11.29, 1.32} },
       figurines = { {6.90, 2.97} },
       events = {{'407-2', 1}, {'407-1', 1}, {'307-2', 1}, {'307-1', 1}, {'207-2', 1}, {'207-1', 1}},
       capital = EasternMap.krakow
@@ -624,8 +624,8 @@ SETUP_DATA = {
       marriages = { WesternMap.ostergotland, WesternMap.borgarsysla },
       influence = { {4.20, 6.95}, {4.20, 6.57}, {0.59, 9.24}, {0.59, 8.87}, {-0.29, 8.62}, {3.27, 11.02},
                     {3.16, 8.95}, {0.25, 6.35}, {2.98, 3.96} },
-      merchants = { {4.34, 5.52}, {-5.65, 10.38} },
-      figurines = { {0.58, 7.05} },
+      merchants = { {3.52, 5.19}, {-5.65, 10.38} },
+      figurines = { {-0.05, 7.05} },
       ships = { {-3.82, 7.27}, {1.62, 7.72}},
       ships_bot = { {-3.84, 7.87}, {1.27, 8.19} },
       capital = WesternMap.kobenhavn
@@ -1137,7 +1137,7 @@ SETUP_DATA = {
           {9.80, 5.94} --Es & Li
         },
         marriages = { EasternMap.krakow },
-        merchants = { {6.82, 1.53}, {11.82, 1.32} },
+        merchants = { {7.20, 1.26}, {11.82, 1.32} }, --Krakow, Kiev
         army1 = { 2, 1, 0 },
         figurines = { {10.21, 4.07} },
         capital = EasternMap.vilnius
@@ -1159,7 +1159,7 @@ SETUP_DATA = {
         {4.83, 0.23} --Bohemia
       },
       marriages = { WesternMap.wien, WesternMap.praha },
-      merchants = { {7.27, 1.32}, {3.64, -0.96} }, --Krakow, Wien
+      merchants = { {7.29, 1.66}, {3.64, -0.96} }, --Krakow, Wien
       army1 = { 2, 1, 0 },
       figurines = { {6.76, -1.40} },
       capital = WesternMap.pest
@@ -1258,11 +1258,11 @@ SETUP_DATA = {
       s_towns = { WesternMap.danzig, WesternMap.kulm, EasternMap.marienburg, EasternMap.konigsberg, },
       influence = {
         {8.29, 5.99}, {8.66, 5.99}, -- Es. & Li.
-        {4.35, 4.11}, -- Pomerania
+        {5.04, 4.15}, -- Pomerania
         {4.29, 3.37}, -- Brandenburg
         {2.88, 2.26} -- Saxony
       },
-      merchants = { {4.48, 5.05}, {7.08, 1.74} },
+      merchants = { {4.48, 5.05}, {6.79, 1.32} }, --Lubeck, Krakow
       army1 = { 1, 1, 0 },
       figurines = { {7.93, 4.45}, 'none', 'none', {6.74, 6.29} },
       fleet = { 0, 0, 1 },
