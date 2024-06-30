@@ -321,7 +321,7 @@ SETUP_DATA = {
       allies = { WesternMap.lothian, WesternMap.provence },
       claims = { {-5.05, -3.55}, {-6.39, -0.57} },
       influence = { {-3.76, -4.11}, {-3.76, -4.48}, {-9.02, 6.84}, {-9.02, 7.22}, {-2.79, -0.79}, {-0.43, -3.04} },
-      merchants = { {-3.74, -0.52}, {-10.34, -2.96} },
+      merchants = { {-3.48, -0.60}, {-10.34, -2.96} },
       figurines = { {-3.75, 0.72}, {-6.40, -3.59} },
       ships = { {-8.91, -2.66}, {-2.61, -5.52} },
       ships_bot = { {-8.89, -1.89}, {-2.68, -4.92} },
@@ -1087,7 +1087,7 @@ SETUP_DATA = {
         {-1.98, 2.05}, --Fland. and Wall.
         {-1.30, 3.51} --Netherlands
       },
-      figurines = { {-1.98, -3.11} },
+      figurines = { {-2.02, -3.22} },
       ships = { {-4.49, 2.52} },
       ships_bot = { {-3.94, 2.76} },
       merchants = { {-3.89, -0.63}, {-3.41, 3.26}},
@@ -1324,7 +1324,7 @@ SETUP_DATA = {
       influence = {
         {-10.60, 5.16}, -- Ireland
         {-7.80, 5.42}, -- Northumbria
-        {-4.46, 0.77}, -- Seine
+        {-3.53, 1.26}, -- Seine
         {-0.50, 8.48} -- Vestlandet
       },
       allies = { WesternMap.paris },
