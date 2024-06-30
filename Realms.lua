@@ -44,7 +44,7 @@ SETUP_DATA = {
       s_towns = { WesternMap.osterreich, WesternMap.steiermark, WesternMap.karnten, WesternMap.lienz,
                   WesternMap.tirol, WesternMap.krain, WesternMap.sundgau },
       marriages = { WesternMap.pest },
-      influence = { {1.57, -0.63}, {1.57, -0.25}, {6.23, 0.09}, {6.23, -0.28}, {3.78, 1.61}, {-0.36, -3.42},
+      influence = { {1.57, -0.63}, {1.57, -0.25}, {6.23, 0.09}, {6.23, -0.28}, {3.98, 0.37}, {-0.36, -3.42},
                     {2.17, -4.68}, {4.26, -3.45}, },
       merchants = { {3.64, -0.55}, {0.91, 1.21} }, --Wien, Saxony
       figurines = { {4.19, -1.70} },
@@ -846,7 +846,7 @@ SETUP_DATA = {
       ruler = {deck_guid = Setup_Card_Deck_GUID, card_guid = 'bcaf62', flip = false, ill = false },
       s_towns = { WesternMap.berlin, WesternMap.potsdam, WesternMap.altmark },
       influence = { {4.27, 4.36}, {4.27, 3.98}, {5.68, 3.88}, {0.33, 4.65},
-                    {1.29, 3.56}, {-0.31, 2.09}, {2.86, 0.78} },
+                    {1.29, 3.56}, {-0.31, 2.09}, {2.87, 0.60} },
       merchants = { {0.46, 0.80}, {3.18, -0.96} }, --Saxony, Wien
       figurines = { {4.25, 3.34} },
       army1 = { 1, 0, 0 },
@@ -1103,15 +1103,15 @@ SETUP_DATA = {
       s_towns = { WesternMap.rudohori, WesternMap.budejovice, WesternMap.olomouc, },
       vassals = { WesternMap.silesia, },
       influence = {
-        {1.17, -0.24}, -- Bavaria & Swabia
-        {3.89, -0.53}, -- Austria
+        {1.32, 0.06}, -- Bavaria & Swabia
+        {4.00, -0.51}, -- Austria
         {5.41, 1.11}, -- Wielkopolska
-        {2.18, 1.46}, -- Saxony
+        {2.00, 1.98}, -- Saxony
         {5.34, -0.88} -- Royal Hungary
       },
       marriages = { WesternMap.pest },
       merchants = { {3.18, -0.55}, {0.46, 1.21} }, --Wien, Saxony
-      figurines = { {2.80, 0.57} },
+      figurines = { {3.78, 1.64} },
       capital = WesternMap.praha
     },
     ['1618'] = {
@@ -1350,12 +1350,12 @@ SETUP_DATA = {
         {1.09, 1.57}, -- Saxony
         {1.30, 2.50}, -- L. Saxony
         {0.26, 1.82}, -- Westphalia
-        {-0.36, 0.27}, -- Rhineland
+        {-0.49, 0.22}, -- Rhineland
         {0.94, 0.23} -- Bavaria & Swabia
       },
       merchants = { {3.64, -0.55}, {0.91, 1.21} }, --Wien, Saxony
       army1 = { 1, 0, 0 },
-      figurines = { {2.14, 1.62} },
+      figurines = { {1.95, 1.14} },
       capital = WesternMap.dresden
     },
     ['1618'] = {
@@ -1371,13 +1371,13 @@ SETUP_DATA = {
       religion = RELIGION.catholic,
       s_towns = { WesternMap.regensburg, WesternMap.landshut, WesternMap.munchen, },
       influence ={
-        {1.96, -0.30}, --B S
+        {2.01, -0.16}, --B S
         {1.29, 0.89}, --Sax
-        {-0.22, 0.17}, --Rh
+        {-0.11, 0.22}, --Rh
         {1.73, -1.82} --T
       },
       merchants = { {3.64, -0.96}, {0.91, 0.80}}, --Wien, Saxony
-      figurines = { {0.92, 0.28} },
+      figurines = { {0.98, -0.62} },
       army1 = { 1, 0, 0 },
       capital = WesternMap.munchen
     },
