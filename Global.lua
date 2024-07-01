@@ -1126,7 +1126,6 @@ function Setup_Game()
       broadcastToAll("Setting up: [u]Imperial Waltz (3 players + 1 Bot)[/u]", {1,1,1})
     else
       broadcastToAll("Setting up: [u]Imperial Waltz (3 players + 2 Bots)[/u]", {1,1,1})
-      broadcastToAll("Duplicate Event 256B was replaced with 262B", {1,1,1})
     end
 
     CoreScenarioSetup(scenario_data)
