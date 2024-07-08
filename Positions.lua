@@ -172,7 +172,7 @@ AfricaMap = {
   }
 
   TradeNodeLocations = {
-    ['adriatic sea'] = {},
+    ['adriaticsea'] = {},
     ['aleppo'] = {},
     ['alexandria'] = {},
     ['astrakhan'] = {},

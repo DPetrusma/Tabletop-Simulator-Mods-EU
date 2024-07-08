@@ -2072,7 +2072,42 @@ function SetupRealm(player)
   if is_bot then
     PlaceObjectsFromBag( realmTable['ships_bot'], Setup_Bag_Item_GUIDs[color]['ship'], false)
   else
-    PlaceObjectsFromBag( realmTable['ships'], Setup_Bag_Item_GUIDs[color]['ship'], false)
+    -- PlaceObjectsFromBag( realmTable['ships'], Setup_Bag_Item_GUIDs[color]['ship'], false)
+    --XXX Dynamic ship placement
+    --[[
+    realmTable['ships'] looks like { 'Eastern Atlantic', 'Western Mediterranean' }
+    Before, it would look like { {1.77, -7.90}, {2.55, -7.90} }
+
+    Ideally, we'd use the same logic for influence, merchants, and army figures
+
+    0. Output - a table of co-ordinates to pass to PlaceObjectsFromBag
+    1. Make sure we have a table tracking what slot we are up to
+    2. Step through each zone in the realm data and find the co-ordinates of the
+        slot we're up to in that zone
+    3. If that slot is beyond the maximum of the sea zone slots, warn the players
+        and go back to slot 1
+    --]]
+    -- Track the number of ships in each sea zone so we can warn the players when
+    -- there are more than the number of trade protection slots
+    sea_zone_increments = {}
+    for _, sea_zone in ipairs(realmTable['ships']) do
+        -- Rather than initialising the table with all sea zones, use this logic
+        -- to populate it if the sea zone we're up to is new
+        if sea_zone_increments[sea_zone] == nil then
+            sea_zone_increments[sea_zone] = 1
+        else
+            sea_zone_increments[sea_zone] = sea_zone_increments[sea_zone] + 1
+            -- We could just use modular arithmetic, but I want to know when it's too
+            -- big so we can warn the players
+            if sea_zone_increments[sea_zone] > #TradeProtectionSlots[sea_zone] + 1 then
+                broadcastToAll("Too many ships in the TPS for " .. sea_zone)
+                sea_zone_increments[sea_zone] = 1
+            end
+        end
+        new_pos = TradeProtectionSlots[sea_zone][sea_zone_increments[sea_zone]]
+        log(new_pos)
+    end
+
     PlaceObjectsFromBag( realmTable['soldiers'], Setup_Bag_Item_GUIDs[color]['soldier'], false)
   end
 
