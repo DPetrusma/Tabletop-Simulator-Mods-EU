@@ -1726,6 +1726,31 @@ function CoreScenarioSetup(scenario_data)
   if TEST_MODE then log('Core scenario setup complete') end
 end
 
+--PUT THIS SOMEWHERE ELSE
+function GenerateCoordinatesFromArea(piece_type,area_increments,area_coordinates)
+  local realmTable_pieces = {}
+
+  for _, area in ipairs(realmTable[piece_type]) do
+      -- Rather than initialising the table with all sea zones, use this logic
+      -- to populate it if the sea zone we're up to is new
+      if area_increments[area] == nil then
+          area_increments[area] = 1
+      else
+          area_increments[area] = area_increments[area] + 1
+          -- We could just use modular arithmetic, but I want to know when it's too
+          -- big so we can warn the players
+          if area_increments[area] > #area_coordinates[area] + 1 then
+              broadcastToAll("Too many " .. piece_type .. " in " .. area)
+              area_increments[area] = 1
+          end
+      end
+      table.insert(realmTable_pieces, area_coordinates[area][area_increments[area]])
+      log(area_coordinates[area][area_increments[area]])
+  end
+
+  return realmTable_pieces
+end
+
 
 
 --[[
@@ -1989,13 +2014,16 @@ function SetupRealm(player)
   for _, v in ipairs(realmTable['truces']) do
     table.insert(Change_Rotation, { v, 'War'})
   end
-  PlaceObjectsFromBag( realmTable['influence'], Setup_Bag_Item_GUIDs[color]['cube'], false)
+  local realmTable_influence = GenerateCoordinatesFromArea('influence',influence_increments,InfluenceLocations)
+  PlaceObjectsFromBag( realmTable_influence, Setup_Bag_Item_GUIDs[color]['cube'], false)
   PlaceObjectsFromBag( realmTable['claims'], Setup_Bag_Item_GUIDs[color]['claim'], false)
   PlaceObjectsFromBag( realmTable['core'], Setup_Bag_Item_GUIDs[color]['claim'], true, 'Core')
+
+  local realmTable_merchants = GenerateCoordinatesFromArea('merchants',merchant_increments,TradeNodeLocations) --Remember, merchants won't be in a bag
   if is_bot then
-    PlaceObjectsFromList( {realmTable['merchants'][1]}, Merchant_GUIDs, color, false)
+    PlaceObjectsFromList( {realmTable_merchants[1]}, Merchant_GUIDs, color, false)
   else
-    PlaceObjectsFromList( realmTable['merchants'], Merchant_GUIDs, color, false)
+    PlaceObjectsFromList( realmTable_merchants, Merchant_GUIDs, color, false)
   end
   if is_bot then
     local army = getObjectFromGUID(Figurine_GUIDs[color][1])
@@ -2096,24 +2124,28 @@ function SetupRealm(player)
     --]]
     -- Track the number of ships in each sea zone so we can warn the players when
     -- there are more than the number of trade protection slots
-    local realmTable_ships = {}
-    for _, sea_zone in ipairs(realmTable['ships']) do
-        -- Rather than initialising the table with all sea zones, use this logic
-        -- to populate it if the sea zone we're up to is new
-        if sea_zone_increments[sea_zone] == nil then
-            sea_zone_increments[sea_zone] = 1
-        else
-            sea_zone_increments[sea_zone] = sea_zone_increments[sea_zone] + 1
-            -- We could just use modular arithmetic, but I want to know when it's too
-            -- big so we can warn the players
-            if sea_zone_increments[sea_zone] > #TradeProtectionSlots[sea_zone] + 1 then
-                broadcastToAll("Too many ships in the TPS for " .. sea_zone)
-                sea_zone_increments[sea_zone] = 1
-            end
-        end
-        table.insert(realmTable_ships, TradeProtectionSlots[sea_zone][sea_zone_increments[sea_zone]])
-        log(TradeProtectionSlots[sea_zone][sea_zone_increments[sea_zone]])
-    end
+
+    -- local realmTable_ships = {}
+    -- for _, sea_zone in ipairs(realmTable['ships']) do
+    --     -- Rather than initialising the table with all sea zones, use this logic
+    --     -- to populate it if the sea zone we're up to is new
+    --     if sea_zone_increments[sea_zone] == nil then
+    --         sea_zone_increments[sea_zone] = 1
+    --     else
+    --         sea_zone_increments[sea_zone] = sea_zone_increments[sea_zone] + 1
+    --         -- We could just use modular arithmetic, but I want to know when it's too
+    --         -- big so we can warn the players
+    --         if sea_zone_increments[sea_zone] > #TradeProtectionSlots[sea_zone] + 1 then
+    --             broadcastToAll("Too many ships in the TPS for " .. sea_zone)
+    --             sea_zone_increments[sea_zone] = 1
+    --         end
+    --     end
+    --     table.insert(realmTable_ships, TradeProtectionSlots[sea_zone][sea_zone_increments[sea_zone]])
+    --     log(TradeProtectionSlots[sea_zone][sea_zone_increments[sea_zone]])
+    -- end
+
+    local realmTable_ships = GenerateCoordinatesFromArea('ships',sea_zone_increments,TradeProtectionSlots)
+
     PlaceObjectsFromBag( realmTable_ships, Setup_Bag_Item_GUIDs[color]['ship'], false)
 
     PlaceObjectsFromBag( realmTable['soldiers'], Setup_Bag_Item_GUIDs[color]['soldier'], false)
