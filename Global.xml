@@ -590,7 +590,7 @@
 <Panel id="maximise" height="15" width="160" color="#3C3A39" rectAlignment="LowerCenter" active="false">
   <Button id="maximise" class="maximise">
     <Text id="maximise_txt" fontSize="12" color="White" alignment="MiddleCenter">
-      Minimise
+      Maximise
     </Text>
   </Button>
 </Panel>
