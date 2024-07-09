@@ -259,7 +259,8 @@ Setup_Bag_Item_GUIDs = {
   red    = { stability = '823a51', ruler_general = '272d23', ship = 'd80c7e', soldier = '04d4c0', cube = 'fe26c8',
              vassal = '405477', s_town = '622025', l_town = '21dcc8', claim = '3479d2', alliance = 'fbf72e', marriage = 'e0f1f0',
              war = 'a313fd', tag_chit = '347db4', merchant_1 = '65c7d5', merchant_2 = 'dd9bef', merchant_3 = 'd6b5d0',
-             army_1 = 'b198c2', army_2 = 'dfb12f', army_3 = 'cce497', fleet = '0019b4' },
+             army_1 = 'b198c2', army_2 = 'dfb12f', army_3 = 'cce497', fleet = '0019b4',
+             army_1_middle_eastern = '', army_2_middle_eastern = '', army_3_middle_eastern = '', fleet_middle_eastern = '' },
   yellow = { stability = 'c5fd9e', ruler_general = '8c295b', ship = '9c5ace', soldier = '7cdf8b', cube = '15ea2d',
              vassal = '21e4d6', s_town = '806208', l_town = 'cbfda2', claim = '2ff54a', alliance = 'e33aa3', marriage = '16045a',
              war = '710cae', tag_chit = 'f36db4', merchant_1 = '0dc52d', merchant_2 = 'f59c7f', merchant_3 = '88ba29',
@@ -367,6 +368,8 @@ Main_Tableau_Offset_Positions = {
   ['bot_ideas_admin_1'] = {0.46, -1.49}, ['bot_ideas_admin_2'] = {0.81, -1.49}, ['bot_ideas_admin_3'] = {1.19, -1.49},
   ['bot_ideas_diplo_1'] = {2.02, -1.49}, ['bot_ideas_diplo_2'] = {2.38, -1.49}, ['bot_ideas_diplo_3'] = {2.75, -1.49},
   ['bot_ideas_war_1'] = {3.62, -1.49}, ['bot_ideas_war_2'] = {3.96, -1.49}, ['bot_ideas_war_3'] = {4.33, -1.49}, ['extra_events'] = {-3.23, -7.40},
+
+  ['army_1_middle_eastern_left'] = {-13.19, 3.03}, ['army_1_middle_eastern_right'] = {5.49, 3.04},
 }
 
 Main_Tableau_Local_Positions = { ['religion'] = {0.84, 2, 0.78}, ['ruler'] = {1.30, 2, 1.69}, ['missions'] = {-2.57, 2, -0.75}, ['missions_left'] = {2.57, 2, -0.75},
@@ -2303,13 +2306,15 @@ function PlaceTableausAndBags(seat, color)
     lock = true
     height = 1.02
     if (name == 'ship') or (name == 'soldier') then
+        string.match(name, 'ship_%d')
       name = name .. suffix
       height = 0.93
     elseif (name == 'merchant_1') or (name == 'merchant_2') or (name == 'merchant_3') then
       name = name .. suffix
       height = 1.50
       lock = false
-    elseif (name == 'army_1') or (name == 'army_2') or (name == 'army_3') or (name == 'fleet') then
+    elseif (name == 'army_1') or (name == 'army_2') or (name == 'army_3') or (name == 'fleet')
+    or (name == 'army_1_middle_eastern') or (name == 'army_2_middle_eastern') or (name == 'army_3_middle_eastern') or (name == 'fleet_middle_eastern') then
       name = name .. suffix
       height = 2.00
       lock = false
@@ -4475,6 +4480,14 @@ function CheckRemovedEnter(object, trashBinObject)
       name = 'army_3'
     elseif object.guid == Setup_Bag_Item_GUIDs[col].fleet then
       name = 'fleet'
+    if object.guid == Setup_Bag_Item_GUIDs[col].army_1_middle_eastern then
+      name = 'army_1_middle_eastern'
+    elseif object.guid == Setup_Bag_Item_GUIDs[col].army_2_middle_eastern then
+      name = 'army_2_middle_eastern'
+    elseif object.guid == Setup_Bag_Item_GUIDs[col].army_3_middle_eastern then
+      name = 'army_3_middle_eastern'
+    elseif object.guid == Setup_Bag_Item_GUIDs[col].fleet_middle_eastern then
+      name = 'fleet_middle_eastern'
     end
     if name == '' then return false end
     if seat == 2 then
