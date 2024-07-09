@@ -658,6 +658,26 @@ function ui_set_active()
   end
 end
 
+function ui_minimise()
+    log("minimise")
+    --Basically, make all of the screens hidden, but don't change the "current" screen so we can maximise it later
+    --Then show the maximise button
+
+    --Use this method so that ui_set_active() works
+    for key, _ in pairs(UI_PAGES) do
+        Global.UI.setAttribute(key, "active",  false)
+    end
+    Global.UI.show("maximise")
+end
+
+function ui_maximise()
+    log("maximise")
+    --Find the "current" page and make it active
+    --Then hide the maximise button
+    ui_set_active()
+    Global.UI.hide("maximise")
+end
+
 
 function ui_num_players_filter(player, value, id)
   local active = value=="True" and true or false

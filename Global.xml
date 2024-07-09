@@ -22,6 +22,8 @@
   <Button class="bot" image="small-button" padding="30 30 5 5" onClick="Global/ui_toggle_bot"/>
   <Button class="option" image="small-button" padding="30 30 5 5" onClick="Global/ui_toggle_option"/>
   <Button class="logging" image="small-button" padding="30 30 5 5" onClick="Global/ui_toggle_logging"/>
+  <Button class="minimise" image="small-button" padding="30 30 5 5" onClick="Global/ui_minimise"/>
+  <Button class="maximise" image="small-button" padding="30 30 5 5" onClick="Global/ui_maximise"/>
   <Row class="option" onClick="Global/ui_show_option_info" />
 </Defaults>
 
@@ -30,6 +32,13 @@
     <Button id="log_btn_1" class="logging">
       <Text id="log_txt_1" fontSize="12" color="White" alignment="MiddleCenter">
         Logging: Off
+      </Text>
+    </Button>
+  </Panel>
+  <Panel color="rgba(0,0,0,0)" width="200" Height="40" offsetXY="470 -825">
+    <Button id="minimise_btn_1" class="minimise">
+      <Text id="minimise_txt_1" fontSize="12" color="White" alignment="MiddleCenter">
+        Minimise
       </Text>
     </Button>
   </Panel>
@@ -576,4 +585,12 @@
       </Row>
     </TableLayout>
   </Panel>
+</Panel>
+
+<Panel id="maximise" height="15" width="160" color="#3C3A39" rectAlignment="LowerCenter" active="false">
+  <Button id="maximise" class="maximise">
+    <Text id="maximise_txt" fontSize="12" color="White" alignment="MiddleCenter">
+      Minimise
+    </Text>
+  </Button>
 </Panel>
