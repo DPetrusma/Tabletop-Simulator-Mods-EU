@@ -3911,6 +3911,29 @@ function changeRotationValue(o, n)
 	return newRotationValue.value
 end
 
+--[[
+Here we will specify the tags that should be on the face-down side (true) and
+the face-up side (false)
+--]]
+local double_sided_token_snap_behaviour = {
+    Expanded_Trade_Node = {
+        [true] = "Trade_Node",
+        [false] = "Province"
+    },
+    Revolutionary = {
+        [true] = "Religion",
+        [false] = "Province"
+    },
+    Left_HRE = {
+        [true] = nil,
+        [false] = "Province"
+    },
+    Occupied = {
+        [true] = "Province",
+        [false] = nil
+    }
+}
+
 local tagToBehaviour = {
     RoundStatus = {
         forbidPlayerActions = {
@@ -4066,7 +4089,42 @@ local tagToBehaviour = {
         [Player.Action.Copy] = "Please click on the piece to set up that realm",
         [Player.Action.Delete] = "Please click on the piece to set up that realm",        
       }
-    }
+    },
+    --[[
+    All of the double sided tokens with different snap points on the two
+    sides have +1 manpower on one of the sides, so we'll start with that tag.
+    But, is that the face-down side each time...
+    Make sure this is the right order of things, or if I need to swap the not(o.is_face_down)
+   Occupiec vs power truggle
+    --]]
+    Manpower = {
+        [Player.Action.FlipOver] = function(o)
+            for _,check_tag in ipairs(double_sided_token_snap_behaviour) do
+                if o.hasTag(check_tag) then
+                    o.removeTag(
+                        double_sided_token_snap_behaviour[check_tag][o.is_face_down]
+                    )
+                    o.addTag(
+                        double_sided_token_snap_behaviour[check_tag][not(o.is_face_down)]
+                    )
+                end
+            end
+		end,
+    },
+    Power_Struggle = {
+        [Player.Action.FlipOver] = function(o)
+            for _,check_tag in ipairs(double_sided_token_snap_behaviour) do
+                if o.hasTag(check_tag) then
+                    o.removeTag(
+                        double_sided_token_snap_behaviour[check_tag][o.is_face_down]
+                    )
+                    o.addTag(
+                        double_sided_token_snap_behaviour[check_tag][not(o.is_face_down)]
+                    )
+                end
+            end
+		end,
+    },
 }
 
 
