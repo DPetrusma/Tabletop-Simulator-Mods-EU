@@ -319,8 +319,8 @@ Idea_Card_Positions = {
 }
 
 HRE_Authority_Positions = {
-  ['0'] = {1.62, 15.16}, ['1'] = {2.46, 15.15}, ['2'] = {3.29, 15.16}, ['3'] = {4.08, 15.16}, ['4'] = {4.88, 15.17},
-  ['5'] = {5.69, 15.16}, ['6'] = {6.59, 15.16}
+  [0] = {1.62, 15.16}, [1] = {2.46, 15.15}, [2] = {3.29, 15.16}, [3] = {4.08, 15.16}, [4] = {4.88, 15.17},
+  [5] = {5.69, 15.16}, [6] = {6.59, 15.16}
 }
 
 HRE_Influence_Map_Pos = {
@@ -2654,7 +2654,7 @@ function SetupHRE(scenario_data)
   end
   HRE_Config.authority = (empire.authority or 3)
   if HRE_Config.authority ~= 3 then
-    local auth = tostring(HRE_Config.authority)
+    local auth = HRE_Config.authority
     if TEST_MODE then log('Setting up HRE with ruler ' .. (HRE_Config.ruler or 'unknown') .. 'and authority of ' .. auth) end
     local hre_pos = {HRE_Authority_Positions[auth][1], 2, HRE_Authority_Positions[auth][2]}
     local marker = getObjectFromGUID(HRE_Authority_Marker_GUID)
@@ -2669,11 +2669,11 @@ function SetupHRE(scenario_data)
           table.insert(positions, empire.influence[counter])
           counter = counter + 1
         else
-          table.insert(positions, HRE_Authority_Positions[(tostring(i))])
+          table.insert(positions, HRE_Authority_Positions[i])
           counter = counter + 1
         end
       else
-        table.insert(positions, HRE_Authority_Positions[(tostring(i))])
+        table.insert(positions, HRE_Authority_Positions[i])
         counter = counter + 1
       end
     end
@@ -4006,7 +4006,6 @@ local tagToBehaviour = {
       forbidPlayerActions = {
           [Player.Action.Copy] = "You cannot copy an Imperial Influence Cube (sit in Black to do so)",
           [Player.Action.Paste] = "You cannot paste an Imperial Influence Cube (sit in Black to do so)",
-          [Player.Action.Delete] = "You cannot delete an Imperial Influence Cube (sit in Black to do so)",
       }
   },
     NavalUnit = {
@@ -4213,7 +4212,34 @@ function CheckRemovedEnter(object, trashBinObject)
   end
 
 
-  if object.hasTag('Town') or object.hasTag('Vassal') or object.hasTag('Imperial_Influence') then
+  if object.hasTag('Town') or object.hasTag('Vassal') then
+    return false
+  end
+
+  --Return the Imperial Influence cube to the right-most empty space on the IA track
+  if object.hasTag('Imperial_Influence') then
+    -- return false
+    for i = 6, 1, -1 do
+        local hre_pos = {HRE_Authority_Positions[i][1], 2, HRE_Authority_Positions[i][2]}
+        local hits = Physics.cast({
+            origin       = hre_pos,
+            direction    = {0,1,0},
+            type         = 1, --1 for Ray, not Sphere or Box
+            max_distance = 1, --I might need to experiment here. How high are the cubes and coins?
+            debug        = true, -- uncomment to debug
+        })
+        for i,v in pairs(hits) do
+            if v.hit_object.hasTag("Imperial_Influence") or v.hit_object.hasTag("Money") then 
+                goto space_taken
+            end
+        end
+        --The idea is that if we get to here, we haven't hit an IA cube or a coin, so we
+        --want the deleted IA cube to go here
+        object.setPositionSmooth(hre_pos)
+        object.setRotationSmooth({0,0,0})
+        ::space_taken::
+    end
+
     return false
   end
 
