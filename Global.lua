@@ -4212,7 +4212,116 @@ function CheckRemovedEnter(object, trashBinObject)
   end
 
 
-  if object.hasTag('Town') or object.hasTag('Vassal') then
+  if object.hasTag('Vassal') then
+    for i = #Local_Vassal_Positions, 1, -2 do
+        local vassal_pos = {Local_Vassal_Positions[i][1], 0, Local_Vassal_Positions[i][2]}
+        local hits = Physics.cast({
+            origin       = vassal_pos,
+            direction    = {0,1,0},
+            type         = 1, --1 for Ray, not Sphere or Box
+            max_distance = 2, --I might need to experiment here.
+            debug        = true, -- uncomment to debug
+        })
+        --[[Vassals are a little different. If we get to a space with only 1 vassal token
+        and no cubes, then we place the vassal token there
+        If there is just a cube on the space, still skip it for now, but later we want to put the
+        vassal token under the cube
+        --]]
+        local hit_counter = 0
+        for _,v in pairs(hits) do
+            if v.hit_object.hasTag("Vassal") then
+                hit_counter = hit_counter + 1
+            end
+            if v.hit_object.hasTag("Cube") then
+                hit_counter = hit_counter + 2
+            end
+        end
+        if hit_counter > 1 then
+            goto space_taken_vassal
+        end
+        --[[
+        The idea is that if we get to here, we haven't hit a cube and we haven't
+        hit 2 vassal tokens, so we want the deleted vassal to go here, face up
+        --]]
+        object.setPositionSmooth(vassal_pos:setAt('y',2))
+        object.setRotationSmooth({0,0,0})
+        if object.is_face_down then object.flip() end
+        
+        ::space_taken_vassal::
+    end
+
+    return false
+  end
+
+  --[[For small and large towns, step through the spaces on the player board from bottom right to top left,
+  and place the town on the first empty space.
+  Later on, take into account cubes for occupied towns and so place the town in the first cube space and
+  move the cube to the first empty space.
+  I can probably take out this repeated code, for here and the IA cubes, and re-use a function
+  --]]
+  if object.hasTag('LargeTown') then
+    local col = string.lower(GetColorFromTag(object))
+    local tableau = getObjectFromGUID(Main_Tableau_GUIDs[col])
+    if tableau == nil then return false end
+    local tableau_pos = tableau.getPosition()
+    local seat = GetSeatFromPosition(tableau_pos)
+
+    for i = #Local_Large_Town_Positions, 1, -1 do
+        local l_town_pos = GetOffset(tableau_pos, Local_Large_Town_Positions[i], seat, 0)
+        local hits = Physics.cast({
+            origin       = l_town_pos,
+            direction    = {0,1,0},
+            type         = 1, --1 for Ray, not Sphere or Box
+            max_distance = 2, --I might need to experiment here. How high are the towns and cubes?
+            debug        = true, -- uncomment to debug
+        })
+        for _,v in pairs(hits) do
+            if v.hit_object.hasTag("LargeTown") or v.hit_object.hasTag("Cube") then
+                goto space_taken_l_town
+            end
+        end
+        --The idea is that if we get to here, we haven't hit a town or a cube, so we
+        --want the deleted large town to go here, face up
+        object.setPositionSmooth(l_town_pos:setAt('y',2))
+        object.setRotationSmooth(tableau.getRotation())
+        if object.is_face_down then object.flip() end
+        
+        ::space_taken_l_town::
+    end
+
+    return false
+  end
+
+  if object.hasTag('SmallTown') then
+    local col = string.lower(GetColorFromTag(object))
+    local tableau = getObjectFromGUID(Main_Tableau_GUIDs[col])
+    if tableau == nil then return false end
+    local tableau_pos = tableau.getPosition()
+    local seat = GetSeatFromPosition(tableau_pos)
+
+    for i = #Local_Small_Town_Positions, 1, -1 do
+        local s_town_pos = GetOffset(tableau_pos, Local_Small_Town_Positions[i], seat, 0)
+        local hits = Physics.cast({
+            origin       = s_town_pos,
+            direction    = {0,1,0},
+            type         = 1, --1 for Ray, not Sphere or Box
+            max_distance = 2, --I might need to experiment here. How high are the towns and cubes?
+            debug        = true, -- uncomment to debug
+        })
+        for _,v in pairs(hits) do
+            if v.hit_object.hasTag("SmallTown") or v.hit_object.hasTag("Cube") then
+                goto space_taken_s_town
+            end
+        end
+        --The idea is that if we get to here, we haven't hit a town or a cube, so we
+        --want the deleted large town to go here, face up
+        object.setPositionSmooth(s_town_pos:setAt('y',2))
+        object.setRotationSmooth(tableau.getRotation())
+        if object.is_face_down then object.flip() end
+        
+        ::space_taken_s_town::
+    end
+
     return false
   end
 
@@ -4225,19 +4334,20 @@ function CheckRemovedEnter(object, trashBinObject)
             origin       = hre_pos,
             direction    = {0,1,0},
             type         = 1, --1 for Ray, not Sphere or Box
-            max_distance = 1, --I might need to experiment here. How high are the cubes and coins?
+            max_distance = 2, --I might need to experiment here. How high are the cubes and coins?
             debug        = true, -- uncomment to debug
         })
-        for i,v in pairs(hits) do
+        for _,v in pairs(hits) do
+            --For IA, we can probably just check if we hit anything. Players might not use coins to block spaces
             if v.hit_object.hasTag("Imperial_Influence") or v.hit_object.hasTag("Money") then 
-                goto space_taken
+                goto space_taken_ia
             end
         end
         --The idea is that if we get to here, we haven't hit an IA cube or a coin, so we
         --want the deleted IA cube to go here
         object.setPositionSmooth(hre_pos)
         object.setRotationSmooth({0,0,0})
-        ::space_taken::
+        ::space_taken_ia::
     end
 
     return false
