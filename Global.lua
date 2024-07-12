@@ -4130,6 +4130,11 @@ function onPlayerAction(player, action, targets)
 		end
     end
     if action == Player.Action.Delete then
+      --[[ This helps our smart delete of vassals, towns, and IA work for many deleted at once ]]
+      Smart_delete_l_town_targets = {}
+      Smart_delete_s_town_targets = {}
+      Smart_delete_vassal_targets = {}
+      Smart_delete_IA_targets = {}
 	    local trashBinObject = getClosesTrashBin(player.getPointerPosition())
         for _,o in ipairs (targets) do
 			if getHandZone(o) then
@@ -4218,8 +4223,13 @@ function CheckRemovedEnter(object, trashBinObject)
     if tableau == nil then return false end
 
     for i = #Local_Vassal_Positions, 1, -2 do
-        local vassal_pos = tableau.positionToWorld({Local_Vassal_Positions[i][1], 0, Local_Vassal_Positions[i][2]})
-        local hits = Physics.cast({
+      --We need to declare these local variables before the goto. The Lua docs explain about scope.
+        local hit_counter = 0
+        local vassal_pos
+        local hits
+        if (Smart_delete_vassal_targets[i] or 0) > 1 then goto space_taken_vassal end
+        vassal_pos = tableau.positionToWorld({Local_Vassal_Positions[i][1], 0, Local_Vassal_Positions[i][2]})
+        hits = Physics.cast({
             origin       = vassal_pos,
             direction    = {0,1,0},
             type         = 1, --1 for Ray, not Sphere or Box
@@ -4231,13 +4241,10 @@ function CheckRemovedEnter(object, trashBinObject)
         If there is just a cube on the space, still skip it for now, but later we want to put the
         vassal token under the cube
         --]]
-        local hit_counter = 0
         for _,v in pairs(hits) do
-            if v.hit_object.hasTag("Vassal") then
+            if v.hit_object.hasTag("Vassal") or v.hit_object.hasTag("Cube") then
                 hit_counter = hit_counter + 1
-            end
-            if v.hit_object.hasTag("Cube") then
-                hit_counter = hit_counter + 2
+                Smart_delete_vassal_targets[i] = (Smart_delete_vassal_targets[i] or 0) + 1
             end
         end
         if hit_counter > 1 or ( hit_counter > 0 and i == 1 ) then
@@ -4250,6 +4257,7 @@ function CheckRemovedEnter(object, trashBinObject)
         if object.is_face_down then object.flip() end
         object.setPositionSmooth(vassal_pos:setAt('y',2))
         object.setRotationSmooth(tableau.getRotation())
+        Smart_delete_vassal_targets[i] = (Smart_delete_vassal_targets[i] or 0) + 1
         goto piece_moved_vassal
         
         ::space_taken_vassal::
@@ -4271,15 +4279,19 @@ function CheckRemovedEnter(object, trashBinObject)
     if tableau == nil then return false end
 
     for i = #Local_Large_Town_Positions, 1, -1 do
-        local l_town_pos = tableau.positionToWorld({Local_Large_Town_Positions[i][1], 0, Local_Large_Town_Positions[i][2]})
-        local hits = Physics.cast({
-            origin       = l_town_pos,
-            direction    = {0,1,0},
-            type         = 1, --1 for Ray, not Sphere or Box
-            max_distance = 2, --I might need to experiment here. How high are the towns and cubes?
-            -- debug        = true, -- uncomment to debug
-        })
+        --We need to declare these local variables before the goto. The Lua docs explain about scope.
         local has_hit = false
+        local l_town_pos
+        local hits
+        if Smart_delete_l_town_targets[i] then goto space_taken_l_town end
+        l_town_pos = tableau.positionToWorld({Local_Large_Town_Positions[i][1], 0, Local_Large_Town_Positions[i][2]})
+        hits = Physics.cast({
+          origin       = l_town_pos,
+          direction    = {0,1,0},
+          type         = 1, --1 for Ray, not Sphere or Box
+          max_distance = 2, --I might need to experiment here. How high are the towns and cubes?
+          -- debug        = true, -- uncomment to debug
+        })
         for _,v in pairs(hits) do
             if v.hit_object.hasTag("LargeTown") or v.hit_object.hasTag("Cube") then
               has_hit = true
@@ -4291,6 +4303,7 @@ function CheckRemovedEnter(object, trashBinObject)
         if object.is_face_down then object.flip() end
         object.setPositionSmooth(l_town_pos:setAt('y',2))
         object.setRotationSmooth(tableau.getRotation())
+        Smart_delete_l_town_targets[i] = true
         goto piece_moved_l_town
         
         ::space_taken_l_town::
@@ -4306,15 +4319,19 @@ function CheckRemovedEnter(object, trashBinObject)
     if tableau == nil then return false end
 
     for i = #Local_Small_Town_Positions, 1, -1 do
-        local s_town_pos = tableau.positionToWorld({Local_Small_Town_Positions[i][1], 0, Local_Small_Town_Positions[i][2]})
-        local hits = Physics.cast({
+        --We need to declare these local variables before the goto. The Lua docs explain about scope.
+        local has_hit = false
+        local s_town_pos
+        local hits
+        if Smart_delete_s_town_targets[i] then goto space_taken_s_town end
+        s_town_pos = tableau.positionToWorld({Local_Small_Town_Positions[i][1], 0, Local_Small_Town_Positions[i][2]})
+        hits = Physics.cast({
             origin       = s_town_pos,
             direction    = {0,1,0},
             type         = 1, --1 for Ray, not Sphere or Box
             max_distance = 2, --I might need to experiment here. How high are the towns and cubes?
             -- debug        = true, -- uncomment to debug
         })
-        local has_hit = false
         for _,v in pairs(hits) do
             if v.hit_object.hasTag("SmallTown") or v.hit_object.hasTag("Cube") then
               has_hit = true
@@ -4326,6 +4343,7 @@ function CheckRemovedEnter(object, trashBinObject)
         if object.is_face_down then object.flip() end
         object.setPositionSmooth(s_town_pos:setAt('y',2))
         object.setRotationSmooth(tableau.getRotation())
+        Smart_delete_s_town_targets[i] = true
         goto piece_moved_s_town
         
         ::space_taken_s_town::
