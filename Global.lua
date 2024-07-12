@@ -4359,15 +4359,19 @@ function CheckRemovedEnter(object, trashBinObject)
   if object.hasTag('Imperial_Influence') then
     -- return false
     for i = 6, 1, -1 do
-        local hre_pos = Vector(HRE_Authority_Positions[i][1], 0, HRE_Authority_Positions[i][2])
-        local hits = Physics.cast({
+        --We need to declare these local variables before the goto. The Lua docs explain about scope.
+        local has_hit = false
+        local hre_pos
+        local hits
+        if Smart_delete_IA_targets[i] then goto space_taken_ia end
+        hre_pos = Vector(HRE_Authority_Positions[i][1], 0, HRE_Authority_Positions[i][2])
+        hits = Physics.cast({
             origin       = hre_pos,
             direction    = {0,1,0},
             type         = 1, --1 for Ray, not Sphere or Box
             max_distance = 2, --I might need to experiment here. How high are the cubes and coins?
             -- debug        = true, -- uncomment to debug
         })
-        local has_hit = false
         for _,v in pairs(hits) do
             --I am assuming the players will use coins to block the IA spaces. We need to ignore the HRE Authority marker at least
             if v.hit_object.hasTag("Imperial_Influence") or v.hit_object.hasTag("Coin") then 
@@ -4379,6 +4383,7 @@ function CheckRemovedEnter(object, trashBinObject)
         --want the deleted IA cube to go here
         object.setPositionSmooth(hre_pos:setAt("y",2))
         object.setRotationSmooth({0,0,0})
+        Smart_delete_IA_targets[i] = true
         goto piece_moved_ia
 
         ::space_taken_ia::
