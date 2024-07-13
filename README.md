@@ -11,3 +11,8 @@ Lua scripts are stored in the EU folder.
 The other files in EU can be edited and those files are alreay referenced in the .tts files. Some objects, such as containers, do not have their scripts in source control as of 2024-06-01.
 
 8. Once all changes have been made to the TTS save and the .lua files, do a final test by loading the save game from the main menu of TTS, commit all changes to git, and pass on to Eivind to upload. Note that the file *EU\usage.txt* is the text in the Grey notepad called Usage.
+
+Changelog:
+v1.0 Initial release version with all components inclded
+v2.0 Scripted version for scenario selection, tagged objects, smart delete, etc
+v2.1 2024-07-05 Manual setup now includes buttons to set up components for a realm, swap two colours, and remove a colour from the table
