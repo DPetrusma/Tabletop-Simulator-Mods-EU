@@ -658,6 +658,21 @@ function ui_set_active()
   end
 end
 
+function ui_minimise()
+    --Use this method, rather than UI.hide, so that ui_set_active() works
+    for key, _ in pairs(UI_PAGES) do
+        Global.UI.setAttribute(key, "active",  false)
+    end
+    Global.UI.show("maximise")
+end
+
+function ui_maximise()
+    --Find the "current" page and make it active
+    --Then hide the maximise button
+    ui_set_active()
+    Global.UI.hide("maximise")
+end
+
 
 function ui_num_players_filter(player, value, id)
   local active = value=="True" and true or false
