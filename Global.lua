@@ -4131,9 +4131,9 @@ function onPlayerAction(player, action, targets)
     end
     if action == Player.Action.Delete then
       --[[ This helps our smart delete of vassals, towns, and IA work for many deleted at once ]]
-      Smart_delete_l_town_targets = {}
-      Smart_delete_s_town_targets = {}
-      Smart_delete_vassal_targets = {}
+      Smart_delete_l_town_targets = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
+      Smart_delete_s_town_targets = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
+      Smart_delete_vassal_targets = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
       Smart_delete_IA_targets = {}
 	    local trashBinObject = getClosesTrashBin(player.getPointerPosition())
         for _,o in ipairs (targets) do
@@ -4227,7 +4227,7 @@ function CheckRemovedEnter(object, trashBinObject)
         local hit_counter = 0
         local vassal_pos
         local hits
-        if (Smart_delete_vassal_targets[i] or 0) > 1 then goto space_taken_vassal end
+        if (Smart_delete_vassal_targets[color][i] or 0) > 1 then goto space_taken_vassal end
         vassal_pos = tableau.positionToWorld({Local_Vassal_Positions[i][1], 0, Local_Vassal_Positions[i][2]})
         hits = Physics.cast({
             origin       = vassal_pos,
@@ -4244,7 +4244,7 @@ function CheckRemovedEnter(object, trashBinObject)
         for _,v in pairs(hits) do
             if v.hit_object.hasTag("Vassal") or v.hit_object.hasTag("Cube") then
                 hit_counter = hit_counter + 1
-                Smart_delete_vassal_targets[i] = (Smart_delete_vassal_targets[i] or 0) + 1
+                Smart_delete_vassal_targets[color][i] = (Smart_delete_vassal_targets[color][i] or 0) + 1
             end
         end
         if hit_counter > 1 or ( hit_counter > 0 and i == 1 ) then
@@ -4257,7 +4257,7 @@ function CheckRemovedEnter(object, trashBinObject)
         if object.is_face_down then object.flip() end
         object.setPositionSmooth(vassal_pos:setAt('y',2))
         object.setRotationSmooth(tableau.getRotation())
-        Smart_delete_vassal_targets[i] = (Smart_delete_vassal_targets[i] or 0) + 1
+        Smart_delete_vassal_targets[color][i] = (Smart_delete_vassal_targets[color][i] or 0) + 1
         goto piece_moved_vassal
         
         ::space_taken_vassal::
@@ -4276,14 +4276,29 @@ function CheckRemovedEnter(object, trashBinObject)
   if object.hasTag('LargeTown') then
     local color = string.lower(GetColorFromTag(object))
     local tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
+    local cubes_hit = false --This doesn't work. How to move multiple cubes all up one space?
     if tableau == nil then return false end
 
+    --[[
+    Step through each large town space.
+      If we encounter a town, just skip that space
+      If we encounter an empty space, send this town there and end the loop
+      If we encounter a cube, send this town to this space, send the cube to the next space, and keep looping
+    If we have already sent the town to a space, do not try to send it anywhere else, even though we might be looping
+        for the cubes
+
+    Once we hit empty space, we can break the loop I believe. But we can't break just because we've moved the
+      town - we need to keep on checking for cubes
+    --]]
     for i = #Local_Large_Town_Positions, 1, -1 do
         --We need to declare these local variables before the goto. The Lua docs explain about scope.
         local has_hit = false
         local l_town_pos
+        local cube_new_pos
         local hits
-        if Smart_delete_l_town_targets[i] then goto space_taken_l_town end
+        if Smart_delete_l_town_targets[color][i] and not(cubes_hit) then
+          goto space_taken_l_town
+        end
         l_town_pos = tableau.positionToWorld({Local_Large_Town_Positions[i][1], 0, Local_Large_Town_Positions[i][2]})
         hits = Physics.cast({
           origin       = l_town_pos,
@@ -4292,9 +4307,14 @@ function CheckRemovedEnter(object, trashBinObject)
           max_distance = 2, --I might need to experiment here. How high are the towns and cubes?
           -- debug        = true, -- uncomment to debug
         })
+        if #hits == 0 then cubes_hit = false end
         for _,v in pairs(hits) do
-            if v.hit_object.hasTag("LargeTown") or v.hit_object.hasTag("Cube") then
+            if v.hit_object.hasTag("LargeTown") then
               has_hit = true
+            elseif v.hit_object.hasTag("Cube") then
+              cube_new_pos = tableau.positionToWorld({Local_Large_Town_Positions[i-1][1], 2, Local_Large_Town_Positions[i-1][2]})
+              v.hit_object.setPositionSmooth(cube_new_pos)
+              cubes_hit = true
             end
         end
         if has_hit then goto space_taken_l_town end
@@ -4303,7 +4323,7 @@ function CheckRemovedEnter(object, trashBinObject)
         if object.is_face_down then object.flip() end
         object.setPositionSmooth(l_town_pos:setAt('y',2))
         object.setRotationSmooth(tableau.getRotation())
-        Smart_delete_l_town_targets[i] = true
+        Smart_delete_l_town_targets[color][i] = true
         goto piece_moved_l_town
         
         ::space_taken_l_town::
@@ -4323,7 +4343,7 @@ function CheckRemovedEnter(object, trashBinObject)
         local has_hit = false
         local s_town_pos
         local hits
-        if Smart_delete_s_town_targets[i] then goto space_taken_s_town end
+        if Smart_delete_s_town_targets[color][i] then goto space_taken_s_town end
         s_town_pos = tableau.positionToWorld({Local_Small_Town_Positions[i][1], 0, Local_Small_Town_Positions[i][2]})
         hits = Physics.cast({
             origin       = s_town_pos,
@@ -4343,7 +4363,7 @@ function CheckRemovedEnter(object, trashBinObject)
         if object.is_face_down then object.flip() end
         object.setPositionSmooth(s_town_pos:setAt('y',2))
         object.setRotationSmooth(tableau.getRotation())
-        Smart_delete_s_town_targets[i] = true
+        Smart_delete_s_town_targets[color][i] = true
         goto piece_moved_s_town
         
         ::space_taken_s_town::
