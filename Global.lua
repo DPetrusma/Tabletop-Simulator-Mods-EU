@@ -4130,6 +4130,8 @@ function onPlayerAction(player, action, targets)
 		end
     end
     if action == Player.Action.Delete then
+      --[[ This helps our smart delete of vassals, towns, and IA work for many deleted at once ]]
+      Smart_delete_IA_targets = {}
 	    local trashBinObject = getClosesTrashBin(player.getPointerPosition())
         for _,o in ipairs (targets) do
 			if getHandZone(o) then
@@ -4216,30 +4218,45 @@ function CheckRemovedEnter(object, trashBinObject)
     return false
   end
 
-  --Return the Imperial Influence cube to the right-most empty space on the IA track
+  --[[
+  Return the Imperial Influence cube to the right-most empty space on the IA track
+  If you select multiple cubes, it intelligently assigns them to subsequent spaces.
+  --]]
   if object.hasTag('Imperial_Influence') then
-    -- return false
     for i = 6, 1, -1 do
-        local hre_pos = {HRE_Authority_Positions[i][1], 2, HRE_Authority_Positions[i][2]}
-        local hits = Physics.cast({
+        --We need to declare these local variables before the goto. The Lua docs explain about scope.
+        local has_hit = false
+        local hre_pos
+        local hits
+        if Smart_delete_IA_targets[i] then goto space_taken_ia end
+        hre_pos = Vector(HRE_Authority_Positions[i][1], 0, HRE_Authority_Positions[i][2])
+        hits = Physics.cast({
             origin       = hre_pos,
             direction    = {0,1,0},
             type         = 1, --1 for Ray, not Sphere or Box
-            max_distance = 1, --I might need to experiment here. How high are the cubes and coins?
-            debug        = true, -- uncomment to debug
+            max_distance = 2, --I might need to experiment here. How high are the cubes and coins?
+            -- debug        = true, -- uncomment to debug
         })
-        for i,v in pairs(hits) do
-            if v.hit_object.hasTag("Imperial_Influence") or v.hit_object.hasTag("Money") then 
-                goto space_taken
+        for _,v in pairs(hits) do
+            --I am assuming the players will use coins to block the IA spaces, so check if there is already a cube or coin on that space
+            if v.hit_object.hasTag("Imperial_Influence") or v.hit_object.hasTag("Coin") then 
+                has_hit = true
             end
         end
-        --The idea is that if we get to here, we haven't hit an IA cube or a coin, so we
-        --want the deleted IA cube to go here
-        object.setPositionSmooth(hre_pos)
+        if has_hit then goto space_taken_ia end
+        --[[
+        The idea is that if we get to here, we haven't hit an IA cube or a coin, so we
+        want the deleted IA cube to go here
+        --]]
+        object.setPositionSmooth(hre_pos:setAt("y",2))
         object.setRotationSmooth({0,0,0})
-        ::space_taken::
+        Smart_delete_IA_targets[i] = true
+        goto piece_moved_ia
+
+        ::space_taken_ia::
     end
 
+    ::piece_moved_ia::
     return false
   end
 
