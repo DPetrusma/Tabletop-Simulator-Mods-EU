@@ -454,6 +454,11 @@ function onLoad()
       i.addContextMenuItem("Detach Card", DetachCard)
     end
   end
+
+  --On game load, seat everyone as a spectator so they won't see any hidden information
+  for _, color in ipairs(getSeatedPlayers()) do
+    Player[color].changeColor("Grey")
+  end
 end
 
 --[[ ----------------------------------
