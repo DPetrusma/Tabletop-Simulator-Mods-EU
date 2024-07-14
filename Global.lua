@@ -3946,6 +3946,13 @@ function SwapDoubleSidedTokenTags(object)
 end
 
 local tagToBehaviour = {
+    Authority = {
+        forbidPlayerActions = {
+            [Player.Action.Copy] = "You cannot copy the Imperial Authority marker (sit in Black to do so)",
+            [Player.Action.Paste] = "You cannot paste the Imperial Authority marker (sit in Black to do so)",
+            [Player.Action.Delete] = "You cannot delete the Imperial Authority marker (sit in Black or drop into a bin to do so)",
+        }
+    },
     RoundStatus = {
         forbidPlayerActions = {
             [Player.Action.Copy] = "You cannot copy a Round Status marker (sit in Black to do so)",
@@ -4130,8 +4137,6 @@ function onPlayerAction(player, action, targets)
 		end
     end
     if action == Player.Action.Delete then
-      --[[ This helps our smart delete of vassals, towns, and IA work for many deleted at once ]]
-      Smart_delete_IA_targets = {}
 	    local trashBinObject = getClosesTrashBin(player.getPointerPosition())
         for _,o in ipairs (targets) do
 			if getHandZone(o) then
@@ -4185,7 +4190,21 @@ function tryObjectEnterContainer(container, enter_object)
     return true
 end
 
+--[[
+This function will run 2 seconds after the players stop deleting Imperial Influence cubes.
+We wait 2 seconds so that if several are deleted in quick succession, but not in the same
+action, they will still be spread out over the right spaces
+--]]
+function CleanupSmartDeleteImperialInfluence()
+  Smart_delete_imperial_influence_reserved = {}
+  Smart_delete_imperial_influence_wait_id = nil
+end
+
 TRASH_BIN_MIN_DECK_SIZE_TO_AVOID_SEPARATION = 9
+
+Smart_delete_imperial_influence_reserved = {}
+Smart_delete_imperial_influence_wait_id = nil
+
 function CheckRemovedEnter(object, trashBinObject)
   if object.type == 'Deck' then
     local count = object.getQuantity()
@@ -4220,7 +4239,8 @@ function CheckRemovedEnter(object, trashBinObject)
 
   --[[
   Return the Imperial Influence cube to the right-most empty space on the IA track
-  If you select multiple cubes, it intelligently assigns them to subsequent spaces.
+  If you delete multiple cubes in quick succession, it intelligently assigns them to
+  subsequent spaces.
   --]]
   if object.hasTag('Imperial_Influence') then
     for i = 6, 1, -1 do
@@ -4228,7 +4248,9 @@ function CheckRemovedEnter(object, trashBinObject)
         local has_hit = false
         local hre_pos
         local hits
-        if Smart_delete_IA_targets[i] then goto space_taken_ia end
+        --This reserved table will be cleared 2 seconds after the deletes have stopped, so the cubes in
+        --transit have enough time to get to the space for the next physics.cast
+        if Smart_delete_imperial_influence_reserved[i] then goto space_taken_ia end
         hre_pos = Vector(HRE_Authority_Positions[i][1], 0, HRE_Authority_Positions[i][2])
         hits = Physics.cast({
             origin       = hre_pos,
@@ -4238,7 +4260,8 @@ function CheckRemovedEnter(object, trashBinObject)
             -- debug        = true, -- uncomment to debug
         })
         for _,v in pairs(hits) do
-            --I am assuming the players will use coins to block the IA spaces, so check if there is already a cube or coin on that space
+            --I am assuming the players will use coins to block the IA spaces, so check if there is already a
+            --cube or coin on that space
             if v.hit_object.hasTag("Imperial_Influence") or v.hit_object.hasTag("Coin") then 
                 has_hit = true
             end
@@ -4250,7 +4273,12 @@ function CheckRemovedEnter(object, trashBinObject)
         --]]
         object.setPositionSmooth(hre_pos:setAt("y",2))
         object.setRotationSmooth({0,0,0})
-        Smart_delete_IA_targets[i] = true
+        --Mark that space as reserved, and queue the reserved table to be cleared in 2 seconds, resetting any
+        --existing counter
+        Smart_delete_imperial_influence_reserved[i] = true
+        if Smart_delete_imperial_influence_wait_id ~= nil then Wait.stop(Smart_delete_imperial_influence_wait_id) end
+        Smart_delete_imperial_influence_wait_id = Wait.time(CleanupSmartDeleteImperialInfluence, 2)
+
         goto piece_moved_ia
 
         ::space_taken_ia::
