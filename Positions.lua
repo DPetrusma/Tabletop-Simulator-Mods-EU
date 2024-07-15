@@ -201,6 +201,23 @@ AfricaMap = {
     ['wien'] = {3.20, -0.90},
   }
 
+  MilestoneLocations = {
+    {-5.80, -16.02},
+    {-3.55, -16.02},
+    {-1.30, -16.01},
+    {0.95, -16.00}
+  }
+
+MilestoneLeftmostTags = {
+    {-6.77, -15.84},
+    {-6.77, -16.30},
+    {-6.77, -16.80},
+    {-6.34, -16.80},
+    {-5.92, -16.80},
+    {-5.49, -16.80},
+    {-5.07, -16.80}
+}
+
   -- From this position, the below offsets will be used to determine the location of the 5 maximum influence tokens
   -- Hopefully it works well enough for all regions
   InfluenceLocations = {
@@ -315,6 +332,20 @@ AfricaMap = {
     end
   end
 
+  AllMilestoneSnapPoints = {}
+
+  for i = 1, 4 do
+    for j = 1, 7 do
+      table.insert(AllMilestoneSnapPoints,
+      -- Vector(MilestoneLocations[i]) + Vector(MilestoneLeftmostTags[j])
+      {
+        MilestoneLocations[i][1] + MilestoneLeftmostTags[j][1] - MilestoneLocations[1][1],
+        MilestoneLocations[i][2] + MilestoneLeftmostTags[j][2] - MilestoneLocations[1][2]
+      }
+    )
+    end
+  end
+
 function generateMapSnapPoints()
 
     local main_map = getObjectFromGUID('a19848')
@@ -333,6 +364,9 @@ function generateMapSnapPoints()
       ['Religion'] = {
           WesternMapReligion,
           EasternMapReligion
+      },
+      ['TagChit'] = {
+        AllMilestoneSnapPoints
       }
     }
 
