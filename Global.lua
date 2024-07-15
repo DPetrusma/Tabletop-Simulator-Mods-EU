@@ -371,7 +371,10 @@ Main_Tableau_Offset_Positions = {
   ['bot_ideas_diplo_1'] = {2.02, -1.49}, ['bot_ideas_diplo_2'] = {2.38, -1.49}, ['bot_ideas_diplo_3'] = {2.75, -1.49},
   ['bot_ideas_war_1'] = {3.62, -1.49}, ['bot_ideas_war_2'] = {3.96, -1.49}, ['bot_ideas_war_3'] = {4.33, -1.49}, ['extra_events'] = {-3.23, -7.40},
 
-  ['army_1_middle_eastern_left'] = {-13.19, 3.03}, ['army_1_middle_eastern_right'] = {5.49, 3.04},
+  ['army_1_middle_eastern_left'] = {-13.19, 4.53}, ['army_1_middle_eastern_right'] = {5.49, 4.54},
+  ['army_2_middle_eastern_left'] = {-9.98, 4.49}, ['army_2_middle_eastern_right'] = {8.72, 4.49},
+  ['army_3_middle_eastern_left'] = {-8.70, 4.64}, ['army_3_middle_eastern_right'] = {10.00, 4.54},
+  ['fleet_middle_eastern_left'] = {-5.45, 4.53}, ['fleet_middle_eastern_right'] = {13.25, 4.52},
 }
 
 Main_Tableau_Local_Positions = { ['religion'] = {0.84, 2, 0.78}, ['ruler'] = {1.30, 2, 1.69}, ['missions'] = {-2.57, 2, -0.75}, ['missions_left'] = {2.57, 2, -0.75},
@@ -4482,7 +4485,7 @@ function CheckRemovedEnter(object, trashBinObject)
       name = 'army_3'
     elseif object.guid == Setup_Bag_Item_GUIDs[col].fleet then
       name = 'fleet'
-    if object.guid == Setup_Bag_Item_GUIDs[col].army_1_middle_eastern then
+    elseif object.guid == Setup_Bag_Item_GUIDs[col].army_1_middle_eastern then
       name = 'army_1_middle_eastern'
     elseif object.guid == Setup_Bag_Item_GUIDs[col].army_2_middle_eastern then
       name = 'army_2_middle_eastern'
@@ -4817,15 +4820,21 @@ function SwapTwoColors()
   --We want to store, for each piece type in the setup area, the piece itself, the location and rotation
   --for both colours so we can easily reference and swap later
   for piece_name,_ in pairs(Setup_Bag_Item_GUIDs[color_to_swap_1]) do
-    objects_to_swap[piece_name] = {
-      piece_1 = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_1][piece_name]),
-      piece_1_pos = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_1][piece_name]).getPosition(),
-      piece_1_rot = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_1][piece_name]).getRotation(),
-      
-      piece_2 = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_2][piece_name]),
-      piece_2_pos = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_2][piece_name]).getPosition(),
-      piece_2_rot = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_2][piece_name]).getRotation()
-    }
+    --This handles the case where some colours have middle eastern figures and others don't
+    local color_1_piece = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_1][piece_name])
+    local color_2_piece = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_2][piece_name])
+
+    if color_1_piece ~= nil and color_2_piece ~= nil then
+      objects_to_swap[piece_name] = {
+        piece_1 = color_1_piece,
+        piece_1_pos = color_1_piece.getPosition(),
+        piece_1_rot = color_1_piece.getRotation(),
+        
+        piece_2 = color_2_piece,
+        piece_2_pos = color_2_piece.getPosition(),
+        piece_2_rot = color_2_piece.getRotation()
+      }
+    end
   end
   
   --Swap the mats
