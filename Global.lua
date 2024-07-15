@@ -3915,24 +3915,35 @@ end
 Here we will specify the tags that should be on the face-down side (true) and
 the face-up side (false)
 --]]
-local double_sided_token_snap_behaviour = {
-    Expanded_Trade_Node = {
+Double_sided_token_snap_behaviour = {
+    Expanded_Trade = {
         [true] = "Trade_Node",
         [false] = "Province"
     },
     Revolutionary = {
-        [true] = "Religion",
-        [false] = "Province"
+        [true] = "Province",
+        [false] = "Religion"
     },
     Left_HRE = {
-        [true] = nil,
-        [false] = "Province"
+        [true] = "Province",
+        [false] = nil
     },
-    Occupied = {
+    Battleground = {
         [true] = "Province",
         [false] = nil
     }
 }
+
+function SwapDoubleSidedTokenTags(object)
+  for check_tag,behaviour in pairs(Double_sided_token_snap_behaviour) do
+      if object.hasTag(check_tag) then
+        local old_tag =  behaviour[object.is_face_down]
+        local new_tag =  behaviour[not(object.is_face_down)]
+        if old_tag ~= nil then object.removeTag(old_tag) end
+        if new_tag ~= nil then object.addTag(new_tag) end
+      end
+  end
+end
 
 local tagToBehaviour = {
     RoundStatus = {
@@ -4093,42 +4104,23 @@ local tagToBehaviour = {
     --[[
     All of the double sided tokens with different snap points on the two
     sides have +1 manpower on one of the sides, so we'll start with that tag.
-    But, is that the face-down side each time...
-    Make sure this is the right order of things, or if I need to swap the not(o.is_face_down)
-   Occupiec vs power truggle
+    Well, except the battleground tokens, so we'll handle both.
     --]]
     Manpower = {
         [Player.Action.FlipOver] = function(o)
-            for _,check_tag in ipairs(double_sided_token_snap_behaviour) do
-                if o.hasTag(check_tag) then
-                    o.removeTag(
-                        double_sided_token_snap_behaviour[check_tag][o.is_face_down]
-                    )
-                    o.addTag(
-                        double_sided_token_snap_behaviour[check_tag][not(o.is_face_down)]
-                    )
-                end
-            end
-		end,
+          SwapDoubleSidedTokenTags(o)
+        end
     },
-    Power_Struggle = {
+    Battleground = {
         [Player.Action.FlipOver] = function(o)
-            for _,check_tag in ipairs(double_sided_token_snap_behaviour) do
-                if o.hasTag(check_tag) then
-                    o.removeTag(
-                        double_sided_token_snap_behaviour[check_tag][o.is_face_down]
-                    )
-                    o.addTag(
-                        double_sided_token_snap_behaviour[check_tag][not(o.is_face_down)]
-                    )
-                end
-            end
-		end,
+          SwapDoubleSidedTokenTags(o)
+        end
     },
 }
 
 
 function onPlayerAction(player, action, targets)
+  -- log(action)
     for _,o in ipairs(targets) do
         for tag,behaviour in pairs(tagToBehaviour) do
             if o.hasTag(tag) then
