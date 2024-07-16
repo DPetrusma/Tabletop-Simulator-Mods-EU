@@ -4101,17 +4101,7 @@ local tagToBehaviour = {
         [Player.Action.Delete] = "Please click on the piece to set up that realm",        
       }
     },
-    --[[
-    All of the double sided tokens with different snap points on the two
-    sides have +1 manpower on one of the sides, so we'll start with that tag.
-    Well, except the battleground tokens, so we'll handle both.
-    --]]
-    Manpower = {
-        [Player.Action.FlipOver] = function(o)
-          SwapDoubleSidedTokenTags(o)
-        end
-    },
-    Battleground = {
+    DoubleSidedDifferentTag = {
         [Player.Action.FlipOver] = function(o)
           SwapDoubleSidedTokenTags(o)
         end
