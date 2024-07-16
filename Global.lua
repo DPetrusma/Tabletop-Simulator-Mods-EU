@@ -4959,6 +4959,57 @@ for x = Victory_Point_Init_Positions[1].x, Victory_Point_Init_Positions[60].x, V
   end
 end
 
+--[[
+Many snap points are now stored in the EU\Positions.lua script, and this function will be called when the map
+state changes to update the snap points. The 1618 and 144 side have a couple of provinces in slightly different
+locations. Plus, doing it this way means that the snap points don't need to be manually added in TTS but can just
+be added here in the script.
+--]]
+function SetMainMapSnapPoints()
+  local mainboard = getObjectsWithTag('MainBoard')
+  if mainboard ~= nil then
+    local all_snap_points = {}
+    local all_snap_points_source = {
+      ['Province'] = {
+          AfricaMap,
+          AmericaMap,
+          IndiaMap,
+          FarEastMap,
+          CentralAsiaMap,
+          WesternMap,
+          EasternMap
+      },
+      ['Religion'] = {
+          WesternMapReligion,
+          EasternMapReligion
+      },
+      ['TagChit'] = {
+        MilestoneTagLocations
+      }
+    }
+
+    for tag,location_tables in pairs(all_snap_points_source) do
+      for _,table in pairs(location_tables) do
+        for _,location in pairs(table) do
+          local snap_point_loc = mainboard.positionToLocal({
+            location[1],
+            1.0,
+            location[2]
+          })
+          local snap_point = {
+            position = snap_point_loc,
+            rotation_snap = true,
+            tags = {tag}
+          }
+          table.insert(all_snap_points, snap_point)
+        end
+      end
+    end
+
+    mainboard.setSnapPoints(all_snap_points)
+  end
+end
+
 -- x-cards
 Age1XCards = { '11a-1', '12a-1', '12a-2', '13a-1', '14a-1', '14a-3', '151b', '152b', '153b', '154b', '156b', '160b' }
 

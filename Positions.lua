@@ -245,3 +245,32 @@ AfricaMap = {
       i = i + 1
     end
   end
+
+  --This is where the face-up milestone cards are located
+  MilestoneAvailableLocations = {
+    {-5.80, -16.02},
+    {-3.55, -16.02},
+    {-1.30, -16.02},
+    {0.95, -16.02}
+  }
+  --This lists the offsets from a milestone cards for the 7 snap points for the tag chits
+  MilestoneTagsOffsets = {
+      {-0.97, 0.18},
+      {-0.97, -0.28},
+      {-0.97, -0.78},
+      {-0.54, -0.78},
+      {-0.12, -0.78},
+      {0.31, -0.78},
+      {0.73, -0.78}
+  }
+  MilestoneTagLocations = {}
+  for i = 1, 4 do
+    for j = 1, 7 do
+      table.insert(MilestoneTagLocations,
+      {
+        MilestoneAvailableLocations[i][1] + MilestoneTagsOffsets[j][1],
+        MilestoneAvailableLocations[i][2] + MilestoneTagsOffsets[j][2]
+      }
+    )
+    end
+  end
