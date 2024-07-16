@@ -139,7 +139,7 @@ AfricaMap = {
     ['kasimov'] = {17.79, 3.68}, ['yaroslavl'] = {16.49, 6.21}, ['vologda'] = {16.53, 7.34}, ['beloozero'] = {15.7, 8.36},
     ['don'] = {17.98, -0.33}, ['mentese'] = {11.62, -8.57}, ['teke'] = {12.47, -8.41}, ['kutahya'] = {12.31, -7.24},
     ['amasya'] = {15.28, -6.0}, ['sivas'] = {15.89, -6.64}, ['erzurum'] = {17.82, -6.25}, ['zaporoze'] = {15.00, -1.11}
-    }
+  }
   
   -- snap points for religion tokens on the western map --
   WesternMapReligion = {
@@ -170,3 +170,78 @@ AfricaMap = {
     ['saratov'] = {19.95, 2.38}, ['serbiaalbania'] = {7.9, -4.85}, ['syria'] = {16.17, -9.33}, ['transylvania'] = {9.02, -1.09},
     ['wallachiabulgaria'] = {8.71, -3.93}, ['westernukraine'] = {13.07, -0.35}, ['whiteruthenia'] = {14.2, 3.0}, ['cyprus'] = {13.19, -9.94}
   }
+
+  --This is where the expanded trade node snap points will be placed
+  TradeNodeLocations = {
+    ['adriatic sea'] = {5.71, -8.41},
+    ['aleppo'] = {16.96, -10.34},
+    ['alexandria'] = {11.69, -10.39},
+    ['astrakhan'] = {20.40, -2.68},
+    ['baltic sea'] = {7.21, 7.57},
+    ['blacksea'] = {12.60, -5.25},
+    ['bordeaux'] = {-10.49, -2.85},
+    ['champagne'] = {-3.85, -0.72},
+    ['chinaandjapan'] = {-15.22, -8.49},
+    ['eastindies'] = {-17.43, -11.06},
+    ['englishchannel'] = {-3.88, 3.09},
+    ['genoa'] = {-1.49, -7.02},
+    ['indianocean'] = {-17.07, -4.93},
+    ['ivorycoast'] = {-17.41, -0.73},
+    ['kazan'] = {20.39, 3.31},
+    ['kiev'] = {11.60, 0.84},
+    ['krakow'] = {6.94, 1.94},
+    ['lubeck'] = {4.04, 4.74},
+    ['maghreb'] = {-4.91, -12.23},
+    ['northamerica'] = {-14.97, 9.73},
+    ['northsea'] = {-5.91, 9.70},
+    ['novgorod'] = {12.23, 6.55},
+    ['southamerica'] = {-17.28, 5.33},
+    ['saxony'] = {0.77, 0.74},
+    ['sevilla'] = {-10.46, -9.71},
+    ['wien'] = {3.20, -0.90},
+  }
+
+  TradeProtectionSlots = {
+    ['Central Mediterranean'] = { {1.77, -7.90}, {2.55, -7.90} },
+    ['Western Mediterranean'] = { {-5.13, -8.31}, {-4.34, -8.34}, {-5.10, -8.34} },
+    ['Eastern Mediterranean'] = { {7.02, -9.97}, {7.76, -9.93}, {8.49, -9.93} },
+    ['Black Sea'] = { {12.60, -3.93}, {13.31, -3.93}, {14.05, -3.93}},
+    ['Aegean Sea'] = { {9.37, -7.21}, {10.08, -7.22} },
+    ['Adriatic Sea'] = { {4.23, -5.64}, {4.23, -5.64}, {5.90, -6.00} },
+    ['Gulf of Lion'] = { {-1.10, -5.72}, {-1.79, -5.70}, {-2.55, -5.71} },
+    ['Central Atlantic'] = { {-12.21, -6.51}, {-12.94, -6.49}, {-12.57, -7.12} },
+    ['Eastern Atlantic'] = { {-11.56, -0.91}, {-12.28, -0.89} },
+    ['Northeastern Atlantic'] = { {-7.31, 9.92}, {-8.04, 9.92} },
+    ['Northwestern Atlantic'] = { {-14.30, 10.97}, {-15.02, 10.97} },
+    ['Southwestern Atlantic'] = { {-14.64, 5.15}, {-15.37, 5.15} },
+    ['Southeastern Atlantic'] = { {-17.50, 0.53}, {-18.29, 0.53}, {-18.29, -0.08} },
+    ['Bay of Biscay'] = { {-7.39, -2.70}, {-8.12, -2.70}, {-8.88, -2.70} },
+    ['English Channel'] = { {-6.04, 1.15}, {-5.30, 1.54}, {-4.47, 2.44} },
+    ['Doggerbank'] = { {-5.25, 5.59}, {-4.48, 5.59} },
+    ['North Sea'] = { {-3.75, 7.19}, {-2.99, 7.19} },
+    ['Norwegian Sea'] = { {-3.79, 10.56}, {-4.52, 10.56} },
+    ['Skagerrak'] = { {1.51, 7.60}, {1.49, 7.04}, {1.97, 6.61} },
+    ['Baltic Sea'] = { {5.25, 5.35}, {5.96, 5.35}, {6.69, 5.34} },
+    ['Gulf of Bothnia'] = { {6.76, 9.09}, {6.76, 9.73}, {6.76, 10.35} },
+    ['Caribbean Sea'] = { {-14.31, 9.30}, {-14.96, 9.08}, {-15.65, 9.45} },
+    ['Southeasten Pacific'] = { {-16.65, 6.46}, {-17.37, 6.46}, {-18.10, 6.46} },
+    ['East Africa Coast'] = { {-14.30, 1.27}, {-14.69, -0.16} },
+    ['Great Australian Bight'] = { {-17.38, -11.76}, {-18.10, -11.76} },
+    ['East Indies'] = { {-18.33, -11.06}, {-18.33, -10.47}, {-18.33, -9.87} },
+    ['Sea of Japan'] = { {-15.99, -7.36}, {-15.26, -7.36}, {-14.57, -7.36} },
+    ['Indian Ocean'] = { {-16.19, -4.90}, {-16.20, -4.35}, {-16.60, -3.92} }
+  }
+
+  PrestigeLocations = {
+    [0] = {x = -19.92, z = -12.69}, --Below the track, in between 1 and 31
+    [1] = {x = -20.33, z = -11.70}, --On the track
+    [60] = {x = -19.49, z = 11.58} -- On the track
+  }
+
+  local i = 1
+  for x = PrestigeLocations[1].x, PrestigeLocations[60].x, PrestigeLocations[60].x-PrestigeLocations[1].x do --Start, End, Step
+    for z = PrestigeLocations[1].z, PrestigeLocations[60].z, (PrestigeLocations[60].z-PrestigeLocations[1].z) / 29 do --Start, End, Step
+      PrestigeLocations[i]= {x = x, z = z}
+      i = i + 1
+    end
+  end
