@@ -4950,6 +4950,43 @@ function outputDroppedStabilityObjectStability(obj)
   printToAll(outString, c)
 end
 
+
+--[[
+  ------------------------------------------------
+  ------------------------------------------------
+            Flip light ships dropped on
+            trade protection slots
+  ------------------------------------------------
+  ------------------------------------------------
+--]]
+
+function flipLightShipOnTPS(obj)
+    local dropPos = obj.getPosition()
+    --TODO: Decide whether I want to keep this lookup, or use physics.cast to
+    --find the TPS the ship is on top of
+    --This rounds the co-ordinates to the nearest 0.05
+    local roundedDropPos = {
+        x = math.floor(dropPos.x*20+0.5)/20,
+        z = math.floor(dropPos.z*20+0.5)/20
+    }
+
+    --Normally, we flip between the two states, but for this function, we only
+    --care about putting it on its side if it's standing up
+    if Rounded_Trade_Protection_Slot_Position[roundedDropPos.x .. '||' .. roundedDropPos.z] then
+        obj.setRotation("#side") --We'll see what this looks like
+    else
+        obj.setRotation("") --Whatever the other one is called
+    end
+    
+    
+    -- and
+    --     changeRotationValue(dropped_object, -1) == "#side" then
+    --         obj.setPosition(dropPos + Vector(0,0,-0.1))
+    -- else
+    --         obj.setPosition(dropPos + Vector(0,0,0.1))
+    -- end
+end
+
 function onObjectDrop(player_color, dropped_object)
   if dropped_object.hasTag("Score") then
     Wait.condition(
@@ -4964,6 +5001,13 @@ function onObjectDrop(player_color, dropped_object)
       function() return dropped_object.resting end,
       5,
       function() outputDroppedStabilityObjectStability(dropped_object) end
+    )
+  elseif dropped_object.hasTag("NavalUnit") then
+    Wait.condition(
+      function() flipLightShipOnTPS(dropped_object) end,
+      function() return dropped_object.isDestroyed() or dropped_object.resting end, --Condition function
+      5, --Timeout in seconds
+      function() flipLightShipOnTPS(dropped_object) end --Function to run if we hit the timeout
     )
   end
 end
