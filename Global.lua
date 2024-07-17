@@ -4191,7 +4191,7 @@ action, they will still be spread out over the right spaces
 --]]
 function CleanupSmartDeleteLargeTowns()
   Smart_delete_large_towns_reserved = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
-  Smart_delete_large_town_p_board_spaces = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
+  Smart_delete_large_town_counter = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 }
   Smart_delete_large_towns_wait_id = nil
 end
 
@@ -4202,13 +4202,15 @@ function CleanupSmartDeleteSmallTowns()
 end
 
 Smart_delete_large_towns_reserved = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
+Smart_delete_large_town_counter = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 }
 Smart_delete_large_towns_wait_id = nil
-Smart_delete_large_town_p_board_spaces = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
+
 Smart_delete_small_towns_reserved = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
 Smart_delete_small_towns_wait_id = nil
 Smart_delete_small_town_p_board_spaces = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
 
 TRASH_BIN_MIN_DECK_SIZE_TO_AVOID_SEPARATION = 9
+
 function CheckRemovedEnter(object, trashBinObject)
   if object.type == 'Deck' then
     local count = object.getQuantity()
@@ -4293,12 +4295,30 @@ function CheckRemovedEnter(object, trashBinObject)
   move the cube to the first empty space.
   I can probably take out this repeated code, for here and the IA cubes, and re-use a function
   --]]
+
+  --[[
+  Another thought train:
+  Have a counter of how many large towns have been deleted per colour (Large_Town_Deleted_Count[color])
+  In here, CheckRemovedEnter, if it's a large town, increment this counter by 1 (start at 0)
+  When this part finishes, schedule a function to run after 2 seconds to set the counter back to 0, but
+    cancel that schedule for each town to restart the count
+  For the town, loop through Local_Large_Town_Positions. The first town will use physics.cast on each space to see what is already there.
+    If there is a town, save "Town" in a holding table (which will also be cleared out in the scheduled function)
+    If there is a cube, save a reference to the object, and move that object over a number of spaces equal to Large_Town_Deleted_Count[color]. Then, put
+        this town in the current space+1-Large_Town_Deleted_Count[color] if it hasn't already been flagged as moved, then flag it as moved
+    If there is a blank, record it as blank, and break the loop
+  Subsequent towns will check the holding table to see what is in this space
+  Schedule the function to reset our counter and the holding table
+
+  So, the first town will be placed in the first blank/cubed space, and each cube will be moved over 1 space
+  The second town will be placed in the second blank/cubed space, and each cube will be moved over 2 spaces
+  --]]
   if object.hasTag('LargeTown') then
     local color = string.lower(GetColorFromTag(object))
     local tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
-    local town_moved = false
     if tableau == nil then return false end
-
+    local this_town_moved = false
+    Smart_delete_large_town_counter[color] = Smart_delete_large_town_counter[color] + 1
     --[[
     Step through each large town space.
       If we encounter a town, just skip that space
@@ -4312,21 +4332,26 @@ function CheckRemovedEnter(object, trashBinObject)
     --]]
     for i = #Local_Large_Town_Positions, 1, -1 do
         --We need to declare these local variables before the goto. The Lua docs explain about scope.
-        local has_hit = false
+        -- local has_hit = false
         local l_town_pos
         local hits
         --We can't trust #Smart_delete_large_towns_reserved[color] because that table is not keyed with a sequence
-        local reserved_spaces = 1
-        for _,_ in pairs(Smart_delete_large_towns_reserved[color]) do
-          reserved_spaces = reserved_spaces + 1
-        end
+        -- local reserved_spaces = 1
+        -- for _,_ in pairs(Smart_delete_large_towns_reserved[color]) do
+        --   reserved_spaces = reserved_spaces + 1
+        -- end
         --GAH, still doesn't quite work. I need to get the order right of reserving the space and moving the cube
         --the right number down
         local cube_new_pos = tableau.positionToWorld(
-                  {Local_Large_Town_Positions[math.max(1,i-reserved_spaces)][1],
-                  2,
-                  Local_Large_Town_Positions[math.max(1,i-reserved_spaces)][2]}
-                )
+            {Local_Large_Town_Positions[math.max(1,i-Smart_delete_large_town_counter[color])][1],
+            2,
+            Local_Large_Town_Positions[math.max(1,i-Smart_delete_large_town_counter[color])][2]}
+        )
+        local town_new_pos = tableau.positionToWorld(
+            {Local_Large_Town_Positions[math.max(1,i-Smart_delete_large_town_counter[color]+1)][1],
+            2,
+            Local_Large_Town_Positions[math.max(1,i-Smart_delete_large_town_counter[color]+1)][2]}
+          )
         -- log(cube_new_pos)
         --The problem is that if the cube space is reserved, we don't check it again
         --to move it a second space for the second town
@@ -4335,63 +4360,52 @@ function CheckRemovedEnter(object, trashBinObject)
         -- if Smart_delete_large_towns_reserved[color][i] then goto space_taken_l_town end
         l_town_pos = tableau.positionToWorld({Local_Large_Town_Positions[i][1], 0, Local_Large_Town_Positions[i][2]})
         --I am trying to use physics.cast on each space just once, so check if we've already done it
-        log(Smart_delete_large_town_p_board_spaces[color][i])
-        if Smart_delete_large_town_p_board_spaces[color][i] == nil then
-          hits = Physics.cast({
-            origin       = l_town_pos,
-            direction    = {0,1,0},
-            type         = 1, --1 for Ray, not Sphere or Box
-            max_distance = 2, --I might need to experiment here. How high are the towns and cubes?
-            -- debug        = true, -- uncomment to debug
-          })
-          --Assume there is only 1 piece on each slot, so just override l_town_slots[color][i]
-          for _,v in pairs(hits) do
-              if v.hit_object.hasTag("LargeTown") then
-                -- log("I hit a town")
-                has_hit = true
-                Smart_delete_large_town_p_board_spaces[color][i] = "Town"
-              elseif v.hit_object.hasTag("Cube") then
-                log("I hit a cube")
-                Smart_delete_large_town_p_board_spaces[color][i] = v.hit_object
-                --Move the cube a number of spaces equal to how many have been reserved + 1 (since we've not reserved
-                --for the current piece just yet)
-                v.hit_object.setPositionSmooth(cube_new_pos)
-              end
-          end
-        else
-          --If this slot has been checked, then see if there is a town or a cube to move
-          if Smart_delete_large_town_p_board_spaces[color][i] == "Town" then
-              has_hit = true
-          elseif Smart_delete_large_town_p_board_spaces[color][i] ~= nil then --i.e. it refers to a cube object
-              log("I should move a cube")
-              --SO CLOSE! But this cube_new_pos isn't updating on subsequent piece deletes
-              Smart_delete_large_town_p_board_spaces[color][i].setPositionSmooth(cube_new_pos)
-          end
+        if Smart_delete_large_towns_reserved[color][i] == nil then
+            hits = Physics.cast({
+                origin       = l_town_pos,
+                direction    = {0,1,0},
+                type         = 1, --1 for Ray, not Sphere or Box
+                max_distance = 2, --I might need to experiment here. How high are the towns and cubes?
+                -- debug        = true, -- uncomment to debug
+            })
+            --Assume there is only 1 piece on each slot, so just override l_town_slots[color][i]
+            --This most likely won't correctly handle a cube and a town on the same slot
+            for _,v in pairs(hits) do
+                if v.hit_object.hasTag("LargeTown") then
+                    -- log("I hit a town")
+                    -- has_hit = true
+                    Smart_delete_large_towns_reserved[color][i] = "Town"
+                elseif v.hit_object.hasTag("Cube") then
+                    -- log("I hit a cube")
+                    Smart_delete_large_towns_reserved[color][i] = v.hit_object
+                    -- --Move the cube a number of spaces equal to how many have been counted
+                    -- v.hit_object.setPositionSmooth(cube_new_pos)
+                end
+            end
+        end
+        --Now that the slot has been checked see if there is a town or a cube to move
+        -- if Smart_delete_large_towns_reserved[color][i] == "Town" then
+        --     has_hit = true
+        if Smart_delete_large_towns_reserved[color][i].type == "cube" then --i.e. it refers to a cube object. TODO: Fix this type check
+            Smart_delete_large_towns_reserved[color][i].setPositionSmooth(cube_new_pos)
+        end
+        if ( Smart_delete_large_towns_reserved[color][i].type == "cube" or Smart_delete_large_towns_reserved[color][i] == nil ) and not(this_town_moved) then
+            if object.is_face_down then object.flip() end
+            object.setPositionSmooth(town_new_pos)
+            object.setRotationSmooth(tableau.getRotation())
+            this_town_moved = true
+            if Smart_delete_large_towns_wait_id ~= nil then Wait.stop(Smart_delete_large_towns_wait_id) end
+            Smart_delete_large_towns_wait_id = Wait.time(CleanupSmartDeleteLargeTowns, 2)
+        end
+        if Smart_delete_large_towns_reserved[color][i] == nil then
+            --If the space is blank, we've moved this town and we've moved any cubes we've encountered, so
+            --we can break the loop
+            goto empty_space_l_town
         end
 
-        if has_hit then goto space_taken_l_town end
-        --The idea is that if we get to here, we haven't hit a town or a cube, so we
-        --want the deleted large town to go here, face up
-        --If this space is reserved, don't move me, but keep on looping
-        if not(Smart_delete_large_towns_reserved[color][i]) and not(town_moved) then
-          -- log("I am up to iterator " .. i .. " to place a town")
-          if object.is_face_down then object.flip() end
-          object.setPositionSmooth(l_town_pos:setAt('y',2))
-          object.setRotationSmooth(tableau.getRotation())
-          Smart_delete_large_towns_reserved[color][i] = true
-          town_moved = true
-          if Smart_delete_large_towns_wait_id ~= nil then Wait.stop(Smart_delete_large_towns_wait_id) end
-          Smart_delete_large_towns_wait_id = Wait.time(CleanupSmartDeleteLargeTowns, 2)
-        end
-
-        -- goto piece_moved_l_town
-        
-        ::space_taken_l_town::
-        -- log("Board spaces for " .. color .. " after loop")
-        -- log(Smart_delete_large_town_p_board_spaces[color][i])
     end
 
-    -- ::piece_moved_l_town::
+    ::empty_space_l_town::
     return false
   end
 
