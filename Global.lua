@@ -4989,7 +4989,9 @@ function SetMainMapSnapPoints()
     }
 
     for tag,location_tables in pairs(all_snap_points_source) do
+      log("Snap point tag " .. tag)
       for _,table in pairs(location_tables) do
+        log("Snap point location table " .. table)
         for _,location in pairs(table) do
           local snap_point_loc = mainboard.positionToLocal({
             location[1],
@@ -5005,7 +5007,8 @@ function SetMainMapSnapPoints()
         end
       end
     end
-
+    log("Snap point 33")
+    log(all_snap_points[33])
     mainboard.setSnapPoints(all_snap_points)
   end
 end
