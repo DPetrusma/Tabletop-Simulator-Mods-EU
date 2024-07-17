@@ -4968,8 +4968,8 @@ be added here in the script.
 function SetMainMapSnapPoints()
   local mainboard = getObjectsWithTag('MainBoard')
   if mainboard ~= nil then
-    local all_snap_points = {}
-    local all_snap_points_source = {
+    local allSnapPoints = {}
+    local allSnapPointsSourceByTag = {
       ['Province'] = {
           AfricaMap,
           AmericaMap,
@@ -4985,31 +4985,66 @@ function SetMainMapSnapPoints()
       },
       ['TagChit'] = {
         MilestoneTagLocations
+      },
+      ['NavalUnit'] = {
+        TradeProtectionSlots
       }
     }
 
-    for tag,location_tables in pairs(all_snap_points_source) do
+    for tag,location_tables in pairs(allSnapPointsSourceByTag) do
       log("Snap point tag " .. tag)
       for _,table in pairs(location_tables) do
         log("Snap point location table " .. table)
         for _,location in pairs(table) do
-          local snap_point_loc = mainboard.positionToLocal({
-            location[1],
-            1.0,
-            location[2]
-          })
-          local snap_point = {
-            position = snap_point_loc,
-            rotation_snap = true,
-            tags = {tag}
-          }
-          table.insert(all_snap_points, snap_point)
+          local snap_point_loc
+          local snapPoint
+          if table == TradeProtectionSlots then --Or I can check tag == NavalUnit
+            --The trade protection slots needs to handled slightly differently since each key has a table
+            --of tables as a value, not just one 
+            for _,tradeProtSlot in pairs(location) do
+                snap_point_loc = mainboard.positionToLocal({
+                    tradeProtSlot[1],
+                    1.0,
+                    tradeProtSlot[2]
+                  })
+                  snapPoint = {
+                    position = snap_point_loc,
+                    rotation_snap = true,
+                    tags = {tag}
+                  }
+                  table.insert(allSnapPoints, snapPoint)
+            end
+          else
+            snap_point_loc = mainboard.positionToLocal({
+                location[1],
+                1.0,
+                location[2]
+            })
+            snapPoint = {
+                position = snap_point_loc,
+                rotation_snap = true,
+                tags = {tag}
+            }
+            table.insert(allSnapPoints, snapPoint)
+          end
         end
       end
     end
+
+    ROUNDED_TPS = {}
+    for zone,points in pairs(TradeProtectionSlots) do
+        for _,point in pairs(points) do
+            local rounded_point = {
+            x = math.floor(point[1]*20+0.5)/20,
+            y = 1.06,
+            z = math.floor(point[2]*20+0.5)/20
+            }
+            ROUNDED_TPS[rounded_point.x..'||'..rounded_point.z] = true
+        end
+    end
     log("Snap point 33")
-    log(all_snap_points[33])
-    mainboard.setSnapPoints(all_snap_points)
+    log(allSnapPoints[33])
+    mainboard.setSnapPoints(allSnapPoints)
   end
 end
 
