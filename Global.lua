@@ -4966,7 +4966,7 @@ locations. Plus, doing it this way means that the snap points don't need to be m
 be added here in the script.
 --]]
 ROUNDED_TRADE_PROTECTION_SLOT_LOCATIONS = {}
-function SetMainMapSnapPoints()
+function SetMainMapSnapPoints(year)
   local mainboard = getObjectsWithTag('MainBoard')
   if mainboard ~= nil then
     local allSnapPoints = {}
@@ -4993,18 +4993,20 @@ function SetMainMapSnapPoints()
       log("Snap point tag " .. tag)
       for _,table in pairs(location_tables) do
         log("Snap point location table " .. table)
-        for _,location in pairs(table) do
-          local snap_point_loc = mainboard.positionToLocal({
-            location[1],
-            1.0,
-            location[2]
-          })
-          local snapPoint = {
-            position = snap_point_loc,
-            rotation_snap = true,
-            tags = {tag}
-          }
-          table.insert(allSnapPoints, snapPoint)
+        for name,location in pairs(table) do
+          if not(( string.endsWith(name, '%_1444') and year == '1618' ) or ( string.endsWith(name, '%_1618') and year == '1444' )) then
+            local snap_point_loc = mainboard.positionToLocal({
+                location[1],
+                1.0,
+                location[2]
+            })
+            local snapPoint = {
+                position = snap_point_loc,
+                rotation_snap = true,
+                tags = {tag}
+            }
+            table.insert(allSnapPoints, snapPoint)
+          end
         end
       end
     end
