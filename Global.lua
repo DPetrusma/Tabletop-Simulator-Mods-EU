@@ -4862,6 +4862,52 @@ function outputDroppedScoreObjectScore(obj)
   printToAll(outString, c)
 end
 
+function outputDroppedPrestigeObjectPrestige(obj)
+  local dropPos = obj.getPosition():setAt("y", 0)
+  local closestDist, closestScorePos, closestScore = 999, nil, nil
+  for stability = -3, 3 do
+    local scorePos =  Victory_Point_Score_To_Position[score]
+    local dist = Vector.distance(scorePos, dropPos)
+    if dist < 0.7 then
+      if dist < closestDist then
+        closestDist = dist
+        closestScorePos = scorePos
+        closestScore = score
+      end
+    end
+  end
+
+  local c = GetColorFromTag(obj) or "Grey"
+  local name = obj.getName()
+  local outString = ""
+  if name ~= "" then
+    outString = name
+  else
+    outString = c
+  end
+
+  local previousScore = tonumber(obj.getDescription()) or 0
+
+  if closestScore then
+    outString = outString.."'s Stability set to "..closestScore
+    obj.setDescription(closestScore)
+  else
+    closestScore = 0
+    outString = outString.."'s Stability dropped off the track "
+    obj.setDescription("")
+  end
+  
+  local scoreMod = closestScore - previousScore
+  if scoreMod == 0 then
+    return
+  elseif scoreMod > 0 then
+    scoreMod = "+"..scoreMod
+  end
+  outString = outString.." ["..scoreMod.."]"
+
+  printToAll(outString, c)
+end
+
 function onObjectDrop(player_color, dropped_object)
   if dropped_object.hasTag("Score") then
     Wait.condition(
@@ -4869,6 +4915,13 @@ function onObjectDrop(player_color, dropped_object)
       function() return dropped_object.resting end,
       5,
       function() outputDroppedScoreObjectScore(dropped_object) end
+    )
+  elseif dropped_object.hasTag("Prestige") then
+    Wait.condition(
+      function() outputDroppedPrestigeObjectPrestige(dropped_object) end,
+      function() return dropped_object.resting end,
+      5,
+      function() outputDroppedPrestigeObjectPrestige(dropped_object) end
     )
   end
 end
