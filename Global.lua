@@ -4967,7 +4967,7 @@ be added here in the script.
 --]]
 ROUNDED_TRADE_PROTECTION_SLOT_LOCATIONS = {}
 function SetMainMapSnapPoints(year)
-  local mainboard = getObjectsWithTag('MainBoard')
+  local mainboard = getObjectsWithTag('MainBoard')[1]
   if mainboard ~= nil then
     local allSnapPoints = {}
     local allSnapPointSourceByTag = {
@@ -4990,11 +4990,9 @@ function SetMainMapSnapPoints(year)
     }
 
     for tag,location_tables in pairs(allSnapPointSourceByTag) do
-      log("Snap point tag " .. tag)
       for _,table in pairs(location_tables) do
-        log("Snap point location table " .. table)
         for name,location in pairs(table) do
-          if not(( string.endsWith(name, '%_1444') and year == '1618' ) or ( string.endsWith(name, '%_1618') and year == '1444' )) then
+          if not(( string.find(name, "_1444") and year == "1618" ) or ( string.find(name, "_1618") and year == "1444" )) then
             local snap_point_loc = mainboard.positionToLocal({
                 location[1],
                 1.0,
@@ -5005,7 +5003,8 @@ function SetMainMapSnapPoints(year)
                 rotation_snap = true,
                 tags = {tag}
             }
-            table.insert(allSnapPoints, snapPoint)
+            -- table.insert(allSnapPoints, snapPoint) -- I don't know why this doesn't work...
+            allSnapPoints[#allSnapPoints+1] = snapPoint -- ...but this does
           end
         end
       end
@@ -5026,7 +5025,8 @@ function SetMainMapSnapPoints(year)
                 rotation_snap = true,
                 tags = {tag}
             }
-            table.insert(allSnapPoints, snapPoint)
+            -- table.insert(allSnapPoints, snapPoint)
+            allSnapPoints[#allSnapPoints+1] = snapPoint
 
             local roundedPoint = {
                 x = math.floor(location[1]*20+0.5)/20,
