@@ -4340,8 +4340,8 @@ function CheckRemovedEnter(object, trashBinObject)
             Local_Large_Town_Positions[math.max(1,i-Smart_delete_large_town_counter[color]+1)][2]}
           )
         
-        if TEST_MODE then log('A cube will go to ' .. cube_new_pos ) end
-        if TEST_MODE then log('A town will go to ' .. town_new_pos ) end
+        -- if TEST_MODE then log('A cube will go to x-pos ' .. cube_new_pos[1]) end
+        -- if TEST_MODE then log('A town will go to x-pos ' .. town_new_pos[1]) end
 
         local_l_town_pos = tableau.positionToWorld({Local_Large_Town_Positions[i][1], 0, Local_Large_Town_Positions[i][2]})
         --I am trying to use physics.cast on each space just once, so check if we've already done it
@@ -4355,30 +4355,32 @@ function CheckRemovedEnter(object, trashBinObject)
             })
             --Assume there is only 1 piece on each slot, so just override l_town_slots[color][i]
             --This most likely won't correctly handle a cube and a town on the same slot
+            Smart_delete_large_towns_reserved[color][i] = "Empty"
             for _,v in pairs(hits) do
                 if v.hit_object.hasTag("LargeTown") then
                     if TEST_MODE then log('I have hit a town in slot ' .. i ) end
                     Smart_delete_large_towns_reserved[color][i] = "Town"
                 elseif v.hit_object.hasTag("Cube") then
                     if TEST_MODE then log('I have hit a cube in slot ' .. i ) end
-                    Smart_delete_large_towns_reserved[color][i] = v.hit_object
+                    Smart_delete_large_towns_reserved[color][i] = v.hit_object.getGUID()
                 end
             end
         end
         --Now that the slot has been checked see if there is a town or a cube to move
-        if Smart_delete_large_towns_reserved[color][i].type == "Cube" then --i.e. it refers to a cube object. TODO: Fix this type check
-            if TEST_MODE then log('I am moving a cube in slot ' .. i ) end
-            Smart_delete_large_towns_reserved[color][i].setPositionSmooth(cube_new_pos)
+        local potential_cube = getObjectFromGUID(Smart_delete_large_towns_reserved[color][i])
+        if potential_cube ~= nil then --i.e. it refers to a cube object
+          if TEST_MODE then log('I am moving a cube in slot ' .. i .. ' to slot ' .. math.max(1,i-Smart_delete_large_town_counter[color]) ) end
+          potential_cube.setPositionSmooth(cube_new_pos)
         end
-        if ( Smart_delete_large_towns_reserved[color][i].type == "cube" or Smart_delete_large_towns_reserved[color][i] == nil ) and not(this_town_moved) then
-            --i.e. move the town if this slot is empty or has a cube in it. The cube would have been moved in the previous if
-            if TEST_MODE then log('I am moving a town in slot ' .. i ) end
+        if ( potential_cube ~= nil or Smart_delete_large_towns_reserved[color][i] == "Empty" ) and not(this_town_moved) then
+              --i.e. move the town if this slot is empty or has a cube in it. The cube would have been moved in the previous if
+            if TEST_MODE then log('I am moving a town to slot ' .. math.max(1,i-Smart_delete_large_town_counter[color]+1) ) end
             if object.is_face_down then object.flip() end
             object.setPositionSmooth(town_new_pos)
             object.setRotationSmooth(tableau.getRotation())
             this_town_moved = true
         end
-        if Smart_delete_large_towns_reserved[color][i] == nil then
+        if Smart_delete_large_towns_reserved[color][i] == "Empty" then
             --If the space is blank, we've moved the town and we've moved any cubes we've encountered, so
             --we can break the loop
             if TEST_MODE then log('I am breaking the loop at slot ' .. i ) end
