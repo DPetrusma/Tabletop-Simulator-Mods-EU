@@ -4990,8 +4990,8 @@ function SetMainMapSnapPoints(year)
     }
 
     for tag,location_tables in pairs(allSnapPointSourceByTag) do
-      for _,table in pairs(location_tables) do
-        for name,location in pairs(table) do
+      for _,location_table in pairs(location_tables) do
+        for name,location in pairs(location_table) do
           if not(( string.find(name, "_1444") and year == "1618" ) or ( string.find(name, "_1618") and year == "1444" )) then
             local snap_point_loc = mainboard.positionToLocal({
                 location[1],
@@ -5003,8 +5003,7 @@ function SetMainMapSnapPoints(year)
                 rotation_snap = true,
                 tags = {tag}
             }
-            -- table.insert(allSnapPoints, snapPoint) -- I don't know why this doesn't work...
-            allSnapPoints[#allSnapPoints+1] = snapPoint -- ...but this does
+            table.insert(allSnapPoints, snapPoint)
           end
         end
       end
@@ -5025,8 +5024,7 @@ function SetMainMapSnapPoints(year)
                 rotation_snap = true,
                 tags = {tag}
             }
-            -- table.insert(allSnapPoints, snapPoint)
-            allSnapPoints[#allSnapPoints+1] = snapPoint
+            table.insert(allSnapPoints, snapPoint)
 
             local roundedPoint = {
                 x = math.floor(location[1]*20+0.5)/20,
@@ -5036,8 +5034,6 @@ function SetMainMapSnapPoints(year)
 
         end
     end
-    log("Snap point 33")
-    log(allSnapPoints[33])
     mainboard.setSnapPoints(allSnapPoints)
   end
 end
