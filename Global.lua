@@ -4862,17 +4862,40 @@ function outputDroppedScoreObjectScore(obj)
   printToAll(outString, c)
 end
 
-function outputDroppedPrestigeObjectPrestige(obj)
+--[[
+  ------------------------------------------------
+  ------------------------------------------------
+            Print Stability on change
+  ------------------------------------------------
+  ------------------------------------------------
+--]]
+
+Stability_Offset = {
+    [-3] = {-3, 0},
+    [-2] = {-2, 0},
+    [-1] = {-1, 0},
+    [0]  = { 0, 0},
+    [1]  = { 1, 0},
+    [2]  = { 2, 0},
+    [3]  = { 3, 0},
+  }
+
+function outputDroppedStabilityObjectStability(obj)
   local dropPos = obj.getPosition():setAt("y", 0)
-  local closestDist, closestScorePos, closestScore = 999, nil, nil
+  local seat = Player_Seat_From_Color[getColorFromTag(obj)]
+  local closestDist, closestStabPos, closestStab = 999, nil, nil
   for stability = -3, 3 do
-    local scorePos =  Victory_Point_Score_To_Position[score]
-    local dist = Vector.distance(scorePos, dropPos)
+    local stabOffset = {
+        Main_Tableau_Offset_Positions.stability[1] + Stability_Offset[stability][1],
+        Main_Tableau_Offset_Positions.stability[2] + Stability_Offset[stability][2],
+    }
+    local stabPos = GetOffset(Main_Tableau_Positions[seat], stabOffset, seat, 0 )
+    local dist = Vector.distance(stabPos, dropPos)
     if dist < 0.7 then
       if dist < closestDist then
         closestDist = dist
-        closestScorePos = scorePos
-        closestScore = score
+        closestStabPos = stabPos
+        closestStab = stability
       end
     end
   end
@@ -4886,24 +4909,26 @@ function outputDroppedPrestigeObjectPrestige(obj)
     outString = c
   end
 
-  local previousScore = tonumber(obj.getDescription()) or 0
+  local previousStab = tonumber(obj.getDescription()) or 0
 
-  if closestScore then
-    outString = outString.."'s Stability set to "..closestScore
-    obj.setDescription(closestScore)
+  if closestStab then
+    outString = outString.."'s Stability set to "..closestStab
+    obj.setDescription(closestStab)
   else
-    closestScore = 0
+    closestStab = 0
     outString = outString.."'s Stability dropped off the track "
     obj.setDescription("")
   end
   
-  local scoreMod = closestScore - previousScore
-  if scoreMod == 0 then
+  local stabMod = closestStab - previousStab
+  if stabMod == 0 then
     return
-  elseif scoreMod > 0 then
-    scoreMod = "+"..scoreMod
+  elseif stabMod > 0 then
+    stabMod = "+"..stabMod
+  elseif stabMod < 0 then
+    stabMod = "-"..stabMod
   end
-  outString = outString.." ["..scoreMod.."]"
+  outString = outString.." ["..stabMod.."]"
 
   printToAll(outString, c)
 end
@@ -4918,10 +4943,10 @@ function onObjectDrop(player_color, dropped_object)
     )
   elseif dropped_object.hasTag("Prestige") then
     Wait.condition(
-      function() outputDroppedPrestigeObjectPrestige(dropped_object) end,
+      function() outputDroppedStabilityObjectStability(dropped_object) end,
       function() return dropped_object.resting end,
       5,
-      function() outputDroppedPrestigeObjectPrestige(dropped_object) end
+      function() outputDroppedStabilityObjectStability(dropped_object) end
     )
   end
 end
