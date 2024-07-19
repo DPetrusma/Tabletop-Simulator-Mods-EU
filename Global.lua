@@ -4882,14 +4882,15 @@ Stability_Offset = {
 
 function outputDroppedStabilityObjectStability(obj)
   local dropPos = obj.getPosition():setAt("y", 0)
-  local seat = Player_Seat_From_Color[getColorFromTag(obj)]
+  local color = string.lower(GetColorFromTag(obj))
+  local tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
   local closestDist, closestStabPos, closestStab = 999, nil, nil
   for stability = -3, 3 do
     local stabOffset = {
         Main_Tableau_Offset_Positions.stability[1] + Stability_Offset[stability][1],
         Main_Tableau_Offset_Positions.stability[2] + Stability_Offset[stability][2],
     }
-    local stabPos = GetOffset(Main_Tableau_Positions[seat], stabOffset, seat, 0 )
+    local stabPos = tableau.positionToWorld(stabOffset)
     local dist = Vector.distance(stabPos, dropPos)
     if dist < 0.7 then
       if dist < closestDist then
