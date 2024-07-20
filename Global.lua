@@ -916,6 +916,8 @@ function Setup_Game()
   -- Handle Manual Setup
   if UI_Data.scenario == '0-00' then
     --Keep these in sync for the later color-swapping features
+    --TODO: I think I don't need this, actually. I get use a colour to get a Tableau from getObjectFromGUID(Main_Tableau_GUIDs[col])
+    --and then use tableau.getPosition() and GetSeatFromPosition(pos) to find a position from the color
     Player_Seat_From_Color =
     {
       blue = 1,
@@ -4201,6 +4203,12 @@ function CleanupSmartDeleteSmallTowns()
   Smart_delete_small_towns_wait_id = nil
 end
 
+function CleanupSmartDeleteTowns(town_size)
+  Smart_delete_towns_reserved[town_size] = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
+  Smart_delete_town_counter[town_size] = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 }
+  Smart_delete_towns_wait_id[town_size] = nil
+end
+
 Smart_delete_large_towns_reserved = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
 Smart_delete_large_town_counter = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 }
 Smart_delete_large_towns_wait_id = nil
@@ -4208,6 +4216,20 @@ Smart_delete_large_towns_wait_id = nil
 Smart_delete_small_towns_reserved = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
 Smart_delete_small_towns_wait_id = nil
 Smart_delete_small_town_p_board_spaces = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
+
+Smart_delete_towns_reserved = {
+  LargeTown = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} },
+  SmallTown = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} },
+}
+Smart_delete_town_counter = {
+  LargeTown = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 },
+  SmallTown = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 }
+}
+Smart_delete_towns_wait_id = { LargeTown = nil, SmallTown = nil }
+Local_Town_positions = {
+  LargeTown = Local_Large_Town_Positions,
+  SmallTown = Local_Small_Town_Positions
+}
 
 TRASH_BIN_MIN_DECK_SIZE_TO_AVOID_SEPARATION = 9
 
@@ -4289,13 +4311,6 @@ function CheckRemovedEnter(object, trashBinObject)
     return false
   end
 
-  --[[For small and large towns, step through the spaces on the player board from bottom right to top left,
-  and place the town on the first empty space.
-  Later on, take into account cubes for occupied towns and so place the town in the first cube space and
-  move the cube to the first empty space.
-  I can probably take out this repeated code, for here and the IA cubes, and re-use a function
-  --]]
-
   --[[
   Another thought train:
   Have a counter of how many large towns have been deleted per colour (Large_Town_Deleted_Count[color])
@@ -4313,41 +4328,40 @@ function CheckRemovedEnter(object, trashBinObject)
   So, the first town will be placed in the first blank/cubed space, and each cube will be moved over 1 space
   The second town will be placed in the second blank/cubed space, and each cube will be moved over 2 spaces
   --]]
-  if object.hasTag('LargeTown') then
+  if object.hasTag('LargeTown') or object.hasTag('SmallTown') then
+    local town_size = 'SmallTown'
+    if object.hasTag('LargeTown') then town_size = 'LargeTown' end
     local color = string.lower(GetColorFromTag(object))
     local tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
     if tableau == nil then return false end
     local this_town_moved = false
-    Smart_delete_large_town_counter[color] = Smart_delete_large_town_counter[color] + 1
-    if TEST_MODE then log('Up to "deleting" town ' .. Smart_delete_large_town_counter[color] .. ' for ' .. color ) end
+    Smart_delete_town_counter[town_size][color] = Smart_delete_town_counter[town_size][color] + 1
+    if TEST_MODE then log('Up to "deleting" town ' .. Smart_delete_town_counter[town_size][color] .. ' for ' .. color ) end
 
-    for i = #Local_Large_Town_Positions, 1, -1 do
+    for i = #Local_Town_positions[town_size], 1, -1 do
         --We need to declare these local variables before the goto. The Lua docs explain about scope.
         -- local has_hit = false
-        local local_l_town_pos
+        local local_town_pos
         local hits
 
         --We only use these once, so it doesn't space, but next to each other you can see that a
         --cube will be offset from a moved town by 1
         local cube_new_pos = tableau.positionToWorld(
-            {Local_Large_Town_Positions[math.max(1,i-Smart_delete_large_town_counter[color])][1],
+            {Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color])][1],
             2,
-            Local_Large_Town_Positions[math.max(1,i-Smart_delete_large_town_counter[color])][2]}
+            Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color])][2]}
         )
         local town_new_pos = tableau.positionToWorld(
-            {Local_Large_Town_Positions[math.max(1,i-Smart_delete_large_town_counter[color]+1)][1],
+            {Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color]+1)][1],
             2,
-            Local_Large_Town_Positions[math.max(1,i-Smart_delete_large_town_counter[color]+1)][2]}
+            Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color]+1)][2]}
           )
-        
-        -- if TEST_MODE then log('A cube will go to x-pos ' .. cube_new_pos[1]) end
-        -- if TEST_MODE then log('A town will go to x-pos ' .. town_new_pos[1]) end
 
-        local_l_town_pos = tableau.positionToWorld({Local_Large_Town_Positions[i][1], 0, Local_Large_Town_Positions[i][2]})
+        local_town_pos = tableau.positionToWorld({Local_Town_positions[town_size][i][1], 0, Local_Town_positions[town_size][i][2]})
         --I am trying to use physics.cast on each space just once, so check if we've already done it
-        if Smart_delete_large_towns_reserved[color][i] == nil then
+        if Smart_delete_towns_reserved[town_size][color][i] == nil then
             hits = Physics.cast({
-                origin       = local_l_town_pos,
+                origin       = local_town_pos,
                 direction    = {0,1,0},
                 type         = 1, --1 for Ray, not Sphere or Box
                 max_distance = 2, --I might need to experiment here. How high are the towns and cubes?
@@ -4355,86 +4369,46 @@ function CheckRemovedEnter(object, trashBinObject)
             })
             --Assume there is only 1 piece on each slot, so just override l_town_slots[color][i]
             --This most likely won't correctly handle a cube and a town on the same slot
-            Smart_delete_large_towns_reserved[color][i] = "Empty"
+            Smart_delete_towns_reserved[town_size][color][i] = "Empty"
             for _,v in pairs(hits) do
-                if v.hit_object.hasTag("LargeTown") then
+                if v.hit_object.hasTag(town_size) then
                     if TEST_MODE then log('I have hit a town in slot ' .. i ) end
-                    Smart_delete_large_towns_reserved[color][i] = "Town"
+                    Smart_delete_towns_reserved[town_size][color][i] = "Town"
                 elseif v.hit_object.hasTag("Cube") then
                     if TEST_MODE then log('I have hit a cube in slot ' .. i ) end
-                    Smart_delete_large_towns_reserved[color][i] = v.hit_object.getGUID()
+                    Smart_delete_towns_reserved[town_size][color][i] = v.hit_object.getGUID()
                 end
             end
         end
         --Now that the slot has been checked see if there is a town or a cube to move
-        local potential_cube = getObjectFromGUID(Smart_delete_large_towns_reserved[color][i])
+        local potential_cube = getObjectFromGUID(Smart_delete_towns_reserved[town_size][color][i])
         if potential_cube ~= nil then --i.e. it refers to a cube object
-          if TEST_MODE then log('I am moving a cube in slot ' .. i .. ' to slot ' .. math.max(1,i-Smart_delete_large_town_counter[color]) ) end
+          if TEST_MODE then log('I am moving a cube in slot ' .. i .. ' to slot ' .. math.max(1,i-Smart_delete_town_counter[town_size][color]) ) end
           potential_cube.setPositionSmooth(cube_new_pos)
         end
-        if ( potential_cube ~= nil or Smart_delete_large_towns_reserved[color][i] == "Empty" ) and not(this_town_moved) then
+        if ( potential_cube ~= nil or Smart_delete_towns_reserved[town_size][color][i] == "Empty" ) and not(this_town_moved) then
               --i.e. move the town if this slot is empty or has a cube in it. The cube would have been moved in the previous if
-            if TEST_MODE then log('I am moving a town to slot ' .. math.max(1,i-Smart_delete_large_town_counter[color]+1) ) end
+            if TEST_MODE then log('I am moving a town to slot ' .. math.max(1,i-Smart_delete_town_counter[town_size][color]+1) ) end
             if object.is_face_down then object.flip() end
             object.setPositionSmooth(town_new_pos)
             object.setRotationSmooth(tableau.getRotation())
             this_town_moved = true
         end
-        if Smart_delete_large_towns_reserved[color][i] == "Empty" then
+        if Smart_delete_towns_reserved[town_size][color][i] == "Empty" then
             --If the space is blank, we've moved the town and we've moved any cubes we've encountered, so
             --we can break the loop
             if TEST_MODE then log('I am breaking the loop at slot ' .. i ) end
-            goto empty_space_l_town
+            goto empty_space_town
         end
 
     end
 
-    ::empty_space_l_town::
+    ::empty_space_town::
     --I'll put this at the very end, just in case something happens and no pieces are moved, like if you delete a small town
     --with all slots taken
     if TEST_MODE then log('The timer has begun to reset the counter and holding table' ) end
-    if Smart_delete_large_towns_wait_id ~= nil then Wait.stop(Smart_delete_large_towns_wait_id) end
-    Smart_delete_large_towns_wait_id = Wait.time(CleanupSmartDeleteLargeTowns, 2)
-    return false
-  end
-
-  if object.hasTag('SmallTown') then
-    local color = string.lower(GetColorFromTag(object))
-    local tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
-    if tableau == nil then return false end
-
-    for i = #Local_Small_Town_Positions, 1, -1 do
-        --We need to declare these local variables before the goto. The Lua docs explain about scope.
-        local has_hit = false
-        local s_town_pos
-        local hits
-        if Smart_delete_s_town_targets[color][i] then goto space_taken_s_town end
-        s_town_pos = tableau.positionToWorld({Local_Small_Town_Positions[i][1], 0, Local_Small_Town_Positions[i][2]})
-        hits = Physics.cast({
-            origin       = s_town_pos,
-            direction    = {0,1,0},
-            type         = 1, --1 for Ray, not Sphere or Box
-            max_distance = 2, --I might need to experiment here. How high are the towns and cubes?
-            -- debug        = true, -- uncomment to debug
-        })
-        for _,v in pairs(hits) do
-            if v.hit_object.hasTag("SmallTown") or v.hit_object.hasTag("Cube") then
-              has_hit = true
-            end
-        end
-        if has_hit then goto space_taken_s_town end
-        --The idea is that if we get to here, we haven't hit a town or a cube, so we
-        --want the deleted large town to go here, face up
-        if object.is_face_down then object.flip() end
-        object.setPositionSmooth(s_town_pos:setAt('y',2))
-        object.setRotationSmooth(tableau.getRotation())
-        Smart_delete_s_town_targets[color][i] = true
-        goto piece_moved_s_town
-        
-        ::space_taken_s_town::
-    end
-
-    ::piece_moved_s_town::
+    if Smart_delete_towns_wait_id[town_size] ~= nil then Wait.stop(Smart_delete_towns_wait_id[town_size]) end
+    Smart_delete_towns_wait_id[town_size] = Wait.time(function() CleanupSmartDeleteTowns(town_size) end, 2)
     return false
   end
 
