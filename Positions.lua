@@ -99,7 +99,7 @@ AfricaMap = {
     ['wittenberg'] = {2.44, 2.31}, ['leipzig'] = {1.53, 1.83}, ['augsburg'] = {1.17, -0.60}, ['landshut'] = {2.58, -0.23},
     ['steiermark'] = {3.49, -1.46}, ['osterreich'] = {4.24, -0.13}, ['verona'] = {1.76, -3.03}, ['treviso'] = {2.5, -2.58},
     ['krain'] = {3.19, -2.81}, ['potsdam'] = {2.58, 3.11}, ['altmark'] = {1.93, 3.45}, ['neumark_1618'] = {4.41, 3.47},
-    ['koslin_1618'] = {4.92, 4.54}, ['stralsund_1444'] = {3.03, 4.56}, ['stralsund_1618'] = {3.03, 4.56}, ['mecklenburg'] = {2.32, 4.47}, ['hum_1444'] = {5.17, -4.04},
+    ['koslin_1618'] = {4.92, 4.54}, ['stralsund_1444'] = {3.03, 4.56}, ['stralsund_1618'] = {2.99, 4.62}, ['mecklenburg'] = {2.32, 4.47}, ['hum_1444'] = {5.17, -4.04},
     ['kalisz'] = {5.76, 2.41}, ['granada'] = {-8.19, -8.41}, ['gibraltar'] = {-9.39, -9.05}, ['sopron'] = {5.03, -1.29},
     ['olomouc'] = {5.01, 0.67}, ['budejovice'] = {3.48, 0.13}, ['corsica'] = {0.34, -5.3}, ['sardenya'] = {0.22, -7.7}
   }
@@ -108,8 +108,8 @@ AfricaMap = {
   -- snap points for provinces on the eastern map --
   EasternMap = {
     ['iskandariyya'] = {11.80, -11.24}, ['qahirah'] = {12.43, -11.95}, ['dumyat'] = {13.0, -11.33}, ['krakow'] = {6.87, 0.78},
-    ['warszawa'] = {7.54, 2.5}, ['lwow'] = {9.54, -0.01}, ['constantinople_1444'] = {11.68, -5.6}, ['constantinople_1618'] = {11.68, -5.6},
-    ['hudavendigar_1444'] = {11.4, -6.51}, ['hudavendigar_1618'] = {11.4, -6.51},
+    ['warszawa'] = {7.54, 2.5}, ['lwow'] = {9.54, -0.01}, ['constantinople_1444'] = {11.68, -5.6}, ['constantinople_1618'] = {11.59, -5.59},
+    ['hudavendigar_1444'] = {11.4, -6.51}, ['hudavendigar_1618'] = {11.34, -6.51},
     ['basarabia'] = {12.05, -2.69}, ['trebizond'] = {16.89, -5.82}, ['kazan'] = {20.11, 4.61}, ['nizhnynovgorod'] = {18.86, 5.28},
     ['perm'] = {20.5, 8.28}, ['viatka'] = {20.41, 6.78}, ['tblisi'] = {19.36, -5.09}, ['caffa'] = {15.41, -2.88},
     ['athina'] = {9.19, -8.14}, ['creta'] = {10.02, -9.86}, ['novgorod'] = {13.0, 7.1}, ['neva'] = {12.11, 7.88},
