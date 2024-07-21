@@ -290,6 +290,8 @@ DNPR_Capital_GUIDs = {
         Positions
      --------------- ]]
 
+require("EU.Positions")
+
 Scenario_Book_Position = {37.86, 0.95, 10.00}
 
 Power_Struggle_Active = {8.48, 15.11}
@@ -4807,13 +4809,18 @@ end
   ------------------------------------------------
 --]]
 
-Victory_Point_Init_Positions = {
-  [1] = Vector(-20.33, 0, -11.70),
-  [60] =  Vector(-19.49, 0, 11.58)
-}
-Victory_Point_Score_To_Position = {
-  [0] = Vector(-19.92, 0, -12.69)
-}
+Victory_Point_Score_To_Position = {}
+
+for i = 0, 60 do
+  table.insert(
+    Victory_Point_Score_To_Position,
+    Vector(
+      PrestigeLocations[i][1],
+      0,
+      PrestigeLocations[i][2]
+    )
+  )
+end
 
 function outputDroppedScoreObjectScore(obj)
   local dropPos = obj.getPosition():setAt("y", 0)
@@ -4953,12 +4960,6 @@ function onObjectDrop(player_color, dropped_object)
   end
 end
 
-for x = Victory_Point_Init_Positions[1].x, Victory_Point_Init_Positions[60].x, Victory_Point_Init_Positions[60].x-Victory_Point_Init_Positions[1].x do
-  for z = Victory_Point_Init_Positions[1].z, Victory_Point_Init_Positions[60].z, (Victory_Point_Init_Positions[60].z-Victory_Point_Init_Positions[1].z) / 29 do
-    table.insert(Victory_Point_Score_To_Position, Vector(x, 0, z))
-  end
-end
-
 --[[
 Many snap points are now stored in the EU\Positions.lua script, and this function will be called when the map
 state changes to update the snap points. The 1618 and 144 side have a couple of provinces in slightly different
@@ -4986,6 +4987,9 @@ function SetMainMapSnapPoints(year)
       },
       ['TagChit'] = {
         MilestoneTagLocations
+      },
+      ['Score'] = {
+        PrestigeLocations
       }
     }
 
@@ -5046,8 +5050,6 @@ Age2XCards = { '21a-1', '22a-1', '22a-2', '24a-3', '24a-4', '252b', '253b', '254
 Age3XCards = { '31a-1', '31a-2', '32a-1', '32a-2', '33a-1', '33a-2', '34a-3', '351b', '354b', '355b', '356b', '357b', '358b', '359b', '361b', '362b', '363b', '364b', }
 
 Age4XCards = { '41a-2', '42a-1', '44a-1', '452b', '453b', '454b', '455b' }
-
-require("EU.Positions")
 
 require("EU.Realms")
 

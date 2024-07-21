@@ -234,15 +234,15 @@ AfricaMap = {
   }
 
   PrestigeLocations = {
-    [0] = {x = -19.92, z = -12.69}, --Below the track, in between 1 and 31
-    [1] = {x = -20.33, z = -11.70}, --On the track
-    [60] = {x = -19.49, z = 11.58} -- On the track
+    [0] = {-19.92, -12.69}, --Below the track, in between 1 and 31
+    [1] = {-20.33, -11.70}, --On the track
+    [60] = {-19.49, 11.58} -- On the track
   }
 
   local i = 1
-  for x = PrestigeLocations[1].x, PrestigeLocations[60].x, PrestigeLocations[60].x-PrestigeLocations[1].x do --Start, End, Step
-    for z = PrestigeLocations[1].z, PrestigeLocations[60].z, (PrestigeLocations[60].z-PrestigeLocations[1].z) / 29 do --Start, End, Step
-      PrestigeLocations[i]= {x = x, z = z}
+  for x = PrestigeLocations[1][1], PrestigeLocations[60][1], PrestigeLocations[60][1]-PrestigeLocations[1][1] do --Start, End, Step
+    for z = PrestigeLocations[1][2], PrestigeLocations[60][2], (PrestigeLocations[60][2]-PrestigeLocations[1][2]) / 29 do --Start, End, Step
+      PrestigeLocations[i]= {x, z}
       i = i + 1
     end
   end
