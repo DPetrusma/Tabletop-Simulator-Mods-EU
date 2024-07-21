@@ -4964,27 +4964,22 @@ function flipLightShipOnTPS(obj)
     local dropPos = obj.getPosition()
     --TODO: Decide whether I want to keep this lookup, or use physics.cast to
     --find the TPS the ship is on top of
+
     --This rounds the co-ordinates to the nearest 0.05
     local roundedDropPos = {
         x = math.floor(dropPos.x*20+0.5)/20,
         z = math.floor(dropPos.z*20+0.5)/20
     }
+    local rotationValues = obj.getRotationValues() -- Index 1 is normal, 2 is the side
 
-    --Normally, we flip between the two states, but for this function, we only
-    --care about putting it on its side if it's standing up
-    if Rounded_Trade_Protection_Slot_Position[roundedDropPos.x .. '||' .. roundedDropPos.z] then
-        obj.setRotation("#side") --We'll see what this looks like
+    --This is a little different to the flip function since I don't necessarily want to go
+    --between the two states. If it's not on a trade protection slot, put it upright
+    if ROUNDED_TRADE_PROTECTION_SLOT_LOCATIONS[roundedDropPos.x .. '||' .. roundedDropPos.z] then
+        obj.setRotation(rotationValues[2].rotation)
+        obj.setPosition(obj.getPosition() + Vector(0,0,-0.1))
     else
-        obj.setRotation("") --Whatever the other one is called
+        obj.setRotation(rotationValues[1].rotation)
     end
-    
-    
-    -- and
-    --     changeRotationValue(dropped_object, -1) == "#side" then
-    --         obj.setPosition(dropPos + Vector(0,0,-0.1))
-    -- else
-    --         obj.setPosition(dropPos + Vector(0,0,0.1))
-    -- end
 end
 
 function onObjectDrop(player_color, dropped_object)
@@ -5005,7 +5000,7 @@ function onObjectDrop(player_color, dropped_object)
   elseif dropped_object.hasTag("NavalUnit") then
     Wait.condition(
       function() flipLightShipOnTPS(dropped_object) end,
-      function() return dropped_object.isDestroyed() or dropped_object.resting end, --Condition function
+      function() return dropped_object.resting end, --Condition function
       5, --Timeout in seconds
       function() flipLightShipOnTPS(dropped_object) end --Function to run if we hit the timeout
     )
