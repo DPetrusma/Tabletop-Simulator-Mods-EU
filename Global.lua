@@ -4904,6 +4904,7 @@ function removePlayerPieces()
     DealActionCards(players)
     RotateTruceAndRemoveBags()
     printToAll("Remember to draw three additional action cards and appoint advisors and leaders.\nYou may keep up to four action cards and two missions in your hand (unless otherwise specified by the scenario)", {1,1,1})
+    broadcastToAll('Remove influence from any areas with no NPR provinces remaining after setup. Imperial Authority, influence, and extra manpower must be set up manually')
   else
     broadcastToAll('Marriage and Alliance tokens will be placed after all colors have a realm selected or have been removed')
   end
