@@ -4996,7 +4996,7 @@ function SetMainMapSnapPoints(year)
     for tag,location_tables in pairs(allSnapPointSourceByTag) do
       for _,location_table in pairs(location_tables) do
         for name,location in pairs(location_table) do
-          if not(( string.find(name, "_1444") and year == "1618" ) or ( string.find(name, "_1618") and year == "1444" )) then
+          if not(( Provinces1444Only[name] and year == "1618" ) or ( Provinces1618Only[name] and year == "1444" )) then
             local snap_point_loc = mainboard.positionToLocal({
                 location[1],
                 1.0,

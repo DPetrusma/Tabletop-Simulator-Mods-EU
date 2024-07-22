@@ -971,7 +971,7 @@ Scenario_List['2-04'].variants = {
   }, DNPR_Orange_L = { 
     WesternMap.amsterdam, WesternMap.gent, WesternMap.antwerpen, WesternMap.brugge, WesternMap.namur, WesternMap.luxembourg, AfricaMap.capeofgoodhope,
   }, DNPR_Blue_L = { 
-    WesternMap.stockholm, WesternMap.lund, WesternMap.gotland, WesternMap.stralsund,
+    WesternMap.stockholm, WesternMap.lund, WesternMap.gotland, WesternMap.stralsund_1618,
   }, DNPR_Green_S = { 
     WesternMap.napoli, WesternMap.salerno, WesternMap.bari, WesternMap.palermo, WesternMap.mesina,
   }, DNPR_Pink_L = { 
