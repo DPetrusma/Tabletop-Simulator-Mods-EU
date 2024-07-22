@@ -15,6 +15,8 @@ The other files in EU can be edited and those files are alreay referenced in the
 Changelog:
 v2.2
 - Scripts on all pieces and containers are now in the repo, with in-game pieces and containers using Require
+- Claim containers only accept claim tokens
+- White's tag chit container only accepts tag chit tokens
 - The opening splash screen now has a minimise button and a maximise button
 - Imperial Influence cubes will now return to the track if you delete them
 - When the game is loaded, all players are put in the spectator seat. When a player connects, they are put into a spectator seat. This prevents revealing of hidden information.
