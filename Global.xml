@@ -615,3 +615,9 @@
     </Text>
   </Button>
 </Panel>
+
+<Panel id="global_message_banner" color="rgba(0,0,0,100)" width="600" Height="200" rectAlignment="UpperCenter" offsetXY="0 425" active="false">
+    <Text id="global_message_banner_txt" fontSize="12" color="Orange" alignment="MiddleCenter">
+        This is a test message
+    </Text>
+</Panel>

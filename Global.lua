@@ -464,6 +464,10 @@ function onLoad()
 
   local mainboard = getObjectsWithTag('MainBoard')[1]
   onObjectSpawn(mainboard)
+
+  --Testing the message banner
+  Global.UI.setAttribute('global_message_banner_txt', "text", "This is a test message")
+  Global.UI.setAttribute('global_message_banner', "active", "true")
 end
 
 --[[ ----------------------------------
