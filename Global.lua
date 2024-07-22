@@ -4812,14 +4812,11 @@ end
 Victory_Point_Score_To_Position = {}
 
 for i = 0, 60 do
-  table.insert(
-    Victory_Point_Score_To_Position,
-    Vector(
+  Victory_Point_Score_To_Position[i] = Vector(
       PrestigeLocations[i][1],
       0,
       PrestigeLocations[i][2]
-    )
-  )
+)
 end
 
 function outputDroppedScoreObjectScore(obj)
@@ -4990,6 +4987,9 @@ function SetMainMapSnapPoints(year)
       },
       ['Score'] = {
         PrestigeLocations
+      },
+      ['Expanded_Trade'] = {
+        TradeNodeLocations
       }
     }
 
