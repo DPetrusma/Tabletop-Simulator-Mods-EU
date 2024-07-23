@@ -1596,10 +1596,7 @@ SETUP_DATA = {
       capital = EasternMap.tirgoviste
     },
     ['1618'] = {
-      parent = {'000', 'default'},
-      religion = RELIGION.orthodox,
-      s_towns = { EasternMap.tirgoviste, EasternMap.buzau, },
-      capital = EasternMap.tirgoviste
+      parent = {REALM.wallachia, '1444'},
     },
   },
   [REALM.stettin] = {
@@ -1634,10 +1631,7 @@ SETUP_DATA = {
       capital = EasternMap.imereti
     },
     ['1618'] = {
-      parent = {'000', 'default'},
-      religion = RELIGION.orthodox,
-      s_towns = { EasternMap.imereti, EasternMap.guria, },
-      capital = EasternMap.imereti
+      parent = {REALM.imereti, '1444'},
     },
   },
   [REALM.transylvania] = {
@@ -1664,7 +1658,7 @@ SETUP_DATA = {
       capital = EasternMap.suceava
     },
   },
-  [REALM.BRUNSWICK] = {
+  [REALM.brunswick] = {
     ['1444'] = {
       parent = {'000', 'default'},
       religion = RELIGION.catholic,
@@ -1672,7 +1666,7 @@ SETUP_DATA = {
       capital = WesternMap.braunschweig
     },
     ['1618'] = {
-        parent = { REALM.BRUNSWICK, '1444'}
+        parent = { REALM.brunswick, '1444'}
     }
   },
   [REALM.kazan] = {
