@@ -1698,4 +1698,15 @@ SETUP_DATA = {
       capital = WesternMap.malta
     },
   },
+  [REALM.lorraine] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      l_towns = { WesternMap.lorraine, },
+      capital = WesternMap.lorraine
+    },
+    ['1618'] = {
+        parent = { REALM.lorraine, '1444'}
+    }
+  },
 }
