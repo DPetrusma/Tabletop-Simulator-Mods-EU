@@ -4187,48 +4187,31 @@ function tryObjectEnterContainer(container, enter_object)
     return true
 end
 --[[
-These functions will run 2 seconds after the players stop deleting towns and vassals.
+This function will run 2 seconds after the players stop deleting towns and vassals.
 We wait 2 seconds so that if several are deleted in quick succession, but not in the same
 action, they will still be spread out over the right spaces
 --]]
-function CleanupSmartDeleteLargeTowns()
-  Smart_delete_large_towns_reserved = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
-  Smart_delete_large_town_counter = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 }
-  Smart_delete_large_towns_wait_id = nil
-end
-
-function CleanupSmartDeleteSmallTowns()
-  Smart_delete_small_towns_reserved = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
-  Smart_delete_small_town_p_board_spaces = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
-  Smart_delete_small_towns_wait_id = nil
-end
-
 function CleanupSmartDeleteTowns(town_size)
   Smart_delete_towns_reserved[town_size] = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
   Smart_delete_town_counter[town_size] = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 }
   Smart_delete_towns_wait_id[town_size] = nil
 end
 
-Smart_delete_large_towns_reserved = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
-Smart_delete_large_town_counter = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 }
-Smart_delete_large_towns_wait_id = nil
-
-Smart_delete_small_towns_reserved = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
-Smart_delete_small_towns_wait_id = nil
-Smart_delete_small_town_p_board_spaces = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
-
 Smart_delete_towns_reserved = {
   LargeTown = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} },
   SmallTown = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} },
+  Vassal = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} },
 }
 Smart_delete_town_counter = {
   LargeTown = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 },
-  SmallTown = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 }
+  SmallTown = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 },
+  Vassal = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 }
 }
 Smart_delete_towns_wait_id = { LargeTown = nil, SmallTown = nil }
 Local_Town_positions = {
   LargeTown = Local_Large_Town_Positions,
-  SmallTown = Local_Small_Town_Positions
+  SmallTown = Local_Small_Town_Positions,
+  Vassal = Local_Vassal_Positions
 }
 
 TRASH_BIN_MIN_DECK_SIZE_TO_AVOID_SEPARATION = 9
@@ -4260,57 +4243,6 @@ function CheckRemovedEnter(object, trashBinObject)
     return false
   end
 
-
-  if object.hasTag('Vassal') then
-    local color = string.lower(GetColorFromTag(object))
-    local tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
-    if tableau == nil then return false end
-
-    for i = #Local_Vassal_Positions, 1, -2 do
-      --We need to declare these local variables before the goto. The Lua docs explain about scope.
-        local hit_counter = 0
-        local vassal_pos
-        local hits
-        if (Smart_delete_vassal_targets[color][i] or 0) > 1 then goto space_taken_vassal end
-        vassal_pos = tableau.positionToWorld({Local_Vassal_Positions[i][1], 0, Local_Vassal_Positions[i][2]})
-        hits = Physics.cast({
-            origin       = vassal_pos,
-            direction    = {0,1,0},
-            type         = 1, --1 for Ray, not Sphere or Box
-            max_distance = 2, --I might need to experiment here.
-            -- debug        = true, -- uncomment to debug
-        })
-        --[[Vassals are a little different. If we get to a space with only 1 vassal token
-        and no cubes, then we place the vassal token there
-        If there is just a cube on the space, still skip it for now, but later we want to put the
-        vassal token under the cube
-        --]]
-        for _,v in pairs(hits) do
-            if v.hit_object.hasTag("Vassal") or v.hit_object.hasTag("Cube") then
-                hit_counter = hit_counter + 1
-                Smart_delete_vassal_targets[color][i] = (Smart_delete_vassal_targets[color][i] or 0) + 1
-            end
-        end
-        if hit_counter > 1 or ( hit_counter > 0 and i == 1 ) then
-            goto space_taken_vassal
-        end
-        --[[
-        The idea is that if we get to here, we haven't hit a cube and we haven't
-        hit 2 vassal tokens, so we want the deleted vassal to go here, face up
-        --]]
-        if object.is_face_down then object.flip() end
-        object.setPositionSmooth(vassal_pos:setAt('y',2))
-        object.setRotationSmooth(tableau.getRotation())
-        Smart_delete_vassal_targets[color][i] = (Smart_delete_vassal_targets[color][i] or 0) + 1
-        goto piece_moved_vassal
-        
-        ::space_taken_vassal::
-    end
-
-    ::piece_moved_vassal::
-    return false
-  end
-
   --[[
   Another thought train:
   Have a counter of how many large towns have been deleted per colour (Large_Town_Deleted_Count[color])
@@ -4328,9 +4260,13 @@ function CheckRemovedEnter(object, trashBinObject)
   So, the first town will be placed in the first blank/cubed space, and each cube will be moved over 1 space
   The second town will be placed in the second blank/cubed space, and each cube will be moved over 2 spaces
   --]]
-  if object.hasTag('LargeTown') or object.hasTag('SmallTown') then
+  if object.hasTag('LargeTown') or object.hasTag('SmallTown') or object.hasTag('Vassal') then
     local town_size = 'SmallTown'
-    if object.hasTag('LargeTown') then town_size = 'LargeTown' end
+    if object.hasTag('LargeTown') then
+        town_size = 'LargeTown'
+    elseif object.hasTag('Vassal') then
+        town_size = 'Vassal'
+    end
     local color = string.lower(GetColorFromTag(object))
     local tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
     if tableau == nil then return false end
@@ -4344,11 +4280,14 @@ function CheckRemovedEnter(object, trashBinObject)
         local local_town_pos
         local hits
 
-        --We only use these once, so it doesn't space, but next to each other you can see that a
+        --We only use these once, so it doesn't save space, but next to each other you can see that a
         --cube will be offset from a moved town by 1
+        --Cubes can be on top of vassal tokens, so in that case, move them a little higher
+        local cube_height
+        if town_size == 'Vassal' then cube_height = 3 else cube_height = 2 end 
         local cube_new_pos = tableau.positionToWorld(
             {Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color])][1],
-            2,
+            cube_height,
             Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color])][2]}
         )
         local town_new_pos = tableau.positionToWorld(
@@ -4367,16 +4306,36 @@ function CheckRemovedEnter(object, trashBinObject)
                 max_distance = 2, --I might need to experiment here. How high are the towns and cubes?
                 -- debug        = true, -- uncomment to debug
             })
-            --Assume there is only 1 piece on each slot, so just override l_town_slots[color][i]
-            --This most likely won't correctly handle a cube and a town on the same slot
-            Smart_delete_towns_reserved[town_size][color][i] = "Empty"
-            for _,v in pairs(hits) do
-                if v.hit_object.hasTag(town_size) then
-                    if TEST_MODE then log('I have hit a town in slot ' .. i ) end
-                    Smart_delete_towns_reserved[town_size][color][i] = "Town"
-                elseif v.hit_object.hasTag("Cube") then
-                    if TEST_MODE then log('I have hit a cube in slot ' .. i ) end
-                    Smart_delete_towns_reserved[town_size][color][i] = v.hit_object.getGUID()
+            if town_size ~= 'Vassal' then
+                --Assume there is only 1 piece on each slot, so just override l_town_slots[color][i]
+                --This most likely won't correctly handle a cube and a town on the same slot
+                Smart_delete_towns_reserved[town_size][color][i] = 'Empty'
+                for _,v in pairs(hits) do
+                    if v.hit_object.hasTag(town_size) then
+                        if TEST_MODE then log('I have hit a town in slot ' .. i ) end
+                        Smart_delete_towns_reserved[town_size][color][i] = 'Town'
+                    elseif v.hit_object.hasTag('Cube') then
+                        if TEST_MODE then log('I have hit a cube in slot ' .. i ) end
+                        Smart_delete_towns_reserved[town_size][color][i] = v.hit_object.getGUID()
+                    end
+                end
+            else
+                --Vassals are a little different to towns as we expect to have up to 2 pieces on each
+                --slot. Here, I am going to assume we hit no more than 2 pieces
+                --The intention is that a physics.cast will populate slot i and i-1 in the reserved
+                --table, so we only cast every second step, i.e., once per vassal track slot
+                Smart_delete_towns_reserved[town_size][color][i] = 'Empty'
+                Smart_delete_towns_reserved[town_size][color][i-1] = 'Empty'
+                for h = 1, 2, 1 do
+                    if hits[h] then --We need to check if we've hit anything before trying .hit_object
+                        if hits[h].hit_object.hasTag(town_size) then
+                            if TEST_MODE then log('I have hit a town in slot ' .. i-h+1 ) end
+                            Smart_delete_towns_reserved[town_size][color][i-h+1] = 'Town'
+                        elseif hits[h].hit_object.hasTag('Cube') then
+                            if TEST_MODE then log('I have hit a cube in slot ' .. i-h+1 ) end
+                            Smart_delete_towns_reserved[town_size][color][i-h+1] = hits[h].hit_object.getGUID()
+                        end
+                    end
                 end
             end
         end
@@ -4386,7 +4345,7 @@ function CheckRemovedEnter(object, trashBinObject)
           if TEST_MODE then log('I am moving a cube in slot ' .. i .. ' to slot ' .. math.max(1,i-Smart_delete_town_counter[town_size][color]) ) end
           potential_cube.setPositionSmooth(cube_new_pos)
         end
-        if ( potential_cube ~= nil or Smart_delete_towns_reserved[town_size][color][i] == "Empty" ) and not(this_town_moved) then
+        if ( potential_cube ~= nil or Smart_delete_towns_reserved[town_size][color][i] == 'Empty' ) and not(this_town_moved) then
               --i.e. move the town if this slot is empty or has a cube in it. The cube would have been moved in the previous if
             if TEST_MODE then log('I am moving a town to slot ' .. math.max(1,i-Smart_delete_town_counter[town_size][color]+1) ) end
             if object.is_face_down then object.flip() end
@@ -4413,7 +4372,7 @@ function CheckRemovedEnter(object, trashBinObject)
   end
 
   --[[Return the Imperial Influence cube to the right-most empty space on the IA track
-  TODO: If you select multiple cubes, it intelligently assigns them to subsequent spaces. Right now, it puts them all in the same space
+  TODO: Rewrite this to use similar logic as the town smart delete
   --]]
   if object.hasTag('Imperial_Influence') then
     -- return false
