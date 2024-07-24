@@ -6,6 +6,7 @@
   <Text class="BotText" fontSize="24" color="White" Width="375" alignment="MiddleCenter" resizeTextForBestFit="False" />
   <Text class="OptionText" fontSize="24" color="White" Width="250" alignment="MiddleLeft" resizeTextForBestFit="False" />
   <Text class="OptionButton" color="White" alignment="MiddleCenter" resizeTextForBestFit="True" resizeTextMinSize="16" resizeTextMaxSize="24"/>
+  <Text class="BannerMessage" font="font/Arial" color="Orange" fontSize="14" alignment="MiddleCenter" resizeTextForBestFit="True" resizeTextMinSize="14" resizeTextMaxSize="18"/>
   <TableLayout class="BaseTable" width="1000" height="550" columnWidths="1000" cellPadding="0" />
   <TableLayout class="MainTable" width="1000" height="550" columnWidths="500 500" cellPadding="0" />
   <TableLayout class="RightTable" width="500" height="410" cellPadding="0" />
@@ -616,8 +617,8 @@
   </Button>
 </Panel>
 
-<Panel id="global_message_banner" color="rgba(0,0,0,100)" width="600" Height="200" rectAlignment="UpperCenter" offsetXY="0 425" active="false">
-    <Text id="global_message_banner_txt" fontSize="12" color="Orange" alignment="MiddleCenter">
-        This is a test message
+<Panel id="global_message_banner" color="rgba(0,0,0,0.8)" width="600" Height="60" rectAlignment="UpperCenter" offsetXY="0 -70" active="false" visibility="White|Red">
+    <Text id="global_message_banner_txt" class="BannerMessage">
+        I can fit 3 lines of text, and if it goes over, the text will just be cut off. That's fine. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah
     </Text>
 </Panel>
