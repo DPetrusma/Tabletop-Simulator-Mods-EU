@@ -3873,9 +3873,11 @@ function onObjectSpawn(o)
     o.sticky = false -- BW all objects are no longer sticky - should be easier to manipulate stacking objects now
   if o.type == "Board" then
     local map_year = o.getGMNotes()
-    o.interactable = false
-    SetRulebookDate(map_year)
-    SetMainMapSnapPoints(map_year)
+    if map_year == "1444" or map_year == "1618" then
+      o.interactable = false
+      SetRulebookDate(map_year)
+      SetMainMapSnapPoints(map_year)
+    end
   end
 end
 
