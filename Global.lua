@@ -3911,6 +3911,40 @@ function changeRotationValue(o, n)
 	return newRotationValue.value
 end
 
+--[[
+Here we will specify the tags that should be on the face-down side (true) and
+the face-up side (false)
+--]]
+Double_sided_token_snap_behaviour = {
+    Expanded_Trade = {
+        [true] = "Trade_Node",
+        [false] = "Province"
+    },
+    Revolutionary = {
+        [true] = "Province",
+        [false] = "Religion"
+    },
+    Left_HRE = {
+        [true] = "Province",
+        [false] = nil
+    },
+    Battleground = {
+        [true] = "Province",
+        [false] = nil
+    }
+}
+
+function SwapDoubleSidedTokenTags(object)
+  for check_tag,behaviour in pairs(Double_sided_token_snap_behaviour) do
+      if object.hasTag(check_tag) then
+        local old_tag =  behaviour[object.is_face_down]
+        local new_tag =  behaviour[not(object.is_face_down)]
+        if old_tag ~= nil then object.removeTag(old_tag) end
+        if new_tag ~= nil then object.addTag(new_tag) end
+      end
+  end
+end
+
 local tagToBehaviour = {
     RoundStatus = {
         forbidPlayerActions = {
@@ -4066,11 +4100,17 @@ local tagToBehaviour = {
         [Player.Action.Copy] = "Please click on the piece to set up that realm",
         [Player.Action.Delete] = "Please click on the piece to set up that realm",        
       }
-    }
+    },
+    DoubleSidedDifferentTag = {
+        [Player.Action.FlipOver] = function(o)
+          SwapDoubleSidedTokenTags(o)
+        end
+    },
 }
 
 
 function onPlayerAction(player, action, targets)
+  -- log(action)
     for _,o in ipairs(targets) do
         for tag,behaviour in pairs(tagToBehaviour) do
             if o.hasTag(tag) then
