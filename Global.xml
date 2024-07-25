@@ -617,8 +617,38 @@
   </Button>
 </Panel>
 
-<Panel id="global_message_banner" color="rgba(0,0,0,0.8)" width="600" Height="60" rectAlignment="UpperCenter" offsetXY="0 -70" active="false" visibility="White|Red">
-    <Text id="global_message_banner_txt" class="BannerMessage">
+<Panel id="message_banner_red" color="rgba(0,0,0,0.8)" width="600" Height="60" rectAlignment="UpperCenter" offsetXY="0 -70" active="false" visibility="Red">
+    <Text id="message_banner_txt_red" class="BannerMessage">
+        I can fit 3 lines of text, and if it goes over, the text will just be cut off. That's fine. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah
+    </Text>
+</Panel>
+
+<Panel id="message_banner_yellow" color="rgba(0,0,0,0.8)" width="600" Height="60" rectAlignment="UpperCenter" offsetXY="0 -70" active="false" visibility="Yellow">
+    <Text id="message_banner_txt_yellow" class="BannerMessage">
+        I can fit 3 lines of text, and if it goes over, the text will just be cut off. That's fine. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah
+    </Text>
+</Panel>
+
+<Panel id="message_banner_blue" color="rgba(0,0,0,0.8)" width="600" Height="60" rectAlignment="UpperCenter" offsetXY="0 -70" active="false" visibility="Blue">
+    <Text id="message_banner_txt_blue" class="BannerMessage">
+        I can fit 3 lines of text, and if it goes over, the text will just be cut off. That's fine. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah
+    </Text>
+</Panel>
+
+<Panel id="message_banner_green" color="rgba(0,0,0,0.8)" width="600" Height="60" rectAlignment="UpperCenter" offsetXY="0 -70" active="false" visibility="Green">
+    <Text id="message_banner_txt_green" class="BannerMessage">
+        I can fit 3 lines of text, and if it goes over, the text will just be cut off. That's fine. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah
+    </Text>
+</Panel>
+
+<Panel id="message_banner_purple" color="rgba(0,0,0,0.8)" width="600" Height="60" rectAlignment="UpperCenter" offsetXY="0 -70" active="false" visibility="Purple">
+    <Text id="message_banner_txt_purple" class="BannerMessage">
+        I can fit 3 lines of text, and if it goes over, the text will just be cut off. That's fine. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah
+    </Text>
+</Panel>
+
+<Panel id="message_banner_white" color="rgba(0,0,0,0.8)" width="600" Height="60" rectAlignment="UpperCenter" offsetXY="0 -70" active="false" visibility="White">
+    <Text id="message_banner_txt_white" class="BannerMessage">
         I can fit 3 lines of text, and if it goes over, the text will just be cut off. That's fine. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah
     </Text>
 </Panel>

@@ -465,9 +465,6 @@ function onLoad()
   local mainboard = getObjectsWithTag('MainBoard')[1]
   onObjectSpawn(mainboard)
 
-  --Testing the message banner
-  Global.UI.setAttribute('global_message_banner_txt', "text", "This is a test message")
-  Global.UI.setAttribute('global_message_banner', "active", "true")
 end
 
 --[[ ----------------------------------
@@ -573,8 +570,14 @@ function AutoSetupRealm()
     DealActionCards(players)
     RotateTruceAndRemoveBags()
     printToAll("Remember to draw three additional action cards and appoint advisors and leaders.\nYou may keep up to four action cards and two missions in your hand (unless otherwise specified by the scenario)", {1,1,1})
+    for color,_ in pairs(COLOR_RGB_CODES) do
+      Global.UI.setAttribute(('message_banner_'..color), "active", false)
+    end
   else
-    broadcastToAll('Marriage and Alliance tokens will be placed after all colors have a realm selected or have been removed')
+    for color,_ in pairs(COLOR_RGB_CODES) do
+      Global.UI.setAttribute(('message_banner_txt_'..color), "text", "Marriage and Alliance tokens will be placed after all colors have a realm selected or have been removed")
+      Global.UI.setAttribute(('message_banner_'..color), "active", true)
+    end
   end
 
   return 1
