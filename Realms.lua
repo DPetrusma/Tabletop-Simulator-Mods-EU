@@ -516,7 +516,7 @@ SETUP_DATA = {
       setup_bag_guid = '58331e',
       religion = RELIGION.muslim,
       ruler = {deck_guid = Setup_Card_Deck_GUID, card_guid = 'b0bdfb', flip = false, ill = false },
-      l_towns = { EasternMap.edirne, EasternMap.hudavendigar },
+      l_towns = { EasternMap.edirne, EasternMap.hudavendigar_1444 },
       s_towns = { EasternMap.selanik, EasternMap.yanya, EasternMap.sofya, EasternMap.silistre, EasternMap.ankara,
                   EasternMap.izmir, EasternMap.kutahya, EasternMap.mentese, EasternMap.teke,
                   EasternMap.amasya, EasternMap.sivas },
@@ -536,8 +536,8 @@ SETUP_DATA = {
       setup_bag_guid = '58331e',
       religion = RELIGION.muslim,
       ruler = {deck_guid = Setup_Card_Deck_GUID, card_guid = 'b0bdfb', flip = true, ill = false },
-      l_towns = { EasternMap.constantinople },
-      s_towns = { EasternMap.edirne, EasternMap.selanik, EasternMap.kastamonu, EasternMap.ankara, EasternMap.hudavendigar, EasternMap.teke,
+      l_towns = { EasternMap.constantinople_1618 },
+      s_towns = { EasternMap.edirne, EasternMap.selanik, EasternMap.kastamonu, EasternMap.ankara, EasternMap.hudavendigar_1618, EasternMap.teke,
                   EasternMap.mentese, EasternMap.izmir, EasternMap.yanya, EasternMap.morea, EasternMap.athina, EasternMap.beograd,
                   EasternMap.kosovo, EasternMap.albania, WesternMap.pest, EasternMap.szabolcs, EasternMap.naxos, EasternMap.rhodes,
                   EasternMap.caffa, EasternMap.azov, EasternMap.basarabia, WesternMap.bosnia, EasternMap.sofya, EasternMap.silistre },
@@ -552,12 +552,12 @@ SETUP_DATA = {
       ships_bot = { {9.73, -6.42}, {13.28, -3.06} },
       army1 = { 2, 1, 1 },
       fleet = { 0, 0, 3 },
-      capital = EasternMap.constantinople
+      capital = EasternMap.constantinople_1618
     },
     ['S205'] = {
       parent = {REALM.ottomans, '1444'},
       ruler = {deck_guid = Event_Deck_GUIDs.age1r, card_guid = '7187b7', flip = false, ill = false },
-      l_towns = { EasternMap.edirne, EasternMap.constantinople, EasternMap.hudavendigar },
+      l_towns = { EasternMap.edirne, EasternMap.constantinople_1444, EasternMap.hudavendigar_1444 },
       s_towns = { EasternMap.selanik, EasternMap.kastamonu, EasternMap.athina, EasternMap.morea, EasternMap.yanya,
                   EasternMap.sofya, EasternMap.silistre, EasternMap.ankara, EasternMap.izmir, EasternMap.kutahya,
                   EasternMap.mentese, EasternMap.teke, EasternMap.albania, EasternMap.kosovo, EasternMap.smederevo,
@@ -973,7 +973,7 @@ SETUP_DATA = {
                   EasternMap.tikrit, EasternMap.kirkuk, EasternMap.baghdad, EasternMap.bangazi, IndiaMap.yemen, EasternMap.cyprus },
       vassals = { WesternMap.tripoli, WesternMap.tunis, WesternMap.sousse, WesternMap.bizerte, WesternMap.qafsah, WesternMap.qusantinah,
                   WesternMap.mitidja, IndiaMap.basra, IndiaMap.hejaz },
-      allies = { EasternMap.constantinople },
+      allies = { EasternMap.constantinople_1618 },
       claims = { {-3.17, -10.30} },
       influence = { {0.15, -10.66}, {-2.20, -10.08}, {1.77, -12.10} },
       merchants = { {12.03, -10.25}, {17.12, -10.27} },
@@ -992,7 +992,7 @@ SETUP_DATA = {
       religion = RELIGION.orthodox,
       coin = 20,
       ruler = {deck_guid = Setup_Card_Deck_GUID, card_guid = 'd8862e', flip = false, ill = true },
-      l_towns = { EasternMap.constantinople },
+      l_towns = { EasternMap.constantinople_1444 },
       s_towns = { EasternMap.morea },
       vassals = { EasternMap.athina },
       claims = { {7.99, -5.82}, {8.61, -7.26} },
@@ -1001,7 +1001,7 @@ SETUP_DATA = {
       figurines = { {11.14, -4.92} },
       ships = { {14.13, -3.85} },
       ships_bot = { {14.97, -3.87} },
-      capital = EasternMap.constantinople
+      capital = EasternMap.constantinople_1444
     },
     ['S206'] = {
       parent = {REALM.byzantium, '1444'},
