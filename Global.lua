@@ -4283,8 +4283,10 @@ function CheckRemovedEnter(object, trashBinObject)
         --We only use these once, so it doesn't save space, but next to each other you can see that a
         --cube will be offset from a moved town by 1
         --Cubes can be on top of vassal tokens, so in that case, move them a little higher
-        local cube_height
-        if town_size == 'Vassal' then cube_height = 3 else cube_height = 2 end 
+        local cube_height = 2
+        if town_size == 'Vassal' then cube_height = cube_height + math.fmod(i+1,2) end 
+        local town_height = 2
+        if town_size == 'Vassal' then town_height = 0.2 end 
         local cube_new_pos = tableau.positionToWorld(
             {Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color])][1],
             cube_height,
@@ -4292,7 +4294,7 @@ function CheckRemovedEnter(object, trashBinObject)
         )
         local town_new_pos = tableau.positionToWorld(
             {Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color]+1)][1],
-            2,
+            town_height,
             Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color]+1)][2]}
           )
 
@@ -4371,43 +4373,7 @@ function CheckRemovedEnter(object, trashBinObject)
     return false
   end
 
-  --[[Return the Imperial Influence cube to the right-most empty space on the IA track
-  TODO: Rewrite this to use similar logic as the town smart delete
-  --]]
   if object.hasTag('Imperial_Influence') then
-    -- return false
-    for i = 6, 1, -1 do
-        --We need to declare these local variables before the goto. The Lua docs explain about scope.
-        local has_hit = false
-        local hre_pos
-        local hits
-        if Smart_delete_IA_targets[i] then goto space_taken_ia end
-        hre_pos = Vector(HRE_Authority_Positions[i][1], 0, HRE_Authority_Positions[i][2])
-        hits = Physics.cast({
-            origin       = hre_pos,
-            direction    = {0,1,0},
-            type         = 1, --1 for Ray, not Sphere or Box
-            max_distance = 2, --I might need to experiment here. How high are the cubes and coins?
-            -- debug        = true, -- uncomment to debug
-        })
-        for _,v in pairs(hits) do
-            --I am assuming the players will use coins to block the IA spaces. We need to ignore the HRE Authority marker at least
-            if v.hit_object.hasTag("Imperial_Influence") or v.hit_object.hasTag("Coin") then 
-                has_hit = true
-            end
-        end
-        if has_hit then goto space_taken_ia end
-        --The idea is that if we get to here, we haven't hit an IA cube or a coin, so we
-        --want the deleted IA cube to go here
-        object.setPositionSmooth(hre_pos:setAt("y",2))
-        object.setRotationSmooth({0,0,0})
-        Smart_delete_IA_targets[i] = true
-        goto piece_moved_ia
-
-        ::space_taken_ia::
-    end
-
-    ::piece_moved_ia::
     return false
   end
 
