@@ -26,6 +26,7 @@ v2.2
 - Snap poinst for trade protection slots, expanded trade nodes, and milestone tags have been added
 - Event 468b has been corrected to 458b in the team variant of S2-03
 - Light ships will now snap to trade protection slots and lay sideways when placed there. They will flip to right side up if placed off a trade protection slot
+- Double-sided tokens will now only snap to certain points depending on which side is up
 v2.1
 - 2024-07-05 Manual setup now includes buttons to set up components for a realm, swap two colours, and remove a colour from the table
 v2.0
