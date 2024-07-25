@@ -4862,6 +4862,79 @@ function outputDroppedScoreObjectScore(obj)
   printToAll(outString, c)
 end
 
+--[[
+  ------------------------------------------------
+  ------------------------------------------------
+            Print Stability on change
+  ------------------------------------------------
+  ------------------------------------------------
+--]]
+
+Stability_Offset = {
+    [-3] = {-1.25, 0},
+    [-2] = {-0.84, 0},
+    [-1] = {-0.42, 0},
+    [0]  = { 0, 0},
+    [1]  = { 0.43, 0},
+    [2]  = { 0.85, 0},
+    [3]  = { 1.27, 0},
+  }
+
+function outputDroppedStabilityObjectStability(obj)
+  local dropPos = obj.getPosition():setAt("y", 1.4)
+  local color = string.lower(GetColorFromTag(obj))
+  local tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
+  local tableau_pos = tableau.getPosition()
+  local seat = GetSeatFromPosition(tableau_pos)
+  
+  local closestDist, closestStabPos, closestStab = 999, nil, nil
+  for stability = -3, 3 do
+    local stabOffset = {
+      Main_Tableau_Offset_Positions.stability[1] + Stability_Offset[stability][1],
+      Main_Tableau_Offset_Positions.stability[2] + Stability_Offset[stability][2],
+    }
+    local stabPos = GetOffset(tableau_pos, stabOffset, seat, 1.4)
+    local dist = Vector.distance(Vector(stabPos), dropPos)
+    if dist < 0.7 then
+      if dist < closestDist then
+        closestDist = dist
+        closestStabPos = stabPos
+        closestStab = stability
+      end
+    end
+  end
+
+  local c = GetColorFromTag(obj) or "Grey"
+  local name = obj.getName()
+  local outString = ""
+  if name ~= "" then
+    outString = name
+  else
+    outString = c
+  end
+
+  local previousStab = tonumber(obj.getDescription()) or 0
+
+  if closestStab then
+    outString = outString.."'s Stability set to "..closestStab
+    obj.setDescription(closestStab)
+  else
+    closestStab = 0
+    outString = outString.."'s Stability dropped off the track "
+    obj.setDescription("")
+  end
+  
+  local stabMod = closestStab - previousStab
+  if stabMod == 0 then
+    return
+  elseif stabMod > 0 then
+    stabMod = "+"..stabMod
+  end
+  outString = outString.." ["..stabMod.."]"
+
+  printToAll(outString, c)
+end
+
 function onObjectDrop(player_color, dropped_object)
   if dropped_object.hasTag("Score") then
     Wait.condition(
@@ -4869,6 +4942,13 @@ function onObjectDrop(player_color, dropped_object)
       function() return dropped_object.resting end,
       5,
       function() outputDroppedScoreObjectScore(dropped_object) end
+    )
+  elseif dropped_object.hasTag("Stability") then
+    Wait.condition(
+      function() outputDroppedStabilityObjectStability(dropped_object) end,
+      function() return dropped_object.resting end,
+      5,
+      function() outputDroppedStabilityObjectStability(dropped_object) end
     )
   end
 end

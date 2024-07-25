@@ -19,7 +19,9 @@ v2.2
 - White's tag chit container only accepts tag chit tokens
 - The opening splash screen now has a minimise button and a maximise button
 - Imperial Influence cubes will now return to the track if you delete them
+- The Defending the HRE slot now allows tag chits to snap instead of cubes
 - When the game is loaded, all players are put in the spectator seat. When a player connects, they are put into a spectator seat. This prevents revealing of hidden information.
+- Changing stability logs a message in the chat window
 v2.1
 - 2024-07-05 Manual setup now includes buttons to set up components for a realm, swap two colours, and remove a colour from the table
 v2.0
