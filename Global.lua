@@ -4950,6 +4950,38 @@ function outputDroppedStabilityObjectStability(obj)
   printToAll(outString, c)
 end
 
+
+--[[
+  ------------------------------------------------
+  ------------------------------------------------
+            Flip light ships dropped on
+            trade protection slots
+  ------------------------------------------------
+  ------------------------------------------------
+--]]
+
+function flipLightShipOnTPS(obj)
+    local dropPos = obj.getPosition()
+    --TODO: Decide whether I want to keep this lookup, or use physics.cast to
+    --find the TPS the ship is on top of
+
+    --This rounds the co-ordinates to the nearest 0.05
+    local roundedDropPos = {
+        x = math.floor(dropPos.x*20+0.5)/20,
+        z = math.floor(dropPos.z*20+0.5)/20
+    }
+    local rotationValues = obj.getRotationValues() -- Index 1 is normal, 2 is the side
+
+    --This is a little different to the flip function since I don't necessarily want to go
+    --between the two states. If it's not on a trade protection slot, put it upright
+    if ROUNDED_TRADE_PROTECTION_SLOT_LOCATIONS[roundedDropPos.x .. '||' .. roundedDropPos.z] then
+        obj.setRotation(rotationValues[2].rotation)
+        obj.setPosition(obj.getPosition() + Vector(0,0,-0.1))
+    else
+        obj.setRotation(rotationValues[1].rotation)
+    end
+end
+
 function onObjectDrop(player_color, dropped_object)
   if dropped_object.hasTag("Score") then
     Wait.condition(
@@ -4964,6 +4996,13 @@ function onObjectDrop(player_color, dropped_object)
       function() return dropped_object.resting end,
       5,
       function() outputDroppedStabilityObjectStability(dropped_object) end
+    )
+  elseif dropped_object.hasTag("NavalUnit") then
+    Wait.condition(
+      function() flipLightShipOnTPS(dropped_object) end,
+      function() return dropped_object.resting end, --Condition function
+      5, --Timeout in seconds
+      function() flipLightShipOnTPS(dropped_object) end --Function to run if we hit the timeout
     )
   end
 end
