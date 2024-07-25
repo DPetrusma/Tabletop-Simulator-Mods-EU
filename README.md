@@ -19,6 +19,7 @@ v2.2
 - White's tag chit container only accepts tag chit tokens
 - The opening splash screen now has a minimise button and a maximise button
 - Imperial Influence cubes will now return to the track if you delete them
+- Imperial Influence cubes are a lighter shade of grey
 - The Defending the HRE slot now allows tag chits to snap instead of cubes
 - When the game is loaded, all players are put in the spectator seat. When a player connects, they are put into a spectator seat. This prevents revealing of hidden information.
 - Changing stability logs a message in the chat window
@@ -27,6 +28,7 @@ v2.2
 - Event 468b has been corrected to 458b in the team variant of S2-03
 - Light ships will now snap to trade protection slots and lay sideways when placed there. They will flip to right side up if placed off a trade protection slot
 - Double-sided tokens will now only snap to certain points depending on which side is up
+- Small towns, large towns, and vassals tokens will return to the player mat if they are deleted or dropped into the bin
 v2.1
 - 2024-07-05 Manual setup now includes buttons to set up components for a realm, swap two colours, and remove a colour from the table
 v2.0

@@ -319,8 +319,8 @@ Idea_Card_Positions = {
 }
 
 HRE_Authority_Positions = {
-  ['0'] = {1.62, 15.16}, ['1'] = {2.46, 15.15}, ['2'] = {3.29, 15.16}, ['3'] = {4.08, 15.16}, ['4'] = {4.88, 15.17},
-  ['5'] = {5.69, 15.16}, ['6'] = {6.59, 15.16}
+  [0] = {1.62, 15.16}, [1] = {2.46, 15.15}, [2] = {3.29, 15.16}, [3] = {4.08, 15.16}, [4] = {4.88, 15.17},
+  [5] = {5.69, 15.16}, [6] = {6.59, 15.16}
 }
 
 HRE_Influence_Map_Pos = {
@@ -916,6 +916,8 @@ function Setup_Game()
   -- Handle Manual Setup
   if UI_Data.scenario == '0-00' then
     --Keep these in sync for the later color-swapping features
+    --TODO: I think I don't need this, actually. I get use a colour to get a Tableau from getObjectFromGUID(Main_Tableau_GUIDs[col])
+    --and then use tableau.getPosition() and GetSeatFromPosition(pos) to find a position from the color
     Player_Seat_From_Color =
     {
       blue = 1,
@@ -2654,7 +2656,7 @@ function SetupHRE(scenario_data)
   end
   HRE_Config.authority = (empire.authority or 3)
   if HRE_Config.authority ~= 3 then
-    local auth = tostring(HRE_Config.authority)
+    local auth = HRE_Config.authority
     if TEST_MODE then log('Setting up HRE with ruler ' .. (HRE_Config.ruler or 'unknown') .. 'and authority of ' .. auth) end
     local hre_pos = {HRE_Authority_Positions[auth][1], 2, HRE_Authority_Positions[auth][2]}
     local marker = getObjectFromGUID(HRE_Authority_Marker_GUID)
@@ -2669,11 +2671,11 @@ function SetupHRE(scenario_data)
           table.insert(positions, empire.influence[counter])
           counter = counter + 1
         else
-          table.insert(positions, HRE_Authority_Positions[(tostring(i))])
+          table.insert(positions, HRE_Authority_Positions[i])
           counter = counter + 1
         end
       else
-        table.insert(positions, HRE_Authority_Positions[(tostring(i))])
+        table.insert(positions, HRE_Authority_Positions[i])
         counter = counter + 1
       end
     end
@@ -4006,7 +4008,6 @@ local tagToBehaviour = {
       forbidPlayerActions = {
           [Player.Action.Copy] = "You cannot copy an Imperial Influence Cube (sit in Black to do so)",
           [Player.Action.Paste] = "You cannot paste an Imperial Influence Cube (sit in Black to do so)",
-          [Player.Action.Delete] = "You cannot delete an Imperial Influence Cube (sit in Black to do so)",
       }
   },
     NavalUnit = {
@@ -4131,6 +4132,8 @@ function onPlayerAction(player, action, targets)
 		end
     end
     if action == Player.Action.Delete then
+      --[[ This helps our smart delete of vassals, towns, and IA work for many deleted at once ]]
+      Smart_delete_IA_targets = {}
 	    local trashBinObject = getClosesTrashBin(player.getPointerPosition())
         for _,o in ipairs (targets) do
 			if getHandZone(o) then
@@ -4183,8 +4186,36 @@ function tryObjectEnterContainer(container, enter_object)
     end
     return true
 end
+--[[
+This function will run 2 seconds after the players stop deleting towns and vassals.
+We wait 2 seconds so that if several are deleted in quick succession, but not in the same
+action, they will still be spread out over the right spaces
+--]]
+function CleanupSmartDeleteTowns(town_size)
+  Smart_delete_towns_reserved[town_size] = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
+  Smart_delete_town_counter[town_size] = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 }
+  Smart_delete_towns_wait_id[town_size] = nil
+end
+
+Smart_delete_towns_reserved = {
+  LargeTown = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} },
+  SmallTown = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} },
+  Vassal = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} },
+}
+Smart_delete_town_counter = {
+  LargeTown = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 },
+  SmallTown = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 },
+  Vassal = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 }
+}
+Smart_delete_towns_wait_id = { LargeTown = nil, SmallTown = nil }
+Local_Town_positions = {
+  LargeTown = Local_Large_Town_Positions,
+  SmallTown = Local_Small_Town_Positions,
+  Vassal = Local_Vassal_Positions
+}
 
 TRASH_BIN_MIN_DECK_SIZE_TO_AVOID_SEPARATION = 9
+
 function CheckRemovedEnter(object, trashBinObject)
   if object.type == 'Deck' then
     local count = object.getQuantity()
@@ -4212,8 +4243,137 @@ function CheckRemovedEnter(object, trashBinObject)
     return false
   end
 
+  --[[
+  Another thought train:
+  Have a counter of how many large towns have been deleted per colour (Large_Town_Deleted_Count[color])
+  In here, CheckRemovedEnter, if it's a large town, increment this counter by 1 (start at 0)
+  When this part finishes, schedule a function to run after 2 seconds to set the counter back to 0, but
+    cancel that schedule for each town to restart the count
+  For the town, loop through Local_Large_Town_Positions. The first town will use physics.cast on each space to see what is already there.
+    If there is a town, save "Town" in a holding table (which will also be cleared out in the scheduled function)
+    If there is a cube, save a reference to the object, and move that object over a number of spaces equal to Large_Town_Deleted_Count[color]. Then, put
+        this town in the current space+1-Large_Town_Deleted_Count[color] if it hasn't already been flagged as moved, then flag it as moved
+    If there is a blank, record it as blank, and break the loop
+  Subsequent towns will check the holding table to see what is in this space
+  Schedule the function to reset our counter and the holding table
 
-  if object.hasTag('Town') or object.hasTag('Vassal') or object.hasTag('Imperial_Influence') then
+  So, the first town will be placed in the first blank/cubed space, and each cube will be moved over 1 space
+  The second town will be placed in the second blank/cubed space, and each cube will be moved over 2 spaces
+  --]]
+  if object.hasTag('LargeTown') or object.hasTag('SmallTown') or object.hasTag('Vassal') then
+    local town_size = 'SmallTown'
+    if object.hasTag('LargeTown') then
+        town_size = 'LargeTown'
+    elseif object.hasTag('Vassal') then
+        town_size = 'Vassal'
+    end
+    local color = string.lower(GetColorFromTag(object))
+    local tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
+    if tableau == nil then return false end
+    local this_town_moved = false
+    Smart_delete_town_counter[town_size][color] = Smart_delete_town_counter[town_size][color] + 1
+    if TEST_MODE then log('Up to "deleting" town ' .. Smart_delete_town_counter[town_size][color] .. ' for ' .. color ) end
+
+    for i = #Local_Town_positions[town_size], 1, -1 do
+        --We need to declare these local variables before the goto. The Lua docs explain about scope.
+        -- local has_hit = false
+        local local_town_pos
+        local hits
+
+        --We only use these once, so it doesn't save space, but next to each other you can see that a
+        --cube will be offset from a moved town by 1
+        --Cubes can be on top of vassal tokens, so in that case, move them a little higher
+        local cube_height = 2
+        if town_size == 'Vassal' then cube_height = cube_height + math.fmod(i+1,2) end 
+        local town_height = 2
+        if town_size == 'Vassal' then town_height = 0.2 end 
+        local cube_new_pos = tableau.positionToWorld(
+            {Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color])][1],
+            cube_height,
+            Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color])][2]}
+        )
+        local town_new_pos = tableau.positionToWorld(
+            {Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color]+1)][1],
+            town_height,
+            Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color]+1)][2]}
+          )
+
+        local_town_pos = tableau.positionToWorld({Local_Town_positions[town_size][i][1], 0, Local_Town_positions[town_size][i][2]})
+        --I am trying to use physics.cast on each space just once, so check if we've already done it
+        if Smart_delete_towns_reserved[town_size][color][i] == nil then
+            hits = Physics.cast({
+                origin       = local_town_pos,
+                direction    = {0,1,0},
+                type         = 1, --1 for Ray, not Sphere or Box
+                max_distance = 2, --I might need to experiment here. How high are the towns and cubes?
+                -- debug        = true, -- uncomment to debug
+            })
+            if town_size ~= 'Vassal' then
+                --Assume there is only 1 piece on each slot, so just override l_town_slots[color][i]
+                --This most likely won't correctly handle a cube and a town on the same slot
+                Smart_delete_towns_reserved[town_size][color][i] = 'Empty'
+                for _,v in pairs(hits) do
+                    if v.hit_object.hasTag(town_size) then
+                        if TEST_MODE then log('I have hit a town in slot ' .. i ) end
+                        Smart_delete_towns_reserved[town_size][color][i] = 'Town'
+                    elseif v.hit_object.hasTag('Cube') then
+                        if TEST_MODE then log('I have hit a cube in slot ' .. i ) end
+                        Smart_delete_towns_reserved[town_size][color][i] = v.hit_object.getGUID()
+                    end
+                end
+            else
+                --Vassals are a little different to towns as we expect to have up to 2 pieces on each
+                --slot. Here, I am going to assume we hit no more than 2 pieces
+                --The intention is that a physics.cast will populate slot i and i-1 in the reserved
+                --table, so we only cast every second step, i.e., once per vassal track slot
+                Smart_delete_towns_reserved[town_size][color][i] = 'Empty'
+                Smart_delete_towns_reserved[town_size][color][i-1] = 'Empty'
+                for h = 1, 2, 1 do
+                    if hits[h] then --We need to check if we've hit anything before trying .hit_object
+                        if hits[h].hit_object.hasTag(town_size) then
+                            if TEST_MODE then log('I have hit a town in slot ' .. i-h+1 ) end
+                            Smart_delete_towns_reserved[town_size][color][i-h+1] = 'Town'
+                        elseif hits[h].hit_object.hasTag('Cube') then
+                            if TEST_MODE then log('I have hit a cube in slot ' .. i-h+1 ) end
+                            Smart_delete_towns_reserved[town_size][color][i-h+1] = hits[h].hit_object.getGUID()
+                        end
+                    end
+                end
+            end
+        end
+        --Now that the slot has been checked see if there is a town or a cube to move
+        local potential_cube = getObjectFromGUID(Smart_delete_towns_reserved[town_size][color][i])
+        if potential_cube ~= nil then --i.e. it refers to a cube object
+          if TEST_MODE then log('I am moving a cube in slot ' .. i .. ' to slot ' .. math.max(1,i-Smart_delete_town_counter[town_size][color]) ) end
+          potential_cube.setPositionSmooth(cube_new_pos)
+        end
+        if ( potential_cube ~= nil or Smart_delete_towns_reserved[town_size][color][i] == 'Empty' ) and not(this_town_moved) then
+              --i.e. move the town if this slot is empty or has a cube in it. The cube would have been moved in the previous if
+            if TEST_MODE then log('I am moving a town to slot ' .. math.max(1,i-Smart_delete_town_counter[town_size][color]+1) ) end
+            if object.is_face_down then object.flip() end
+            object.setPositionSmooth(town_new_pos)
+            object.setRotationSmooth(tableau.getRotation())
+            this_town_moved = true
+        end
+        if Smart_delete_towns_reserved[town_size][color][i] == "Empty" then
+            --If the space is blank, we've moved the town and we've moved any cubes we've encountered, so
+            --we can break the loop
+            if TEST_MODE then log('I am breaking the loop at slot ' .. i ) end
+            goto empty_space_town
+        end
+
+    end
+
+    ::empty_space_town::
+    --I'll put this at the very end, just in case something happens and no pieces are moved, like if you delete a small town
+    --with all slots taken
+    if TEST_MODE then log('The timer has begun to reset the counter and holding table' ) end
+    if Smart_delete_towns_wait_id[town_size] ~= nil then Wait.stop(Smart_delete_towns_wait_id[town_size]) end
+    Smart_delete_towns_wait_id[town_size] = Wait.time(function() CleanupSmartDeleteTowns(town_size) end, 2)
+    return false
+  end
+
+  if object.hasTag('Imperial_Influence') then
     return false
   end
 
