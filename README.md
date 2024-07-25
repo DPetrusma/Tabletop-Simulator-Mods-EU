@@ -22,6 +22,8 @@ v2.2
 - The Defending the HRE slot now allows tag chits to snap instead of cubes
 - When the game is loaded, all players are put in the spectator seat. When a player connects, they are put into a spectator seat. This prevents revealing of hidden information.
 - Changing stability logs a message in the chat window
+- Snap points for the main map are now generated in the script when the map loads
+- Snap poinst for trade protection slots, expanded trade nodes, and milestone tags have been added
 v2.1
 - 2024-07-05 Manual setup now includes buttons to set up components for a realm, swap two colours, and remove a colour from the table
 v2.0
