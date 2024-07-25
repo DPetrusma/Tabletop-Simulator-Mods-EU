@@ -461,6 +461,9 @@ function onLoad()
   for _, color in ipairs(getSeatedPlayers()) do
     Player[color].changeColor("Grey")
   end
+
+  local mainboard = getObjectsWithTag('MainBoard')[1]
+  onObjectSpawn(mainboard)
 end
 
 --[[ ----------------------------------
@@ -3868,6 +3871,12 @@ end
 function onObjectSpawn(o)
 	if o.type == "Card" then o.use_hands = true end -- BW safety-net for BW_NOTE_A below
     o.sticky = false -- BW all objects are no longer sticky - should be easier to manipulate stacking objects now
+  if o.type == "Board" then
+    local map_year = o.getGMNotes()
+    o.interactable = false
+    SetRulebookDate(map_year)
+    SetMainMapSnapPoints(map_year)
+  end
 end
 
 function getRotationValueIndexTable(o)
