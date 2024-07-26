@@ -259,27 +259,33 @@ Setup_Bag_Item_GUIDs = {
   red    = { stability = '823a51', ruler_general = '272d23', ship = 'd80c7e', soldier = '04d4c0', cube = 'fe26c8',
              vassal = '405477', s_town = '622025', l_town = '21dcc8', claim = '3479d2', alliance = 'fbf72e', marriage = 'e0f1f0',
              war = 'a313fd', tag_chit = '347db4', merchant_1 = '65c7d5', merchant_2 = 'dd9bef', merchant_3 = 'd6b5d0',
-             army_1 = 'b198c2', army_2 = 'dfb12f', army_3 = 'cce497', fleet = '0019b4' },
+             army_1 = 'b198c2', army_2 = 'dfb12f', army_3 = 'cce497', fleet = '0019b4',
+             army_1_middle_eastern = '6db006', army_2_middle_eastern = 'b62175', army_3_middle_eastern = 'bb842e', fleet_middle_eastern = 'bcaf43' },
   yellow = { stability = 'c5fd9e', ruler_general = '8c295b', ship = '9c5ace', soldier = '7cdf8b', cube = '15ea2d',
              vassal = '21e4d6', s_town = '806208', l_town = 'cbfda2', claim = '2ff54a', alliance = 'e33aa3', marriage = '16045a',
              war = '710cae', tag_chit = 'f36db4', merchant_1 = '0dc52d', merchant_2 = 'f59c7f', merchant_3 = '88ba29',
-             army_1 = '0a4d9e', army_2 = '38029f', army_3 = '4dc1da', fleet = '507c52' },
+             army_1 = '0a4d9e', army_2 = '38029f', army_3 = '4dc1da', fleet = '507c52',
+             army_1_middle_eastern = 'b2e2e2', army_2_middle_eastern = '9522b3', army_3_middle_eastern = '065e4c', fleet_middle_eastern = '8f704a' },
   blue   = { stability = 'e71bbe', ruler_general = 'c57fcf', ship = 'd3d3c8', soldier = '264b61', cube = '2a66a0',
              vassal = 'b28b31', s_town = 'bbba61', l_town = 'fa5e7d', claim = '188a15', alliance = '696031', marriage = '4064c1',
              war = '1f6dfb', tag_chit = '1d258f', merchant_1 = 'f30cd6', merchant_2 = 'dc0f3e', merchant_3 = '17dd06',
-             army_1 = '196789', army_2 = '6f49ec', army_3 = 'f4ea35', fleet = '357ceb' },
+             army_1 = '196789', army_2 = '6f49ec', army_3 = 'f4ea35', fleet = '357ceb',
+             army_1_middle_eastern = '75a5a0', army_2_middle_eastern = 'e94e52', army_3_middle_eastern = 'e01e25', fleet_middle_eastern = 'e6c5aa' },
   green  = { stability = '1de95e', ruler_general = '235e36', ship = '748bb4', soldier = '82a19e', cube = 'd90508',
              vassal = 'a2b1ce', s_town = '57dd90', l_town = '3eacd6', claim = 'fdaa7b', alliance = '31e859', marriage = '6f94d9',
              war = 'b0560c', tag_chit = '1b9ae8', merchant_1 = 'f02763', merchant_2 = '5ec83e', merchant_3 = '16ce9d',
-             army_1 = 'f49823', army_2 = 'b2ccc9', army_3 = '390ccb', fleet = '1d9350' },
+             army_1 = 'f49823', army_2 = 'b2ccc9', army_3 = '390ccb', fleet = '1d9350',
+             army_1_middle_eastern = '19fff0', army_2_middle_eastern = 'b0935c', army_3_middle_eastern = '052d69', fleet_middle_eastern = '0e6b98' },
   purple = { stability = '7659ef', ruler_general = 'abc742', ship = '89bf50', soldier = '3735aa', cube = '168120',
              vassal = 'ef2a36', s_town = 'b0d827', l_town = 'cbcea5', claim = 'dbc249', alliance = 'f3661e', marriage = '955f8d',
              war = 'd82571', tag_chit = '1f43f9', merchant_1 = 'ff439f', merchant_2 = '0cceef', merchant_3 = 'd8da5c',
-             army_1 = '18b918', army_2 = '84a1a8', army_3 = 'a3fbd1', fleet = '66a7e9' },
+             army_1 = '18b918', army_2 = '84a1a8', army_3 = 'a3fbd1', fleet = '66a7e9',
+             army_1_middle_eastern = '74b8d0', army_2_middle_eastern = 'c7b4b8', army_3_middle_eastern = '999dac', fleet_middle_eastern = '881ba9' },
   white  = { stability = 'b27422', ruler_general = 'd90cf4', ship = '455429', soldier = '0f16c8', cube = 'df9f2a',
              vassal = 'c1f2d4', s_town = '56e7e7', l_town = '78bff9', claim = 'a9c9a9', alliance = 'ab7108', marriage = 'b4c14b',
              war = 'c35452', tag_chit = '6d1ef0', merchant_1 = '778c3f', merchant_2 = '29421f', merchant_3 = '7d16fe',
-             army_1 = '9dfd9b', army_2 = '849af8', army_3 = 'ea745a', fleet = '2c826c' }
+             army_1 = '9dfd9b', army_2 = '849af8', army_3 = 'ea745a', fleet = '2c826c',
+             army_1_middle_eastern = '74172a', army_2_middle_eastern = 'eb5823', army_3_middle_eastern = '29cae0', fleet_middle_eastern = '7ac729' },
 }
 
 HRE_Influence_Cube_GUIDs = {
@@ -367,6 +373,11 @@ Main_Tableau_Offset_Positions = {
   ['bot_ideas_admin_1'] = {0.46, -1.49}, ['bot_ideas_admin_2'] = {0.81, -1.49}, ['bot_ideas_admin_3'] = {1.19, -1.49},
   ['bot_ideas_diplo_1'] = {2.02, -1.49}, ['bot_ideas_diplo_2'] = {2.38, -1.49}, ['bot_ideas_diplo_3'] = {2.75, -1.49},
   ['bot_ideas_war_1'] = {3.62, -1.49}, ['bot_ideas_war_2'] = {3.96, -1.49}, ['bot_ideas_war_3'] = {4.33, -1.49}, ['extra_events'] = {-3.23, -7.40},
+
+  ['army_1_middle_eastern_left'] = {-13.19, 4.53}, ['army_1_middle_eastern_right'] = {5.49, 4.54},
+  ['army_2_middle_eastern_left'] = {-9.98, 4.49}, ['army_2_middle_eastern_right'] = {8.72, 4.49},
+  ['army_3_middle_eastern_left'] = {-8.70, 4.64}, ['army_3_middle_eastern_right'] = {10.00, 4.54},
+  ['fleet_middle_eastern_left'] = {-5.45, 4.53}, ['fleet_middle_eastern_right'] = {13.25, 4.52},
 }
 
 Main_Tableau_Local_Positions = { ['religion'] = {0.84, 2, 0.78}, ['ruler'] = {1.30, 2, 1.69}, ['missions'] = {-2.57, 2, -0.75}, ['missions_left'] = {2.57, 2, -0.75},
@@ -2303,13 +2314,15 @@ function PlaceTableausAndBags(seat, color)
     lock = true
     height = 1.02
     if (name == 'ship') or (name == 'soldier') then
+        string.match(name, 'ship_%d')
       name = name .. suffix
       height = 0.93
     elseif (name == 'merchant_1') or (name == 'merchant_2') or (name == 'merchant_3') then
       name = name .. suffix
       height = 1.50
       lock = false
-    elseif (name == 'army_1') or (name == 'army_2') or (name == 'army_3') or (name == 'fleet') then
+    elseif (name == 'army_1') or (name == 'army_2') or (name == 'army_3') or (name == 'fleet')
+    or (name == 'army_1_middle_eastern') or (name == 'army_2_middle_eastern') or (name == 'army_3_middle_eastern') or (name == 'fleet_middle_eastern') then
       name = name .. suffix
       height = 2.00
       lock = false
@@ -4475,6 +4488,14 @@ function CheckRemovedEnter(object, trashBinObject)
       name = 'army_3'
     elseif object.guid == Setup_Bag_Item_GUIDs[col].fleet then
       name = 'fleet'
+    elseif object.guid == Setup_Bag_Item_GUIDs[col].army_1_middle_eastern then
+      name = 'army_1_middle_eastern'
+    elseif object.guid == Setup_Bag_Item_GUIDs[col].army_2_middle_eastern then
+      name = 'army_2_middle_eastern'
+    elseif object.guid == Setup_Bag_Item_GUIDs[col].army_3_middle_eastern then
+      name = 'army_3_middle_eastern'
+    elseif object.guid == Setup_Bag_Item_GUIDs[col].fleet_middle_eastern then
+      name = 'fleet_middle_eastern'
     end
     if name == '' then return false end
     if seat == 2 then
@@ -4802,15 +4823,21 @@ function SwapTwoColors()
   --We want to store, for each piece type in the setup area, the piece itself, the location and rotation
   --for both colours so we can easily reference and swap later
   for piece_name,_ in pairs(Setup_Bag_Item_GUIDs[color_to_swap_1]) do
-    objects_to_swap[piece_name] = {
-      piece_1 = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_1][piece_name]),
-      piece_1_pos = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_1][piece_name]).getPosition(),
-      piece_1_rot = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_1][piece_name]).getRotation(),
-      
-      piece_2 = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_2][piece_name]),
-      piece_2_pos = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_2][piece_name]).getPosition(),
-      piece_2_rot = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_2][piece_name]).getRotation()
-    }
+    --This handles the case where some colours have middle eastern figures and others don't
+    local color_1_piece = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_1][piece_name])
+    local color_2_piece = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_2][piece_name])
+
+    if color_1_piece ~= nil and color_2_piece ~= nil then
+      objects_to_swap[piece_name] = {
+        piece_1 = color_1_piece,
+        piece_1_pos = color_1_piece.getPosition(),
+        piece_1_rot = color_1_piece.getRotation(),
+        
+        piece_2 = color_2_piece,
+        piece_2_pos = color_2_piece.getPosition(),
+        piece_2_rot = color_2_piece.getRotation()
+      }
+    end
   end
   
   --Swap the mats
