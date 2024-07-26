@@ -569,10 +569,11 @@ function AutoSetupRealm()
 
     DealActionCards(players)
     RotateTruceAndRemoveBags()
-    printToAll("Remember to draw three additional action cards and appoint advisors and leaders.\nYou may keep up to four action cards and two missions in your hand (unless otherwise specified by the scenario)", {1,1,1})
     for color,_ in pairs(COLOR_RGB_CODES) do
       Global.UI.setAttribute(('message_banner_'..color), "active", false)
     end
+    printToAll("Remember to draw three additional action cards and appoint advisors and leaders.\nYou may keep up to four action cards and two missions in your hand (unless otherwise specified by the scenario)", {1,1,1})
+    broadcastToAll('Remove influence from any areas with no NPR provinces remaining after setup. Imperial Authority, influence, and extra manpower must be set up manually')
   else
     for color,_ in pairs(COLOR_RGB_CODES) do
       Global.UI.setAttribute(('message_banner_txt_'..color), "text", "Marriage and Alliance tokens will be placed after all colors have a realm selected or have been removed")
@@ -976,7 +977,10 @@ function Setup_Game()
     --Create buttons for selecting a realm, removing a color and swapping them around
     CreateButtonsForRealms()
 
-    broadcastToAll("Right-click the map to select the starting state, then click the Select Realm tile to choose your realm from the map", {1,1,1})
+    for color,_ in pairs(COLOR_RGB_CODES) do
+      Global.UI.setAttribute(('message_banner_txt_'..color), "text", "Right-click the map to select the starting state, then click the Select Realm tile to choose your realm from the map")
+      Global.UI.setAttribute(('message_banner_'..color), "active", true)
+    end
     return 1
   end
 
@@ -4910,10 +4914,16 @@ function removePlayerPieces()
 
     DealActionCards(players)
     RotateTruceAndRemoveBags()
+    for color,_ in pairs(COLOR_RGB_CODES) do
+      Global.UI.setAttribute(('message_banner_'..color), "active", false)
+    end
     printToAll("Remember to draw three additional action cards and appoint advisors and leaders.\nYou may keep up to four action cards and two missions in your hand (unless otherwise specified by the scenario)", {1,1,1})
     broadcastToAll('Remove influence from any areas with no NPR provinces remaining after setup. Imperial Authority, influence, and extra manpower must be set up manually')
   else
-    broadcastToAll('Marriage and Alliance tokens will be placed after all colors have a realm selected or have been removed')
+    for color,_ in pairs(COLOR_RGB_CODES) do
+      Global.UI.setAttribute(('message_banner_txt_'..color), "text", "Marriage and Alliance tokens will be placed after all colors have a realm selected or have been removed")
+      Global.UI.setAttribute(('message_banner_'..color), "active", true)
+    end
   end
   
   return 1
@@ -4933,8 +4943,6 @@ function swapColorsButtonPress(obj)
     end
 
     startLuaCoroutine(Global,"SwapTwoColors")
-  else
-    broadcastToAll("Please wait for the swap the finish")
   end
 end
 
@@ -4949,10 +4957,12 @@ function selectRealmButtonPress(obj)
     end
 
     startLuaCoroutine(Global,"CreateRealmButtons")
-    broadcastToAll("Select a realm by clicking the counter on their capital")
+    Global.UI.setAttribute(('message_banner_txt_'..Select_Realm_Target_Color), "text", "Select a realm by clicking the counter on their capital")
+    Global.UI.setAttribute(('message_banner_'..Select_Realm_Target_Color), "active", true)
     obj.destroy()
   else
-    broadcastToAll("Another player is selecting a realm. Please wait for them to finish.")
+    Global.UI.setAttribute(('message_banner_txt_'..Select_Realm_Target_Color), "text", "Another player is selecting a realm. Please wait for them to finish.")
+    Global.UI.setAttribute(('message_banner_'..Select_Realm_Target_Color), "active", true)
   end
 end
 
