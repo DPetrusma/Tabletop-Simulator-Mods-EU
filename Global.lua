@@ -259,7 +259,8 @@ Setup_Bag_Item_GUIDs = {
   red    = { stability = '823a51', ruler_general = '272d23', ship = 'd80c7e', soldier = '04d4c0', cube = 'fe26c8',
              vassal = '405477', s_town = '622025', l_town = '21dcc8', claim = '3479d2', alliance = 'fbf72e', marriage = 'e0f1f0',
              war = 'a313fd', tag_chit = '347db4', merchant_1 = '65c7d5', merchant_2 = 'dd9bef', merchant_3 = 'd6b5d0',
-             army_1 = 'b198c2', army_2 = 'dfb12f', army_3 = 'cce497', fleet = '0019b4', },
+             army_1 = 'b198c2', army_2 = 'dfb12f', army_3 = 'cce497', fleet = '0019b4',
+             army_1_middle_eastern = '6db006', army_2_middle_eastern = 'b62175', army_3_middle_eastern = 'bb842e', fleet_middle_eastern = 'bcaf43' },
   yellow = { stability = 'c5fd9e', ruler_general = '8c295b', ship = '9c5ace', soldier = '7cdf8b', cube = '15ea2d',
              vassal = '21e4d6', s_town = '806208', l_town = 'cbfda2', claim = '2ff54a', alliance = 'e33aa3', marriage = '16045a',
              war = '710cae', tag_chit = 'f36db4', merchant_1 = '0dc52d', merchant_2 = 'f59c7f', merchant_3 = '88ba29',
@@ -268,7 +269,8 @@ Setup_Bag_Item_GUIDs = {
   blue   = { stability = 'e71bbe', ruler_general = 'c57fcf', ship = 'd3d3c8', soldier = '264b61', cube = '2a66a0',
              vassal = 'b28b31', s_town = 'bbba61', l_town = 'fa5e7d', claim = '188a15', alliance = '696031', marriage = '4064c1',
              war = '1f6dfb', tag_chit = '1d258f', merchant_1 = 'f30cd6', merchant_2 = 'dc0f3e', merchant_3 = '17dd06',
-             army_1 = '196789', army_2 = '6f49ec', army_3 = 'f4ea35', fleet = '357ceb', },
+             army_1 = '196789', army_2 = '6f49ec', army_3 = 'f4ea35', fleet = '357ceb',
+             army_1_middle_eastern = '75a5a0', army_2_middle_eastern = 'e94e52', army_3_middle_eastern = 'e01e25', fleet_middle_eastern = 'e6c5aa' },
   green  = { stability = '1de95e', ruler_general = '235e36', ship = '748bb4', soldier = '82a19e', cube = 'd90508',
              vassal = 'a2b1ce', s_town = '57dd90', l_town = '3eacd6', claim = 'fdaa7b', alliance = '31e859', marriage = '6f94d9',
              war = 'b0560c', tag_chit = '1b9ae8', merchant_1 = 'f02763', merchant_2 = '5ec83e', merchant_3 = '16ce9d',
@@ -282,7 +284,8 @@ Setup_Bag_Item_GUIDs = {
   white  = { stability = 'b27422', ruler_general = 'd90cf4', ship = '455429', soldier = '0f16c8', cube = 'df9f2a',
              vassal = 'c1f2d4', s_town = '56e7e7', l_town = '78bff9', claim = 'a9c9a9', alliance = 'ab7108', marriage = 'b4c14b',
              war = 'c35452', tag_chit = '6d1ef0', merchant_1 = '778c3f', merchant_2 = '29421f', merchant_3 = '7d16fe',
-             army_1 = '9dfd9b', army_2 = '849af8', army_3 = 'ea745a', fleet = '2c826c', },
+             army_1 = '9dfd9b', army_2 = '849af8', army_3 = 'ea745a', fleet = '2c826c',
+             army_1_middle_eastern = '74172a', army_2_middle_eastern = 'eb5823', army_3_middle_eastern = '29cae0', fleet_middle_eastern = '7ac729' },
 }
 
 HRE_Influence_Cube_GUIDs = {
