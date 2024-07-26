@@ -22,7 +22,10 @@ REALM = {
   papal = '012', brandenburg = '013', prussia = '013', venice = '014', mamluks = '015', egypt = '015', byzantium = '016', ulm = '017',  aragon = '018',
   burgundy = '019', bohemia = '020', lithuania = '021', hungary = '022', novgorod = '023', great_horde = '024', morocco = '025', norway = '026',
   teutonic_order = '028', tunis = '029', persia = '030', scotland = '031', saxony = '032', bavaria = '033', milan = '034', genoa = '035',
-  naples = '036', livonian_order = '037', crimea = '038', aq_qoyunlu = '039', savoy = '040', tuscany = '041', florence = '042'
+  naples = '036', livonian_order = '037', crimea = '038', aq_qoyunlu = '039', savoy = '040', tuscany = '041', florence = '042',
+  brittany = '043', granada = '044', tlemcen = '045', provence = '046', switzerland = '047', bosnia = '048', serbia = '049', albania = '050',
+  wallachia = '051', stettin = '052', pomerania = '053', karaman = '054', imereti = '055', transylvania = '056', algiers = '057', moldavia = '058',
+  brunswick = '059', kazan = '060', knights = '061', lorraine = '062'
 }
 REALM_NAME = {
   ['000'] = 'None', ['001'] = 'Austria', ['002'] =  'Castile', ['003'] = 'England', ['004'] = 'France', ['005'] = 'Muscovy',
@@ -30,7 +33,10 @@ REALM_NAME = {
   ['012'] = 'Papal States', ['013'] = 'Brandenburg', ['014'] = 'Venice', ['015'] = 'Mamluks', ['016'] = 'Byzantium', ['017'] = 'Ulm', ['018'] = 'Aragon',
   ['019'] = 'Burgundy', ['020'] = 'Bohemia', ['021'] = 'Lithuania', ['022'] = 'Hungary', ['023'] = 'Novgorod', ['024'] = 'Great Horde', ['025'] = 'Morocco', ['026'] = 'Norway',
   ['028'] = 'Teutonic Order', ['029'] = 'Tunis', ['030'] = 'Persia', ['031'] = 'Scotland', ['032'] = 'Saxony', ['033'] = 'Bavaria', ['034'] = 'Milan', ['035'] = 'Genoa',
-  ['036'] = 'Naples', ['037'] = 'Livonian Order', ['038'] = 'Crimea', ['039'] = 'Aq Qoyunlu', ['040'] = 'Savoy', ['041'] = 'Tuscany', ['042'] = 'Florence'
+  ['036'] = 'Naples', ['037'] = 'Livonian Order', ['038'] = 'Crimea', ['039'] = 'Aq Qoyunlu', ['040'] = 'Savoy', ['041'] = 'Tuscany', ['042'] = 'Florence',
+  ['043'] = 'Brittany', ['044'] = 'Granada', ['045'] = 'Tlemcen', ['046'] = 'Provence', ['047'] = 'Switzerland', ['048'] = 'Bosnia', ['049'] = 'Serbia', ['050'] = 'Albania',
+  ['051'] = 'Wallachia', ['052'] = 'Stettin', ['053'] = 'Pomerania', ['054'] = 'Karaman', ['055'] = 'Imereti', ['056'] = 'Transylvania', ['057'] = 'Algiers', ['058'] = 'Moldavia',
+  ['059'] = 'Brunswick', ['060'] = 'Kazan', ['061'] = 'Knights', ['062'] = 'Lorraine'
 }
 
 RELIGION = { none = 0, catholic = 1, diverse = 2, protestant = 3, counter_reformed = 4, muslim = 5, orthodox = 6, revolutionary = 7 }
@@ -490,6 +496,7 @@ function CreateRealmButtons()
     --if a button has already been placed
     if code ~= '000' and SelectedRealms[code] == nil and RealmsWithButtons[code] == nil then
       --Then we need to make sure the relevant year exists for this realm's setup
+      --TODO: Handle parents here
       if SETUP_DATA[code][mainboardYear] ~= nil then
         --Then make sure we have a capital defined
         if SETUP_DATA[code][mainboardYear]['capital'] ~= nil then            
