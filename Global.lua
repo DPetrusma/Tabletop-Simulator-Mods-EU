@@ -496,6 +496,7 @@ function CreateRealmButtons()
     --if a button has already been placed
     if code ~= '000' and SelectedRealms[code] == nil and RealmsWithButtons[code] == nil then
       --Then we need to make sure the relevant year exists for this realm's setup
+      --TODO: Handle parents here
       if SETUP_DATA[code][mainboardYear] ~= nil then
         --Then make sure we have a capital defined
         if SETUP_DATA[code][mainboardYear]['capital'] ~= nil then            
