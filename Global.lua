@@ -5355,7 +5355,7 @@ function SetMainMapSnapPoints(year)
       ['Score'] = {
         PrestigeLocations
       },
-      ['Expanded_Trade'] = {
+      ['Trade_Node'] = {
         TradeNodeLocations
       }
     }
