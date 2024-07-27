@@ -31,6 +31,8 @@ v2.2
 - Small towns, large towns, and vassals tokens will return to the player mat if they are deleted or dropped into the bin
 - Army figure models have been updates so that missing faces are now properly filled in
 - All colours have the Defying Destiny Middle-Eastern figures in the setup bags, and they will be placed by the player boards in manual setup
+- Crusade/Excommunicate token has been placed on the status mat and the bag removed
+- DNPR capitals are now easier to find in the containers
 v2.1
 - 2024-07-05 Manual setup now includes buttons to set up components for a realm, swap two colours, and remove a colour from the table
 v2.0
