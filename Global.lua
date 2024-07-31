@@ -433,6 +433,8 @@ Military_Tableau_Local_Positions = {
   ['tuck_zone'] = {0.00, -0.25, 1.09},
 }
 
+Crusade_Excommunicate_Position = { 0, 2, 0 }
+
 
 --[[ --------------------
         onLoad Handler
@@ -4293,6 +4295,7 @@ function CheckRemovedEnter(object, trashBinObject)
   end
 
   --[[
+ TODO: Clean this comment up
   Another thought train:
   Have a counter of how many large towns have been deleted per colour (Large_Town_Deleted_Count[color])
   In here, CheckRemovedEnter, if it's a large town, increment this counter by 1 (start at 0)
@@ -4470,6 +4473,12 @@ function CheckRemovedEnter(object, trashBinObject)
     end
 
     ::piece_moved_ia::
+    return false
+  end
+
+  if object.hasTag('Crusade') then
+    object.setPositionSmooth(Crusade_Excommunicate_Position)
+    object.setRotationSmooth({0,0,0})
     return false
   end
 

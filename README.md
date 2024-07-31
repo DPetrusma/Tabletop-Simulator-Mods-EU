@@ -34,9 +34,12 @@ v2.2
 - Crusade/Excommunicate token has been placed on the status mat and the bag removed
 - DNPR capitals are now easier to find in the containers
 - All realms with a base tax of 2 or greated are now available for selection during manual setup
+
 v2.1
-- 2024-07-05 Manual setup now includes buttons to set up components for a realm, swap two colours, and remove a colour from the table
+- Manual setup now includes buttons to set up components for a realm, swap two colours, and remove a colour from the table
+
 v2.0
 - Scripted version for scenario selection, tagged objects, smart delete, etc
+
 v1.0
 - Initial release version with all components inclded
