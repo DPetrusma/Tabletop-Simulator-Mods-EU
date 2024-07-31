@@ -939,6 +939,34 @@ end
   ------------------------------------------------
   ------------------------------------------------
 --]]
+function Player_Seat_From_Color(color)
+    local main_tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
+    local seat
+    if main_tableau ~= nil then
+        local pos = main_tableau.getPosition()
+        seat = GetSeatFromPosition(pos)
+    end
+    return seat
+end
+
+function Player_Color_From_Seat(seat)
+    local main_tableau_position = Main_Tableau_Positions[seat]
+    local color
+    if main_tableau_position ~= nil then
+        for col,_ in pairs(COLOR_RGB_CODES) do
+            local main_tableau = getObjectFromGUID(Main_Tableau_GUIDs[col])
+            local pos = main_tableau.getPosition()
+            if pos.x == main_tableau_position[1] and pos.z == main_tableau_position[3] then
+                color = col
+            end
+        end
+    end
+    if color == nil then
+        return "Could not find a color from seat " .. seat
+    end
+    return color
+end
+
 function Setup_Game()
 
   -- Handle Manual Setup
@@ -946,7 +974,7 @@ function Setup_Game()
     --Keep these in sync for the later color-swapping features
     --TODO: I think I don't need this, actually. I get use a colour to get a Tableau from getObjectFromGUID(Main_Tableau_GUIDs[col])
     --and then use tableau.getPosition() and GetSeatFromPosition(pos) to find a position from the color
-    local main_tableau = getObjectFromGUID(Bot_Tableau_GUIDs[color])
+    local main_tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
     if main_tableau ~= nil then
         local pos = main_tableau.getPosition()
         local seat = GetSeatFromPosition(pos)
