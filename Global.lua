@@ -946,6 +946,14 @@ function Setup_Game()
     --Keep these in sync for the later color-swapping features
     --TODO: I think I don't need this, actually. I get use a colour to get a Tableau from getObjectFromGUID(Main_Tableau_GUIDs[col])
     --and then use tableau.getPosition() and GetSeatFromPosition(pos) to find a position from the color
+    local main_tableau = getObjectFromGUID(Bot_Tableau_GUIDs[color])
+    if main_tableau ~= nil then
+        local pos = main_tableau.getPosition()
+        local seat = GetSeatFromPosition(pos)
+    end
+    Player_Seat_From_Color['blue'] --1
+    Player_Color_From_Seat[1] --"blue"
+
     Player_Seat_From_Color =
     {
       blue = 1,
@@ -4807,34 +4815,40 @@ function SwapTwoObjects(piece_1, piece_2)
 end
 
 function SwapTwoColors()
-  local color_to_swap_1 = Color_Swapping_Table[1]
-  local color_to_swap_2 = Color_Swapping_Table[2]
 
-  if color_to_swap_1 == color_to_swap_2 then
+  if Color_Swapping_Table[1] == Color_Swapping_Table[2] then
     log("No action on swapping a color with itself")
     Is_Color_Swapping = false
     return 1
   end
   --We need Color_Swapping_Table to be set beforehand with 2 entries
-  if TEST_MODE then log('Swapping pieces for '..color_to_swap_1..' and '..color_to_swap_2) end
+  if TEST_MODE then log('Swapping pieces for '..Color_Swapping_Table[1]..' and '..Color_Swapping_Table[2]) end
   --Also, since I will run 3 loops, best to store the objects themselves, their positions and rotations
   -- We are assuming that both lists are the same size
   local objects_to_swap = {}
+  local seats_to_swap = {}
 
-  --Update the tables first so that if you click another button it will use the new location
-  local intermediate_seat = Player_Seat_From_Color[color_to_swap_1]
-  Player_Seat_From_Color[color_to_swap_1] = Player_Seat_From_Color[color_to_swap_2]
-  Player_Seat_From_Color[color_to_swap_2] = intermediate_seat
+  for i = 1, 2, 1 do
+    local main_tableau = getObjectFromGUID(Main_Tableau_GUIDs[Color_Swapping_Table[i]])
+    if main_tableau ~= nil then
+        local pos = main_tableau.getPosition()
+        seats_to_swap[i] = GetSeatFromPosition(pos)
+    end
+  end
+--   --Update the tables first so that if you click another button it will use the new location
+--   local intermediate_seat = Player_Seat_From_Color[Color_Swapping_Table[1]]
+--   Player_Seat_From_Color[Color_Swapping_Table[1]] = Player_Seat_From_Color[Color_Swapping_Table[2]]
+--   Player_Seat_From_Color[Color_Swapping_Table[2]] = intermediate_seat
 
-  Player_Color_From_Seat[Player_Seat_From_Color[color_to_swap_2]] = color_to_swap_2
-  Player_Color_From_Seat[Player_Seat_From_Color[color_to_swap_1]] = color_to_swap_1
+--   Player_Color_From_Seat[Player_Seat_From_Color[Color_Swapping_Table[2]]] = Color_Swapping_Table[2]
+--   Player_Color_From_Seat[Player_Seat_From_Color[Color_Swapping_Table[1]]] = Color_Swapping_Table[1]
 
   --We want to store, for each piece type in the setup area, the piece itself, the location and rotation
   --for both colours so we can easily reference and swap later
-  for piece_name,_ in pairs(Setup_Bag_Item_GUIDs[color_to_swap_1]) do
+  for piece_name,_ in pairs(Setup_Bag_Item_GUIDs[Color_Swapping_Table[1]]) do
     --This handles the case where some colours have middle eastern figures and others don't
-    local color_1_piece = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_1][piece_name])
-    local color_2_piece = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_2][piece_name])
+    local color_1_piece = getObjectFromGUID(Setup_Bag_Item_GUIDs[Color_Swapping_Table[1]][piece_name])
+    local color_2_piece = getObjectFromGUID(Setup_Bag_Item_GUIDs[Color_Swapping_Table[2]][piece_name])
 
     if color_1_piece ~= nil and color_2_piece ~= nil then
       objects_to_swap[piece_name] = {
@@ -4850,9 +4864,9 @@ function SwapTwoColors()
   end
   
   --Swap the mats
-  SwapTwoObjects(getObjectFromGUID(Main_Tableau_GUIDs[color_to_swap_1]), getObjectFromGUID(Main_Tableau_GUIDs[color_to_swap_2]))
-  SwapTwoObjects(getObjectFromGUID(Army_Tableau_GUIDs[color_to_swap_1]), getObjectFromGUID(Army_Tableau_GUIDs[color_to_swap_2]))
-  SwapTwoObjects(getObjectFromGUID(Fleet_Tableau_GUIDs[color_to_swap_1]), getObjectFromGUID(Fleet_Tableau_GUIDs[color_to_swap_2]))
+  SwapTwoObjects(getObjectFromGUID(Main_Tableau_GUIDs[Color_Swapping_Table[1]]), getObjectFromGUID(Main_Tableau_GUIDs[Color_Swapping_Table[2]]))
+  SwapTwoObjects(getObjectFromGUID(Army_Tableau_GUIDs[Color_Swapping_Table[1]]), getObjectFromGUID(Army_Tableau_GUIDs[Color_Swapping_Table[2]]))
+  SwapTwoObjects(getObjectFromGUID(Fleet_Tableau_GUIDs[Color_Swapping_Table[1]]), getObjectFromGUID(Fleet_Tableau_GUIDs[Color_Swapping_Table[2]]))
 
   waitFrames(5)
 
@@ -4875,15 +4889,15 @@ function SwapTwoColors()
   end
 
   --Swap the player hand positions
-  local player_hand1 = getObjectFromGUID(Player_Hand_GUIDs[color_to_swap_1])
-  local player_hand2 = getObjectFromGUID(Player_Hand_GUIDs[color_to_swap_2])
+  local player_hand1 = getObjectFromGUID(Player_Hand_GUIDs[Color_Swapping_Table[1]])
+  local player_hand2 = getObjectFromGUID(Player_Hand_GUIDs[Color_Swapping_Table[2]])
   if player_hand1 == nil or player_hand2 == nil then
     log('Could not find player hand object')
   else
-    player_hand1.setPosition(Player_Hand_Positions[Player_Seat_From_Color[color_to_swap_1]])
-    player_hand1.setRotation(Player_Hand_Rotations[Player_Seat_From_Color[color_to_swap_1]])
-    player_hand2.setPosition(Player_Hand_Positions[Player_Seat_From_Color[color_to_swap_2]])
-    player_hand2.setRotation(Player_Hand_Rotations[Player_Seat_From_Color[color_to_swap_2]])
+    player_hand1.setPosition(Player_Hand_Positions[seats_to_swap[1]])
+    player_hand1.setRotation(Player_Hand_Rotations[seats_to_swap[1]])
+    player_hand2.setPosition(Player_Hand_Positions[seats_to_swap[2]])
+    player_hand2.setRotation(Player_Hand_Rotations[seats_to_swap[2]])
   end
 
   --Just to make sure everthing is done
