@@ -7,13 +7,15 @@ Usage notes to be pasted into the "Usage" section of the game's notebook:
 
 3. If players may select their starting missions then all suitable missions will be dealt to their hand. Usually one of them has to be moved back to their mission deck.
 
+- When loading the game, all players would be placed in the Spectator seat. Change to another color before you can interact with the components or buttons.
+
 - Tuck any leader cards by lowering them (hold LMB then also hold RMB) near the slot. Untuck them by right clicking the card and selecting "Detach Card" from the context menu. If you want to rearrange player boards you need to update the positions after doing so. Right click any human player's board and select "Update Tuck Zones" to update all of the zones for boards currently on the table.
 
 - Smart Trash bins: Putting an item on the black buttons will return the item to their respective container or discard pile. If the item would be removed from the game it will enter the button's bag. If the "Empty" button is pressed then the contents will be moved to a special bag in the black hidden zone. (Any infinite components are simply deleted). If any item's handling is ambiguous it will remain lying on the button and has to be handled manually.
 
 - Smart deletion: Pressing DEL will send an item to the smart trash instead of deleting it. If it would not be allowed to enter it will simply remain where it is.
 
-- Imperial influence cubes, towns, vassals, army and fleet figures will return to their original position if they are dropped in the smart trash bin.
+- Imperial influence cubes, towns, vassals, army and fleet figures, and the Crusade/Excommunicate will return to their original position if they are dropped in the smart trash bin.
 
 - Double-sided tokens have smart snap behavious so they will only snap to locations relevant to the side that is face up
 
