@@ -1733,17 +1733,17 @@ function GenerateCoordinatesFromArea(piece_type,area_increments,area_coordinates
   for _, area in ipairs(realmTable[piece_type]) do
       -- Rather than initialising the table with all sea zones, use this logic
       -- to populate it if the sea zone we're up to is new
-      if area_increments[area] == nil then
-          area_increments[area] = 1
-      else
-          area_increments[area] = area_increments[area] + 1
-          -- We could just use modular arithmetic, but I want to know when it's too
-          -- big so we can warn the players
-          if area_increments[area] > #area_coordinates[area] + 1 then
-              broadcastToAll("Too many " .. piece_type .. " in " .. area)
-              area_increments[area] = 1
-          end
-      end
+    --   if area_increments[area] == nil then
+    --       area_increments[area] = 1
+    --   else
+        area_increments[area] = ( area_increments[area] + 1 ) or 1
+        -- We could just use modular arithmetic, but I want to know when it's too
+        -- big so we can warn the players
+        if area_increments[area] > #area_coordinates[area] + 1 then
+            broadcastToAll("Too many " .. piece_type .. " in " .. area)
+            area_increments[area] = 1
+        end
+    --   end
       table.insert(realmTable_pieces, area_coordinates[area][area_increments[area]])
       log(area_coordinates[area][area_increments[area]])
   end
