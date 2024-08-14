@@ -433,7 +433,13 @@ function AutoSetupRealm()
   end
    --Make sure this realm is not selected again
   SelectedRealms[PlayerInSetup.realm] = true
-  SetupRealm({ seat = PlayerInSetup.seat, color = PlayerInSetup.color, realm = { PlayerInSetup.realm, PlayerInSetup.year}, })
+  local seat = PlayerInSetup.seat
+  SetupRealm({
+    seat = PlayerInSetup.seat,
+    color = PlayerInSetup.color,
+    realm = { PlayerInSetup.realm, PlayerInSetup.year},
+    is_bot = Tile_for_Bot_Flag[seat].is_face_down
+})
   --Clear out this table so that someone else can choose a realm
   PlayerInSetup = {}
   Is_Realm_Selecting = false
@@ -4953,6 +4959,7 @@ function CreateButtonsForRealms()
   Buttons_To_Swap = {}
   Buttons_For_Realm_Selection = {}
   Buttons_To_Remove_Player = {}
+  Tile_for_Bot_Flag = {}
 
   local color_swap_button_offsets = {
     red = {-6.0, -8.00},
@@ -4963,7 +4970,8 @@ function CreateButtonsForRealms()
     white = {1.50, -8.00}
   }
   local remove_player_button_offset = {-6.90, -5.08}
-  local realm_selection_button_offset = {0.00, -5.08}
+  local realm_selection_button_offset = {-2.00, -5.08}
+  local realm_selection_bot_flag_tile_offset = {5.00, -5.08}
 
   for color1,_ in pairs(COLOR_RGB_CODES) do
     local seat = Player_Seat_From_Color(color1)
@@ -5018,6 +5026,22 @@ function CreateButtonsForRealms()
     select_realm_button.setColorTint("Grey")
     select_realm_button.setLock(true)
     waitFrames(5)
+
+    --This tile will be used to determine if the setup is for a human or a bot
+    position = GetOffset(Main_Tableau_Positions[seat],realm_selection_bot_flag_tile_offset,seat,1)
+    Tile_for_Bot_Flag[seat] = spawnObject({
+        type = "Custom_Tile",
+        position = RepeatPosition,
+        sound = false,
+        -- scale = {6,0.2,1.5},
+        rotation = rot,
+        parameters = {
+            image =,
+            image_bottom = ,
+            type = 0,
+
+        }
+    })
 
     if TEST_MODE then log('Placing swap buttons for ' .. color1 .. ' player') end
     for color2,_ in pairs(COLOR_RGB_CODES) do
