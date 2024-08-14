@@ -5409,6 +5409,96 @@ function SetMainMapSnapPoints(year)
   end
 end
 
+function HighlightUnrest(onOffFlag)
+    --[[
+    Loop through all pieces
+    Check if it's on the board
+    Check if it's a town or vassal
+    Check if it's flipped
+        If all are true, highlight it in red
+    --]]
+    for _,obj in ipairs(getAllObjects()) do
+        local pos = obj.getPosition()
+        if pos.x >  -40 and pos.x < 40 and pos.z > -30 and pos.z < 30
+            and ( obj.hasTag('Town') or obj.hasTag('Vassal') )
+            and obj.is_face_down == true then
+                if onOffFlag then obj.highlightOn('Red') else obj.highlightOff() end
+        end
+    end
+    return true
+end
+
+function HighlightRebels(onOffFlag)
+    --[[
+    Loop through all pieces
+    Check if it's on the board
+    Check if it's an allied unit
+        If all are true, highlight it in red
+    --]]
+    for _,obj in ipairs(getAllObjects()) do
+        local pos = obj.getPosition()
+        if pos.x >  -40 and pos.x < 40 and pos.z > -30 and pos.z < 30
+            and obj.hasTag('NPRLand') then
+                if onOffFlag then obj.highlightOn('Red') else obj.highlightOff() end
+        end
+    end
+    return true
+end
+
+function HighlightTruces(onOffFlag)
+    --[[
+    Loop through all pieces
+    Check if it's on the board
+    Check if it's a war/truce token
+    Check if it's flipped
+        If all are true, highlight it in red
+    --]]
+    for _,obj in ipairs(getAllObjects()) do
+        local pos = obj.getPosition()
+        if pos.x >  -40 and pos.x < 40 and pos.z > -30 and pos.z < 30
+            and obj.hasTag('War')
+            and obj.is_face_down == true then
+                if onOffFlag then obj.highlightOn('Red') else obj.highlightOff() end
+        end
+    end
+    return true
+end
+
+function HighlightCBs(onOffFlag)
+    --[[
+    Loop through all pieces
+    Check if it's on the board
+    Check if it's a CB token
+    Check if it's flipped
+        If all are true, highlight it in red
+    --]]
+    for _,obj in ipairs(getAllObjects()) do
+        local pos = obj.getPosition()
+        if pos.x >  -40 and pos.x < 40 and pos.z > -30 and pos.z < 30
+            and obj.hasTag('Casus_Belli')
+            and obj.is_face_down == true then
+                if onOffFlag then obj.highlightOn('Red') else obj.highlightOff() end
+        end
+    end
+    return true
+end
+
+function HighlightExhaustedManpower(onOffFlag)
+    --[[
+    Loop through all exhausted manpower zones
+    Look through all the pieces in it
+    Check if it's a regular unit
+        If all are true, highlight it in red
+    --]]
+    for _,em_zone in pairs(exhaustedManpowerZones) do
+        for _,obj in pairs(em_zone.getObjects()) do
+            if obj.hasTag('LandUnit') then
+                    if onOffFlag then obj.highlightOn('Red') else obj.highlightOff() end
+            end
+        end
+    end
+    return true
+end
 -- x-cards
 Age1XCards = { '11a-1', '12a-1', '12a-2', '13a-1', '14a-1', '14a-3', '151b', '152b', '153b', '154b', '156b', '160b' }
 
