@@ -2586,6 +2586,8 @@ end
 
 
 -- Set-up DNPRs
+--[[ Note that as of 2024/08/19 the pink and green DNPR capitals have had their top and
+ bottom sides swapped so they are easy to find in the bags ]]
 function PlaceDNPRs(scenario_data)
   local orange_l_towns = {}
   local orange_s_towns = {}
@@ -2618,7 +2620,7 @@ function PlaceDNPRs(scenario_data)
   if scenario_data.DNPR_Green_L then
     for i, pos in ipairs(scenario_data.DNPR_Green_L) do
       if i == 1 then
-        PlaceGuidObjectFromBag(pos, Bag_GUIDs['dnpr_og'], true, DNPR_Capital_GUIDs.green_l)
+        PlaceGuidObjectFromBag(pos, Bag_GUIDs['dnpr_og'], false, DNPR_Capital_GUIDs.green_l)
       else
         -- Put other towns in a to-place list
         table.insert(green_l_towns, pos)
@@ -2628,7 +2630,7 @@ function PlaceDNPRs(scenario_data)
   if scenario_data.DNPR_Green_S then
     for i, pos in ipairs(scenario_data.DNPR_Green_S) do
       if i == 1 then
-        PlaceGuidObjectFromBag(pos, Bag_GUIDs['dnpr_og'], true, DNPR_Capital_GUIDs.green_s)
+        PlaceGuidObjectFromBag(pos, Bag_GUIDs['dnpr_og'], false, DNPR_Capital_GUIDs.green_s)
       else
         -- Put other towns in a to-place list
         table.insert(green_s_towns, pos)
@@ -2638,7 +2640,7 @@ function PlaceDNPRs(scenario_data)
   if scenario_data.DNPR_Pink_L then
     for i, pos in ipairs(scenario_data.DNPR_Pink_L) do
       if i == 1 then
-        PlaceGuidObjectFromBag(pos, Bag_GUIDs['dnpr_pb'], true, DNPR_Capital_GUIDs.pink_l)
+        PlaceGuidObjectFromBag(pos, Bag_GUIDs['dnpr_pb'], false, DNPR_Capital_GUIDs.pink_l)
       else
         -- Put other towns in a to-place list
         table.insert(pink_l_towns, pos)
@@ -2648,7 +2650,7 @@ function PlaceDNPRs(scenario_data)
   if scenario_data.DNPR_Pink_S then
     for i, pos in ipairs(scenario_data.DNPR_Pink_S) do
       if i == 1 then
-        PlaceGuidObjectFromBag(pos, Bag_GUIDs['dnpr_pb'], true, DNPR_Capital_GUIDs.pink_s)
+        PlaceGuidObjectFromBag(pos, Bag_GUIDs['dnpr_pb'], false, DNPR_Capital_GUIDs.pink_s)
       else
         -- Put other towns in a to-place list
         table.insert(pink_s_towns, pos)
