@@ -22,7 +22,10 @@ REALM = {
   papal = '012', brandenburg = '013', prussia = '013', venice = '014', mamluks = '015', egypt = '015', byzantium = '016', ulm = '017',  aragon = '018',
   burgundy = '019', bohemia = '020', lithuania = '021', hungary = '022', novgorod = '023', great_horde = '024', morocco = '025', norway = '026',
   teutonic_order = '028', tunis = '029', persia = '030', scotland = '031', saxony = '032', bavaria = '033', milan = '034', genoa = '035',
-  naples = '036', livonian_order = '037', crimea = '038', aq_qoyunlu = '039', savoy = '040', tuscany = '041', florence = '042'
+  naples = '036', livonian_order = '037', crimea = '038', aq_qoyunlu = '039', savoy = '040', tuscany = '041', florence = '042',
+  brittany = '043', granada = '044', tlemcen = '045', provence = '046', switzerland = '047', bosnia = '048', serbia = '049', albania = '050',
+  wallachia = '051', stettin = '052', pomerania = '053', karaman = '054', imereti = '055', transylvania = '056', algiers = '057', moldavia = '058',
+  brunswick = '059', kazan = '060', knights = '061', lorraine = '062'
 }
 REALM_NAME = {
   ['000'] = 'None', ['001'] = 'Austria', ['002'] =  'Castile', ['003'] = 'England', ['004'] = 'France', ['005'] = 'Muscovy',
@@ -30,7 +33,10 @@ REALM_NAME = {
   ['012'] = 'Papal States', ['013'] = 'Brandenburg', ['014'] = 'Venice', ['015'] = 'Mamluks', ['016'] = 'Byzantium', ['017'] = 'Ulm', ['018'] = 'Aragon',
   ['019'] = 'Burgundy', ['020'] = 'Bohemia', ['021'] = 'Lithuania', ['022'] = 'Hungary', ['023'] = 'Novgorod', ['024'] = 'Great Horde', ['025'] = 'Morocco', ['026'] = 'Norway',
   ['028'] = 'Teutonic Order', ['029'] = 'Tunis', ['030'] = 'Persia', ['031'] = 'Scotland', ['032'] = 'Saxony', ['033'] = 'Bavaria', ['034'] = 'Milan', ['035'] = 'Genoa',
-  ['036'] = 'Naples', ['037'] = 'Livonian Order', ['038'] = 'Crimea', ['039'] = 'Aq Qoyunlu', ['040'] = 'Savoy', ['041'] = 'Tuscany', ['042'] = 'Florence'
+  ['036'] = 'Naples', ['037'] = 'Livonian Order', ['038'] = 'Crimea', ['039'] = 'Aq Qoyunlu', ['040'] = 'Savoy', ['041'] = 'Tuscany', ['042'] = 'Florence',
+  ['043'] = 'Brittany', ['044'] = 'Granada', ['045'] = 'Tlemcen', ['046'] = 'Provence', ['047'] = 'Switzerland', ['048'] = 'Bosnia', ['049'] = 'Serbia', ['050'] = 'Albania',
+  ['051'] = 'Wallachia', ['052'] = 'Stettin', ['053'] = 'Pomerania', ['054'] = 'Karaman', ['055'] = 'Imereti', ['056'] = 'Transylvania', ['057'] = 'Algiers', ['058'] = 'Moldavia',
+  ['059'] = 'Brunswick', ['060'] = 'Kazan', ['061'] = 'Knights', ['062'] = 'Lorraine'
 }
 
 RELIGION = { none = 0, catholic = 1, diverse = 2, protestant = 3, counter_reformed = 4, muslim = 5, orthodox = 6, revolutionary = 7 }
@@ -253,27 +259,33 @@ Setup_Bag_Item_GUIDs = {
   red    = { stability = '823a51', ruler_general = '272d23', ship = 'd80c7e', soldier = '04d4c0', cube = 'fe26c8',
              vassal = '405477', s_town = '622025', l_town = '21dcc8', claim = '3479d2', alliance = 'fbf72e', marriage = 'e0f1f0',
              war = 'a313fd', tag_chit = '347db4', merchant_1 = '65c7d5', merchant_2 = 'dd9bef', merchant_3 = 'd6b5d0',
-             army_1 = 'b198c2', army_2 = 'dfb12f', army_3 = 'cce497', fleet = '0019b4' },
+             army_1 = 'b198c2', army_2 = 'dfb12f', army_3 = 'cce497', fleet = '0019b4',
+             army_1_middle_eastern = '6db006', army_2_middle_eastern = 'b62175', army_3_middle_eastern = 'bb842e', fleet_middle_eastern = 'bcaf43' },
   yellow = { stability = 'c5fd9e', ruler_general = '8c295b', ship = '9c5ace', soldier = '7cdf8b', cube = '15ea2d',
              vassal = '21e4d6', s_town = '806208', l_town = 'cbfda2', claim = '2ff54a', alliance = 'e33aa3', marriage = '16045a',
              war = '710cae', tag_chit = 'f36db4', merchant_1 = '0dc52d', merchant_2 = 'f59c7f', merchant_3 = '88ba29',
-             army_1 = '0a4d9e', army_2 = '38029f', army_3 = '4dc1da', fleet = '507c52' },
+             army_1 = '0a4d9e', army_2 = '38029f', army_3 = '4dc1da', fleet = '507c52',
+             army_1_middle_eastern = 'b2e2e2', army_2_middle_eastern = '9522b3', army_3_middle_eastern = '065e4c', fleet_middle_eastern = '8f704a' },
   blue   = { stability = 'e71bbe', ruler_general = 'c57fcf', ship = 'd3d3c8', soldier = '264b61', cube = '2a66a0',
              vassal = 'b28b31', s_town = 'bbba61', l_town = 'fa5e7d', claim = '188a15', alliance = '696031', marriage = '4064c1',
              war = '1f6dfb', tag_chit = '1d258f', merchant_1 = 'f30cd6', merchant_2 = 'dc0f3e', merchant_3 = '17dd06',
-             army_1 = '196789', army_2 = '6f49ec', army_3 = 'f4ea35', fleet = '357ceb' },
+             army_1 = '196789', army_2 = '6f49ec', army_3 = 'f4ea35', fleet = '357ceb',
+             army_1_middle_eastern = '75a5a0', army_2_middle_eastern = 'e94e52', army_3_middle_eastern = 'e01e25', fleet_middle_eastern = 'e6c5aa' },
   green  = { stability = '1de95e', ruler_general = '235e36', ship = '748bb4', soldier = '82a19e', cube = 'd90508',
              vassal = 'a2b1ce', s_town = '57dd90', l_town = '3eacd6', claim = 'fdaa7b', alliance = '31e859', marriage = '6f94d9',
              war = 'b0560c', tag_chit = '1b9ae8', merchant_1 = 'f02763', merchant_2 = '5ec83e', merchant_3 = '16ce9d',
-             army_1 = 'f49823', army_2 = 'b2ccc9', army_3 = '390ccb', fleet = '1d9350' },
+             army_1 = 'f49823', army_2 = 'b2ccc9', army_3 = '390ccb', fleet = '1d9350',
+             army_1_middle_eastern = '19fff0', army_2_middle_eastern = 'b0935c', army_3_middle_eastern = '052d69', fleet_middle_eastern = '0e6b98' },
   purple = { stability = '7659ef', ruler_general = 'abc742', ship = '89bf50', soldier = '3735aa', cube = '168120',
              vassal = 'ef2a36', s_town = 'b0d827', l_town = 'cbcea5', claim = 'dbc249', alliance = 'f3661e', marriage = '955f8d',
              war = 'd82571', tag_chit = '1f43f9', merchant_1 = 'ff439f', merchant_2 = '0cceef', merchant_3 = 'd8da5c',
-             army_1 = '18b918', army_2 = '84a1a8', army_3 = 'a3fbd1', fleet = '66a7e9' },
+             army_1 = '18b918', army_2 = '84a1a8', army_3 = 'a3fbd1', fleet = '66a7e9',
+             army_1_middle_eastern = '74b8d0', army_2_middle_eastern = 'c7b4b8', army_3_middle_eastern = '999dac', fleet_middle_eastern = '881ba9' },
   white  = { stability = 'b27422', ruler_general = 'd90cf4', ship = '455429', soldier = '0f16c8', cube = 'df9f2a',
              vassal = 'c1f2d4', s_town = '56e7e7', l_town = '78bff9', claim = 'a9c9a9', alliance = 'ab7108', marriage = 'b4c14b',
              war = 'c35452', tag_chit = '6d1ef0', merchant_1 = '778c3f', merchant_2 = '29421f', merchant_3 = '7d16fe',
-             army_1 = '9dfd9b', army_2 = '849af8', army_3 = 'ea745a', fleet = '2c826c' }
+             army_1 = '9dfd9b', army_2 = '849af8', army_3 = 'ea745a', fleet = '2c826c',
+             army_1_middle_eastern = '74172a', army_2_middle_eastern = 'eb5823', army_3_middle_eastern = '29cae0', fleet_middle_eastern = '7ac729' },
 }
 
 HRE_Influence_Cube_GUIDs = {
@@ -290,130 +302,7 @@ DNPR_Capital_GUIDs = {
         Positions
      --------------- ]]
 
-Scenario_Book_Position = {37.86, 0.95, 10.00}
-
-Power_Struggle_Active = {8.48, 15.11}
-Power_Struggle_Upcoming = {11.61, 15.01}
-
-Event_Card_Positions = {
-  {-24.06, 2, 3.33},  {-24.06, 2, 1.15},  {-24.06, 2, -1.04}, {-24.06, 2, -3.24},
-  {-24.06, 2, -5.44}, {-24.06, 2, -7.64}, {-24.06, 2, -9.84}, {-24.06, 2, -12.04}
-}
-
-Discard_Positions = {
-  trade = {-27.32, 2, 12.16}, admin = {-27.38, 2, 9.98}, diplo = {-27.38, 2, 7.78}, war = {-27.38, 2, 5.52}, event = {-27.32, 2, 3.36}
-}
-
-Milestone_Deck_Positions = {
-  future = {-8.50, 2, -14.50},
-  top = { {-5.80, 2, -14.50}, {-3.54, 2, -14.49}, {-1.30, 2, -14.50}, {0.95, 2, -14.50} },
-  bot = { {-5.80, 2, -16.02}, {-3.55, 2, -16.02}, {-1.30, 2, -16.01}, {0.95, 2, -16.00} }
-}
-
-Idea_Card_Positions = {
-  admin = { { 7.63, 2, -22.11}, { 7.63, 2, -20.54}, { 7.63, 2, -18.98}, { 7.63, 2, -17.48}, { 7.63, 2, -15.98} },
-  diplo = { { 9.88, 2, -22.11}, { 9.88, 2, -20.54}, { 9.88, 2, -18.98}, { 9.88, 2, -17.48}, { 9.88, 2, -15.98} },
-  war   = { {12.13, 2, -22.11}, {12.13, 2, -20.54}, {12.13, 2, -18.98}, {12.13, 2, -17.48}, {12.13, 2, -15.98} }
-}
-
-HRE_Authority_Positions = {
-  ['0'] = {1.62, 15.16}, ['1'] = {2.46, 15.15}, ['2'] = {3.29, 15.16}, ['3'] = {4.08, 15.16}, ['4'] = {4.88, 15.17},
-  ['5'] = {5.69, 15.16}, ['6'] = {6.59, 15.16}
-}
-
-HRE_Influence_Map_Pos = {
-  rhineland = {-0.12, 0.27}, westphalia = {-0.69, 2.07}, saxony = {1.93, 1.92},
-  central_italy = {1.87, -5.73}, lombardy = {-1.35, -3.34}, bavaria_swabia = {0.93, 0.36},
-}
-
-Papal_Curia_Positions = {
-  {1.57, 17.29}, {2.49, 17.29}, {3.30, 17.29}, {4.09, 17.29},
-  {4.90, 17.29}, {5.70, 17.29}, {6.52, 17.29},
-}
-
-Main_Tableau_Positions = {
-  {-11.09, 1, -23.47}, {-33.80, 1, -11.95}, {-33.80, 1, 11.23}, {-14.98, 1, 25.06}, {18.28, 1, 25.07}, {27.33, 1, -23.51}
-}
-
-Main_Tableau_Rotations = {
-  {0.00, 180.00, 0.00}, {0.00, 270.00, 0.00}, {0.00, 270.00, 0.00}, {0.00, 0.00, 0.00}, {0.00, 0.00, 0.00}, {0.00, 180.00, 0.00}
-}
-
-Player_Hand_Positions = {
-  {-14.66, 3.35, -36.00}, {-46.00, 3.35, -15.41}, {-46.00, 3.35, 14.62}, {-11.01, 3.35, 37.50}, {21.22, 3.35, 37.50}, {23.67, 3.35, -36.00}
-}
-
-Player_Hand_Rotations = {
-  {0.00, 0.00, 0.00}, {0.00, 90.00, 0.00}, {0.00, 90.00, 0.00}, {0.00, 180.00, 0.00}, {0.00, 180.80, 0.00}, {0.00, 0.00, 0.00}
-}
-
-Main_Tableau_Offset_Positions = {
-  ['stability'] = {-3.22, 1.92}, ['ruler_general'] = {-3.21, -2.12}, ['army_1_left'] = {-13.19, 2.03}, ['army_1_right'] = {5.49, 2.04},
-  ['army_2_left'] = {-9.98, 1.99}, ['army_2_right'] = {8.72, 1.99}, ['army_3_left'] = {-8.70, 2.14}, ['army_3_right'] = {10.00, 2.14},
-  ['fleet_left'] = {-5.45, 2.03}, ['fleet_right'] = {13.25, 2.02}, ['armies_left'] = {-11.61, 0.00}, ['armies_right'] = {7.11, 0.00},
-  ['mixed_left'] = {-7.11, 0.00},  ['mixed_right'] = {11.61, 0.00}, ['merchant_1_left'] = {-11.50, 3.25}, ['merchant_2_left'] = {-10.75, 3.25},
-  ['merchant_3_left'] = {-10.00, 3.25}, ['merchant_1_right'] = {11.50, 3.25}, ['merchant_2_right'] = {10.75, 3.25}, ['merchant_3_right'] = {10.00, 3.25},
-  ['soldier_left'] = {-8.00, 3.25}, ['soldier_right'] = {6.00, 3.25}, ['ship_left'] = {-6.00, 3.25}, ['ship_right'] = {8.00, 3.25},
-  ['l_town'] = {-3.40, 4.75}, ['s_town'] = {-3.40, 3.25}, ['vassal'] = {-2.10, 4.75}, ['cube'] = {-2.10, 3.25},
-  ['claim'] = {-0.80,  3.25}, ['alliance'] = {0.50, 3.25}, ['marriage'] = {1.80, 3.25}, ['war'] = {3.10, 3.25}, ['tag_chit'] = {4.40, 3.25},
-  ['bot_ideas_admin_1'] = {0.46, -1.49}, ['bot_ideas_admin_2'] = {0.81, -1.49}, ['bot_ideas_admin_3'] = {1.19, -1.49},
-  ['bot_ideas_diplo_1'] = {2.02, -1.49}, ['bot_ideas_diplo_2'] = {2.38, -1.49}, ['bot_ideas_diplo_3'] = {2.75, -1.49},
-  ['bot_ideas_war_1'] = {3.62, -1.49}, ['bot_ideas_war_2'] = {3.96, -1.49}, ['bot_ideas_war_3'] = {4.33, -1.49}, ['extra_events'] = {-3.23, -7.40},
-}
-
-Main_Tableau_Local_Positions = { ['religion'] = {0.84, 2, 0.78}, ['ruler'] = {1.30, 2, 1.69}, ['missions'] = {-2.57, 2, -0.75}, ['missions_left'] = {2.57, 2, -0.75},
-  ['starting'] = {1.30, 2, 3.1}, ['income_token'] = {0.30, 2, 1.69}, ['tuck_zone'] = {0.00, -0.25, 1.09},
-  ['manpower_1'] = { 1.16, 2, -0.38},  ['manpower_2'] = { 0.95, 2, -0.38},  ['manpower_3'] = { 1.16, 2, -0.24},  ['manpower_4'] = { 0.95, 2, -0.24},
-  ['manpower_5'] = { 1.16, 2, -0.09},  ['manpower_6'] = { 0.95, 2, -0.09},  ['manpower_7'] = { 1.16, 2,  0.05},  ['manpower_8'] = { 0.95, 2,  0.05},
-  ['manpower_9'] = { 0.74, 2, -0.38}, ['manpower_10'] = { 0.74, 2, -0.24}, ['manpower_11'] = { 0.74, 2, -0.09}, ['manpower_12'] = { 0.74, 2,  0.05},
-  ['manpower_13'] = { 1.06, 2, -0.38}, ['manpower_14'] = { 0.84, 2, -0.38}, ['manpower_15'] = { 1.06, 2, -0.24}, ['manpower_16'] = { 0.84, 2, -0.24},
-  ['manpower_17'] = { 1.06, 2, -0.09}, ['manpower_18'] = { 0.84, 2, -0.09}, ['manpower_19'] = { 1.06, 2,  0.05}, ['manpower_20'] = { 0.84, 2,  0.05},
-  ['treasury_1'] = { 1.75, 2, 0.45},  ['treasury_2'] = { 1.45, 2, 0.45},  ['treasury_3'] = { 1.15, 2, 0.45},  ['treasury_4'] = { 0.85, 2, 0.45},
-  ['mp_a_1'] = { 0.44, 2, 0.67},  ['mp_a_2'] = { 0.22, 2, 0.67},  ['mp_a_3'] = { 0.00, 2, 0.67}, ['mp_d_1'] = { -0.38, 2, 0.67},  ['mp_d_2'] = { -0.60, 2, 0.67},
-  ['mp_d_3'] = { -0.82, 2, 0.67},  ['mp_m_1'] = { -1.22, 2, 0.67},  ['mp_m_2'] = { -1.44, 2, 0.67},  ['mp_m_3'] = { -1.66, 2, 0.67},
-  ['extra_mp_1'] = {1.00, 2, 2.40}, ['extra_mp_2'] = {1.20, 2, 2.40}, ['extra_mp_3'] = {1.40, 2, 2.40}, ['extra_mp_4'] = {1.60, 2, 2.40},
-  ['extra_mp_5'] = {1.00, 2, 2.58}, ['extra_mp_6'] = {1.20, 2, 2.58}, ['extra_mp_7'] = {1.40, 2, 2.58}, ['extra_mp_8'] = {1.60, 2, 2.58},
-}
-
-Bot_Tableau_Local_Positions = { ['religion'] = {0.18, 2, 0.68}, ['army'] = {0.5, 2, 0.65}, ['bot_rules'] = {5.50, 2, 3.0}, ['bot_rules_right'] = {-5.50, 2, 3.0},
-  ['starting'] = {2.57, 2, 0.25}, ['starting_left'] = {-2.57, 2, 0.25}, ['targeting_chart'] = {0.00, 2, 3.0}, ['die'] = {0.00, 2, 5.0}, ['income_token'] = {0.00, 2, 1.05},
-  ['setup_card'] = {2.57, 2, 0.00},['setup_card_left'] = {-2.57, 2, 0.00}, ['event_cards'] = {3.57, 2, 0.00},['event_cards_left'] = {-3.57, 2, 0.00},
-  ['manpower_1'] = { 1.77, 2, 0.00},  ['manpower_2'] = { 1.56, 2, 0.00},  ['manpower_3'] = { 1.35, 2, 0.00},  ['manpower_4'] = { 1.14, 2, 0.00},  ['manpower_5'] = { 0.93, 2, 0.00},  ['manpower_6'] = { 0.72, 2, 0.00},
-  ['manpower_7'] = { 1.77, 2, 0.22},  ['manpower_8'] = { 1.56, 2, 0.22},  ['manpower_9'] = { 1.35, 2, 0.22}, ['manpower_10'] = { 1.14, 2, 0.22}, ['manpower_11'] = { 0.93, 2, 0.22}, ['manpower_12'] = { 0.72, 2, 0.22},
-  ['manpower_13'] = { 1.77, 2, 0.11}, ['manpower_14'] = { 1.56, 2, 0.11}, ['manpower_15'] = { 1.35, 2, 0.11}, ['manpower_16'] = { 1.14, 2, 0.11}, ['manpower_17'] = { 0.93, 2, 0.11}, ['manpower_18'] = { 0.72, 2, 0.11},
-  ['manpower_19'] = { 1.67, 2, 0.11}, ['manpower_20'] = { 1.24, 2, 0.11},
-  ['army_1'] = { 1.77, 2, 0.60}, ['army_2']  = { 1.56, 2, 0.60}, ['army_3']  = { 1.35, 2, 0.60}, ['army_4']  = { 1.14, 2, 0.60},
-  ['army_5'] = { 1.77, 2, 0.82}, ['army_6']  = { 1.56, 2, 0.82}, ['army_7']  = { 1.35, 2, 0.82}, ['army_8']  = { 1.14, 2, 0.82},
-  ['army_9'] = { 1.77, 2, 1.04}, ['army_10'] = { 1.56, 2, 1.04}, ['army_11'] = { 1.35, 2, 1.04}, ['army_12'] = { 1.14, 2, 1.04},
-  ['bot_power_1'] = { 1.72, 2, -0.70},  ['bot_power_2'] = {1.54, 2, -0.70},  ['bot_power_3'] = { 1.36, 2, -0.70},
-  ['bot_power_4'] = { 1.72, 2, -0.52},  ['bot_power_5'] = {1.54, 2, -0.52},  ['bot_power_6'] = { 1.36, 2, -0.52},
-  ['bot_power_7'] = { 1.72, 2, -0.34},  ['bot_power_8'] = {1.54, 2, -0.34},  ['bot_power_9'] = { 1.36, 2, -0.34},
-  ['bot_power_10'] = { 1.63, 2, -0.61},  ['bot_power_11'] = {1.45, 2, -0.61},  ['bot_power_12'] = { 1.63, 2, -0.43},
-  ['bot_power_13'] = { 1.45, 2, -0.43},  ['bot_power_14'] = {1.54, 2, -0.52},
-}
-
-Local_Large_Town_Positions = {
-  { 0.485, -0.179}, { 0.177, -0.179}, { -0.134, -0.179}, { -0.468, -0.179}, { -0.772, -0.179}, { -1.083, -0.179}, { -1.402, -0.179}, { -1.712, -0.179}
-}
-
-Local_Small_Town_Positions = {
-  { 0.521, -0.72}, { 0.276, -0.72}, { 0.018, -0.72}, { -0.228, -0.72}, { -0.488, -0.72}, { -0.739, -0.72}, { -0.996, -0.72}, { -1.241, -0.72}, { -1.503, -0.72}, { -1.747, -0.72},
-  { 0.519, -0.47}, { 0.267, -0.47}, { 0.019, -0.47}, { -0.231, -0.47}, { -0.489, -0.47}, { -0.743, -0.47}, { -0.991, -0.47}, { -1.246, -0.47}, { -1.495, -0.47}, { -1.749, -0.47}
-}
-
-Local_Vassal_Positions = {
-{ 0.527, 0.195},  { 0.274, 0.195},  { 0.274, 0.195},  { 0.019, 0.195},  { 0.019, 0.195},  { -0.235, 0.195}, { -0.235, 0.195},
-{ -0.489, 0.195}, { -0.489, 0.195}, { -0.733, 0.195}, { -0.733, 0.195}, { -0.990, 0.195}, { -0.990, 0.195},
-{ -1.241, 0.195}, { -1.241, 0.195}, { -1.498, 0.195}, { -1.498, 0.195}, { -1.752, 0.195}, { -1.752, 0.195}
-}
-
-Military_Tableau_Local_Positions = {
-  ['upper_1']  = { 0.61, 1, -0.44},  ['upper_2'] = { 0.25, 1, -0.44}, ['upper_3'] = { 0.61, 1, -0.18}, ['upper_4'] = { 0.25, 1, -0.18},
-  ['middle_1'] = { 0.61, 1, 0.08},  ['middle_2'] = { 0.25, 1, 0.08}, ['middle_3'] = { 0.61, 1, 0.26}, ['middle_4'] = { 0.25, 1, 0.26},
-  ['lower_1']  = { 0.61, 1, 0.52},   ['lower_2'] = { 0.25, 1, 0.52},  ['lower_3'] = { 0.61, 1, 0.67},  ['lower_4'] = { 0.25, 1, 0.67},
-  ['tuck_zone'] = {0.00, -0.25, 1.09},
-}
-
+require("EU.Positions")
 
 --[[ --------------------
         onLoad Handler
@@ -454,6 +343,15 @@ function onLoad()
       i.addContextMenuItem("Detach Card", DetachCard)
     end
   end
+
+  --On game load, seat everyone as a spectator so they won't see any hidden information
+  for _, color in ipairs(getSeatedPlayers()) do
+    Player[color].changeColor("Grey")
+  end
+
+  local mainboard = getObjectsWithTag('MainBoard')[1]
+  onObjectSpawn(mainboard)
+
 end
 
 --[[ ----------------------------------
@@ -479,6 +377,7 @@ function CreateRealmButtons()
     --if a button has already been placed
     if code ~= '000' and SelectedRealms[code] == nil and RealmsWithButtons[code] == nil then
       --Then we need to make sure the relevant year exists for this realm's setup
+      --TODO: Handle parents here
       if SETUP_DATA[code][mainboardYear] ~= nil then
         --Then make sure we have a capital defined
         if SETUP_DATA[code][mainboardYear]['capital'] ~= nil then            
@@ -558,9 +457,16 @@ function AutoSetupRealm()
 
     DealActionCards(players)
     RotateTruceAndRemoveBags()
+    for color,_ in pairs(COLOR_RGB_CODES) do
+      Global.UI.setAttribute(('message_banner_'..color), "active", false)
+    end
     printToAll("Remember to draw three additional action cards and appoint advisors and leaders.\nYou may keep up to four action cards and two missions in your hand (unless otherwise specified by the scenario)", {1,1,1})
+    broadcastToAll('Remove influence from any areas with no NPR provinces remaining after setup. Imperial Authority, influence, and extra manpower must be set up manually')
   else
-    broadcastToAll('Marriage and Alliance tokens will be placed after all colors have a realm selected or have been removed')
+    for color,_ in pairs(COLOR_RGB_CODES) do
+      Global.UI.setAttribute(('message_banner_txt_'..color), "text", "Marriage and Alliance tokens will be placed after all colors have a realm selected or have been removed")
+      Global.UI.setAttribute(('message_banner_'..color), "active", true)
+    end
   end
 
   return 1
@@ -656,6 +562,21 @@ function ui_set_active()
     end
     Global.UI.setAttribute("option_panel", "height", (elements * 70))
   end
+end
+
+function ui_minimise()
+    --Use this method, rather than UI.hide, so that ui_set_active() works
+    for key, _ in pairs(UI_PAGES) do
+        Global.UI.setAttribute(key, "active",  false)
+    end
+    Global.UI.show("maximise")
+end
+
+function ui_maximise()
+    --Find the "current" page and make it active
+    --Then hide the maximise button
+    ui_set_active()
+    Global.UI.hide("maximise")
 end
 
 
@@ -891,6 +812,8 @@ function Setup_Game()
   -- Handle Manual Setup
   if UI_Data.scenario == '0-00' then
     --Keep these in sync for the later color-swapping features
+    --TODO: I think I don't need this, actually. I get use a colour to get a Tableau from getObjectFromGUID(Main_Tableau_GUIDs[col])
+    --and then use tableau.getPosition() and GetSeatFromPosition(pos) to find a position from the color
     Player_Seat_From_Color =
     {
       blue = 1,
@@ -942,7 +865,10 @@ function Setup_Game()
     --Create buttons for selecting a realm, removing a color and swapping them around
     CreateButtonsForRealms()
 
-    broadcastToAll("Right-click the map to select the starting state, then click the Select Realm tile to choose your realm from the map", {1,1,1})
+    for color,_ in pairs(COLOR_RGB_CODES) do
+      Global.UI.setAttribute(('message_banner_txt_'..color), "text", "Right-click the map to select the starting state, then click the Select Realm tile to choose your realm from the map. Make sure you are not a spectator.")
+      Global.UI.setAttribute(('message_banner_'..color), "active", true)
+    end
     return 1
   end
 
@@ -2258,13 +2184,15 @@ function PlaceTableausAndBags(seat, color)
     lock = true
     height = 1.02
     if (name == 'ship') or (name == 'soldier') then
+        string.match(name, 'ship_%d')
       name = name .. suffix
       height = 0.93
     elseif (name == 'merchant_1') or (name == 'merchant_2') or (name == 'merchant_3') then
       name = name .. suffix
       height = 1.50
       lock = false
-    elseif (name == 'army_1') or (name == 'army_2') or (name == 'army_3') or (name == 'fleet') then
+    elseif (name == 'army_1') or (name == 'army_2') or (name == 'army_3') or (name == 'fleet')
+    or (name == 'army_1_middle_eastern') or (name == 'army_2_middle_eastern') or (name == 'army_3_middle_eastern') or (name == 'fleet_middle_eastern') then
       name = name .. suffix
       height = 2.00
       lock = false
@@ -2629,7 +2557,7 @@ function SetupHRE(scenario_data)
   end
   HRE_Config.authority = (empire.authority or 3)
   if HRE_Config.authority ~= 3 then
-    local auth = tostring(HRE_Config.authority)
+    local auth = HRE_Config.authority
     if TEST_MODE then log('Setting up HRE with ruler ' .. (HRE_Config.ruler or 'unknown') .. 'and authority of ' .. auth) end
     local hre_pos = {HRE_Authority_Positions[auth][1], 2, HRE_Authority_Positions[auth][2]}
     local marker = getObjectFromGUID(HRE_Authority_Marker_GUID)
@@ -2644,11 +2572,11 @@ function SetupHRE(scenario_data)
           table.insert(positions, empire.influence[counter])
           counter = counter + 1
         else
-          table.insert(positions, HRE_Authority_Positions[(tostring(i))])
+          table.insert(positions, HRE_Authority_Positions[i])
           counter = counter + 1
         end
       else
-        table.insert(positions, HRE_Authority_Positions[(tostring(i))])
+        table.insert(positions, HRE_Authority_Positions[i])
         counter = counter + 1
       end
     end
@@ -2658,6 +2586,8 @@ end
 
 
 -- Set-up DNPRs
+--[[ Note that as of 2024/08/19 the pink and green DNPR capitals have had their top and
+ bottom sides swapped so they are easy to find in the bags ]]
 function PlaceDNPRs(scenario_data)
   local orange_l_towns = {}
   local orange_s_towns = {}
@@ -2690,7 +2620,7 @@ function PlaceDNPRs(scenario_data)
   if scenario_data.DNPR_Green_L then
     for i, pos in ipairs(scenario_data.DNPR_Green_L) do
       if i == 1 then
-        PlaceGuidObjectFromBag(pos, Bag_GUIDs['dnpr_og'], true, DNPR_Capital_GUIDs.green_l)
+        PlaceGuidObjectFromBag(pos, Bag_GUIDs['dnpr_og'], false, DNPR_Capital_GUIDs.green_l)
       else
         -- Put other towns in a to-place list
         table.insert(green_l_towns, pos)
@@ -2700,7 +2630,7 @@ function PlaceDNPRs(scenario_data)
   if scenario_data.DNPR_Green_S then
     for i, pos in ipairs(scenario_data.DNPR_Green_S) do
       if i == 1 then
-        PlaceGuidObjectFromBag(pos, Bag_GUIDs['dnpr_og'], true, DNPR_Capital_GUIDs.green_s)
+        PlaceGuidObjectFromBag(pos, Bag_GUIDs['dnpr_og'], false, DNPR_Capital_GUIDs.green_s)
       else
         -- Put other towns in a to-place list
         table.insert(green_s_towns, pos)
@@ -2710,7 +2640,7 @@ function PlaceDNPRs(scenario_data)
   if scenario_data.DNPR_Pink_L then
     for i, pos in ipairs(scenario_data.DNPR_Pink_L) do
       if i == 1 then
-        PlaceGuidObjectFromBag(pos, Bag_GUIDs['dnpr_pb'], true, DNPR_Capital_GUIDs.pink_l)
+        PlaceGuidObjectFromBag(pos, Bag_GUIDs['dnpr_pb'], false, DNPR_Capital_GUIDs.pink_l)
       else
         -- Put other towns in a to-place list
         table.insert(pink_l_towns, pos)
@@ -2720,7 +2650,7 @@ function PlaceDNPRs(scenario_data)
   if scenario_data.DNPR_Pink_S then
     for i, pos in ipairs(scenario_data.DNPR_Pink_S) do
       if i == 1 then
-        PlaceGuidObjectFromBag(pos, Bag_GUIDs['dnpr_pb'], true, DNPR_Capital_GUIDs.pink_s)
+        PlaceGuidObjectFromBag(pos, Bag_GUIDs['dnpr_pb'], false, DNPR_Capital_GUIDs.pink_s)
       else
         -- Put other towns in a to-place list
         table.insert(pink_s_towns, pos)
@@ -3846,6 +3776,14 @@ end
 function onObjectSpawn(o)
 	if o.type == "Card" then o.use_hands = true end -- BW safety-net for BW_NOTE_A below
     o.sticky = false -- BW all objects are no longer sticky - should be easier to manipulate stacking objects now
+  if o.type == "Board" then
+    local map_year = o.getGMNotes()
+    if map_year == "1444" or map_year == "1618" then
+      o.interactable = false
+      SetRulebookDate(map_year)
+      SetMainMapSnapPoints(map_year)
+    end
+  end
 end
 
 function getRotationValueIndexTable(o)
@@ -3878,7 +3816,48 @@ function changeRotationValue(o, n)
 	return newRotationValue.value
 end
 
+--[[
+Here we will specify the tags that should be on the face-down side (true) and
+the face-up side (false)
+--]]
+Double_sided_token_snap_behaviour = {
+    Expanded_Trade = {
+        [true] = "Trade_Node",
+        [false] = "Province"
+    },
+    Revolutionary = {
+        [true] = "Province",
+        [false] = "Religion"
+    },
+    Left_HRE = {
+        [true] = "Province",
+        [false] = nil
+    },
+    Battleground = {
+        [true] = "Province",
+        [false] = nil
+    }
+}
+
+function SwapDoubleSidedTokenTags(object)
+  for check_tag,behaviour in pairs(Double_sided_token_snap_behaviour) do
+      if object.hasTag(check_tag) then
+        local old_tag =  behaviour[object.is_face_down]
+        local new_tag =  behaviour[not(object.is_face_down)]
+        if old_tag ~= nil then object.removeTag(old_tag) end
+        if new_tag ~= nil then object.addTag(new_tag) end
+      end
+  end
+end
+
 local tagToBehaviour = {
+    Authority = {
+        forbidPlayerActions = {
+            [Player.Action.Copy] = "You cannot copy the Imperial Authority marker (sit in Black to do so)",
+            [Player.Action.Paste] = "You cannot paste the Imperial Authority marker (sit in Black to do so)",
+            [Player.Action.Delete] = "You cannot delete the Imperial Authority marker (sit in Black or drop into a bin to do so)",
+        }
+    },
     RoundStatus = {
         forbidPlayerActions = {
             [Player.Action.Copy] = "You cannot copy a Round Status marker (sit in Black to do so)",
@@ -3939,7 +3918,6 @@ local tagToBehaviour = {
       forbidPlayerActions = {
           [Player.Action.Copy] = "You cannot copy an Imperial Influence Cube (sit in Black to do so)",
           [Player.Action.Paste] = "You cannot paste an Imperial Influence Cube (sit in Black to do so)",
-          [Player.Action.Delete] = "You cannot delete an Imperial Influence Cube (sit in Black to do so)",
       }
   },
     NavalUnit = {
@@ -4033,11 +4011,17 @@ local tagToBehaviour = {
         [Player.Action.Copy] = "Please click on the piece to set up that realm",
         [Player.Action.Delete] = "Please click on the piece to set up that realm",        
       }
-    }
+    },
+    DoubleSidedDifferentTag = {
+        [Player.Action.FlipOver] = function(o)
+          SwapDoubleSidedTokenTags(o)
+        end
+    },
 }
 
 
 function onPlayerAction(player, action, targets)
+  -- log(action)
     for _,o in ipairs(targets) do
         for tag,behaviour in pairs(tagToBehaviour) do
             if o.hasTag(tag) then
@@ -4110,8 +4094,49 @@ function tryObjectEnterContainer(container, enter_object)
     end
     return true
 end
+--[[
+This function will run 2 seconds after the players stop deleting towns and vassals.
+We wait 2 seconds so that if several are deleted in quick succession, but not in the same
+action, they will still be spread out over the right spaces
+--]]
+function CleanupSmartDeleteTowns(town_size)
+  Smart_delete_towns_reserved[town_size] = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
+  Smart_delete_town_counter[town_size] = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 }
+  Smart_delete_towns_wait_id[town_size] = nil
+end
+
+Smart_delete_towns_reserved = {
+  LargeTown = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} },
+  SmallTown = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} },
+  Vassal = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} },
+}
+Smart_delete_town_counter = {
+  LargeTown = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 },
+  SmallTown = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 },
+  Vassal = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 }
+}
+Smart_delete_towns_wait_id = { LargeTown = nil, SmallTown = nil }
+Local_Town_positions = {
+  LargeTown = Local_Large_Town_Positions,
+  SmallTown = Local_Small_Town_Positions,
+  Vassal = Local_Vassal_Positions
+}
+
+--[[
+This function will run 2 seconds after the players stop deleting Imperial Influence cubes.
+We wait 2 seconds so that if several are deleted in quick succession, but not in the same
+action, they will still be spread out over the right spaces
+--]]
+function CleanupSmartDeleteImperialInfluence()
+  Smart_delete_imperial_influence_reserved = {}
+  Smart_delete_imperial_influence_wait_id = nil
+end
+
+Smart_delete_imperial_influence_reserved = {}
+Smart_delete_imperial_influence_wait_id = nil
 
 TRASH_BIN_MIN_DECK_SIZE_TO_AVOID_SEPARATION = 9
+
 function CheckRemovedEnter(object, trashBinObject)
   if object.type == 'Deck' then
     local count = object.getQuantity()
@@ -4139,8 +4164,195 @@ function CheckRemovedEnter(object, trashBinObject)
     return false
   end
 
+  --[[
+ TODO: Clean this comment up
+  Another thought train:
+  Have a counter of how many large towns have been deleted per colour (Large_Town_Deleted_Count[color])
+  In here, CheckRemovedEnter, if it's a large town, increment this counter by 1 (start at 0)
+  When this part finishes, schedule a function to run after 2 seconds to set the counter back to 0, but
+    cancel that schedule for each town to restart the count
+  For the town, loop through Local_Large_Town_Positions. The first town will use physics.cast on each space to see what is already there.
+    If there is a town, save "Town" in a holding table (which will also be cleared out in the scheduled function)
+    If there is a cube, save a reference to the object, and move that object over a number of spaces equal to Large_Town_Deleted_Count[color]. Then, put
+        this town in the current space+1-Large_Town_Deleted_Count[color] if it hasn't already been flagged as moved, then flag it as moved
+    If there is a blank, record it as blank, and break the loop
+  Subsequent towns will check the holding table to see what is in this space
+  Schedule the function to reset our counter and the holding table
 
-  if object.hasTag('Town') or object.hasTag('Vassal') or object.hasTag('Imperial_Influence') then
+  So, the first town will be placed in the first blank/cubed space, and each cube will be moved over 1 space
+  The second town will be placed in the second blank/cubed space, and each cube will be moved over 2 spaces
+  --]]
+  if object.hasTag('LargeTown') or object.hasTag('SmallTown') or object.hasTag('Vassal') then
+    local town_size = 'SmallTown'
+    if object.hasTag('LargeTown') then
+        town_size = 'LargeTown'
+    elseif object.hasTag('Vassal') then
+        town_size = 'Vassal'
+    end
+    local color = string.lower(GetColorFromTag(object))
+    local tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
+    --It might be a bot mat
+    if tableau == nil then
+      tableau = getObjectFromGUID(Bot_Tableau_GUIDs[color])
+    end
+    if tableau == nil then return false end
+    local this_town_moved = false
+    Smart_delete_town_counter[town_size][color] = Smart_delete_town_counter[town_size][color] + 1
+    if TEST_MODE then log('Up to "deleting" town ' .. Smart_delete_town_counter[town_size][color] .. ' for ' .. color ) end
+
+    for i = #Local_Town_positions[town_size], 1, -1 do
+        --We need to declare these local variables before the goto. The Lua docs explain about scope.
+        -- local has_hit = false
+        local local_town_pos
+        local hits
+
+        --We only use these once, so it doesn't save space, but next to each other you can see that a
+        --cube will be offset from a moved town by 1
+        --Cubes can be on top of vassal tokens, so in that case, move them a little higher
+        local cube_height = 2
+        if town_size == 'Vassal' then cube_height = cube_height + math.fmod(i+1,2) end 
+        local town_height = 2
+        if town_size == 'Vassal' then town_height = 0.2 end 
+        local cube_new_pos = tableau.positionToWorld(
+            {Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color])][1],
+            cube_height,
+            Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color])][2]}
+        )
+        local town_new_pos = tableau.positionToWorld(
+            {Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color]+1)][1],
+            town_height,
+            Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color]+1)][2]}
+          )
+
+        local_town_pos = tableau.positionToWorld({Local_Town_positions[town_size][i][1], 0, Local_Town_positions[town_size][i][2]})
+        --I am trying to use physics.cast on each space just once, so check if we've already done it
+        if Smart_delete_towns_reserved[town_size][color][i] == nil then
+            hits = Physics.cast({
+                origin       = local_town_pos,
+                direction    = {0,1,0},
+                type         = 1, --1 for Ray, not Sphere or Box
+                max_distance = 2, --I might need to experiment here. How high are the towns and cubes?
+                -- debug        = true, -- uncomment to debug
+            })
+            if town_size ~= 'Vassal' then
+                --Assume there is only 1 piece on each slot, so just override l_town_slots[color][i]
+                --This most likely won't correctly handle a cube and a town on the same slot
+                Smart_delete_towns_reserved[town_size][color][i] = 'Empty'
+                for _,v in pairs(hits) do
+                    if v.hit_object.hasTag(town_size) then
+                        if TEST_MODE then log('I have hit a town in slot ' .. i ) end
+                        Smart_delete_towns_reserved[town_size][color][i] = 'Town'
+                    elseif v.hit_object.hasTag('Cube') then
+                        if TEST_MODE then log('I have hit a cube in slot ' .. i ) end
+                        Smart_delete_towns_reserved[town_size][color][i] = v.hit_object.getGUID()
+                    end
+                end
+            else
+                --Vassals are a little different to towns as we expect to have up to 2 pieces on each
+                --slot. Here, I am going to assume we hit no more than 2 pieces
+                --The intention is that a physics.cast will populate slot i and i-1 in the reserved
+                --table, so we only cast every second step, i.e., once per vassal track slot
+                Smart_delete_towns_reserved[town_size][color][i] = 'Empty'
+                Smart_delete_towns_reserved[town_size][color][i-1] = 'Empty'
+                for h = 1, 2, 1 do
+                    if hits[h] then --We need to check if we've hit anything before trying .hit_object
+                        if hits[h].hit_object.hasTag(town_size) then
+                            if TEST_MODE then log('I have hit a town in slot ' .. i-h+1 ) end
+                            Smart_delete_towns_reserved[town_size][color][i-h+1] = 'Town'
+                        elseif hits[h].hit_object.hasTag('Cube') then
+                            if TEST_MODE then log('I have hit a cube in slot ' .. i-h+1 ) end
+                            Smart_delete_towns_reserved[town_size][color][i-h+1] = hits[h].hit_object.getGUID()
+                        end
+                    end
+                end
+            end
+        end
+        --Now that the slot has been checked see if there is a town or a cube to move
+        local potential_cube = getObjectFromGUID(Smart_delete_towns_reserved[town_size][color][i])
+        if potential_cube ~= nil then --i.e. it refers to a cube object
+          if TEST_MODE then log('I am moving a cube in slot ' .. i .. ' to slot ' .. math.max(1,i-Smart_delete_town_counter[town_size][color]) ) end
+          potential_cube.setPositionSmooth(cube_new_pos)
+        end
+        if ( potential_cube ~= nil or Smart_delete_towns_reserved[town_size][color][i] == 'Empty' ) and not(this_town_moved) then
+              --i.e. move the town if this slot is empty or has a cube in it. The cube would have been moved in the previous if
+            if TEST_MODE then log('I am moving a town to slot ' .. math.max(1,i-Smart_delete_town_counter[town_size][color]+1) ) end
+            if object.is_face_down then object.flip() end
+            object.setPositionSmooth(town_new_pos)
+            object.setRotationSmooth(tableau.getRotation())
+            this_town_moved = true
+        end
+        if Smart_delete_towns_reserved[town_size][color][i] == "Empty" then
+            --If the space is blank, we've moved the town and we've moved any cubes we've encountered, so
+            --we can break the loop
+            if TEST_MODE then log('I am breaking the loop at slot ' .. i ) end
+            goto empty_space_town
+        end
+
+    end
+
+    ::empty_space_town::
+    --I'll put this at the very end, just in case something happens and no pieces are moved, like if you delete a small town
+    --with all slots taken
+    if TEST_MODE then log('The timer has begun to reset the counter and holding table' ) end
+    if Smart_delete_towns_wait_id[town_size] ~= nil then Wait.stop(Smart_delete_towns_wait_id[town_size]) end
+    Smart_delete_towns_wait_id[town_size] = Wait.time(function() CleanupSmartDeleteTowns(town_size) end, 2)
+    return false
+  end
+
+  --[[
+  Return the Imperial Influence cube to the right-most empty space on the IA track
+  If you delete multiple cubes in quick succession, it intelligently assigns them to
+  subsequent spaces.
+  --]]
+  if object.hasTag('Imperial_Influence') then
+    for i = 6, 1, -1 do
+        --We need to declare these local variables before the goto. The Lua docs explain about scope.
+        local has_hit = false
+        local hre_pos
+        local hits
+        --This reserved table will be cleared 2 seconds after the deletes have stopped, so the cubes in
+        --transit have enough time to get to the space for the next physics.cast
+        if Smart_delete_imperial_influence_reserved[i] then goto space_taken_ia end
+        hre_pos = Vector(HRE_Authority_Positions[i][1], 0, HRE_Authority_Positions[i][2])
+        hits = Physics.cast({
+            origin       = hre_pos,
+            direction    = {0,1,0},
+            type         = 1, --1 for Ray, not Sphere or Box
+            max_distance = 2, --I might need to experiment here. How high are the cubes and coins?
+            -- debug        = true, -- uncomment to debug
+        })
+        for _,v in pairs(hits) do
+            --I am assuming the players will use coins to block the IA spaces, so check if there is already a
+            --cube or coin on that space
+            if v.hit_object.hasTag("Imperial_Influence") or v.hit_object.hasTag("Coin") then 
+                has_hit = true
+            end
+        end
+        if has_hit then goto space_taken_ia end
+        --[[
+        The idea is that if we get to here, we haven't hit an IA cube or a coin, so we
+        want the deleted IA cube to go here
+        --]]
+        object.setPositionSmooth(hre_pos:setAt("y",2))
+        object.setRotationSmooth({0,0,0})
+        --Mark that space as reserved, and queue the reserved table to be cleared in 2 seconds, resetting any
+        --existing counter
+        Smart_delete_imperial_influence_reserved[i] = true
+        if Smart_delete_imperial_influence_wait_id ~= nil then Wait.stop(Smart_delete_imperial_influence_wait_id) end
+        Smart_delete_imperial_influence_wait_id = Wait.time(CleanupSmartDeleteImperialInfluence, 2)
+
+        goto piece_moved_ia
+
+        ::space_taken_ia::
+    end
+
+    ::piece_moved_ia::
+    return false
+  end
+
+  if object.hasTag('Crusade') then
+    object.setPositionSmooth(Crusade_Excommunicate_Position)
+    object.setRotationSmooth({0,0,0})
     return false
   end
 
@@ -4159,6 +4371,14 @@ function CheckRemovedEnter(object, trashBinObject)
       name = 'army_3'
     elseif object.guid == Setup_Bag_Item_GUIDs[col].fleet then
       name = 'fleet'
+    elseif object.guid == Setup_Bag_Item_GUIDs[col].army_1_middle_eastern then
+      name = 'army_1_middle_eastern'
+    elseif object.guid == Setup_Bag_Item_GUIDs[col].army_2_middle_eastern then
+      name = 'army_2_middle_eastern'
+    elseif object.guid == Setup_Bag_Item_GUIDs[col].army_3_middle_eastern then
+      name = 'army_3_middle_eastern'
+    elseif object.guid == Setup_Bag_Item_GUIDs[col].fleet_middle_eastern then
+      name = 'fleet_middle_eastern'
     end
     if name == '' then return false end
     if seat == 2 then
@@ -4486,15 +4706,21 @@ function SwapTwoColors()
   --We want to store, for each piece type in the setup area, the piece itself, the location and rotation
   --for both colours so we can easily reference and swap later
   for piece_name,_ in pairs(Setup_Bag_Item_GUIDs[color_to_swap_1]) do
-    objects_to_swap[piece_name] = {
-      piece_1 = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_1][piece_name]),
-      piece_1_pos = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_1][piece_name]).getPosition(),
-      piece_1_rot = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_1][piece_name]).getRotation(),
-      
-      piece_2 = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_2][piece_name]),
-      piece_2_pos = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_2][piece_name]).getPosition(),
-      piece_2_rot = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_2][piece_name]).getRotation()
-    }
+    --This handles the case where some colours have middle eastern figures and others don't
+    local color_1_piece = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_1][piece_name])
+    local color_2_piece = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_2][piece_name])
+
+    if color_1_piece ~= nil and color_2_piece ~= nil then
+      objects_to_swap[piece_name] = {
+        piece_1 = color_1_piece,
+        piece_1_pos = color_1_piece.getPosition(),
+        piece_1_rot = color_1_piece.getRotation(),
+        
+        piece_2 = color_2_piece,
+        piece_2_pos = color_2_piece.getPosition(),
+        piece_2_rot = color_2_piece.getRotation()
+      }
+    end
   end
   
   --Swap the mats
@@ -4605,9 +4831,16 @@ function removePlayerPieces()
 
     DealActionCards(players)
     RotateTruceAndRemoveBags()
+    for color,_ in pairs(COLOR_RGB_CODES) do
+      Global.UI.setAttribute(('message_banner_'..color), "active", false)
+    end
     printToAll("Remember to draw three additional action cards and appoint advisors and leaders.\nYou may keep up to four action cards and two missions in your hand (unless otherwise specified by the scenario)", {1,1,1})
+    broadcastToAll('Remove influence from any areas with no NPR provinces remaining after setup. Imperial Authority, influence, and extra manpower must be set up manually')
   else
-    broadcastToAll('Marriage and Alliance tokens will be placed after all colors have a realm selected or have been removed')
+    for color,_ in pairs(COLOR_RGB_CODES) do
+      Global.UI.setAttribute(('message_banner_txt_'..color), "text", "Marriage and Alliance tokens will be placed after all colors have a realm selected or have been removed")
+      Global.UI.setAttribute(('message_banner_'..color), "active", true)
+    end
   end
   
   return 1
@@ -4627,8 +4860,6 @@ function swapColorsButtonPress(obj)
     end
 
     startLuaCoroutine(Global,"SwapTwoColors")
-  else
-    broadcastToAll("Please wait for the swap the finish")
   end
 end
 
@@ -4643,10 +4874,12 @@ function selectRealmButtonPress(obj)
     end
 
     startLuaCoroutine(Global,"CreateRealmButtons")
-    broadcastToAll("Select a realm by clicking the counter on their capital")
+    Global.UI.setAttribute(('message_banner_txt_'..Select_Realm_Target_Color), "text", "Select a realm by clicking the counter on their capital")
+    Global.UI.setAttribute(('message_banner_'..Select_Realm_Target_Color), "active", true)
     obj.destroy()
   else
-    broadcastToAll("Another player is selecting a realm. Please wait for them to finish.")
+    Global.UI.setAttribute(('message_banner_txt_'..Select_Realm_Target_Color), "text", "Another player is selecting a realm. Please wait for them to finish.")
+    Global.UI.setAttribute(('message_banner_'..Select_Realm_Target_Color), "active", true)
   end
 end
 
@@ -4787,13 +5020,15 @@ end
   ------------------------------------------------
 --]]
 
-Victory_Point_Init_Positions = {
-  [1] = Vector(-20.33, 0, -11.70),
-  [60] =  Vector(-19.49, 0, 11.58)
-}
-Victory_Point_Score_To_Position = {
-  [0] = Vector(-19.92, 0, -12.69)
-}
+Victory_Point_Score_To_Position = {}
+
+for i = 0, 60 do
+  Victory_Point_Score_To_Position[i] = Vector(
+      PrestigeLocations[i][1],
+      0,
+      PrestigeLocations[i][2]
+)
+end
 
 function outputDroppedScoreObjectScore(obj)
   local dropPos = obj.getPosition():setAt("y", 0)
@@ -4842,6 +5077,111 @@ function outputDroppedScoreObjectScore(obj)
   printToAll(outString, c)
 end
 
+--[[
+  ------------------------------------------------
+  ------------------------------------------------
+            Print Stability on change
+  ------------------------------------------------
+  ------------------------------------------------
+--]]
+
+Stability_Offset = {
+    [-3] = {-1.25, 0},
+    [-2] = {-0.84, 0},
+    [-1] = {-0.42, 0},
+    [0]  = { 0, 0},
+    [1]  = { 0.43, 0},
+    [2]  = { 0.85, 0},
+    [3]  = { 1.27, 0},
+  }
+
+function outputDroppedStabilityObjectStability(obj)
+  local dropPos = obj.getPosition():setAt("y", 1.4)
+  local color = string.lower(GetColorFromTag(obj))
+  local tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
+  local tableau_pos = tableau.getPosition()
+  local seat = GetSeatFromPosition(tableau_pos)
+  
+  local closestDist, closestStabPos, closestStab = 999, nil, nil
+  for stability = -3, 3 do
+    local stabOffset = {
+      Main_Tableau_Offset_Positions.stability[1] + Stability_Offset[stability][1],
+      Main_Tableau_Offset_Positions.stability[2] + Stability_Offset[stability][2],
+    }
+    local stabPos = GetOffset(tableau_pos, stabOffset, seat, 1.4)
+    local dist = Vector.distance(Vector(stabPos), dropPos)
+    if dist < 0.7 then
+      if dist < closestDist then
+        closestDist = dist
+        closestStabPos = stabPos
+        closestStab = stability
+      end
+    end
+  end
+
+  local c = GetColorFromTag(obj) or "Grey"
+  local name = obj.getName()
+  local outString = ""
+  if name ~= "" then
+    outString = name
+  else
+    outString = c
+  end
+
+  local previousStab = tonumber(obj.getDescription()) or 0
+
+  if closestStab then
+    outString = outString.."'s Stability set to "..closestStab
+    obj.setDescription(closestStab)
+  else
+    closestStab = 0
+    outString = outString.."'s Stability dropped off the track "
+    obj.setDescription("")
+  end
+  
+  local stabMod = closestStab - previousStab
+  if stabMod == 0 then
+    return
+  elseif stabMod > 0 then
+    stabMod = "+"..stabMod
+  end
+  outString = outString.." ["..stabMod.."]"
+
+  printToAll(outString, c)
+end
+
+
+--[[
+  ------------------------------------------------
+  ------------------------------------------------
+            Flip light ships dropped on
+            trade protection slots
+  ------------------------------------------------
+  ------------------------------------------------
+--]]
+
+function flipLightShipOnTPS(obj)
+    local dropPos = obj.getPosition()
+    --TODO: Decide whether I want to keep this lookup, or use physics.cast to
+    --find the TPS the ship is on top of
+
+    --This rounds the co-ordinates to the nearest 0.05
+    local roundedDropPos = {
+        x = math.floor(dropPos.x*20+0.5)/20,
+        z = math.floor(dropPos.z*20+0.5)/20
+    }
+    local rotationValues = obj.getRotationValues() -- Index 1 is normal, 2 is the side
+
+    --This is a little different to the flip function since I don't necessarily want to go
+    --between the two states. If it's not on a trade protection slot, put it upright
+    if ROUNDED_TRADE_PROTECTION_SLOT_LOCATIONS[roundedDropPos.x .. '||' .. roundedDropPos.z] then
+        obj.setRotation(rotationValues[2].rotation)
+        obj.setPosition(obj.getPosition() + Vector(0,0,-0.1))
+    else
+        obj.setRotation(rotationValues[1].rotation)
+    end
+end
+
 function onObjectDrop(player_color, dropped_object)
   if dropped_object.hasTag("Score") then
     Wait.condition(
@@ -4850,188 +5190,107 @@ function onObjectDrop(player_color, dropped_object)
       5,
       function() outputDroppedScoreObjectScore(dropped_object) end
     )
+  elseif dropped_object.hasTag("Stability") then
+    Wait.condition(
+      function() outputDroppedStabilityObjectStability(dropped_object) end,
+      function() return dropped_object.resting end,
+      5,
+      function() outputDroppedStabilityObjectStability(dropped_object) end
+    )
+  elseif dropped_object.hasTag("NavalUnit") then
+    Wait.condition(
+      function() flipLightShipOnTPS(dropped_object) end,
+      function() return dropped_object.resting end, --Condition function
+      5, --Timeout in seconds
+      function() flipLightShipOnTPS(dropped_object) end --Function to run if we hit the timeout
+    )
   end
 end
-
-for x = Victory_Point_Init_Positions[1].x, Victory_Point_Init_Positions[60].x, Victory_Point_Init_Positions[60].x-Victory_Point_Init_Positions[1].x do
-  for z = Victory_Point_Init_Positions[1].z, Victory_Point_Init_Positions[60].z, (Victory_Point_Init_Positions[60].z-Victory_Point_Init_Positions[1].z) / 29 do
-    table.insert(Victory_Point_Score_To_Position, Vector(x, 0, z))
-  end
-end
-
 
 --[[
-  ------------------------------------------------
-  ------------------------------------------------
-                Map Position Data
-  ------------------------------------------------
-  ------------------------------------------------
+Many snap points are now stored in the EU\Positions.lua script, and this function will be called when the map
+state changes to update the snap points. The 1618 and 144 side have a couple of provinces in slightly different
+locations. Plus, doing it this way means that the snap points don't need to be manually added in TTS but can just
+be added here in the script.
 --]]
+ROUNDED_TRADE_PROTECTION_SLOT_LOCATIONS = {}
+function SetMainMapSnapPoints(year)
+  local mainboard = getObjectsWithTag('MainBoard')[1]
+  if mainboard ~= nil then
+    local allSnapPoints = {}
+    local allSnapPointSourceByTag = {
+      ['Province'] = {
+          AfricaMap,
+          AmericaMap,
+          IndiaMap,
+          FarEastMap,
+          CentralAsiaMap,
+          WesternMap,
+          EasternMap
+      },
+      ['Religion'] = {
+          WesternMapReligion,
+          EasternMapReligion
+      },
+      ['TagChit'] = {
+        MilestoneTagLocations
+      },
+      ['Score'] = {
+        PrestigeLocations
+      },
+      ['Trade_Node'] = {
+        TradeNodeLocations
+      }
+    }
 
--- snap points for provinces on the africa map --
-AfricaMap = {
-  ['timbuktu'] = {-17.84, 3.49}, ['benin'] = {-17.11, 2.34}, ['songhai'] = {-17.21, 3.13}, ['ethiopia'] = {-15.02, 2.67},
-  ['adal'] = {-14.5, 2.73}, ['goldcoast'] = {-17.75, 2.39}, ['mali'] = {-18.32, 2.74}, ['mutapa'] = {-15.47, 0.63},
-  ['kilwa'] = {-14.94, 1.16}, ['katsina'] = {-16.65, 2.77}, ['kongo'] = {-16.57, 1.58}, ['ajuuraan'] = {-14.56, 2.09},
-  ['upperegypt'] = {-15.42, 3.55}, ['angola'] = {-16.56, 0.75}, ['madagascar'] = {-14.43, 0.64}, ['centralafrica'] = {-15.55, 1.77},
-  ['natal'] = {-15.58, -0.12}, ['capeofgoodhope'] = {-16.16, -0.36}
-}
+    for tag,location_tables in pairs(allSnapPointSourceByTag) do
+      for _,location_table in pairs(location_tables) do
+        for name,location in pairs(location_table) do
+          if not(( Provinces1444Only[name] and year == "1618" ) or ( Provinces1618Only[name] and year == "1444" )) then
+            local snap_point_loc = mainboard.positionToLocal({
+                location[1],
+                1.0,
+                location[2]
+            })
+            local snapPoint = {
+                position = snap_point_loc,
+                rotation_snap = true,
+                tags = {tag}
+            }
+            table.insert(allSnapPoints, snapPoint)
+          end
+        end
+      end
+    end
 
--- snap points for provinces on the america map --
-AmericaMap = {
-  ['pernambuco'] = {-14.39, 7.91}, ['bahia'] = {-14.37, 7.23}, ['riodejaneiro'] = {-14.64, 6.52}, ['amazonas'] = {-15.66, 7.72},
-  ['mexico'] = {-17.77, 9.17}, ['centralamerica'] = {-17.07, 9.0}, ['newgranada'] = {-16.16, 8.56}, ['guyana'] = {-15.47, 8.43},
-  ['mississippi'] = {-17.45, 9.99}, ['virginia'] = {-16.57, 10.45}, ['florida'] = {-16.84, 9.77}, ['antilles'] = {-16.32, 9.29},
-  ['hudsonbay'] = {-17.22, 11.59}, ['canada'] = {-16.48, 11.24}, ['greatlakes'] = {-17.12, 10.78}, ['newengland'] = {-15.97, 10.7},
-  ['cuzco'] = {-16.26, 7.24}, ['charcas'] = {-15.8, 6.82}, ['minasgerais'] = {-15.09, 7.2}, ['laplata'] = {-15.53, 5.98},
-  ['greatplains'] = {-17.87, 10.72}, ['california'] = {-18.39, 9.94}, ['chile'] = {-16.2, 5.9}, ['quito'] = {-16.64, 7.87}
-}
+    --The trade protection slots needs to handled slightly differently since each key has a table
+    --of tables as a value, not just one. Plus, I want to populate a table with rounded co-ordinates
+    local tag = "NavalUnit"
+    for _,locations in pairs(TradeProtectionSlots) do
+        for _,location in pairs(locations) do
+            local snap_point_loc = mainboard.positionToLocal({
+                location[1],
+                1.0,
+                location[2]
+            })
+            local snapPoint = {
+                position = snap_point_loc,
+                rotation_snap = true,
+                tags = {tag}
+            }
+            table.insert(allSnapPoints, snapPoint)
 
--- snap points for provinces on the india map --
-IndiaMap = {
-  ['hejaz'] = {-18.45, -3.56}, ['yemen'] = {-18.15, -4.21}, ['coromandel'] = {-15.2, -4.65}, ['bengal'] = {-14.38, -3.42},
-  ['gujarat'] = {-15.92, -3.37}, ['doab'] = {-14.91, -3.0}, ['delhi'] = {-15.44, -2.58}, ['deccan'] = {-15.24, -3.86},
-  ['samarkand'] = {-16.6, -1.81}, ['isfahan'] = {-17.68, -2.22}, ['goa'] = {-15.67, -4.13}, ['fars'] = {-17.37, -2.98},
-  ['balkh'] = {-16.29, -2.41}, ['herat'] = {-16.95, -2.47}, ['baluchistan'] = {-16.59, -3.1}, ['basra'] = {-18.13, -2.57},
-  ['najd'] = {-18.07, -3.27}, ['khiva'] = {-17.21, -1.73}, ['hormuz'] = {-17.17, -3.6}
-}
+            local roundedPoint = {
+                x = math.floor(location[1]*20+0.5)/20,
+                z = math.floor(location[2]*20+0.5)/20
+                }
+            ROUNDED_TRADE_PROTECTION_SLOT_LOCATIONS[roundedPoint.x..'||'..roundedPoint.z] = true
 
--- snap points for provinces on the far east map --
-FarEastMap = {
-  ['canton'] = {-17.41, -7.18}, ['xian'] = {-17.54, -6.27}, ['kyushu'] = {-15.57, -6.56}, ['hangzhou'] = {-16.74, -6.84},
-  ['malacca'] = {-17.72, -8.86}, ['siam'] = {-17.86, -8.0}, ['burma'] = {-18.41, -7.54}, ['southsumatra'] = {-17.82, -9.56},
-  ['moluccas'] = {-16.19, -9.18}, ['java'] = {-17.18, -9.72}, ['papua'] = {-14.77, -9.56}, ['chengdu'] = {-18.08, -6.82},
-  ['philippines'] = {-16.29, -7.94}, ['brunei'] = {-16.98, -8.79}, ['beijing'] = {-16.88, -5.88}, ['honshu'] = {-15.05, -6.1},
-  ['korea'] = {-16.04, -6.14}, ['aceh'] = {-18.23, -8.99}, ['timor'] = {-16.25, -9.9}, ['vogelkop'] = {-15.51, -9.28},
-  ['easternaustralia'] = {-14.27, -11.17}, ['southernaustralia'] = {-14.82, -11.75}, ['westernaustralia'] = {-16.48, -11.48}
-}
-
-  -- snap points for provinces on the central asia map --
-CentralAsiaMap = {
-  ['westsiberia'] = {16.93, 11.63}, ['tyumen'] = {16.24, 10.75}, ['volga'] = {15.09, 10.66}, ['nogai'] = {15.18, 9.74},
-  ['ural'] = {15.63, 11.58}, ['eastsiberia'] = {18.37, 10.96}, ['okhosk'] = {19.65, 10.83}, ['oirat'] = {17.4, 10.09},
-  ['mongolia'] = {18.36, 9.67}, ['manchu'] = {19.04, 9.6}, ['furdan'] = {19.63, 9.57}, ['chagati'] = {16.8, 9.56},
-  ['kazakhstan'] = {15.96, 9.77}
-}
-
--- snap points for provinces on the western map --
-WesternMap = {
-  ['amsterdam'] = {-2.54, 3.4}, ['antwerpen'] = {-2.50, 2.08}, ['brugge'] = {-3.77, 2.16}, ['london'] = {-5.84, 2.68},
-  ['genova'] = {0.01, -3.82}, ['firenze'] = {1.63, -4.55}, ['montpellier'] = {-3.12, -4.27}, ['valencia'] = {-5.98, -6.8},
-  ['normandie'] = {-6.09, 0.49}, ['champagne'] = {-2.98, 0.24}, ['savoie'] = {-1.68, -2.59}, ['lorraine'] = {-1.54, -0.13},
-  ['geneve'] = {-1.29, -1.78}, ['venezia'] = {2.57, -3.27}, ['milano'] = {0.0, -2.61}, ['brescia'] = {0.91, -2.75},
-  ['rijeka'] = {3.74, -3.4}, ['essex'] = {-5.02, 3.05}, ['york'] = {-6.82, 4.96}, ['praha'] = {3.76, 0.91},
-  ['berlin'] = {3.3, 3.4}, ['magdeburg'] = {1.79, 2.76}, ['frankfurt'] = {0.02, 1.42}, ['tunis'] = {0.77, -9.61},
-  ['gharb'] = {-10.47, -10.78}, ['tlemcen'] = {-6.34, -10.23}, ['bourgogne'] = {-2.67, -1.35}, ['wien'] = {4.4, -0.94},
-  ['pozsony'] = {5.42, -0.36}, ['regensburg'] = {2.02, 0.35}, ['ulm'] = {0.55, 0.06}, ['silesia'] = {4.89, 1.49},
-  ['lothian'] = {-7.8, 6.45}, ['aberdeen'] = {-7.41, 7.63}, ['bergenhus'] = {-1.04, 9.63}, ['trondheim'] = {1.74, 11.36},
-  ['lubeck'] = {1.6, 4.3}, ['kobenhavn'] = {2.07, 5.83}, ['lund'] = {3.41, 6.29},['hamburg'] = {0.72, 3.89},
-  ['sevilla'] = {-9.7, -8.29}, ['lisboa'] = {-11.49, -7.01}, ['porto'] = {-11.18, -5.52}, ['ceuta'] = {-8.93, -9.72},
-  ['barcelona'] = {-4.14, -5.64}, ['mesina'] = {3.56, -8.92}, ['napoli'] = {3.54, -6.78}, ['wessex'] = {-7.82, 2.08},
-  ['rennes'] = {-7.23, -0.05}, ['ragusa'] = {5.35, -5.08}, ['caux'] = {-5.39, 0.89}, ['liege'] = {-1.84, 1.65},
-  ['siena'] = {1.6, -5.4}, ['pest'] = {6.02, -1.29}, ['tirol'] = {1.31, -1.42}, ['rudohori'] = {3.04, 1.16},
-  ['sundgau'] = {-1.03, -0.65}, ['tafilalt'] = {-8.29, -11.95}, ['marrakech'] = {-10.66, -11.64}, ['munchen'] = {1.98, -0.61},
-  ['kulm'] = {5.93, 3.43}, ['sieradz'] = {5.97, 1.45}, ['danzig'] = {5.93, 4.49}, ['stockholm'] = {5.68, 8.39},
-  ['karnten'] = {2.84, -1.61}, ['lienz'] = {2.17, -1.65}, ['namur'] = {-2.81, 1.12}, ['bern'] = {-0.82, -1.55},
-  ['bordeaux'] = {-6.18, -2.78}, ['bourbon'] = {-3.51, -1.93}, ['navarra'] = {-6.89, -4.31}, ['nantes'] = {-6.89, -0.87},
-  ['bergslagen'] = {3.93, 9.24}, ['stettin'] = {3.84, 4.08}, ['dresden'] = {3.03, 1.82}, ['braunschweig'] = {0.93, 2.32},
-  ['salamanca'] = {-9.67, -5.85}, ['galicia'] = {-10.68, -3.52}, ['badajoz'] = {-9.77, -7.36}, ['perth'] = {-8.26, 7.19},
-  ['pale'] = {-10.04, 4.62}, ['laighin'] = {-10.25, 3.77}, ['tripoli'] = {2.56, -11.85}, ['slesvig'] = {0.25, 5.22},
-  ['holstein'] = {0.82, 4.7}, ['bremen'] = {-0.11, 3.69}, ['poitou'] = {-5.4, -2.02}, ['limousin'] = {-4.54, -2.8},
-  ['akershus'] = {1.71, 9.22}, ['roma'] = {2.39, -6.15}, ['lyon'] = {-2.59, -2.63}, ['avignon'] = {-2.85, -3.43},
-  ['nurnberg'] = {1.5, 0.57}, ['mainz'] = {0.01, 0.68}, ['paris'] = {-4.5, 0.16}, ['ferrara'] = {2.15, -3.87},
-  ['bosnia'] = {5.69, -3.33}, ['salzburg'] = {2.58, -0.91}, ['saintonge'] = {-6.27, -1.9}, ['poznan'] = {4.83, 2.56},
-  ['sus'] = {-9.6, -12.1}, ['madeira'] = {-13.21, -10.03}, ['toulouse'] = {-4.34, -4.12}, ['armagnac'] = {-5.64, -3.9},
-  ['pfalz'] = {-0.73, 0.34}, ['provence'] = {-1.86, -4.65}, ['piemont'] = {-0.87, -3.32}, ['berry'] = {-4.02, -1.44},
-  ['orleans'] = {-4.83, -1.01}, ['bari'] = {5.0, -6.36}, ['lancashire'] = {-7.42, 4.72}, ['northumberland'] = {-7.04, 5.88},
-  ['shrewsbury'] = {-7.33, 3.82}, ['ulaidh'] = {-10.32, 5.77}, ['madrid'] = {-8.1, -6.17}, ['cordoba'] = {-8.82, -7.9},
-  ['burgos'] = {-8.28, -4.86}, ['zara'] = {4.28, -4.47}, ['zagreb'] = {4.78, -2.52}, ['beira'] = {-10.64, -6.26},
-  ['ayrshire'] = {-8.82, 6.07}, ['mhumhain'] = {-11.18, 3.44}, ['wales'] = {-8.47, 3.39}, ['oxford'] = {-6.51, 3.19},
-  ['maine'] = {-5.72, -0.52}, ['artois'] = {-3.98, 1.3}, ['picardie'] = {-4.58, 1.4}, ['anjou'] = {-5.78, -1.29},
-  ['canarias'] = {-13.17, -12.09}, ['fez'] = {-8.36, -10.57}, ['tangiers'] = {-9.55, -9.88}, ['qafsah'] = {-0.33, -11.71},
-  ['oran'] = {-4.84, -9.7}, ['mitidja'] = {-3.34, -9.37}, ['qusantinah'] = {-1.13, -9.49}, ['kabylia'] = {-2.17, -9.5},
-  ['bizerte'] = {-0.06, -9.4}, ['sousse'] = {0.83, -10.54}, ['murcia'] = {-6.66, -8.25}, ['zaragoza'] = {-5.89, -5.46},
-  ['baleares'] = {-3.74, -7.11}, ['malta'] = {3.32, -10.18}, ['palermo'] = {2.23, -8.85}, ['salerno'] = {4.19, -7.43},
-  ['pisa'] = {1.09, -4.93}, ['ancona'] = {3.03, -4.77}, ['cremona'] = {0.41, -3.06}, ['mantova'] = {1.18, -3.57},
-  ['parma'] = {0.69, -3.67}, ['stgallen'] = {0.05, -1.42}, ['franchecomte'] = {-1.8, -1.15}, ['zeeland'] = {-2.99, 2.84},
-  ['gelre'] = {-1.55, 3.15}, ['breda'] = {-2.01, 2.61}, ['friesland'] = {-1.65, 4.0}, ['gent'] = {-3.15, 2.07},
-  ['luxembourg'] = {-1.84, 0.81}, ['hannover'] = {0.54, 2.92}, ['kleve'] = {-1.18, 2.43}, ['koln'] = {-1.22, 1.73},
-  ['trier'] = {-1.14, 0.94}, ['munster'] = {-0.48, 2.66}, ['borgarsysla'] = {2.07, 8.45}, ['vestjylland'] = {-0.27, 6.42},
-  ['ostjylland'] = {0.83, 6.37}, ['ostergotland'] = {4.68, 7.53}, ['gotland'] = {5.9, 6.97}, ['halsingland'] = {5.38, 10.53},
-  ['wittenberg'] = {2.44, 2.31}, ['leipzig'] = {1.53, 1.83}, ['augsburg'] = {1.17, -0.60}, ['landshut'] = {2.58, -0.23},
-  ['steiermark'] = {3.49, -1.46}, ['osterreich'] = {4.24, -0.13}, ['verona'] = {1.76, -3.03}, ['treviso'] = {2.5, -2.58},
-  ['krain'] = {3.19, -2.81}, ['potsdam'] = {2.58, 3.11}, ['altmark'] = {1.93, 3.45}, ['neumark'] = {4.41, 3.47},
-  ['koslin'] = {4.92, 4.54}, ['stralsund'] = {3.03, 4.56}, ['mecklenburg'] = {2.32, 4.47}, ['hum'] = {5.17, -4.04},
-  ['kalisz'] = {5.76, 2.41}, ['granada'] = {-8.19, -8.41}, ['gibraltar'] = {-9.39, -9.05}, ['sopron'] = {5.03, -1.29},
-  ['olomouc'] = {5.01, 0.67}, ['budejovice'] = {3.48, 0.13}, ['corsica'] = {0.34, -5.3}, ['sardenya'] = {0.22, -7.7}
-}
-
-
--- snap points for provinces on the eastern map --
-EasternMap = {
-  ['iskandariyya'] = {11.80, -11.24}, ['qahirah'] = {12.43, -11.95}, ['dumyat'] = {13.0, -11.33}, ['krakow'] = {6.87, 0.78},
-  ['warszawa'] = {7.54, 2.5}, ['lwow'] = {9.54, -0.01}, ['constantinople'] = {11.68, -5.6}, ['hudavendigar'] = {11.4, -6.51},
-  ['basarabia'] = {12.05, -2.69}, ['trebizond'] = {16.89, -5.82}, ['kazan'] = {20.11, 4.61}, ['nizhnynovgorod'] = {18.86, 5.28},
-  ['perm'] = {20.5, 8.28}, ['viatka'] = {20.41, 6.78}, ['tblisi'] = {19.36, -5.09}, ['caffa'] = {15.41, -2.88},
-  ['athina'] = {9.19, -8.14}, ['creta'] = {10.02, -9.86}, ['novgorod'] = {13.0, 7.1}, ['neva'] = {12.11, 7.88},
-  ['ladoga'] = {13.02, 8.1}, ['arkhangelsk'] = {14.18, 11.65}, ['alquds'] = {14.83, -11.65}, ['moskva'] = {15.63, 4.8},
-  ['tver'] = {15.19, 5.39}, ['suzdal'] = {17.68, 5.57}, ['murom'] = {18.45, 4.43}, ['kijevas'] = {12.51, 0.7},
-  ['smolenskas'] = {13.31, 3.73}, ['vilnius'] = {9.58, 3.65}, ['odoyev'] = {15.51, 3.08}, ['riga'] = {9.11, 6.13},
-  ['reval'] = {9.3, 7.66}, ['hunyad'] = {8.44, -2.49}, ['vladimir'] = {17.2, 4.4}, ['polockas'] = {11.85, 4.88},
-  ['astrakhan'] = {20.71, -1.41}, ['tambov'] = {17.57, 2.4}, ['bangazi'] = {6.78, -11.0}, ['voluine'] = {9.43, 1.7},
-  ['podole'] = {11.13, -0.22}, ['halab'] = {15.91, -8.51}, ['karaman'] = {13.88, -8.66}, ['dimashq'] = {15.53, -10.1},
-  ['tarabulus'] = {15.34, -9.22}, ['saratov'] = {19.63, 1.28}, ['konigsberg'] = {7.25, 4.76}, ['osterode'] = {6.68, 4.20},
-  ['azov'] = {17.08, -1.62}, ['izmir'] = {10.93, -7.82}, ['tabriz'] = {20.36, -7.44}, ['baghdad'] = {19.73, -10.05},
-  ['circassia'] = {17.25, -3.67}, ['morea'] = {8.64, -9.16}, ['naxos'] = {10.19, -8.4}, ['edisanas'] = {13.21, -1.93},
-  ['selanik'] = {8.51, -6.36}, ['beograd'] = {7.17, -3.65}, ['naugardukas'] = {10.23, 2.9}, ['minskas'] = {11.31, 3.42},
-  ['mush'] = {17.8, -7.05}, ['urfa'] = {16.97, -7.96}, ['mosul'] = {18.89, -8.11}, ['jaffa'] = {14.88, -10.85},
-  ['gazzah'] = {14.13, -11.5}, ['fayyum'] = {11.84, -12.14}, ['cyprus'] = {14.08, -9.61}, ['yanya'] = {7.61, -7.5},
-  ['kirkuk'] = {19.62, -8.86}, ['tikrit'] = {19.01, -9.24}, ['yerevan'] = {19.46, -6.24}, ['rhodes'] = {11.04, -9.13},
-  ['edirne'] = {10.56, -5.69}, ['ankara'] = {13.45, -6.71}, ['kastamonu'] = {14.32, -5.35}, ['konya'] = {13.59, -7.63},
-  ['adana'] = {14.95, -8.4}, ['abo'] = {7.54, 9.18}, ['nyland'] = {9.91, 8.59}, ['osterbotten'] = {8.95, 11.43},
-  ['kargopol'] = {13.84, 11.0}, ['olonets'] = {13.9, 9.33}, ['pskov'] = {11.23, 6.88}, ['galich'] = {18.45, 6.28},
-  ['sarai'] = {19.85, -0.54}, ['majar'] = {18.43, -2.5}, ['terek'] = {19.87, -3.38}, ['shirvan'] = {20.81, -4.39},
-  ['guria'] = {18.16, -5.05}, ['imereti'] = {18.55, -4.5}, ['kyzylyar'] = {15.76, -1.53}, ['yedishkul'] = {14.99, -1.86},
-  ['crimea'] = {14.61, -2.61}, ['szabolcs'] = {7.54, -1.14}, ['torda'] = {9.17, -1.98}, ['albania'] = {6.82, -6.17},
-  ['kosovo'] = {7.22, -5.26}, ['smederevo'] = {7.72, -3.84}, ['sofya'] = {9.2, -4.59}, ['silistre'] = {11.3, -4.13},
-  ['tirgoviste'] = {9.71, -3.49}, ['buzau'] = {10.94, -3.03}, ['marienburg'] = {6.68, 4.21}, ['bitlis'] = {18.74, -7.32},
-  ['cernigovas'] = {13.9, 1.67}, ['poltava'] = {14.67, 0.21}, ['suceava'] = {11.0, -1.6}, ['rzhev'] = {14.04, 5.54},
-  ['ryazan'] = {16.79, 3.45}, ['goldingen'] = {7.75, 6.42}, ['livland'] = {9.48, 6.79}, ['kaunas'] = {8.98, 4.27},
-  ['zemaitija'] = {8.47, 5.14}, ['lublin'] = {8.19, 1.51}, ['sandomierz'] = {7.67, 1.08}, ['szepes'] = {6.74, -0.3},
-  ['kasimov'] = {17.79, 3.68}, ['yaroslavl'] = {16.49, 6.21}, ['vologda'] = {16.53, 7.34}, ['beloozero'] = {15.7, 8.36},
-  ['don'] = {17.98, -0.33}, ['mentese'] = {11.62, -8.57}, ['teke'] = {12.47, -8.41}, ['kutahya'] = {12.31, -7.24},
-  ['amasya'] = {15.28, -6.0}, ['sivas'] = {15.89, -6.64}, ['erzurum'] = {17.82, -6.25}, ['zaporoze'] = {15.00, -1.11}
-  }
-
--- snap points for religion tokens on the western map --
-WesternMapReligion = {
-  ['algiers'] = {-5.15, -10.66}, ['andalucia'] = {-7.52, -8.46}, ['aquitaine'] = {-5.51, -2.87}, ['aragon'] = {-6.46, -5.08},
-  ['austria'] = {4.06, -1.68}, ['bavariaswabia'] = {0.53, -0.74}, ['bohemia'] = {4.4, 0.65}, ['brandenburg'] = {3.6, 2.51},
-  ['brittanynormandy'] = {-7.89, -0.03}, ['burgundy'] = {-3.27, -1.11}, ['castile'] = {-7.3, -6.62}, ['centralitaly'] = {2.26, -5.36},
-  ['corsicasardinia'] = {0.26, -6.68}, ['dalmatia'] = {4.22, -3.91}, ['eastanglia'] = {-6.11, 4.12}, ['flanderswallonia'] = {-2.29, 1.14},
-  ['gotalandskane'] = {3.08, 7.53}, ['hungarianplain'] = {5.88, -2.04}, ['ireland'] = {-11.16, 4.92}, ['jutland'] = {0.24, 5.82},
-  ['languedoc'] = {-2.28, -3.95}, ['leon'] = {-9.35, -4.07}, ['loire'] = {-3.71, -3.31}, ['lombardy'] = {-0.74, -4.07},
-  ['lowersaxony'] = {1.21, 2.9}, ['macaronesia'] = {-12.93, -11.22}, ['naples'] = {4.36, -6.72}, ['netherlands'] = {-1.08, 3.84},
-  ['northernmorocco'] = {-9.97, -11.4}, ['northumbria'] = {-6.31, 4.91}, ['ostlandet'] = {1.21, 10.39}, ['pomerania'] = {4.84, 4.28},
-  ['portugal'] = {-10.98, -7.82}, ['prussia'] = {7.56, 3.64}, ['rhineland'] = {-0.49, -0.56}, ['royalhungary'] = {5.89, -0.05},
-  ['saxony'] = {1.79, 1.09}, ['scotland'] = {-9.08, 8.15}, ['seine'] = {-3.52, 0.74}, ['sicily'] = {2.78, -9.85},
-  ['sjaellandfyn'] = {2.63, 5.23}, ['southernmorocco'] = {-8.94, -12.02}, ['svealand'] = {4.71, 8.91}, ['switzerland'] = {0.58, -1.95},
-  ['tirol'] = {1.47, -2.11}, ['tunisia'] = {0.8, -11.62}, ['venetia'] = {3.73, -2.45}, ['waleswesex'] = {-8.02, 3.87},
-  ['westphalia'] = {0.15, 2.23}, ['wielkopoland'] = {4.47, 1.91}
-}
-
--- snap points for religion tokens on the eastern map --
-EasternMapReligion = {
-  ['aegeanarchipelago'] = {10.42, -9.39}, ['transcaucasia'] = {20.29, -6.48}, ['astrakhan'] = {19.22, -2.33}, ['aydin'] = {11.56, -7.62},
-  ['caucasus'] = {20.51, -3.75}, ['centralrussia'] = {17.23, 6.09}, ['circassia'] = {17.94, -4.12}, ['crimea'] = {16.48, -0.95},
-  ['easternukraine'] = {15.05, 1.55}, ['egypt'] = {11.04, -11.75}, ['estonialivonia'] = {10.52, 5.69}, ['finland'] = {9.34, 9.77},
-  ['greece'] = {8.37, -8.53}, ['iraq'] = {18.31, -9.01}, ['karaman'] = {14.26, -8.09}, ['karelia'] = {12.47, 9.82},
-  ['kurdistan'] = {16.46, -7.43}, ['lithuania'] = {9.22, 5.05}, ['macedoniathrace'] = {7.95, -6.63}, ['mazoviamalopolska'] = {8.22, 2.71},
-  ['moldavia'] = {11.74, -1.49}, ['moscowryazan'] = {16.26, 2.37}, ['northernanatolia'] = {13.86, -6.16}, ['novgorod'] = {14.43, 7.01},
-  ['palestine'] = {14.22, -12.22}, ['perm'] = {19.22, 7.79}, ['redruthenia'] = {10.47, 1.96}, ['rum'] = {17.12, -6.63},
-  ['saratov'] = {19.95, 2.38}, ['serbiaalbania'] = {7.9, -4.85}, ['syria'] = {16.17, -9.33}, ['transylvania'] = {9.02, -1.09},
-  ['wallachiabulgaria'] = {8.71, -3.93}, ['westernukraine'] = {13.07, -0.35}, ['whiteruthenia'] = {14.2, 3.0}, ['cyprus'] = {13.19, -9.94}
-}
+        end
+    end
+    mainboard.setSnapPoints(allSnapPoints)
+  end
+end
 
 -- x-cards
 Age1XCards = { '11a-1', '12a-1', '12a-2', '13a-1', '14a-1', '14a-3', '151b', '152b', '153b', '154b', '156b', '160b' }

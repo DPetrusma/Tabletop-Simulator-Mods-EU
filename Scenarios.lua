@@ -909,7 +909,7 @@ Scenario_List['2-03'].variants = {
   }, age_4_events = {
     {'41a-1', 2}, {'42a-1', 2}, {'43a-1', 2}, {'44a-1', 2}, {'451b',  2}, {'452b', 2}, {'454b', 2},
     {'402-1', 2}, {'404-1', 2}, {'406-1', 2}, {'414-1', 2}, {'415-1', 2},
-    {'41a-2', 1}, {'42a-2', 1}, {'43a-2', 1}, {'44a-2', 1}, {'453b',  1}, {'456b', 1}, {'468b', 1},
+    {'41a-2', 1}, {'42a-2', 1}, {'43a-2', 1}, {'44a-2', 1}, {'453b',  1}, {'456b', 1}, {'458b', 1},
     {'402-2', 1}, {'404-2', 1}, {'406-2', 1}, {'414-2', 1}, {'415-2', 1},
   }, 
   ideas = {
@@ -971,7 +971,7 @@ Scenario_List['2-04'].variants = {
   }, DNPR_Orange_L = { 
     WesternMap.amsterdam, WesternMap.gent, WesternMap.antwerpen, WesternMap.brugge, WesternMap.namur, WesternMap.luxembourg, AfricaMap.capeofgoodhope,
   }, DNPR_Blue_L = { 
-    WesternMap.stockholm, WesternMap.lund, WesternMap.gotland, WesternMap.stralsund,
+    WesternMap.stockholm, WesternMap.lund, WesternMap.gotland, WesternMap.stralsund_1618,
   }, DNPR_Green_S = { 
     WesternMap.napoli, WesternMap.salerno, WesternMap.bari, WesternMap.palermo, WesternMap.mesina,
   }, DNPR_Pink_L = { 

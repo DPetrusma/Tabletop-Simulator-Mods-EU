@@ -516,7 +516,7 @@ SETUP_DATA = {
       setup_bag_guid = '58331e',
       religion = RELIGION.muslim,
       ruler = {deck_guid = Setup_Card_Deck_GUID, card_guid = 'b0bdfb', flip = false, ill = false },
-      l_towns = { EasternMap.edirne, EasternMap.hudavendigar },
+      l_towns = { EasternMap.edirne, EasternMap.hudavendigar_1444 },
       s_towns = { EasternMap.selanik, EasternMap.yanya, EasternMap.sofya, EasternMap.silistre, EasternMap.ankara,
                   EasternMap.izmir, EasternMap.kutahya, EasternMap.mentese, EasternMap.teke,
                   EasternMap.amasya, EasternMap.sivas },
@@ -536,8 +536,8 @@ SETUP_DATA = {
       setup_bag_guid = '58331e',
       religion = RELIGION.muslim,
       ruler = {deck_guid = Setup_Card_Deck_GUID, card_guid = 'b0bdfb', flip = true, ill = false },
-      l_towns = { EasternMap.constantinople },
-      s_towns = { EasternMap.edirne, EasternMap.selanik, EasternMap.kastamonu, EasternMap.ankara, EasternMap.hudavendigar, EasternMap.teke,
+      l_towns = { EasternMap.constantinople_1618 },
+      s_towns = { EasternMap.edirne, EasternMap.selanik, EasternMap.kastamonu, EasternMap.ankara, EasternMap.hudavendigar_1618, EasternMap.teke,
                   EasternMap.mentese, EasternMap.izmir, EasternMap.yanya, EasternMap.morea, EasternMap.athina, EasternMap.beograd,
                   EasternMap.kosovo, EasternMap.albania, WesternMap.pest, EasternMap.szabolcs, EasternMap.naxos, EasternMap.rhodes,
                   EasternMap.caffa, EasternMap.azov, EasternMap.basarabia, WesternMap.bosnia, EasternMap.sofya, EasternMap.silistre },
@@ -552,12 +552,12 @@ SETUP_DATA = {
       ships_bot = { {9.73, -6.42}, {13.28, -3.06} },
       army1 = { 2, 1, 1 },
       fleet = { 0, 0, 3 },
-      capital = EasternMap.constantinople
+      capital = EasternMap.constantinople_1618
     },
     ['S205'] = {
       parent = {REALM.ottomans, '1444'},
       ruler = {deck_guid = Event_Deck_GUIDs.age1r, card_guid = '7187b7', flip = false, ill = false },
-      l_towns = { EasternMap.edirne, EasternMap.constantinople, EasternMap.hudavendigar },
+      l_towns = { EasternMap.edirne, EasternMap.constantinople_1444, EasternMap.hudavendigar_1444 },
       s_towns = { EasternMap.selanik, EasternMap.kastamonu, EasternMap.athina, EasternMap.morea, EasternMap.yanya,
                   EasternMap.sofya, EasternMap.silistre, EasternMap.ankara, EasternMap.izmir, EasternMap.kutahya,
                   EasternMap.mentese, EasternMap.teke, EasternMap.albania, EasternMap.kosovo, EasternMap.smederevo,
@@ -973,7 +973,7 @@ SETUP_DATA = {
                   EasternMap.tikrit, EasternMap.kirkuk, EasternMap.baghdad, EasternMap.bangazi, IndiaMap.yemen, EasternMap.cyprus },
       vassals = { WesternMap.tripoli, WesternMap.tunis, WesternMap.sousse, WesternMap.bizerte, WesternMap.qafsah, WesternMap.qusantinah,
                   WesternMap.mitidja, IndiaMap.basra, IndiaMap.hejaz },
-      allies = { EasternMap.constantinople },
+      allies = { EasternMap.constantinople_1618 },
       claims = { {-3.17, -10.30} },
       influence = { {0.15, -10.66}, {-2.20, -10.08}, {1.77, -12.10} },
       merchants = { {12.03, -10.25}, {17.12, -10.27} },
@@ -992,7 +992,7 @@ SETUP_DATA = {
       religion = RELIGION.orthodox,
       coin = 20,
       ruler = {deck_guid = Setup_Card_Deck_GUID, card_guid = 'd8862e', flip = false, ill = true },
-      l_towns = { EasternMap.constantinople },
+      l_towns = { EasternMap.constantinople_1444 },
       s_towns = { EasternMap.morea },
       vassals = { EasternMap.athina },
       claims = { {7.99, -5.82}, {8.61, -7.26} },
@@ -1001,7 +1001,7 @@ SETUP_DATA = {
       figurines = { {11.14, -4.92} },
       ships = { {14.13, -3.85} },
       ships_bot = { {14.97, -3.87} },
-      capital = EasternMap.constantinople
+      capital = EasternMap.constantinople_1444
     },
     ['S206'] = {
       parent = {REALM.byzantium, '1444'},
@@ -1289,6 +1289,12 @@ SETUP_DATA = {
       ships_bot = { {2.17, -10.81} },
       capital = WesternMap.tunis
     },
+    ['1618'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.muslim,
+      s_towns = { WesternMap.tunis, WesternMap.bizerte, WesternMap.sousse, WesternMap.qafsah },
+      capital = WesternMap.tunis
+    },
   },
   [REALM.persia] = {
     ['1444'] = {
@@ -1510,5 +1516,233 @@ SETUP_DATA = {
       s_towns = { WesternMap.pisa, WesternMap.siena, },
       capital = WesternMap.firenze
     },
+  },
+  [REALM.brittany] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      s_towns = { WesternMap.nantes, WesternMap.rennes, },
+      capital = WesternMap.nantes,
+      army1 = { 0, 0, 0 },
+    },
+  },
+  [REALM.granada] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.muslim,
+      s_towns = { WesternMap.granada, WesternMap.gibraltar, },
+      capital = WesternMap.granada,
+      army1 = { 0, 0, 0 },
+    },
+  },
+  [REALM.tlemcen] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.muslim,
+      s_towns = { WesternMap.tlemcen, WesternMap.oran, },
+      capital = WesternMap.tlemcen,
+      army1 = { 0, 0, 0 },
+    },
+  },
+  [REALM.provence] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      l_towns = { WesternMap.provence, },
+      s_towns = { WesternMap.anjou, },
+      capital = WesternMap.provence,
+      army1 = { 0, 0, 0 },
+    },
+  },
+  [REALM.switzerland] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      s_towns = { WesternMap.bern, WesternMap.stgallen, },
+      capital = WesternMap.bern,
+      army1 = { 0, 0, 0 },
+    },
+    ['1618'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      s_towns = { WesternMap.bern, WesternMap.stgallen, WesternMap.geneve },
+      capital = WesternMap.bern,
+      army1 = { 0, 0, 0 },
+    },
+  },
+  [REALM.bosnia] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      s_towns = { WesternMap.bosnia, WesternMap.hum, },
+      capital = WesternMap.bosnia,
+      army1 = { 0, 0, 0 },
+    },
+  },
+  [REALM.serbia] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.orthodox,
+      s_towns = { EasternMap.smederevo, EasternMap.kosovo, },
+      capital = EasternMap.smederevo,
+      army1 = { 0, 0, 0 },
+    },
+  },
+  [REALM.albania] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.orthodox,
+      s_towns = { EasternMap.albania, },
+      capital = EasternMap.albania,
+      army1 = { 0, 0, 0 },
+    },
+  },
+  [REALM.wallachia] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.orthodox,
+      s_towns = { EasternMap.tirgoviste, EasternMap.buzau, },
+      capital = EasternMap.tirgoviste,
+      army1 = { 0, 0, 0 },
+    },
+    ['1618'] = {
+      -- parent = {REALM.wallachia, '1444'},
+      parent = {'000', 'default'},
+      religion = RELIGION.orthodox,
+      s_towns = { EasternMap.tirgoviste, EasternMap.buzau, },
+      capital = EasternMap.tirgoviste,
+      army1 = { 0, 0, 0 },
+    },
+  },
+  [REALM.stettin] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      s_towns = { WesternMap.stettin, WesternMap.stralsund_1444, },
+      capital = WesternMap.stettin,
+      army1 = { 0, 0, 0 },
+    },
+  },
+  [REALM.pomerania] = {
+    ['1618'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.protestant,
+      s_towns = { WesternMap.stettin, WesternMap.koslin, },
+      capital = WesternMap.stettin,
+      army1 = { 0, 0, 0 },
+    },
+  },
+  [REALM.karaman] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.muslim,
+      s_towns = { EasternMap.karaman, EasternMap.konya, },
+      capital = EasternMap.karaman,
+      army1 = { 0, 0, 0 },
+    },
+  },
+  [REALM.imereti] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.orthodox,
+      s_towns = { EasternMap.imereti, EasternMap.guria, },
+      capital = EasternMap.imereti,
+      army1 = { 0, 0, 0 },
+    },
+    ['1618'] = {
+      -- parent = {REALM.imereti, '1444'},
+      parent = {'000', 'default'},
+      religion = RELIGION.orthodox,
+      s_towns = { EasternMap.imereti, EasternMap.guria, },
+      capital = EasternMap.imereti,
+      army1 = { 0, 0, 0 },
+    },
+  },
+  [REALM.transylvania] = {
+    ['1618'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.protestant,
+      s_towns = { EasternMap.torda, EasternMap.hunyad, },
+      capital = EasternMap.torda,
+      army1 = { 0, 0, 0 },
+    },
+  },
+  [REALM.algiers] = {
+    ['1618'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.muslim,
+      s_towns = { WesternMap.mitidja, WesternMap.qusantinah, },
+      capital = WesternMap.mitidja,
+      army1 = { 0, 0, 0 },
+    },
+  },
+  [REALM.moldavia] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.orthodox,
+      s_towns = { EasternMap.suceava, EasternMap.basarabia, },
+      capital = EasternMap.suceava,
+      army1 = { 0, 0, 0 },
+    },
+  },
+  [REALM.brunswick] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      s_towns = { WesternMap.hannover, WesternMap.braunschweig, },
+      capital = WesternMap.braunschweig,
+      army1 = { 0, 0, 0 },
+    },
+    ['1618'] = {
+        -- parent = { REALM.brunswick, '1444'}
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      s_towns = { WesternMap.hannover, WesternMap.braunschweig, },
+      capital = WesternMap.braunschweig,
+      army1 = { 0, 0, 0 },
+    }
+  },
+  [REALM.kazan] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.muslim,
+      s_towns = { EasternMap.kazan, },
+      l_towns = { CentralAsiaMap.volga, },
+      capital = EasternMap.kazan,
+      army1 = { 0, 0, 0 },
+    },
+  },
+  [REALM.knights] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      s_towns = { EasternMap.rhodes, },
+      capital = EasternMap.rhodes,
+      army1 = { 0, 0, 0 },
+    },
+    ['1618'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      s_towns = { WesternMap.malta, },
+      capital = WesternMap.malta,
+      army1 = { 0, 0, 0 },
+    },
+  },
+  [REALM.lorraine] = {
+    ['1444'] = {
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      l_towns = { WesternMap.lorraine, },
+      capital = WesternMap.lorraine,
+      army1 = { 0, 0, 0 },
+    },
+    ['1618'] = {
+        -- parent = { REALM.lorraine, '1444'}
+      parent = {'000', 'default'},
+      religion = RELIGION.catholic,
+      l_towns = { WesternMap.lorraine, },
+      capital = WesternMap.lorraine,
+      army1 = { 0, 0, 0 },
+    }
   },
 }
