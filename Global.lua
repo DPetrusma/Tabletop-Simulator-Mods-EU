@@ -5419,7 +5419,7 @@ function HighlightUnrest(onOffFlag)
     --]]
     for _,obj in ipairs(getAllObjects()) do
         local pos = obj.getPosition()
-        if pos.x >  -40 and pos.x < 40 and pos.z > -30 and pos.z < 30
+        if pos.x > -20 and pos.x < 20 and pos.z > -12 and pos.z < 12
             and ( obj.hasTag('Town') or obj.hasTag('Vassal') )
             and obj.is_face_down == true then
                 if onOffFlag then obj.highlightOn('Red') else obj.highlightOff() end
@@ -5437,7 +5437,7 @@ function HighlightRebels(onOffFlag)
     --]]
     for _,obj in ipairs(getAllObjects()) do
         local pos = obj.getPosition()
-        if pos.x >  -40 and pos.x < 40 and pos.z > -30 and pos.z < 30
+        if pos.x > -20 and pos.x < 20 and pos.z > -12 and pos.z < 12
             and obj.hasTag('NPRLand') then
                 if onOffFlag then obj.highlightOn('Red') else obj.highlightOff() end
         end
@@ -5445,19 +5445,19 @@ function HighlightRebels(onOffFlag)
     return true
 end
 
-function HighlightTruces(onOffFlag)
+function HighlightWarsOrTruces(onOffFlag,truceFlag)
     --[[
     Loop through all pieces
     Check if it's on the board
     Check if it's a war/truce token
-    Check if it's flipped
+    Check if it's flipped/not flipped
         If all are true, highlight it in red
     --]]
     for _,obj in ipairs(getAllObjects()) do
         local pos = obj.getPosition()
-        if pos.x >  -40 and pos.x < 40 and pos.z > -30 and pos.z < 30
+        if pos.x > -20 and pos.x < 20 and pos.z > -12 and pos.z < 12
             and obj.hasTag('War')
-            and obj.is_face_down == true then
+            and obj.is_face_down == truceFlag then
                 if onOffFlag then obj.highlightOn('Red') else obj.highlightOff() end
         end
     end
@@ -5474,11 +5474,61 @@ function HighlightCBs(onOffFlag)
     --]]
     for _,obj in ipairs(getAllObjects()) do
         local pos = obj.getPosition()
-        if pos.x >  -40 and pos.x < 40 and pos.z > -30 and pos.z < 30
+        if pos.x > -20 and pos.x < 20 and pos.z > -12 and pos.z < 12
             and obj.hasTag('Casus_Belli')
             and obj.is_face_down == true then
                 if onOffFlag then obj.highlightOn('Red') else obj.highlightOff() end
         end
+    end
+    return true
+end
+
+function HighlightDisputedSuccession(onOffFlag)
+    --[[
+    Loop through all pieces
+    Check if it's on the board
+    Check if it's a Marriage token
+    Check if it's flipped
+        If all are true, highlight it in red
+    --]]
+    for _,obj in ipairs(getAllObjects()) do
+        local pos = obj.getPosition()
+        if pos.x > -20 and pos.x < 20 and pos.z > -12 and pos.z < 12
+            and obj.hasTag('Marriage')
+            and obj.is_face_down == true then
+                if onOffFlag then obj.highlightOn('Red') else obj.highlightOff() end
+        end
+    end
+    return true
+end
+
+function HighlightOccupiedTowns(onOffFlag)
+    --[[
+    Loop through all pieces
+    Check if it's on the board
+    Check if it's a town token
+    Check if it has another town or rebellion token on top of it
+        If all are true, highlight it in red
+    --]]
+    for _,obj in ipairs(getAllObjects()) do
+        local pos = obj.getPosition()
+        if pos.x > -20 and pos.x < 20 and pos.z > -12 and pos.z < 12
+        and obj.hasTag('Town') then
+            local hits = Physics.cast({
+                origin       = pos,
+                direction    = {0,1,0},
+                type         = 1, --1 for Ray, not Sphere or Box
+                max_distance = 2,
+                -- debug        = true, -- uncomment to debug
+            })
+            for _,v in pairs(hits) do
+                if v.hit_object.hasTag('Town') or v.hit_object.hasTag('Rebels') then
+                    if onOffFlag then obj.highlightOn('Red') else obj.highlightOff() end
+                    goto pieceHighlited
+                end
+            end
+        end
+        ::pieceHighlited::
     end
     return true
 end
@@ -5495,6 +5545,25 @@ function HighlightExhaustedManpower(onOffFlag)
             if obj.hasTag('LandUnit') then
                     if onOffFlag then obj.highlightOn('Red') else obj.highlightOff() end
             end
+        end
+    end
+    return true
+end
+
+function HighlightExhaustedMerchants(onOffFlag)
+    --[[
+    Loop through all pieces
+    Check if it's on the board
+    Check if it's a Merchant token
+    Check if it's flipped
+        If all are true, highlight it in red
+    --]]
+    for _,obj in ipairs(getAllObjects()) do
+        local pos = obj.getPosition()
+        if pos.x > -20 and pos.x < 20 and pos.z > -12 and pos.z < 12
+            and obj.hasTag('Merchant')
+            and obj.is_face_down == true then
+                if onOffFlag then obj.highlightOn('Red') else obj.highlightOff() end
         end
     end
     return true
