@@ -5150,6 +5150,88 @@ function outputDroppedStabilityObjectStability(obj)
   printToAll(outString, c)
 end
 
+--[[
+  ------------------------------------------------
+  ------------------------------------------------
+            Print Round Status on change
+  ------------------------------------------------
+  ------------------------------------------------
+--]]
+
+Round_Status_Locations = {
+  ["Event not taken"] = {
+    {7.67, 17.6},
+    {7.90, 17.35},
+    {7.68, 17.12},
+    {7.86, 16.92},
+    {7.66, 16.65},
+    {7.87, 16.40}
+  },
+  ["Event taken"] = {
+    {8.37, 17.6},
+    {8.57, 17.35},
+    {8.37, 17.12},
+    {8.57, 16.92},
+    {8.37, 16.65},
+    {8.57, 16.40}
+  },
+  ["Has Passed 1st"] = { {9.2, 17.63} },
+  ["Has Passed 2nd"] = { {9.2, 17.21} },
+  ["Has Passed 3rd"] = { {9.2, 16.88} },
+  ["Has Passed 4th or later"] = { {9.2, 16.47} }
+  -- ["Has Passed"] = {
+  --   {9.2, 17.63},
+  --   {9.2, 17.21},
+  --   {9.2, 16.88},
+  --   {9.2, 16.47}
+  -- }
+}
+
+function outputDroppedRoundStatusObjectRoundStatus(obj)
+  local dropPos = obj.getPosition():setAt("y", 1.4)
+  -- local tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
+  -- local tableau_pos = tableau.getPosition()
+  -- local seat = GetSeatFromPosition(tableau_pos)
+  
+  local closestDist, closestRoundStatus = 999, nil
+  for roundStatus, statusLocations in pairs(Round_Status_Locations) do
+    for _,loc in pairs(statusLocations) do
+      local roundStatusPos = {
+        loc[1],
+        1.4,
+        loc[2]
+      }
+      local dist = Vector.distance(Vector(roundStatusPos), dropPos)
+      if dist < 0.7 then
+        if dist < closestDist then
+          closestDist = dist
+          closestRoundStatus = roundStatus
+        end
+      end
+    end
+  end
+
+  local c = GetColorFromTag(obj) or "Grey"
+  local name = obj.getName()
+  local outString = ""
+  if name ~= "" then
+    outString = name
+  else
+    outString = c
+  end
+
+  if closestRoundStatus then
+    outString = outString.."'s Round Status set to "..closestRoundStatus
+    obj.setDescription(closestRoundStatus)
+  else
+    closestRoundStatus = nil
+    outString = outString.."'s Round Status dropped off the board "
+    obj.setDescription("")
+  end
+
+  printToAll(outString, c)
+end
+
 
 --[[
   ------------------------------------------------
@@ -5203,6 +5285,13 @@ function onObjectDrop(player_color, dropped_object)
       function() return dropped_object.resting end, --Condition function
       5, --Timeout in seconds
       function() flipLightShipOnTPS(dropped_object) end --Function to run if we hit the timeout
+    )
+  elseif dropped_object.hasTag("RoundStatus") then
+    Wait.condition(
+      function() outputDroppedRoundStatusObjectRoundStatus(dropped_object) end,
+      function() return dropped_object.resting end,
+      5,
+      function() outputDroppedRoundStatusObjectRoundStatus(dropped_object) end
     )
   end
 end
