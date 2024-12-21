@@ -846,11 +846,12 @@ function Setup_Game()
     --Keep these in sync for the later color-swapping features
     --TODO: I think I don't need this, actually. I get use a colour to get a Tableau from getObjectFromGUID(Main_Tableau_GUIDs[col])
     --and then use tableau.getPosition() and GetSeatFromPosition(pos) to find a position from the color
-    local main_tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
-    if main_tableau ~= nil then
-        local pos = main_tableau.getPosition()
-        local seat = GetSeatFromPosition(pos)
-    end
+
+    -- -- local main_tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
+    -- -- if main_tableau ~= nil then
+    -- --     local pos = main_tableau.getPosition()
+    -- --     local seat = GetSeatFromPosition(pos)
+    -- -- end
 
     --These are used for the manual setup helpers
     PlayerInSetup = {}
