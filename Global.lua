@@ -366,7 +366,7 @@ function CreateRealmButtons()
   PlayerInSetup.color = Select_Realm_Target_Color
 
   --This is only used for seat 2 to put some things in a different spot
-  PlayerInSetup.seat = Player_Seat_From_Color[Select_Realm_Target_Color]
+  PlayerInSetup.seat = Player_Seat_From_Color(Select_Realm_Target_Color)
   --Work out what year of the board is face up to determine what realms are selectable
   local mainboard = getObjectsWithTag('MainBoard')
   local mainboardYear = MAIN_BOARD_DATE[mainboard[1].getStateId()]
@@ -446,7 +446,8 @@ function AutoSetupRealm()
     RotateMissionDecks()
 
     local players = {} -- Work out which players are left
-    for color,seat in pairs(Player_Seat_From_Color) do
+    for color,_ in pairs(COLOR_RGB_CODES) do
+      local seat = Player_Seat_From_Color(color)
       if getObjectFromGUID(Player_Hand_GUIDs[color]) ~= nil then
         players[seat] = {
           bot = false,
@@ -807,14 +808,11 @@ end
   ------------------------------------------------
   ------------------------------------------------
 --]]
-function Setup_Game()
+function Player_Seat_From_Color(color)
 
-  -- Handle Manual Setup
-  if UI_Data.scenario == '0-00' then
-    --Keep these in sync for the later color-swapping features
-    --TODO: I think I don't need this, actually. I get use a colour to get a Tableau from getObjectFromGUID(Main_Tableau_GUIDs[col])
-    --and then use tableau.getPosition() and GetSeatFromPosition(pos) to find a position from the color
-    Player_Seat_From_Color =
+    -- This is our initial helper table for manual setup since we can't use the Tableaus (which
+    -- aren't on the board) to find the seat
+    local Player_Manual_Initial_Seat_From_Color =
     {
       blue = 1,
       yellow = 2,
@@ -824,15 +822,61 @@ function Setup_Game()
       green = 6
     }
 
-    Player_Color_From_Seat =
-    {
-      [Player_Seat_From_Color.blue] = 'blue',
-      [Player_Seat_From_Color.yellow] = 'yellow',
-      [Player_Seat_From_Color.red] = 'red',
-      [Player_Seat_From_Color.white] = 'white',
-      [Player_Seat_From_Color.purple] = 'purple',
-      [Player_Seat_From_Color.green] = 'green'
-    }
+    local main_tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
+    local seat
+    if main_tableau ~= nil then
+      local pos = main_tableau.getPosition()
+      seat = GetSeatFromPosition(pos)
+    else
+      if TEST_MODE then log('Cannot find the main board for '..color..' so defaulting to initial position') end
+      seat = Player_Manual_Initial_Seat_From_Color[color]
+    end
+    return seat
+
+end
+
+function Player_Color_From_Seat(seat)
+    --This is so the ray actually starts under the mat
+    local main_tableau_position = Vector(Main_Tableau_Positions[seat][1], 0, Main_Tableau_Positions[seat][3])
+    local color
+    -- This way might not be exact enough. It might be better to do a cast from this
+    -- seat's main tableau spot and see what colour objects we hit
+    if main_tableau_position ~= nil then
+      --Cast a ray from main_tableau_position
+      hits = Physics.cast({
+        origin       = main_tableau_position,
+        direction    = {0,1,0},
+        type         = 1, --1 for Ray, not Sphere or Box
+        max_distance = 2,
+        -- debug        = true, -- uncomment to debug
+      })
+      --Check the color of the objects hit
+      for _,v in pairs(hits) do
+        local col = string.lower(GetColorFromTag(v.hit_object))
+        if col ~= nil then
+          color = col
+        end
+      end
+    end
+    if color == nil then
+        return "Could not find a color from seat " .. seat
+    end
+    return color
+end
+
+function Setup_Game()
+
+  -- Handle Manual Setup
+  if UI_Data.scenario == '0-00' then
+    --Keep these in sync for the later color-swapping features
+    --TODO: I think I don't need this, actually. I get use a colour to get a Tableau from getObjectFromGUID(Main_Tableau_GUIDs[col])
+    --and then use tableau.getPosition() and GetSeatFromPosition(pos) to find a position from the color
+
+    -- -- local main_tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
+    -- -- if main_tableau ~= nil then
+    -- --     local pos = main_tableau.getPosition()
+    -- --     local seat = GetSeatFromPosition(pos)
+    -- -- end
 
     --These are used for the manual setup helpers
     PlayerInSetup = {}
@@ -840,7 +884,8 @@ function Setup_Game()
     --Once the below counter hits 6, we will place the deferred pieces
     ManualSetupRealmsDealtWithCount = 0
 
-    for seat, color in pairs(Player_Color_From_Seat) do
+    for color,_ in pairs(COLOR_RGB_CODES) do
+      local seat = Player_Seat_From_Color(color)
       PlaceTableausAndBags(seat, color)
       local player_hand = getObjectFromGUID(Player_Hand_GUIDs[color])
       if player_hand == nil then
@@ -4681,34 +4726,33 @@ function SwapTwoObjects(piece_1, piece_2)
 end
 
 function SwapTwoColors()
-  local color_to_swap_1 = Color_Swapping_Table[1]
-  local color_to_swap_2 = Color_Swapping_Table[2]
 
-  if color_to_swap_1 == color_to_swap_2 then
+  if Color_Swapping_Table[1] == Color_Swapping_Table[2] then
     log("No action on swapping a color with itself")
     Is_Color_Swapping = false
     return 1
   end
   --We need Color_Swapping_Table to be set beforehand with 2 entries
-  if TEST_MODE then log('Swapping pieces for '..color_to_swap_1..' and '..color_to_swap_2) end
+  if TEST_MODE then log('Swapping pieces for '..Color_Swapping_Table[1]..' and '..Color_Swapping_Table[2]) end
   --Also, since I will run 3 loops, best to store the objects themselves, their positions and rotations
   -- We are assuming that both lists are the same size
   local objects_to_swap = {}
+  local seats_to_swap = {}
 
-  --Update the tables first so that if you click another button it will use the new location
-  local intermediate_seat = Player_Seat_From_Color[color_to_swap_1]
-  Player_Seat_From_Color[color_to_swap_1] = Player_Seat_From_Color[color_to_swap_2]
-  Player_Seat_From_Color[color_to_swap_2] = intermediate_seat
-
-  Player_Color_From_Seat[Player_Seat_From_Color[color_to_swap_2]] = color_to_swap_2
-  Player_Color_From_Seat[Player_Seat_From_Color[color_to_swap_1]] = color_to_swap_1
+  for i = 1, 2, 1 do
+    local main_tableau = getObjectFromGUID(Main_Tableau_GUIDs[Color_Swapping_Table[i]])
+    if main_tableau ~= nil then
+        local pos = main_tableau.getPosition()
+        seats_to_swap[i] = GetSeatFromPosition(pos)
+    end
+  end
 
   --We want to store, for each piece type in the setup area, the piece itself, the location and rotation
   --for both colours so we can easily reference and swap later
-  for piece_name,_ in pairs(Setup_Bag_Item_GUIDs[color_to_swap_1]) do
+  for piece_name,_ in pairs(Setup_Bag_Item_GUIDs[Color_Swapping_Table[1]]) do
     --This handles the case where some colours have middle eastern figures and others don't
-    local color_1_piece = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_1][piece_name])
-    local color_2_piece = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_2][piece_name])
+    local color_1_piece = getObjectFromGUID(Setup_Bag_Item_GUIDs[Color_Swapping_Table[1]][piece_name])
+    local color_2_piece = getObjectFromGUID(Setup_Bag_Item_GUIDs[Color_Swapping_Table[2]][piece_name])
 
     if color_1_piece ~= nil and color_2_piece ~= nil then
       objects_to_swap[piece_name] = {
@@ -4724,14 +4768,15 @@ function SwapTwoColors()
   end
   
   --Swap the mats
-  SwapTwoObjects(getObjectFromGUID(Main_Tableau_GUIDs[color_to_swap_1]), getObjectFromGUID(Main_Tableau_GUIDs[color_to_swap_2]))
-  SwapTwoObjects(getObjectFromGUID(Army_Tableau_GUIDs[color_to_swap_1]), getObjectFromGUID(Army_Tableau_GUIDs[color_to_swap_2]))
-  SwapTwoObjects(getObjectFromGUID(Fleet_Tableau_GUIDs[color_to_swap_1]), getObjectFromGUID(Fleet_Tableau_GUIDs[color_to_swap_2]))
+  SwapTwoObjects(getObjectFromGUID(Main_Tableau_GUIDs[Color_Swapping_Table[1]]), getObjectFromGUID(Main_Tableau_GUIDs[Color_Swapping_Table[2]]))
+  SwapTwoObjects(getObjectFromGUID(Army_Tableau_GUIDs[Color_Swapping_Table[1]]), getObjectFromGUID(Army_Tableau_GUIDs[Color_Swapping_Table[2]]))
+  SwapTwoObjects(getObjectFromGUID(Fleet_Tableau_GUIDs[Color_Swapping_Table[1]]), getObjectFromGUID(Fleet_Tableau_GUIDs[Color_Swapping_Table[2]]))
 
   waitFrames(5)
 
   --Swap all the pieces
   for _,pieces in pairs(objects_to_swap) do
+    --Can't I use SwapTwoObjects(pieces.piece_1, pieces.piece_2) ???
     pieces.piece_1.setPositionSmooth({
       pieces.piece_2_pos[1],
       pieces.piece_2_pos[2],
@@ -4749,15 +4794,15 @@ function SwapTwoColors()
   end
 
   --Swap the player hand positions
-  local player_hand1 = getObjectFromGUID(Player_Hand_GUIDs[color_to_swap_1])
-  local player_hand2 = getObjectFromGUID(Player_Hand_GUIDs[color_to_swap_2])
+  local player_hand1 = getObjectFromGUID(Player_Hand_GUIDs[Color_Swapping_Table[1]])
+  local player_hand2 = getObjectFromGUID(Player_Hand_GUIDs[Color_Swapping_Table[2]])
   if player_hand1 == nil or player_hand2 == nil then
     log('Could not find player hand object')
   else
-    player_hand1.setPosition(Player_Hand_Positions[Player_Seat_From_Color[color_to_swap_1]])
-    player_hand1.setRotation(Player_Hand_Rotations[Player_Seat_From_Color[color_to_swap_1]])
-    player_hand2.setPosition(Player_Hand_Positions[Player_Seat_From_Color[color_to_swap_2]])
-    player_hand2.setRotation(Player_Hand_Rotations[Player_Seat_From_Color[color_to_swap_2]])
+    player_hand1.setPosition(Player_Hand_Positions[seats_to_swap[1]])
+    player_hand1.setRotation(Player_Hand_Rotations[seats_to_swap[1]])
+    player_hand2.setPosition(Player_Hand_Positions[seats_to_swap[2]])
+    player_hand2.setRotation(Player_Hand_Rotations[seats_to_swap[2]])
   end
 
   --Just to make sure everthing is done
@@ -4771,6 +4816,7 @@ end
 function removePlayerPieces()
   if TEST_MODE then log('Removing pieces for '..Color_To_Remove) end
   local bag = getObjectFromGUID(Setup_Bag_GUIDs[Color_To_Remove])
+  local seat_to_remove = Player_Seat_From_Color(Color_To_Remove)
 
   for _,piece_guid in pairs(Setup_Bag_Item_GUIDs[Color_To_Remove]) do
     local piece = getObjectFromGUID(piece_guid)
@@ -4789,20 +4835,20 @@ function removePlayerPieces()
   --We also need to delete all of the buttons for swapping
   --TODO Abstract this logic a little and create a function to be used here and inside CreateRealmButtons()
   for button,data in pairs(Buttons_To_Swap) do
-    if ( data.seat == Player_Seat_From_Color[Color_To_Remove] or data.target_color == Color_To_Remove ) and not button.isDestroyed() then
+    if ( data.seat == seat_to_remove or data.target_color == Color_To_Remove ) and not button.isDestroyed() then
       button.destroy()
       waitFrames(5)
     end
   end
 
   for button,seat in pairs(Buttons_For_Realm_Selection) do
-    if ( seat == Player_Seat_From_Color[Color_To_Remove] ) and not button.isDestroyed() then
+    if ( seat == seat_to_remove ) and not button.isDestroyed() then
       button.destroy()
     end
   end
 
   for button,seat in pairs(Buttons_To_Remove_Player) do
-    if ( seat == Player_Seat_From_Color[Color_To_Remove] ) and not button.isDestroyed() then
+    if ( seat == seat_to_remove ) and not button.isDestroyed() then
       button.destroy()
     end
   end
@@ -4820,7 +4866,8 @@ function removePlayerPieces()
     RotateMissionDecks()
 
     local players = {} -- Work out which players are left
-    for color,seat in pairs(Player_Seat_From_Color) do
+    for color,_ in pairs(COLOR_RGB_CODES) do
+      local seat = Player_Seat_From_Color(color)
       if getObjectFromGUID(Player_Hand_GUIDs[color]) ~= nil then
         players[seat] = {
           bot = false,
@@ -4851,7 +4898,7 @@ function swapColorsButtonPress(obj)
   if not Is_Color_Swapping then
     Is_Color_Swapping = true
     Color_Swapping_Table = {
-      Player_Color_From_Seat[Buttons_To_Swap[obj].seat],
+      Player_Color_From_Seat(Buttons_To_Swap[obj].seat),
       Buttons_To_Swap[obj].target_color
     }
     if not Color_Swapping_Table then
@@ -4867,7 +4914,7 @@ function selectRealmButtonPress(obj)
   --Try to make sure we don't get mixed up with multiple things going
   if not Is_Realm_Selecting then
     Is_Realm_Selecting = true
-    Select_Realm_Target_Color = Player_Color_From_Seat[Buttons_For_Realm_Selection[obj]]
+    Select_Realm_Target_Color = Player_Color_From_Seat(Buttons_For_Realm_Selection[obj])
     if not Select_Realm_Target_Color then
       log("Could not find a color to select a realm for")
       return
@@ -4884,7 +4931,7 @@ function selectRealmButtonPress(obj)
 end
 
 function removeColorButtonPress(obj)
-  Color_To_Remove = Player_Color_From_Seat[Buttons_To_Remove_Player[obj]]
+  Color_To_Remove = Player_Color_From_Seat(Buttons_To_Remove_Player[obj])
   if not Color_To_Remove then
     log("Could not find a color to remove")
     return
@@ -4919,7 +4966,7 @@ function CreateButtonsForRealms()
   local realm_selection_button_offset = {0.00, -5.08}
 
   for color1,_ in pairs(COLOR_RGB_CODES) do
-    local seat = Player_Seat_From_Color[color1]
+    local seat = Player_Seat_From_Color(color1)
     local rot = Main_Tableau_Rotations[seat]
 
     --Create a button here for removing this player's pieces
@@ -5001,7 +5048,7 @@ function CreateButtonsForRealms()
       })
 
       Buttons_To_Swap[swap_button] = {
-        seat = Player_Seat_From_Color[color1],
+        seat = Player_Seat_From_Color(color1),
         target_color = color2
       }
       swap_button.setColorTint(COLOR_RGB_CODES[color2])
