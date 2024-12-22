@@ -423,6 +423,12 @@ function CreateRealmButtons()
     end
   end
 
+  for seat,button in pairs(Tile_for_Bot_Flag) do
+    if ( seat == PlayerInSetup.seat ) and not button.isDestroyed() then
+      button.destroy()
+    end
+  end
+
   return 1
 end
 
@@ -434,12 +440,13 @@ function AutoSetupRealm()
    --Make sure this realm is not selected again
   SelectedRealms[PlayerInSetup.realm] = true
   local seat = PlayerInSetup.seat
-  SetupRealm({
-    seat = PlayerInSetup.seat,
-    color = PlayerInSetup.color,
-    realm = { PlayerInSetup.realm, PlayerInSetup.year},
-    is_bot = Tile_for_Bot_Flag[seat].is_face_down
-})
+  local player_data = {
+      seat = PlayerInSetup.seat,
+      color = PlayerInSetup.color,
+      realm = { PlayerInSetup.realm, PlayerInSetup.year},
+      bot = Tile_for_Bot_Flag[seat].is_face_down
+  }
+  SetupRealm(player_data)
   --Clear out this table so that someone else can choose a realm
   PlayerInSetup = {}
   Is_Realm_Selecting = false
@@ -842,11 +849,9 @@ function Player_Seat_From_Color(color)
 end
 
 function Player_Color_From_Seat(seat)
-    --This is so the ray actually starts under the mat
+    --The 0 is so the ray actually starts under the mat
     local main_tableau_position = Vector(Main_Tableau_Positions[seat][1], 0, Main_Tableau_Positions[seat][3])
     local color
-    -- This way might not be exact enough. It might be better to do a cast from this
-    -- seat's main tableau spot and see what colour objects we hit
     if main_tableau_position ~= nil then
       --Cast a ray from main_tableau_position
       hits = Physics.cast({
@@ -874,16 +879,6 @@ function Setup_Game()
 
   -- Handle Manual Setup
   if UI_Data.scenario == '0-00' then
-    --Keep these in sync for the later color-swapping features
-    --TODO: I think I don't need this, actually. I get use a colour to get a Tableau from getObjectFromGUID(Main_Tableau_GUIDs[col])
-    --and then use tableau.getPosition() and GetSeatFromPosition(pos) to find a position from the color
-
-    -- -- local main_tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
-    -- -- if main_tableau ~= nil then
-    -- --     local pos = main_tableau.getPosition()
-    -- --     local seat = GetSeatFromPosition(pos)
-    -- -- end
-
     --These are used for the manual setup helpers
     PlayerInSetup = {}
     SelectedRealms = {}
@@ -4217,9 +4212,8 @@ function CheckRemovedEnter(object, trashBinObject)
 
   --[[
  TODO: Clean this comment up
-  Another thought train:
-  Have a counter of how many large towns have been deleted per colour (Large_Town_Deleted_Count[color])
-  In here, CheckRemovedEnter, if it's a large town, increment this counter by 1 (start at 0)
+  Have a counter of how many towns have been deleted per colour (Smart_delete_town_counter)
+  In here, CheckRemovedEnter, if it's a town or vassal, and increment this counter by 1 (start at 0)
   When this part finishes, schedule a function to run after 2 seconds to set the counter back to 0, but
     cancel that schedule for each town to restart the count
   For the town, loop through Local_Large_Town_Positions. The first town will use physics.cast on each space to see what is already there.
@@ -4248,6 +4242,7 @@ function CheckRemovedEnter(object, trashBinObject)
     end
     if tableau == nil then return false end
     local this_town_moved = false
+    --This counter is reset every 2 seconds by CleanupSmartDeleteTowns
     Smart_delete_town_counter[town_size][color] = Smart_delete_town_counter[town_size][color] + 1
     if TEST_MODE then log('Up to "deleting" town ' .. Smart_delete_town_counter[town_size][color] .. ' for ' .. color ) end
 
@@ -4257,13 +4252,13 @@ function CheckRemovedEnter(object, trashBinObject)
         local local_town_pos
         local hits
 
-        --We only use these once, so it doesn't save space, but next to each other you can see that a
+        --We only use these variables once, so it doesn't save space, but next to each other you can see that a
         --cube will be offset from a moved town by 1
         --Cubes can be on top of vassal tokens, so in that case, move them a little higher
         local cube_height = 2
         if town_size == 'Vassal' then cube_height = cube_height + math.fmod(i+1,2) end 
         local town_height = 2
-        if town_size == 'Vassal' then town_height = 0.2 end 
+        if town_size == 'Vassal' then town_height = 0.2 end
         local cube_new_pos = tableau.positionToWorld(
             {Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color])][1],
             cube_height,
@@ -4859,6 +4854,12 @@ function removePlayerPieces()
     end
   end
 
+  for seat,button in pairs(Tile_for_Bot_Flag) do
+    if ( seat == seat_to_remove ) and not button.isDestroyed() then
+      button.destroy()
+    end
+  end
+
   -- Destroy the player's hand zone so no-one can swap to that colour and
   -- they won't be dealt cards
   local player_hand = getObjectFromGUID(Player_Hand_GUIDs[Color_To_Remove])
@@ -5031,17 +5032,16 @@ function CreateButtonsForRealms()
     position = GetOffset(Main_Tableau_Positions[seat],realm_selection_bot_flag_tile_offset,seat,1)
     Tile_for_Bot_Flag[seat] = spawnObject({
         type = "Custom_Tile",
-        position = RepeatPosition,
+        position = position,
         sound = false,
-        -- scale = {6,0.2,1.5},
         rotation = rot,
-        parameters = {
-            image =,
-            image_bottom = ,
-            type = 0,
-
-        }
     })
+    local params = {
+          image = 'https://steamusercontent-a.akamaihd.net/ugc/28808171710508919/C2205D122F1AD93F359961DDE4FB2C20392D4F98/',
+          image_bottom = 'https://steamusercontent-a.akamaihd.net/ugc/28808171710508617/C0A305E3A4E0987F155EB9053A3F111126E4C071/',
+          type = 0,
+      }
+    Tile_for_Bot_Flag[seat].setCustomObject(params)
 
     if TEST_MODE then log('Placing swap buttons for ' .. color1 .. ' player') end
     for color2,_ in pairs(COLOR_RGB_CODES) do
@@ -5250,19 +5250,10 @@ Round_Status_Locations = {
   ["Has Passed 2nd"] = { {9.2, 17.21} },
   ["Has Passed 3rd"] = { {9.2, 16.88} },
   ["Has Passed 4th or later"] = { {9.2, 16.47} }
-  -- ["Has Passed"] = {
-  --   {9.2, 17.63},
-  --   {9.2, 17.21},
-  --   {9.2, 16.88},
-  --   {9.2, 16.47}
-  -- }
 }
 
 function outputDroppedRoundStatusObjectRoundStatus(obj)
   local dropPos = obj.getPosition():setAt("y", 1.4)
-  -- local tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
-  -- local tableau_pos = tableau.getPosition()
-  -- local seat = GetSeatFromPosition(tableau_pos)
   
   local closestDist, closestRoundStatus = 999, nil
   for roundStatus, statusLocations in pairs(Round_Status_Locations) do

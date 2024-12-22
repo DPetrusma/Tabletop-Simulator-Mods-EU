@@ -16,6 +16,7 @@ Changelog:
 v2.3
 - All pieces and bags from the player setup bags are tagged with their respective colours
 - Moving the round status marker will now broadcast the result to all players
+- Added a flippable tile to the manual setup that allows for setting up realms as bots
 
 v2.2
 - Scripts on all pieces and containers are now in the repo, with in-game pieces and containers using Require
