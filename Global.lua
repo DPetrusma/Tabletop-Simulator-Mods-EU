@@ -809,29 +809,54 @@ end
   ------------------------------------------------
 --]]
 function Player_Seat_From_Color(color)
+
+    -- This is our initial helper table for manual setup since we can't use the Tableaus (which
+    -- aren't on the board) to find the seat
+    local Player_Manual_Initial_Seat_From_Color =
+    {
+      blue = 1,
+      yellow = 2,
+      red = 3,
+      white = 4,
+      purple = 5,
+      green = 6
+    }
+
     local main_tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
     local seat
     if main_tableau ~= nil then
-        local pos = main_tableau.getPosition()
-        seat = GetSeatFromPosition(pos)
+      local pos = main_tableau.getPosition()
+      seat = GetSeatFromPosition(pos)
+    else
+      if TEST_MODE then log('Cannot find the main board for '..color..' so defaulting to initial position') end
+      seat = Player_Manual_Initial_Seat_From_Color[color]
     end
     return seat
+
 end
 
 function Player_Color_From_Seat(seat)
-    local main_tableau_position = Main_Tableau_Positions[seat]
+    --This is so the ray actually starts under the mat
+    local main_tableau_position = Vector(Main_Tableau_Positions[seat][1], 0, Main_Tableau_Positions[seat][3])
     local color
     -- This way might not be exact enough. It might be better to do a cast from this
     -- seat's main tableau spot and see what colour objects we hit
     if main_tableau_position ~= nil then
-        for col,_ in pairs(COLOR_RGB_CODES) do
-            local main_tableau = getObjectFromGUID(Main_Tableau_GUIDs[col])
-            if main_tableau == nil then main_tableau = getObjectFromGUID(Bot_Tableau_GUIDs[col]) end
-            local pos = main_tableau.getPosition()
-            if pos.x == main_tableau_position[1] and pos.z == main_tableau_position[3] then
-                color = col
-            end
+      --Cast a ray from main_tableau_position
+      hits = Physics.cast({
+        origin       = main_tableau_position,
+        direction    = {0,1,0},
+        type         = 1, --1 for Ray, not Sphere or Box
+        max_distance = 2,
+        -- debug        = true, -- uncomment to debug
+      })
+      --Check the color of the objects hit
+      for _,v in pairs(hits) do
+        local col = string.lower(GetColorFromTag(v.hit_object))
+        if col ~= nil then
+          color = col
         end
+      end
     end
     if color == nil then
         return "Could not find a color from seat " .. seat
@@ -4791,6 +4816,7 @@ end
 function removePlayerPieces()
   if TEST_MODE then log('Removing pieces for '..Color_To_Remove) end
   local bag = getObjectFromGUID(Setup_Bag_GUIDs[Color_To_Remove])
+  local seat_to_remove = Player_Seat_From_Color(Color_To_Remove)
 
   for _,piece_guid in pairs(Setup_Bag_Item_GUIDs[Color_To_Remove]) do
     local piece = getObjectFromGUID(piece_guid)
@@ -4809,20 +4835,20 @@ function removePlayerPieces()
   --We also need to delete all of the buttons for swapping
   --TODO Abstract this logic a little and create a function to be used here and inside CreateRealmButtons()
   for button,data in pairs(Buttons_To_Swap) do
-    if ( data.seat == Player_Seat_From_Color(Color_To_Remove) or data.target_color == Color_To_Remove ) and not button.isDestroyed() then
+    if ( data.seat == seat_to_remove or data.target_color == Color_To_Remove ) and not button.isDestroyed() then
       button.destroy()
       waitFrames(5)
     end
   end
 
   for button,seat in pairs(Buttons_For_Realm_Selection) do
-    if ( seat == Player_Seat_From_Color(Color_To_Remove) ) and not button.isDestroyed() then
+    if ( seat == seat_to_remove ) and not button.isDestroyed() then
       button.destroy()
     end
   end
 
   for button,seat in pairs(Buttons_To_Remove_Player) do
-    if ( seat == Player_Seat_From_Color(Color_To_Remove) ) and not button.isDestroyed() then
+    if ( seat == seat_to_remove ) and not button.isDestroyed() then
       button.destroy()
     end
   end
