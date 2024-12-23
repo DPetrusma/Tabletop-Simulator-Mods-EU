@@ -69,7 +69,7 @@ Generic_Mission_Deck_GUID = 'cadfa8'
 Scenario_Book_1_GUID = '1ae561'
 Scenario_Book_2_GUID = '79893d'
 
-Player_Hand_GUIDs = { red = '7a5107', yellow = '4f7aff', blue = '3320f7', green = '82f3dd', purple = 'b29a91', white = 'a98fd0', brown = '652140', teal = '61f580' }
+Player_Hand_GUIDs = { red = '7a5107', yellow = '4f7aff', blue = '3320f7', green = '82f3dd', purple = 'b29a91', white = 'a98fd0', brown = 'e746fc', teal = 'b9da2a' }
 Main_Tableau_GUIDs = { red = '388336', yellow = '90ffbf', blue = '1418fd', green = '82efa3', purple = 'ad4d79', white = '30484d', brown = '70c4bc', teal = '61904b' }
 Army_Tableau_GUIDs = { red = '655dff', yellow = 'd20799', blue = 'a076d6', green = 'e8a3ab', purple = 'c8a406', white = 'be9e18', brown = 'a9e19e', teal = '485332' }
 Fleet_Tableau_GUIDs = { red = 'ddf4d4', yellow = '005750', blue = 'fbdfa1', green = '558a42', purple = 'a76ad9', white = '3f02c4', brown = '76a366', teal = '85bde4' }
@@ -258,7 +258,7 @@ Bag_GUIDs = {
 }
 
 Setup_Bag_GUIDs = {
-  red = '5073e8', yellow = '8fa43c', blue = '7a2239', green = 'ddbf73', purple = 'fdd7a0', white = 'deaa34', brown = '2e9596', teal = '957e83'
+  red = '5073e8', yellow = '8fa43c', blue = '7a2239', green = 'ddbf73', purple = 'fdd7a0', white = 'deaa34', brown = '2e9596', teal = '207def'
 }
 
 Setup_Bag_Item_GUIDs = {
@@ -296,12 +296,12 @@ Setup_Bag_Item_GUIDs = {
              vassal = 'ed84de', s_town = '5c9dde', l_town = '2208ad', claim = '366e0f', alliance = 'd4192c', marriage = '60091a',
              war = '7340d5', tag_chit = 'a6b0de', merchant_1 = '5dfc9f', merchant_2 = '61d2ae', merchant_3 = 'a721ef',
              army_1 = '07aa38', army_2 = '2f259d', army_3 = '8332be', fleet = 'd6cc36',
-             army_1_middle_eastern = '', army_2_middle_eastern = '', army_3_middle_eastern = '', fleet_middle_eastern = '' },
+             army_1_middle_eastern = '9a8f3a', army_2_middle_eastern = '6e4943', army_3_middle_eastern = '67ce63', fleet_middle_eastern = 'a12e13' },
   teal  = { stability = '4b29d4', ruler_general = 'cef0e6', ship = '703f24', soldier = '1e1ac8', cube = '9123fa',
              vassal = '7f78d1', s_town = '591d40', l_town = '812992', claim = 'c3113d', alliance = '6fb5bb', marriage = '633664',
              war = 'bcca57', tag_chit = 'fdaf40', merchant_1 = 'b84479', merchant_2 = '0589c9', merchant_3 = '9f2ed6',
              army_1 = 'b98973', army_2 = 'ba4d4c', army_3 = '4dcf8d', fleet = 'f4c7d9',
-             army_1_middle_eastern = '', army_2_middle_eastern = '', army_3_middle_eastern = '', fleet_middle_eastern = '' }
+             army_1_middle_eastern = 'ffee47', army_2_middle_eastern = 'd97e25', army_3_middle_eastern = '80f5b0', fleet_middle_eastern = 'aefa74' }
 }
 
 HRE_Influence_Cube_GUIDs = {
@@ -470,7 +470,7 @@ function AutoSetupRealm()
   -- At this point, I need to check if all colours have been dealt with. If so, place
   -- the deferred pieces and other final steps
   ManualSetupRealmsDealtWithCount = ManualSetupRealmsDealtWithCount + 1
-  if ManualSetupRealmsDealtWithCount == 6 then
+  if ManualSetupRealmsDealtWithCount == 8 then
     DeferredPlacements()
     RotateMissionDecks()
 
@@ -2304,12 +2304,18 @@ end
 
 --Return Position from 1 to 6 depending on main tableau coordinates
 function GetSeatFromPosition(position3d)
-  if position3d[1] > 0 then
+  if position3d[1] > 32 then
     if position3d[3] > 0 then
-      return 5
+      return 7
     else
-      return 6
+      return 8
     end
+  elseif position3d[1] > 0 then
+      if position3d[3] > 0 then
+        return 5
+      else
+        return 6
+      end
   elseif position3d[1] > -27 then
     if position3d[3] > 0 then
       return 4
