@@ -904,7 +904,6 @@ function Setup_Game()
 
     DestructByGUID({ Deck_Shuffler_Zone_1_GUID, Deck_Shuffler_Zone_2_GUID, Event_Deck_Zone_GUID })
     DestructByGUID(Mission_Deck_Zone_GUIDs)
-    DestructByGUID(Reference_Zone_GUIDs)
     DestructByGUID({ Physics_Determination_Zone_GUID })
     UpdateTuckZonePositions()
 
@@ -4211,21 +4210,9 @@ function CheckRemovedEnter(object, trashBinObject)
   end
 
   --[[
- TODO: Clean this comment up
-  Have a counter of how many towns have been deleted per colour (Smart_delete_town_counter)
-  In here, CheckRemovedEnter, if it's a town or vassal, and increment this counter by 1 (start at 0)
-  When this part finishes, schedule a function to run after 2 seconds to set the counter back to 0, but
-    cancel that schedule for each town to restart the count
-  For the town, loop through Local_Large_Town_Positions. The first town will use physics.cast on each space to see what is already there.
-    If there is a town, save "Town" in a holding table (which will also be cleared out in the scheduled function)
-    If there is a cube, save a reference to the object, and move that object over a number of spaces equal to Large_Town_Deleted_Count[color]. Then, put
-        this town in the current space+1-Large_Town_Deleted_Count[color] if it hasn't already been flagged as moved, then flag it as moved
-    If there is a blank, record it as blank, and break the loop
-  Subsequent towns will check the holding table to see what is in this space
-  Schedule the function to reset our counter and the holding table
-
-  So, the first town will be placed in the first blank/cubed space, and each cube will be moved over 1 space
-  The second town will be placed in the second blank/cubed space, and each cube will be moved over 2 spaces
+  Smart delete of towns and vassals. Take all of the towns and vassals deleted within 2 seconds of each other and
+  work out which space on the town track to place them on, taking into account how many were deleted and which
+  spaces are occupied by towns/vassals or cubes.
   --]]
   if object.hasTag('LargeTown') or object.hasTag('SmallTown') or object.hasTag('Vassal') then
     local town_size = 'SmallTown'
@@ -4242,13 +4229,14 @@ function CheckRemovedEnter(object, trashBinObject)
     end
     if tableau == nil then return false end
     local this_town_moved = false
-    --This counter is reset every 2 seconds by CleanupSmartDeleteTowns
+    --This counter is reset every 2 seconds by CleanupSmartDeleteTowns so we can handle
+    --multiple pieces delete in quick succession
     Smart_delete_town_counter[town_size][color] = Smart_delete_town_counter[town_size][color] + 1
     if TEST_MODE then log('Up to "deleting" town ' .. Smart_delete_town_counter[town_size][color] .. ' for ' .. color ) end
 
+    --Step through all of the town spaces, starting from the end
     for i = #Local_Town_positions[town_size], 1, -1 do
         --We need to declare these local variables before the goto. The Lua docs explain about scope.
-        -- local has_hit = false
         local local_town_pos
         local hits
 
@@ -4259,6 +4247,8 @@ function CheckRemovedEnter(object, trashBinObject)
         if town_size == 'Vassal' then cube_height = cube_height + math.fmod(i+1,2) end 
         local town_height = 2
         if town_size == 'Vassal' then town_height = 0.2 end
+        --For this town space, calculate where a cube or a town would be moved to if this space is empty, based
+        --on how many towns have been deleted so far
         local cube_new_pos = tableau.positionToWorld(
             {Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color])][1],
             cube_height,
@@ -4270,6 +4260,7 @@ function CheckRemovedEnter(object, trashBinObject)
             Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color]+1)][2]}
           )
 
+        --This is just the location of the town space to be used for the physics.cast
         local_town_pos = tableau.positionToWorld({Local_Town_positions[town_size][i][1], 0, Local_Town_positions[town_size][i][2]})
         --I am trying to use physics.cast on each space just once, so check if we've already done it
         if Smart_delete_towns_reserved[town_size][color][i] == nil then
@@ -4313,7 +4304,7 @@ function CheckRemovedEnter(object, trashBinObject)
                 end
             end
         end
-        --Now that the slot has been checked see if there is a town or a cube to move
+        --Now that the slot has been checked, see if there is a town or a cube to move
         local potential_cube = getObjectFromGUID(Smart_delete_towns_reserved[town_size][color][i])
         if potential_cube ~= nil then --i.e. it refers to a cube object
           if TEST_MODE then log('I am moving a cube in slot ' .. i .. ' to slot ' .. math.max(1,i-Smart_delete_town_counter[town_size][color]) ) end
@@ -4871,6 +4862,7 @@ function removePlayerPieces()
   if ManualSetupRealmsDealtWithCount == 6 then
     DeferredPlacements()
     RotateMissionDecks()
+    DestructByGUID(Reference_Zone_GUIDs)
 
     local players = {} -- Work out which players are left
     for color,_ in pairs(COLOR_RGB_CODES) do
