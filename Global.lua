@@ -366,7 +366,7 @@ function CreateRealmButtons()
   PlayerInSetup.color = Select_Realm_Target_Color
 
   --This is only used for seat 2 to put some things in a different spot
-  PlayerInSetup.seat = Player_Seat_From_Color[Select_Realm_Target_Color]
+  PlayerInSetup.seat = Player_Seat_From_Color(Select_Realm_Target_Color)
   --Work out what year of the board is face up to determine what realms are selectable
   local mainboard = getObjectsWithTag('MainBoard')
   local mainboardYear = MAIN_BOARD_DATE[mainboard[1].getStateId()]
@@ -423,6 +423,12 @@ function CreateRealmButtons()
     end
   end
 
+  for seat,button in pairs(Tile_for_Bot_Flag) do
+    if ( seat == PlayerInSetup.seat ) and not button.isDestroyed() then
+      button.destroy()
+    end
+  end
+
   return 1
 end
 
@@ -433,7 +439,14 @@ function AutoSetupRealm()
   end
    --Make sure this realm is not selected again
   SelectedRealms[PlayerInSetup.realm] = true
-  SetupRealm({ seat = PlayerInSetup.seat, color = PlayerInSetup.color, realm = { PlayerInSetup.realm, PlayerInSetup.year}, })
+  local seat = PlayerInSetup.seat
+  local player_data = {
+      seat = PlayerInSetup.seat,
+      color = PlayerInSetup.color,
+      realm = { PlayerInSetup.realm, PlayerInSetup.year},
+      bot = Tile_for_Bot_Flag[seat].is_face_down
+  }
+  SetupRealm(player_data)
   --Clear out this table so that someone else can choose a realm
   PlayerInSetup = {}
   Is_Realm_Selecting = false
@@ -446,7 +459,8 @@ function AutoSetupRealm()
     RotateMissionDecks()
 
     local players = {} -- Work out which players are left
-    for color,seat in pairs(Player_Seat_From_Color) do
+    for color,_ in pairs(COLOR_RGB_CODES) do
+      local seat = Player_Seat_From_Color(color)
       if getObjectFromGUID(Player_Hand_GUIDs[color]) ~= nil then
         players[seat] = {
           bot = false,
@@ -807,14 +821,11 @@ end
   ------------------------------------------------
   ------------------------------------------------
 --]]
-function Setup_Game()
+function Player_Seat_From_Color(color)
 
-  -- Handle Manual Setup
-  if UI_Data.scenario == '0-00' then
-    --Keep these in sync for the later color-swapping features
-    --TODO: I think I don't need this, actually. I get use a colour to get a Tableau from getObjectFromGUID(Main_Tableau_GUIDs[col])
-    --and then use tableau.getPosition() and GetSeatFromPosition(pos) to find a position from the color
-    Player_Seat_From_Color =
+    -- This is our initial helper table for manual setup since we can't use the Tableaus (which
+    -- aren't on the board) to find the seat
+    local Player_Manual_Initial_Seat_From_Color =
     {
       blue = 1,
       yellow = 2,
@@ -824,23 +835,58 @@ function Setup_Game()
       green = 6
     }
 
-    Player_Color_From_Seat =
-    {
-      [Player_Seat_From_Color.blue] = 'blue',
-      [Player_Seat_From_Color.yellow] = 'yellow',
-      [Player_Seat_From_Color.red] = 'red',
-      [Player_Seat_From_Color.white] = 'white',
-      [Player_Seat_From_Color.purple] = 'purple',
-      [Player_Seat_From_Color.green] = 'green'
-    }
+    local main_tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
+    local seat
+    if main_tableau ~= nil then
+      local pos = main_tableau.getPosition()
+      seat = GetSeatFromPosition(pos)
+    else
+      if TEST_MODE then log('Cannot find the main board for '..color..' so defaulting to initial position') end
+      seat = Player_Manual_Initial_Seat_From_Color[color]
+    end
+    return seat
 
+end
+
+function Player_Color_From_Seat(seat)
+    --The 0 is so the ray actually starts under the mat
+    local main_tableau_position = Vector(Main_Tableau_Positions[seat][1], 0, Main_Tableau_Positions[seat][3])
+    local color
+    if main_tableau_position ~= nil then
+      --Cast a ray from main_tableau_position
+      hits = Physics.cast({
+        origin       = main_tableau_position,
+        direction    = {0,1,0},
+        type         = 1, --1 for Ray, not Sphere or Box
+        max_distance = 2,
+        -- debug        = true, -- uncomment to debug
+      })
+      --Check the color of the objects hit
+      for _,v in pairs(hits) do
+        local col = string.lower(GetColorFromTag(v.hit_object))
+        if col ~= nil then
+          color = col
+        end
+      end
+    end
+    if color == nil then
+        return "Could not find a color from seat " .. seat
+    end
+    return color
+end
+
+function Setup_Game()
+
+  -- Handle Manual Setup
+  if UI_Data.scenario == '0-00' then
     --These are used for the manual setup helpers
     PlayerInSetup = {}
     SelectedRealms = {}
     --Once the below counter hits 6, we will place the deferred pieces
     ManualSetupRealmsDealtWithCount = 0
 
-    for seat, color in pairs(Player_Color_From_Seat) do
+    for color,_ in pairs(COLOR_RGB_CODES) do
+      local seat = Player_Seat_From_Color(color)
       PlaceTableausAndBags(seat, color)
       local player_hand = getObjectFromGUID(Player_Hand_GUIDs[color])
       if player_hand == nil then
@@ -858,7 +904,6 @@ function Setup_Game()
 
     DestructByGUID({ Deck_Shuffler_Zone_1_GUID, Deck_Shuffler_Zone_2_GUID, Event_Deck_Zone_GUID })
     DestructByGUID(Mission_Deck_Zone_GUIDs)
-    DestructByGUID(Reference_Zone_GUIDs)
     DestructByGUID({ Physics_Determination_Zone_GUID })
     UpdateTuckZonePositions()
 
@@ -4165,22 +4210,9 @@ function CheckRemovedEnter(object, trashBinObject)
   end
 
   --[[
- TODO: Clean this comment up
-  Another thought train:
-  Have a counter of how many large towns have been deleted per colour (Large_Town_Deleted_Count[color])
-  In here, CheckRemovedEnter, if it's a large town, increment this counter by 1 (start at 0)
-  When this part finishes, schedule a function to run after 2 seconds to set the counter back to 0, but
-    cancel that schedule for each town to restart the count
-  For the town, loop through Local_Large_Town_Positions. The first town will use physics.cast on each space to see what is already there.
-    If there is a town, save "Town" in a holding table (which will also be cleared out in the scheduled function)
-    If there is a cube, save a reference to the object, and move that object over a number of spaces equal to Large_Town_Deleted_Count[color]. Then, put
-        this town in the current space+1-Large_Town_Deleted_Count[color] if it hasn't already been flagged as moved, then flag it as moved
-    If there is a blank, record it as blank, and break the loop
-  Subsequent towns will check the holding table to see what is in this space
-  Schedule the function to reset our counter and the holding table
-
-  So, the first town will be placed in the first blank/cubed space, and each cube will be moved over 1 space
-  The second town will be placed in the second blank/cubed space, and each cube will be moved over 2 spaces
+  Smart delete of towns and vassals. Take all of the towns and vassals deleted within 2 seconds of each other and
+  work out which space on the town track to place them on, taking into account how many were deleted and which
+  spaces are occupied by towns/vassals or cubes.
   --]]
   if object.hasTag('LargeTown') or object.hasTag('SmallTown') or object.hasTag('Vassal') then
     local town_size = 'SmallTown'
@@ -4197,22 +4229,26 @@ function CheckRemovedEnter(object, trashBinObject)
     end
     if tableau == nil then return false end
     local this_town_moved = false
+    --This counter is reset every 2 seconds by CleanupSmartDeleteTowns so we can handle
+    --multiple pieces delete in quick succession
     Smart_delete_town_counter[town_size][color] = Smart_delete_town_counter[town_size][color] + 1
     if TEST_MODE then log('Up to "deleting" town ' .. Smart_delete_town_counter[town_size][color] .. ' for ' .. color ) end
 
+    --Step through all of the town spaces, starting from the end
     for i = #Local_Town_positions[town_size], 1, -1 do
         --We need to declare these local variables before the goto. The Lua docs explain about scope.
-        -- local has_hit = false
         local local_town_pos
         local hits
 
-        --We only use these once, so it doesn't save space, but next to each other you can see that a
+        --We only use these variables once, so it doesn't save space, but next to each other you can see that a
         --cube will be offset from a moved town by 1
         --Cubes can be on top of vassal tokens, so in that case, move them a little higher
         local cube_height = 2
         if town_size == 'Vassal' then cube_height = cube_height + math.fmod(i+1,2) end 
         local town_height = 2
-        if town_size == 'Vassal' then town_height = 0.2 end 
+        if town_size == 'Vassal' then town_height = 0.2 end
+        --For this town space, calculate where a cube or a town would be moved to if this space is empty, based
+        --on how many towns have been deleted so far
         local cube_new_pos = tableau.positionToWorld(
             {Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color])][1],
             cube_height,
@@ -4224,6 +4260,7 @@ function CheckRemovedEnter(object, trashBinObject)
             Local_Town_positions[town_size][math.max(1,i-Smart_delete_town_counter[town_size][color]+1)][2]}
           )
 
+        --This is just the location of the town space to be used for the physics.cast
         local_town_pos = tableau.positionToWorld({Local_Town_positions[town_size][i][1], 0, Local_Town_positions[town_size][i][2]})
         --I am trying to use physics.cast on each space just once, so check if we've already done it
         if Smart_delete_towns_reserved[town_size][color][i] == nil then
@@ -4267,7 +4304,7 @@ function CheckRemovedEnter(object, trashBinObject)
                 end
             end
         end
-        --Now that the slot has been checked see if there is a town or a cube to move
+        --Now that the slot has been checked, see if there is a town or a cube to move
         local potential_cube = getObjectFromGUID(Smart_delete_towns_reserved[town_size][color][i])
         if potential_cube ~= nil then --i.e. it refers to a cube object
           if TEST_MODE then log('I am moving a cube in slot ' .. i .. ' to slot ' .. math.max(1,i-Smart_delete_town_counter[town_size][color]) ) end
@@ -4681,34 +4718,33 @@ function SwapTwoObjects(piece_1, piece_2)
 end
 
 function SwapTwoColors()
-  local color_to_swap_1 = Color_Swapping_Table[1]
-  local color_to_swap_2 = Color_Swapping_Table[2]
 
-  if color_to_swap_1 == color_to_swap_2 then
+  if Color_Swapping_Table[1] == Color_Swapping_Table[2] then
     log("No action on swapping a color with itself")
     Is_Color_Swapping = false
     return 1
   end
   --We need Color_Swapping_Table to be set beforehand with 2 entries
-  if TEST_MODE then log('Swapping pieces for '..color_to_swap_1..' and '..color_to_swap_2) end
+  if TEST_MODE then log('Swapping pieces for '..Color_Swapping_Table[1]..' and '..Color_Swapping_Table[2]) end
   --Also, since I will run 3 loops, best to store the objects themselves, their positions and rotations
   -- We are assuming that both lists are the same size
   local objects_to_swap = {}
+  local seats_to_swap = {}
 
-  --Update the tables first so that if you click another button it will use the new location
-  local intermediate_seat = Player_Seat_From_Color[color_to_swap_1]
-  Player_Seat_From_Color[color_to_swap_1] = Player_Seat_From_Color[color_to_swap_2]
-  Player_Seat_From_Color[color_to_swap_2] = intermediate_seat
-
-  Player_Color_From_Seat[Player_Seat_From_Color[color_to_swap_2]] = color_to_swap_2
-  Player_Color_From_Seat[Player_Seat_From_Color[color_to_swap_1]] = color_to_swap_1
+  for i = 1, 2, 1 do
+    local main_tableau = getObjectFromGUID(Main_Tableau_GUIDs[Color_Swapping_Table[i]])
+    if main_tableau ~= nil then
+        local pos = main_tableau.getPosition()
+        seats_to_swap[i] = GetSeatFromPosition(pos)
+    end
+  end
 
   --We want to store, for each piece type in the setup area, the piece itself, the location and rotation
   --for both colours so we can easily reference and swap later
-  for piece_name,_ in pairs(Setup_Bag_Item_GUIDs[color_to_swap_1]) do
+  for piece_name,_ in pairs(Setup_Bag_Item_GUIDs[Color_Swapping_Table[1]]) do
     --This handles the case where some colours have middle eastern figures and others don't
-    local color_1_piece = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_1][piece_name])
-    local color_2_piece = getObjectFromGUID(Setup_Bag_Item_GUIDs[color_to_swap_2][piece_name])
+    local color_1_piece = getObjectFromGUID(Setup_Bag_Item_GUIDs[Color_Swapping_Table[1]][piece_name])
+    local color_2_piece = getObjectFromGUID(Setup_Bag_Item_GUIDs[Color_Swapping_Table[2]][piece_name])
 
     if color_1_piece ~= nil and color_2_piece ~= nil then
       objects_to_swap[piece_name] = {
@@ -4724,14 +4760,15 @@ function SwapTwoColors()
   end
   
   --Swap the mats
-  SwapTwoObjects(getObjectFromGUID(Main_Tableau_GUIDs[color_to_swap_1]), getObjectFromGUID(Main_Tableau_GUIDs[color_to_swap_2]))
-  SwapTwoObjects(getObjectFromGUID(Army_Tableau_GUIDs[color_to_swap_1]), getObjectFromGUID(Army_Tableau_GUIDs[color_to_swap_2]))
-  SwapTwoObjects(getObjectFromGUID(Fleet_Tableau_GUIDs[color_to_swap_1]), getObjectFromGUID(Fleet_Tableau_GUIDs[color_to_swap_2]))
+  SwapTwoObjects(getObjectFromGUID(Main_Tableau_GUIDs[Color_Swapping_Table[1]]), getObjectFromGUID(Main_Tableau_GUIDs[Color_Swapping_Table[2]]))
+  SwapTwoObjects(getObjectFromGUID(Army_Tableau_GUIDs[Color_Swapping_Table[1]]), getObjectFromGUID(Army_Tableau_GUIDs[Color_Swapping_Table[2]]))
+  SwapTwoObjects(getObjectFromGUID(Fleet_Tableau_GUIDs[Color_Swapping_Table[1]]), getObjectFromGUID(Fleet_Tableau_GUIDs[Color_Swapping_Table[2]]))
 
   waitFrames(5)
 
   --Swap all the pieces
   for _,pieces in pairs(objects_to_swap) do
+    --Can't I use SwapTwoObjects(pieces.piece_1, pieces.piece_2) ???
     pieces.piece_1.setPositionSmooth({
       pieces.piece_2_pos[1],
       pieces.piece_2_pos[2],
@@ -4749,15 +4786,15 @@ function SwapTwoColors()
   end
 
   --Swap the player hand positions
-  local player_hand1 = getObjectFromGUID(Player_Hand_GUIDs[color_to_swap_1])
-  local player_hand2 = getObjectFromGUID(Player_Hand_GUIDs[color_to_swap_2])
+  local player_hand1 = getObjectFromGUID(Player_Hand_GUIDs[Color_Swapping_Table[1]])
+  local player_hand2 = getObjectFromGUID(Player_Hand_GUIDs[Color_Swapping_Table[2]])
   if player_hand1 == nil or player_hand2 == nil then
     log('Could not find player hand object')
   else
-    player_hand1.setPosition(Player_Hand_Positions[Player_Seat_From_Color[color_to_swap_1]])
-    player_hand1.setRotation(Player_Hand_Rotations[Player_Seat_From_Color[color_to_swap_1]])
-    player_hand2.setPosition(Player_Hand_Positions[Player_Seat_From_Color[color_to_swap_2]])
-    player_hand2.setRotation(Player_Hand_Rotations[Player_Seat_From_Color[color_to_swap_2]])
+    player_hand1.setPosition(Player_Hand_Positions[seats_to_swap[1]])
+    player_hand1.setRotation(Player_Hand_Rotations[seats_to_swap[1]])
+    player_hand2.setPosition(Player_Hand_Positions[seats_to_swap[2]])
+    player_hand2.setRotation(Player_Hand_Rotations[seats_to_swap[2]])
   end
 
   --Just to make sure everthing is done
@@ -4771,6 +4808,7 @@ end
 function removePlayerPieces()
   if TEST_MODE then log('Removing pieces for '..Color_To_Remove) end
   local bag = getObjectFromGUID(Setup_Bag_GUIDs[Color_To_Remove])
+  local seat_to_remove = Player_Seat_From_Color(Color_To_Remove)
 
   for _,piece_guid in pairs(Setup_Bag_Item_GUIDs[Color_To_Remove]) do
     local piece = getObjectFromGUID(piece_guid)
@@ -4789,20 +4827,26 @@ function removePlayerPieces()
   --We also need to delete all of the buttons for swapping
   --TODO Abstract this logic a little and create a function to be used here and inside CreateRealmButtons()
   for button,data in pairs(Buttons_To_Swap) do
-    if ( data.seat == Player_Seat_From_Color[Color_To_Remove] or data.target_color == Color_To_Remove ) and not button.isDestroyed() then
+    if ( data.seat == seat_to_remove or data.target_color == Color_To_Remove ) and not button.isDestroyed() then
       button.destroy()
       waitFrames(5)
     end
   end
 
   for button,seat in pairs(Buttons_For_Realm_Selection) do
-    if ( seat == Player_Seat_From_Color[Color_To_Remove] ) and not button.isDestroyed() then
+    if ( seat == seat_to_remove ) and not button.isDestroyed() then
       button.destroy()
     end
   end
 
   for button,seat in pairs(Buttons_To_Remove_Player) do
-    if ( seat == Player_Seat_From_Color[Color_To_Remove] ) and not button.isDestroyed() then
+    if ( seat == seat_to_remove ) and not button.isDestroyed() then
+      button.destroy()
+    end
+  end
+
+  for seat,button in pairs(Tile_for_Bot_Flag) do
+    if ( seat == seat_to_remove ) and not button.isDestroyed() then
       button.destroy()
     end
   end
@@ -4818,9 +4862,11 @@ function removePlayerPieces()
   if ManualSetupRealmsDealtWithCount == 6 then
     DeferredPlacements()
     RotateMissionDecks()
+    DestructByGUID(Reference_Zone_GUIDs)
 
     local players = {} -- Work out which players are left
-    for color,seat in pairs(Player_Seat_From_Color) do
+    for color,_ in pairs(COLOR_RGB_CODES) do
+      local seat = Player_Seat_From_Color(color)
       if getObjectFromGUID(Player_Hand_GUIDs[color]) ~= nil then
         players[seat] = {
           bot = false,
@@ -4851,7 +4897,7 @@ function swapColorsButtonPress(obj)
   if not Is_Color_Swapping then
     Is_Color_Swapping = true
     Color_Swapping_Table = {
-      Player_Color_From_Seat[Buttons_To_Swap[obj].seat],
+      Player_Color_From_Seat(Buttons_To_Swap[obj].seat),
       Buttons_To_Swap[obj].target_color
     }
     if not Color_Swapping_Table then
@@ -4867,7 +4913,7 @@ function selectRealmButtonPress(obj)
   --Try to make sure we don't get mixed up with multiple things going
   if not Is_Realm_Selecting then
     Is_Realm_Selecting = true
-    Select_Realm_Target_Color = Player_Color_From_Seat[Buttons_For_Realm_Selection[obj]]
+    Select_Realm_Target_Color = Player_Color_From_Seat(Buttons_For_Realm_Selection[obj])
     if not Select_Realm_Target_Color then
       log("Could not find a color to select a realm for")
       return
@@ -4884,7 +4930,7 @@ function selectRealmButtonPress(obj)
 end
 
 function removeColorButtonPress(obj)
-  Color_To_Remove = Player_Color_From_Seat[Buttons_To_Remove_Player[obj]]
+  Color_To_Remove = Player_Color_From_Seat(Buttons_To_Remove_Player[obj])
   if not Color_To_Remove then
     log("Could not find a color to remove")
     return
@@ -4906,6 +4952,7 @@ function CreateButtonsForRealms()
   Buttons_To_Swap = {}
   Buttons_For_Realm_Selection = {}
   Buttons_To_Remove_Player = {}
+  Tile_for_Bot_Flag = {}
 
   local color_swap_button_offsets = {
     red = {-6.0, -8.00},
@@ -4916,10 +4963,11 @@ function CreateButtonsForRealms()
     white = {1.50, -8.00}
   }
   local remove_player_button_offset = {-6.90, -5.08}
-  local realm_selection_button_offset = {0.00, -5.08}
+  local realm_selection_button_offset = {-2.00, -5.08}
+  local realm_selection_bot_flag_tile_offset = {5.00, -5.08}
 
   for color1,_ in pairs(COLOR_RGB_CODES) do
-    local seat = Player_Seat_From_Color[color1]
+    local seat = Player_Seat_From_Color(color1)
     local rot = Main_Tableau_Rotations[seat]
 
     --Create a button here for removing this player's pieces
@@ -4972,6 +5020,21 @@ function CreateButtonsForRealms()
     select_realm_button.setLock(true)
     waitFrames(5)
 
+    --This tile will be used to determine if the setup is for a human or a bot
+    position = GetOffset(Main_Tableau_Positions[seat],realm_selection_bot_flag_tile_offset,seat,1)
+    Tile_for_Bot_Flag[seat] = spawnObject({
+        type = "Custom_Tile",
+        position = position,
+        sound = false,
+        rotation = rot,
+    })
+    local params = {
+          image = 'https://steamusercontent-a.akamaihd.net/ugc/28808171710508919/C2205D122F1AD93F359961DDE4FB2C20392D4F98/',
+          image_bottom = 'https://steamusercontent-a.akamaihd.net/ugc/28808171710508617/C0A305E3A4E0987F155EB9053A3F111126E4C071/',
+          type = 0,
+      }
+    Tile_for_Bot_Flag[seat].setCustomObject(params)
+
     if TEST_MODE then log('Placing swap buttons for ' .. color1 .. ' player') end
     for color2,_ in pairs(COLOR_RGB_CODES) do
       position = GetOffset(Main_Tableau_Positions[seat],color_swap_button_offsets[color2],seat,1)
@@ -5001,7 +5064,7 @@ function CreateButtonsForRealms()
       })
 
       Buttons_To_Swap[swap_button] = {
-        seat = Player_Seat_From_Color[color1],
+        seat = Player_Seat_From_Color(color1),
         target_color = color2
       }
       swap_button.setColorTint(COLOR_RGB_CODES[color2])
@@ -5150,6 +5213,79 @@ function outputDroppedStabilityObjectStability(obj)
   printToAll(outString, c)
 end
 
+--[[
+  ------------------------------------------------
+  ------------------------------------------------
+            Print Round Status on change
+  ------------------------------------------------
+  ------------------------------------------------
+--]]
+
+Round_Status_Locations = {
+  ["Event not taken"] = {
+    {7.67, 17.6},
+    {7.90, 17.35},
+    {7.68, 17.12},
+    {7.86, 16.92},
+    {7.66, 16.65},
+    {7.87, 16.40}
+  },
+  ["Event taken"] = {
+    {8.37, 17.6},
+    {8.57, 17.35},
+    {8.37, 17.12},
+    {8.57, 16.92},
+    {8.37, 16.65},
+    {8.57, 16.40}
+  },
+  ["Has Passed 1st"] = { {9.2, 17.63} },
+  ["Has Passed 2nd"] = { {9.2, 17.21} },
+  ["Has Passed 3rd"] = { {9.2, 16.88} },
+  ["Has Passed 4th or later"] = { {9.2, 16.47} }
+}
+
+function outputDroppedRoundStatusObjectRoundStatus(obj)
+  local dropPos = obj.getPosition():setAt("y", 1.4)
+  
+  local closestDist, closestRoundStatus = 999, nil
+  for roundStatus, statusLocations in pairs(Round_Status_Locations) do
+    for _,loc in pairs(statusLocations) do
+      local roundStatusPos = {
+        loc[1],
+        1.4,
+        loc[2]
+      }
+      local dist = Vector.distance(Vector(roundStatusPos), dropPos)
+      if dist < 0.7 then
+        if dist < closestDist then
+          closestDist = dist
+          closestRoundStatus = roundStatus
+        end
+      end
+    end
+  end
+
+  local c = GetColorFromTag(obj) or "Grey"
+  local name = obj.getName()
+  local outString = ""
+  if name ~= "" then
+    outString = name
+  else
+    outString = c
+  end
+
+  if closestRoundStatus then
+    outString = outString.."'s Round Status set to "..closestRoundStatus
+    obj.setDescription(closestRoundStatus)
+  else
+    closestRoundStatus = nil
+    outString = outString.."'s Round Status dropped off the board "
+    obj.setDescription("")
+  end
+
+  printToAll(outString, c)
+end
+
 
 --[[
   ------------------------------------------------
@@ -5203,6 +5339,13 @@ function onObjectDrop(player_color, dropped_object)
       function() return dropped_object.resting end, --Condition function
       5, --Timeout in seconds
       function() flipLightShipOnTPS(dropped_object) end --Function to run if we hit the timeout
+    )
+  elseif dropped_object.hasTag("RoundStatus") then
+    Wait.condition(
+      function() outputDroppedRoundStatusObjectRoundStatus(dropped_object) end,
+      function() return dropped_object.resting end,
+      5,
+      function() outputDroppedRoundStatusObjectRoundStatus(dropped_object) end
     )
   end
 end

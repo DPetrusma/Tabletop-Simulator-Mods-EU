@@ -13,6 +13,11 @@ The other files in EU can be edited and those files are alreay referenced in the
 8. Once all changes have been made to the TTS save and the .lua files, do a final test by loading the save game from the main menu of TTS, commit all changes to git, and pass on to Eivind to upload. Note that the file *EU\usage.txt* is the text in the Grey notepad called Usage.
 
 Changelog:
+v2.3
+- All pieces and bags from the player setup bags are tagged with their respective colours
+- Moving the round status marker will now broadcast the result to all players
+- Added a flippable tile to the manual setup that allows for setting up realms as bots
+
 v2.2
 - Scripts on all pieces and containers are now in the repo, with in-game pieces and containers using Require
 - Claim containers only accept claim tokens

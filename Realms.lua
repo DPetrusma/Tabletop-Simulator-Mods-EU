@@ -1502,7 +1502,7 @@ SETUP_DATA = {
       },
       merchants = { {-1.52, -6.17}, {6.10, -7.65} },
       army1 = { 1, 0, 0},
-      figurines = { {0.92, -4.30} },
+      figurines = { {2.37, -4.14} },
       ships = { {2.54, -7.79} },
       ships_bot = { {1.93, -7.11} },
       capital = WesternMap.firenze
