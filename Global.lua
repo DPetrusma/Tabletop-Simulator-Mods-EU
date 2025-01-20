@@ -433,15 +433,21 @@ function CreateRealmButtons()
 end
 
 function ManualSetupFinalSteps()
-    if TEST_MODE then log('Shuffing cards in zone 2') end
-    shuffler = getObjectFromGUID(Deck_Shuffler_Zone_2_GUID)
-    decks_to_shuffle = shuffler.getObjects()
+    if TEST_MODE then log('Shuffing cards in zone 1') end
+    local shuffler = getObjectFromGUID(Deck_Shuffler_Zone_1_GUID)
+    local decks_to_shuffle = shuffler.getObjects()
     for _,i in pairs(decks_to_shuffle) do
       if i.type == 'Deck' then
         i.shuffle()
+        local pos = i.getPosition()
+        if pos[3] < 1.5 then
+          local new_pos = Event_Card_Positions[1]
+          new_pos[2] = 3 - (1 * pos[3])
+          i.setPosition(new_pos)
+        end
       end
     end
-    if TEST_MODE then log('Zone 2 completed') end
+    if TEST_MODE then log('Zone 1 completed') end
 
     -- Lock Rules & References
     local references = getObjectsWithTag('Reference')
@@ -4819,10 +4825,11 @@ function SwapTwoColors()
   if player_hand1 == nil or player_hand2 == nil then
     log('Could not find player hand object')
   else
-    player_hand1.setPosition(Player_Hand_Positions[seats_to_swap[1]])
-    player_hand1.setRotation(Player_Hand_Rotations[seats_to_swap[1]])
-    player_hand2.setPosition(Player_Hand_Positions[seats_to_swap[2]])
-    player_hand2.setRotation(Player_Hand_Rotations[seats_to_swap[2]])
+    if TEST_MODE then log('Swapping hands for '..seats_to_swap[1]..' and '..seats_to_swap[2]) end
+    player_hand1.setPosition(Player_Hand_Positions[seats_to_swap[2]])
+    player_hand1.setRotation(Player_Hand_Rotations[seats_to_swap[2]])
+    player_hand2.setPosition(Player_Hand_Positions[seats_to_swap[1]])
+    player_hand2.setRotation(Player_Hand_Rotations[seats_to_swap[1]])
   end
 
   --Just to make sure everthing is done
