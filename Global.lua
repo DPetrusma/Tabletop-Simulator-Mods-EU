@@ -2562,15 +2562,15 @@ function ProcessMissionDecks(scenario_data)
       if realm_data.rem_missions then
         TransferMissionCards(realm_data, Removed_Components_Bag, realm_data.rem_missions)
       end
-      waitFrames(5)
+      waitFrames(15)
       if realm_data.add_missions then
         TransferMissionCards(realm_data, Generic_Mission_Deck, realm_data.add_missions)
       end
-      waitFrames(5)
+      waitFrames(15)
       if realm_data.done_missions then
         DisplayMissionCards(scenario_data, realm)
       end
-      waitFrames(5)
+      waitFrames(15)
       if realm_data.start_missions then
         DisplayMissionCards(scenario_data, realm, true)
       end
