@@ -432,6 +432,60 @@ function CreateRealmButtons()
   return 1
 end
 
+function ManualSetupFinalSteps()
+    if TEST_MODE then log('Shuffing cards in zone 2') end
+    shuffler = getObjectFromGUID(Deck_Shuffler_Zone_2_GUID)
+    decks_to_shuffle = shuffler.getObjects()
+    for _,i in pairs(decks_to_shuffle) do
+      if i.type == 'Deck' then
+        i.shuffle()
+      end
+    end
+    if TEST_MODE then log('Zone 2 completed') end
+
+    -- Lock Rules & References
+    local references = getObjectsWithTag('Reference')
+    local targeting = getObjectsWithTag('Targeting')
+    local rules = getObjectsWithTag('Rules')
+    for _, o in ipairs(references) do
+      o.setLock(true)
+    end
+    for _, o in ipairs(targeting) do
+      o.setLock(true)
+    end
+    for _, o in ipairs(rules) do
+      o.setLock(true)
+    end
+
+    DeferredPlacements()
+    RotateMissionDecks()
+
+    local players = {} -- Work out which players are left
+    for color,_ in pairs(COLOR_RGB_CODES) do
+      local seat = Player_Seat_From_Color(color)
+      if getObjectFromGUID(Player_Hand_GUIDs[color]) ~= nil then
+        players[seat] = {
+          bot = false,
+          color = color
+        }
+      end
+    end
+
+    DealActionCards(players)
+    RotateTruceAndRemoveBags()
+
+    DestructByGUID({ Deck_Shuffler_Zone_1_GUID, Deck_Shuffler_Zone_2_GUID, Event_Deck_Zone_GUID })
+    DestructByGUID(Mission_Deck_Zone_GUIDs)
+    DestructByGUID({ Physics_Determination_Zone_GUID })
+    UpdateTuckZonePositions()
+    
+    for color,_ in pairs(COLOR_RGB_CODES) do
+      Global.UI.setAttribute(('message_banner_'..color), "active", false)
+    end
+    printToAll("Remember to draw three additional action cards and appoint advisors and leaders.\nYou may keep up to four action cards and two missions in your hand (unless otherwise specified by the scenario)", {1,1,1})
+    broadcastToAll('Remove influence from any areas with no NPR provinces remaining after setup. Imperial Authority, influence, and extra manpower must be set up manually')
+end
+
 function AutoSetupRealm()
   -- Remove the buttons before placing other tokens
   for button,code in pairs(RealmSetupButtons) do
@@ -455,27 +509,7 @@ function AutoSetupRealm()
   -- the deferred pieces and other final steps
   ManualSetupRealmsDealtWithCount = ManualSetupRealmsDealtWithCount + 1
   if ManualSetupRealmsDealtWithCount == 6 then
-    DeferredPlacements()
-    RotateMissionDecks()
-
-    local players = {} -- Work out which players are left
-    for color,_ in pairs(COLOR_RGB_CODES) do
-      local seat = Player_Seat_From_Color(color)
-      if getObjectFromGUID(Player_Hand_GUIDs[color]) ~= nil then
-        players[seat] = {
-          bot = false,
-          color = color
-        }
-      end
-    end
-
-    DealActionCards(players)
-    RotateTruceAndRemoveBags()
-    for color,_ in pairs(COLOR_RGB_CODES) do
-      Global.UI.setAttribute(('message_banner_'..color), "active", false)
-    end
-    printToAll("Remember to draw three additional action cards and appoint advisors and leaders.\nYou may keep up to four action cards and two missions in your hand (unless otherwise specified by the scenario)", {1,1,1})
-    broadcastToAll('Remove influence from any areas with no NPR provinces remaining after setup. Imperial Authority, influence, and extra manpower must be set up manually')
+    ManualSetupFinalSteps()
   else
     for color,_ in pairs(COLOR_RGB_CODES) do
       Global.UI.setAttribute(('message_banner_txt_'..color), "text", "Marriage and Alliance tokens will be placed after all colors have a realm selected or have been removed")
@@ -485,7 +519,6 @@ function AutoSetupRealm()
 
   return 1
 end
-
 
 --[[ ----------------------------------
        Game Option Button Handlers
@@ -901,11 +934,6 @@ function Setup_Game()
     hiddenzone.destruct()
     local mainboard = getObjectFromGUID(Main_Board_GUID)
     mainboard.interactable = true
-
-    DestructByGUID({ Deck_Shuffler_Zone_1_GUID, Deck_Shuffler_Zone_2_GUID, Event_Deck_Zone_GUID })
-    DestructByGUID(Mission_Deck_Zone_GUIDs)
-    DestructByGUID({ Physics_Determination_Zone_GUID })
-    UpdateTuckZonePositions()
 
     --Create buttons for selecting a realm, removing a color and swapping them around
     CreateButtonsForRealms()
@@ -4860,28 +4888,7 @@ function removePlayerPieces()
   -- the deferred pieces and other final steps
   ManualSetupRealmsDealtWithCount = ManualSetupRealmsDealtWithCount + 1
   if ManualSetupRealmsDealtWithCount == 6 then
-    DeferredPlacements()
-    RotateMissionDecks()
-    DestructByGUID(Reference_Zone_GUIDs)
-
-    local players = {} -- Work out which players are left
-    for color,_ in pairs(COLOR_RGB_CODES) do
-      local seat = Player_Seat_From_Color(color)
-      if getObjectFromGUID(Player_Hand_GUIDs[color]) ~= nil then
-        players[seat] = {
-          bot = false,
-          color = color
-        }
-      end
-    end
-
-    DealActionCards(players)
-    RotateTruceAndRemoveBags()
-    for color,_ in pairs(COLOR_RGB_CODES) do
-      Global.UI.setAttribute(('message_banner_'..color), "active", false)
-    end
-    printToAll("Remember to draw three additional action cards and appoint advisors and leaders.\nYou may keep up to four action cards and two missions in your hand (unless otherwise specified by the scenario)", {1,1,1})
-    broadcastToAll('Remove influence from any areas with no NPR provinces remaining after setup. Imperial Authority, influence, and extra manpower must be set up manually')
+    ManualSetupFinalSteps()
   else
     for color,_ in pairs(COLOR_RGB_CODES) do
       Global.UI.setAttribute(('message_banner_txt_'..color), "text", "Marriage and Alliance tokens will be placed after all colors have a realm selected or have been removed")
