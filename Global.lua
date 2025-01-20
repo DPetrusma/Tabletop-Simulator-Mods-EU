@@ -225,24 +225,6 @@ Round_Status_Marker_GUIDs = {
   red = 'f8fe6f', yellow = 'e7476a', blue = '3a5740', green = '842237', purple = '0476d7', white = '72c3bd'
 }
 
-Figurine_GUIDs = {
-  red    = {'b198c2', 'dfb12f', 'cce497', '0019b4' },
-  yellow = {'0a4d9e', '38029f', '4dc1da', '507c52' },
-  blue   = {'196789', '6f49ec', 'f4ea35', '357ceb' },
-  green  = {'f49823', 'b2ccc9', '390ccb', '1d9350' },
-  purple = {'18b918', '84a1a8', 'a3fbd1', '66a7e9' },
-  white  = {'9dfd9b', '849af8', 'ea745a', '2c826c' }
-}
-
-Merchant_GUIDs = {
-  red    = {'65c7d5', 'dd9bef', 'd6b5d0' },
-  yellow = {'f59c7f', '0dc52d', '88ba29' },
-  blue   = {'f30cd6', '17dd06', 'dc0f3e' },
-  green  = {'5ec83e', '16ce9d', 'f02763' },
-  purple = {'0cceef', 'ff439f', 'd8da5c' },
-  white  = {'29421f', '778c3f', '7d16fe' }
-}
-
 Income_Token_GUIDs = { 'e144a8', '1480cc', '1a0674', 'f5ee76', '4ca903', '621d3a' }
 
 Bag_GUIDs = {
@@ -286,6 +268,42 @@ Setup_Bag_Item_GUIDs = {
              war = 'c35452', tag_chit = '6d1ef0', merchant_1 = '778c3f', merchant_2 = '29421f', merchant_3 = '7d16fe',
              army_1 = '9dfd9b', army_2 = '849af8', army_3 = 'ea745a', fleet = '2c826c',
              army_1_middle_eastern = '74172a', army_2_middle_eastern = 'eb5823', army_3_middle_eastern = '29cae0', fleet_middle_eastern = '7ac729' },
+}
+
+Figurine_GUIDs = {
+  -- red    = {'b198c2', 'dfb12f', 'cce497', '0019b4', '6db006', 'b62175', 'bb842e', 'bcaf43' },
+  -- yellow = {'0a4d9e', '38029f', '4dc1da', '507c52', 'b2e2e2', '', '', '8f704a' },
+  -- blue   = {'196789', '6f49ec', 'f4ea35', '357ceb', '75a5a0', '', '', 'e6c5aa' },
+  -- green  = {'f49823', 'b2ccc9', '390ccb', '1d9350', '19fff0', '', '', '0e6b98' },
+  -- purple = {'18b918', '84a1a8', 'a3fbd1', '66a7e9', '74b8d0', '', '', '881ba9' },
+  -- white  = {'9dfd9b', '849af8', 'ea745a', '2c826c', '74172a', '', '', '7ac729' },
+  red    = { Setup_Bag_Item_GUIDs.red.army_1, Setup_Bag_Item_GUIDs.red.army_2, Setup_Bag_Item_GUIDs.red.army_3, Setup_Bag_Item_GUIDs.red.fleet,
+             Setup_Bag_Item_GUIDs.red.army_1_middle_eastern, Setup_Bag_Item_GUIDs.red.army_2_middle_eastern, Setup_Bag_Item_GUIDs.red.army_3_middle_eastern, Setup_Bag_Item_GUIDs.red.fleet_middle_eastern },
+  yellow = { Setup_Bag_Item_GUIDs.yellow.army_1, Setup_Bag_Item_GUIDs.yellow.army_2, Setup_Bag_Item_GUIDs.yellow.army_3, Setup_Bag_Item_GUIDs.yellow.fleet,
+             Setup_Bag_Item_GUIDs.yellow.army_1_middle_eastern, Setup_Bag_Item_GUIDs.yellow.army_2_middle_eastern, Setup_Bag_Item_GUIDs.yellow.army_3_middle_eastern, Setup_Bag_Item_GUIDs.yellow.fleet_middle_eastern },
+  blue   = { Setup_Bag_Item_GUIDs.blue.army_1, Setup_Bag_Item_GUIDs.blue.army_2, Setup_Bag_Item_GUIDs.blue.army_3, Setup_Bag_Item_GUIDs.blue.fleet,
+             Setup_Bag_Item_GUIDs.blue.army_1_middle_eastern, Setup_Bag_Item_GUIDs.blue.army_2_middle_eastern, Setup_Bag_Item_GUIDs.blue.army_3_middle_eastern, Setup_Bag_Item_GUIDs.blue.fleet_middle_eastern },
+  green  = { Setup_Bag_Item_GUIDs.green.army_1, Setup_Bag_Item_GUIDs.green.army_2, Setup_Bag_Item_GUIDs.green.army_3, Setup_Bag_Item_GUIDs.green.fleet,
+            Setup_Bag_Item_GUIDs.green.army_1_middle_eastern, Setup_Bag_Item_GUIDs.green.army_2_middle_eastern, Setup_Bag_Item_GUIDs.green.army_3_middle_eastern, Setup_Bag_Item_GUIDs.green.fleet_middle_eastern },
+  purple = { Setup_Bag_Item_GUIDs.purple.army_1, Setup_Bag_Item_GUIDs.purple.army_2, Setup_Bag_Item_GUIDs.purple.army_3, Setup_Bag_Item_GUIDs.purple.fleet,
+             Setup_Bag_Item_GUIDs.purple.army_1_middle_eastern, Setup_Bag_Item_GUIDs.purple.army_2_middle_eastern, Setup_Bag_Item_GUIDs.purple.army_3_middle_eastern, Setup_Bag_Item_GUIDs.purple.fleet_middle_eastern },
+  white  = { Setup_Bag_Item_GUIDs.white.army_1, Setup_Bag_Item_GUIDs.white.army_2, Setup_Bag_Item_GUIDs.white.army_3, Setup_Bag_Item_GUIDs.white.fleet,
+             Setup_Bag_Item_GUIDs.white.army_1_middle_eastern, Setup_Bag_Item_GUIDs.white.army_2_middle_eastern, Setup_Bag_Item_GUIDs.white.army_3_middle_eastern, Setup_Bag_Item_GUIDs.white.fleet_middle_eastern }, 
+}
+
+Merchant_GUIDs = {
+  -- red    = {'65c7d5', 'dd9bef', 'd6b5d0' },
+  -- yellow = {'f59c7f', '0dc52d', '88ba29' },
+  -- blue   = {'f30cd6', '17dd06', 'dc0f3e' },
+  -- green  = {'5ec83e', '16ce9d', 'f02763' },
+  -- purple = {'0cceef', 'ff439f', 'd8da5c' },
+  -- white  = {'29421f', '778c3f', '7d16fe' }
+  red    = { Setup_Bag_Item_GUIDs.red.merchant_1, Setup_Bag_Item_GUIDs.red.merchant_2, Setup_Bag_Item_GUIDs.red.merchant_3 },
+  yellow = { Setup_Bag_Item_GUIDs.yellow.merchant_1, Setup_Bag_Item_GUIDs.yellow.merchant_2, Setup_Bag_Item_GUIDs.yellow.merchant_3 },
+  blue   = { Setup_Bag_Item_GUIDs.blue.merchant_1, Setup_Bag_Item_GUIDs.blue.merchant_2, Setup_Bag_Item_GUIDs.blue.merchant_3 },
+  green  = { Setup_Bag_Item_GUIDs.green.merchant_1, Setup_Bag_Item_GUIDs.green.merchant_2, Setup_Bag_Item_GUIDs.green.merchant_3 },
+  purple = { Setup_Bag_Item_GUIDs.purple.merchant_1, Setup_Bag_Item_GUIDs.purple.merchant_2, Setup_Bag_Item_GUIDs.purple.merchant_3 },
+  white  = { Setup_Bag_Item_GUIDs.white.merchant_1, Setup_Bag_Item_GUIDs.white.merchant_2, Setup_Bag_Item_GUIDs.white.merchant_3 }
 }
 
 HRE_Influence_Cube_GUIDs = {
@@ -432,6 +450,66 @@ function CreateRealmButtons()
   return 1
 end
 
+function ManualSetupFinalSteps()
+    if TEST_MODE then log('Shuffing cards in zone 1') end
+    local shuffler = getObjectFromGUID(Deck_Shuffler_Zone_1_GUID)
+    local decks_to_shuffle = shuffler.getObjects()
+    for _,i in pairs(decks_to_shuffle) do
+      if i.type == 'Deck' then
+        i.shuffle()
+        local pos = i.getPosition()
+        if pos[3] < 1.5 then
+          local new_pos = Event_Card_Positions[1]
+          new_pos[2] = 3 - (1 * pos[3])
+          i.setPosition(new_pos)
+        end
+      end
+    end
+    if TEST_MODE then log('Zone 1 completed') end
+
+    -- Lock Rules & References
+    local references = getObjectsWithTag('Reference')
+    local targeting = getObjectsWithTag('Targeting')
+    local rules = getObjectsWithTag('Rules')
+    for _, o in ipairs(references) do
+      o.setLock(true)
+    end
+    for _, o in ipairs(targeting) do
+      o.setLock(true)
+    end
+    for _, o in ipairs(rules) do
+      o.setLock(true)
+    end
+
+    DeferredPlacements()
+    RotateMissionDecks()
+
+    local players = {} -- Work out which players are left
+    for color,_ in pairs(COLOR_RGB_CODES) do
+      local seat = Player_Seat_From_Color(color)
+      if getObjectFromGUID(Player_Hand_GUIDs[color]) ~= nil then
+        players[seat] = {
+          bot = false,
+          color = color
+        }
+      end
+    end
+
+    DealActionCards(players)
+    RotateTruceAndRemoveBags()
+
+    DestructByGUID({ Deck_Shuffler_Zone_1_GUID, Deck_Shuffler_Zone_2_GUID, Event_Deck_Zone_GUID })
+    DestructByGUID(Mission_Deck_Zone_GUIDs)
+    DestructByGUID({ Physics_Determination_Zone_GUID })
+    UpdateTuckZonePositions()
+    
+    for color,_ in pairs(COLOR_RGB_CODES) do
+      Global.UI.setAttribute(('message_banner_'..color), "active", false)
+    end
+    printToAll("Remember to draw three additional action cards and appoint advisors and leaders.\nYou may keep up to four action cards and two missions in your hand (unless otherwise specified by the scenario)", {1,1,1})
+    broadcastToAll('Remove influence from any areas with no NPR provinces remaining after setup. Imperial Authority, influence, and extra manpower must be set up manually')
+end
+
 function AutoSetupRealm()
   -- Remove the buttons before placing other tokens
   for button,code in pairs(RealmSetupButtons) do
@@ -455,27 +533,7 @@ function AutoSetupRealm()
   -- the deferred pieces and other final steps
   ManualSetupRealmsDealtWithCount = ManualSetupRealmsDealtWithCount + 1
   if ManualSetupRealmsDealtWithCount == 6 then
-    DeferredPlacements()
-    RotateMissionDecks()
-
-    local players = {} -- Work out which players are left
-    for color,_ in pairs(COLOR_RGB_CODES) do
-      local seat = Player_Seat_From_Color(color)
-      if getObjectFromGUID(Player_Hand_GUIDs[color]) ~= nil then
-        players[seat] = {
-          bot = false,
-          color = color
-        }
-      end
-    end
-
-    DealActionCards(players)
-    RotateTruceAndRemoveBags()
-    for color,_ in pairs(COLOR_RGB_CODES) do
-      Global.UI.setAttribute(('message_banner_'..color), "active", false)
-    end
-    printToAll("Remember to draw three additional action cards and appoint advisors and leaders.\nYou may keep up to four action cards and two missions in your hand (unless otherwise specified by the scenario)", {1,1,1})
-    broadcastToAll('Remove influence from any areas with no NPR provinces remaining after setup. Imperial Authority, influence, and extra manpower must be set up manually')
+    ManualSetupFinalSteps()
   else
     for color,_ in pairs(COLOR_RGB_CODES) do
       Global.UI.setAttribute(('message_banner_txt_'..color), "text", "Marriage and Alliance tokens will be placed after all colors have a realm selected or have been removed")
@@ -485,7 +543,6 @@ function AutoSetupRealm()
 
   return 1
 end
-
 
 --[[ ----------------------------------
        Game Option Button Handlers
@@ -901,11 +958,6 @@ function Setup_Game()
     hiddenzone.destruct()
     local mainboard = getObjectFromGUID(Main_Board_GUID)
     mainboard.interactable = true
-
-    DestructByGUID({ Deck_Shuffler_Zone_1_GUID, Deck_Shuffler_Zone_2_GUID, Event_Deck_Zone_GUID })
-    DestructByGUID(Mission_Deck_Zone_GUIDs)
-    DestructByGUID({ Physics_Determination_Zone_GUID })
-    UpdateTuckZonePositions()
 
     --Create buttons for selecting a realm, removing a color and swapping them around
     CreateButtonsForRealms()
@@ -1847,6 +1899,9 @@ function SetupRealm(player)
     table.insert(guids_for_removal, Figurine_GUIDs[color][2])
     table.insert(guids_for_removal, Figurine_GUIDs[color][3])
     table.insert(guids_for_removal, Figurine_GUIDs[color][4])
+    table.insert(guids_for_removal, Figurine_GUIDs[color][6])
+    table.insert(guids_for_removal, Figurine_GUIDs[color][7])
+    table.insert(guids_for_removal, Figurine_GUIDs[color][8])
     table.insert(guids_for_removal, Army_Tableau_GUIDs[color])
     table.insert(guids_for_removal, Fleet_Tableau_GUIDs[color])
 
@@ -2507,15 +2562,15 @@ function ProcessMissionDecks(scenario_data)
       if realm_data.rem_missions then
         TransferMissionCards(realm_data, Removed_Components_Bag, realm_data.rem_missions)
       end
-      waitFrames(5)
+      waitFrames(15)
       if realm_data.add_missions then
         TransferMissionCards(realm_data, Generic_Mission_Deck, realm_data.add_missions)
       end
-      waitFrames(5)
+      waitFrames(15)
       if realm_data.done_missions then
         DisplayMissionCards(scenario_data, realm)
       end
-      waitFrames(5)
+      waitFrames(15)
       if realm_data.start_missions then
         DisplayMissionCards(scenario_data, realm, true)
       end
@@ -4791,10 +4846,11 @@ function SwapTwoColors()
   if player_hand1 == nil or player_hand2 == nil then
     log('Could not find player hand object')
   else
-    player_hand1.setPosition(Player_Hand_Positions[seats_to_swap[1]])
-    player_hand1.setRotation(Player_Hand_Rotations[seats_to_swap[1]])
-    player_hand2.setPosition(Player_Hand_Positions[seats_to_swap[2]])
-    player_hand2.setRotation(Player_Hand_Rotations[seats_to_swap[2]])
+    if TEST_MODE then log('Swapping hands for '..seats_to_swap[1]..' and '..seats_to_swap[2]) end
+    player_hand1.setPosition(Player_Hand_Positions[seats_to_swap[2]])
+    player_hand1.setRotation(Player_Hand_Rotations[seats_to_swap[2]])
+    player_hand2.setPosition(Player_Hand_Positions[seats_to_swap[1]])
+    player_hand2.setRotation(Player_Hand_Rotations[seats_to_swap[1]])
   end
 
   --Just to make sure everthing is done
@@ -4860,28 +4916,7 @@ function removePlayerPieces()
   -- the deferred pieces and other final steps
   ManualSetupRealmsDealtWithCount = ManualSetupRealmsDealtWithCount + 1
   if ManualSetupRealmsDealtWithCount == 6 then
-    DeferredPlacements()
-    RotateMissionDecks()
-    DestructByGUID(Reference_Zone_GUIDs)
-
-    local players = {} -- Work out which players are left
-    for color,_ in pairs(COLOR_RGB_CODES) do
-      local seat = Player_Seat_From_Color(color)
-      if getObjectFromGUID(Player_Hand_GUIDs[color]) ~= nil then
-        players[seat] = {
-          bot = false,
-          color = color
-        }
-      end
-    end
-
-    DealActionCards(players)
-    RotateTruceAndRemoveBags()
-    for color,_ in pairs(COLOR_RGB_CODES) do
-      Global.UI.setAttribute(('message_banner_'..color), "active", false)
-    end
-    printToAll("Remember to draw three additional action cards and appoint advisors and leaders.\nYou may keep up to four action cards and two missions in your hand (unless otherwise specified by the scenario)", {1,1,1})
-    broadcastToAll('Remove influence from any areas with no NPR provinces remaining after setup. Imperial Authority, influence, and extra manpower must be set up manually')
+    ManualSetupFinalSteps()
   else
     for color,_ in pairs(COLOR_RGB_CODES) do
       Global.UI.setAttribute(('message_banner_txt_'..color), "text", "Marriage and Alliance tokens will be placed after all colors have a realm selected or have been removed")

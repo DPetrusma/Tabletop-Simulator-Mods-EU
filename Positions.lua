@@ -191,7 +191,7 @@ AfricaMap = {
     ['saxony'] = {1.79, 1.09}, ['scotland'] = {-9.08, 8.15}, ['seine'] = {-3.52, 0.74}, ['sicily'] = {2.78, -9.85},
     ['sjaellandfyn'] = {2.63, 5.23}, ['southernmorocco'] = {-8.94, -12.02}, ['svealand'] = {4.71, 8.91}, ['switzerland'] = {0.58, -1.95},
     ['tirol'] = {1.47, -2.11}, ['tunisia'] = {0.8, -11.62}, ['venetia'] = {3.73, -2.45}, ['waleswesex'] = {-8.02, 3.87},
-    ['westphalia'] = {0.15, 2.23}, ['wielkopoland'] = {4.47, 1.91}
+    ['westphalia'] = {0.15, 2.23}, ['wielkopolska'] = {4.47, 1.91}, ['croatiabosnia'] = {5.85, -4.19}
   }
   
   -- snap points for religion tokens on the eastern map --
