@@ -73,7 +73,7 @@ Player_Hand_GUIDs = { red = '7a5107', yellow = '4f7aff', blue = '3320f7', green 
 Main_Tableau_GUIDs = { red = '388336', yellow = '90ffbf', blue = '1418fd', green = '82efa3', purple = 'ad4d79', white = '30484d', brown = '70c4bc', teal = '61904b' }
 Army_Tableau_GUIDs = { red = '655dff', yellow = 'd20799', blue = 'a076d6', green = 'e8a3ab', purple = 'c8a406', white = 'be9e18', brown = 'a9e19e', teal = '485332' }
 Fleet_Tableau_GUIDs = { red = 'ddf4d4', yellow = '005750', blue = 'fbdfa1', green = '558a42', purple = 'a76ad9', white = '3f02c4', brown = '76a366', teal = '85bde4' }
-Bot_Tableau_GUIDs = { red = 'cd844f', yellow = 'c2add8', blue = '7fa64c', green = '3cfa64', purple = 'd06ee7', white = '3fed49', brown = '631b0f', teal = '' }
+Bot_Tableau_GUIDs = { red = 'cd844f', yellow = 'c2add8', blue = '7fa64c', green = '3cfa64', purple = 'd06ee7', white = '3fed49', brown = '631b0f', teal = '3033e2' }
 
 Setup_Card_Deck_GUID = '6c6621'
 Event_Deck_GUIDs = {
