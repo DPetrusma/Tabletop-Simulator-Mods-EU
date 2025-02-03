@@ -220,11 +220,11 @@ PS_GUIDs = {
 }
 
 Prestige_Marker_GUIDs = {
-  red = 'a34738', yellow = '917e57', blue = 'b6350f', green = 'b1f322', purple = 'c3dffe', white = '24d817', brown = 'b46c9e', teal = 'b4d541'
+  red = 'a34738', yellow = '917e57', blue = 'b6350f', green = 'b1f322', purple = 'c3dffe', white = '24d817', brown = 'de8516', teal = '5318dd'
 }
 
 Round_Status_Marker_GUIDs = {
-  red = 'f8fe6f', yellow = 'e7476a', blue = '3a5740', green = '842237', purple = '0476d7', white = '72c3bd', brown = 'ed85d5', teal = 'ba367d'
+  red = 'f8fe6f', yellow = 'e7476a', blue = '3a5740', green = '842237', purple = '0476d7', white = '72c3bd', brown = '23a282', teal = '11fa2b'
 }
 
 Income_Token_GUIDs = { 'e144a8', '1480cc', '1a0674', 'f5ee76', '4ca903', '621d3a' }
