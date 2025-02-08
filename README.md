@@ -13,6 +13,9 @@ The other files in EU can be edited and those files are alreay referenced in the
 8. Once all changes have been made to the TTS save and the .lua files, do a final test by loading the save game from the main menu of TTS, commit all changes to git, and pass on to Eivind to upload. Note that the file *EU\usage.txt* is the text in the Grey notepad called Usage.
 
 Changelog:
+v2.4.1
+- Bots are no longer dealt action cards after manual setup
+
 v2.4
 - The Here I Stand Once More scenario has corrected setup for France, Spain, and Papal States
 - For manual setup, swapping two colours now correctly swaps the players' hands
