@@ -493,9 +493,13 @@ function ManualSetupFinalSteps()
     local players = {} -- Work out which players are left
     for color,_ in pairs(COLOR_RGB_CODES) do
       local seat = Player_Seat_From_Color(color)
+      local is_bot = false
       if getObjectFromGUID(Player_Hand_GUIDs[color]) ~= nil then
+        if getObjectFromGUID(Bot_Tableau_GUIDs[color]) ~= nil then
+            is_bot = true
+        end
         players[seat] = {
-          bot = false,
+          bot = is_bot,
           color = color
         }
       end
