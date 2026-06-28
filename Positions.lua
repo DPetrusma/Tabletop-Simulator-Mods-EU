@@ -380,11 +380,6 @@ AfricaMap = {
     ['bot_ideas_admin_1'] = {0.46, -1.49}, ['bot_ideas_admin_2'] = {0.81, -1.49}, ['bot_ideas_admin_3'] = {1.19, -1.49},
     ['bot_ideas_diplo_1'] = {2.02, -1.49}, ['bot_ideas_diplo_2'] = {2.38, -1.49}, ['bot_ideas_diplo_3'] = {2.75, -1.49},
     ['bot_ideas_war_1'] = {3.62, -1.49}, ['bot_ideas_war_2'] = {3.96, -1.49}, ['bot_ideas_war_3'] = {4.33, -1.49}, ['extra_events'] = {-3.23, -7.40},
-  
-    ['army_1_middle_eastern_left'] = {-13.19, 4.53}, ['army_1_middle_eastern_right'] = {5.49, 4.54},
-    ['army_2_middle_eastern_left'] = {-9.98, 4.49}, ['army_2_middle_eastern_right'] = {8.72, 4.49},
-    ['army_3_middle_eastern_left'] = {-8.70, 4.64}, ['army_3_middle_eastern_right'] = {10.00, 4.54},
-    ['fleet_middle_eastern_left'] = {-5.45, 4.53}, ['fleet_middle_eastern_right'] = {13.25, 4.52},
   }
   
   Main_Tableau_Local_Positions = { ['religion'] = {0.84, 2, 0.78}, ['ruler'] = {1.30, 2, 1.69}, ['missions'] = {-2.57, 2, -0.75}, ['missions_left'] = {2.57, 2, -0.75},
