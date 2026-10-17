@@ -1326,6 +1326,8 @@ function Setup_Game()
     end
     if UI_Data.options[4] ~= nil and UI_Data.options[4].selected == 2 then
       scenario_data.DNPR_Orange_L = nil -- Remove Mamluks DNPR
+    else
+        table.insert(scenario_data.trade_add_tags, 'Trade2')
     end
     if UI_Data.options[5] ~= nil then
       if UI_Data.options[5].selected == 2 then
@@ -1382,6 +1384,8 @@ function Setup_Game()
     end
     if UI_Data.options[4] ~= nil and UI_Data.options[4].selected == 2 then
       scenario_data.DNPR_Orange_L = nil -- Remove Mamluks DNPR
+    else
+        table.insert(scenario_data.trade_add_tags, 'Trade2')
     end
     if UI_Data.options[5] ~= nil then
       if UI_Data.options[5].selected == 2 then
@@ -1556,6 +1560,8 @@ function Setup_Game()
     end
     if UI_Data.options[2] ~= nil and UI_Data.options[2].selected == 2 then
       scenario_data.DNPR_Orange_L = nil -- Remove Mamluks DNPR
+    else
+        table.insert(scenario_data.trade_add_tags, 'Trade2')
     end
 
     broadcastToAll("Setting up: [u]The Rise of the Purple Phoenix (solo)[/u]", {1,1,1})
@@ -5054,6 +5060,8 @@ function CreateButtonsForRealms()
     Tile_for_Bot_Flag[seat].setCustomObject(params)
 
     if TEST_MODE then log('Placing swap buttons for ' .. color1 .. ' player') end
+    
+    if TEST_MODE then log('another log') end
     for color2,_ in pairs(COLOR_RGB_CODES) do
       position = GetOffset(Main_Tableau_Positions[seat],color_swap_button_offsets[color2],seat,1)
 
