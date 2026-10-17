@@ -1041,7 +1041,7 @@ SETUP_DATA = {
       },
       merchants = { {-1.87, -6.30}, {-10.93, -9.12} },
       figurines = { {-5.35, -5.09}, 'none', 'none', {1.25, -6.99} }, --Aragon, C. Med.
-      ships = { {-1.77, -5.56} }, --Gulf of Lion
+      ships = { {-4.33, -8.30} }, --Western Meditteranean
       ships_bot = { {-1.77, -5.56}, {-0.82, -7.40}},
       fleet = { 0, 0, 2},
       capital = WesternMap.valencia,
