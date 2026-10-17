@@ -236,14 +236,14 @@ AfricaMap = {
     ['sevilla'] = {-10.46, -9.71},
     ['wien'] = {3.20, -0.90},
   }
-
+  
   TradeProtectionSlots = {
     ['Central Mediterranean'] = { {1.77, -7.90}, {2.55, -7.90} },
     ['Western Mediterranean'] = { {-5.13, -8.31}, {-4.34, -8.34}, {-5.10, -8.34} },
     ['Eastern Mediterranean'] = { {7.02, -9.97}, {7.76, -9.93}, {8.49, -9.93} },
     ['Black Sea'] = { {12.60, -3.93}, {13.31, -3.93}, {14.05, -3.93}},
     ['Aegean Sea'] = { {9.37, -7.21}, {10.08, -7.22} },
-    ['Adriatic Sea'] = { {4.23, -5.64}, {4.23, -5.64}, {5.90, -6.00} },
+    ['Adriatic Sea'] = { {4.23, -5.64}, {5.17, -6.00}, {5.90, -6.00} },
     ['Gulf of Lion'] = { {-1.10, -5.72}, {-1.79, -5.70}, {-2.55, -5.71} },
     ['Central Atlantic'] = { {-12.21, -6.51}, {-12.94, -6.49}, {-12.57, -7.12} },
     ['Eastern Atlantic'] = { {-11.56, -0.91}, {-12.28, -0.89} },
@@ -380,11 +380,6 @@ AfricaMap = {
     ['bot_ideas_admin_1'] = {0.46, -1.49}, ['bot_ideas_admin_2'] = {0.81, -1.49}, ['bot_ideas_admin_3'] = {1.19, -1.49},
     ['bot_ideas_diplo_1'] = {2.02, -1.49}, ['bot_ideas_diplo_2'] = {2.38, -1.49}, ['bot_ideas_diplo_3'] = {2.75, -1.49},
     ['bot_ideas_war_1'] = {3.62, -1.49}, ['bot_ideas_war_2'] = {3.96, -1.49}, ['bot_ideas_war_3'] = {4.33, -1.49}, ['extra_events'] = {-3.23, -7.40},
-  
-    ['army_1_middle_eastern_left'] = {-13.19, 4.53}, ['army_1_middle_eastern_right'] = {5.49, 4.54},
-    ['army_2_middle_eastern_left'] = {-9.98, 4.49}, ['army_2_middle_eastern_right'] = {8.72, 4.49},
-    ['army_3_middle_eastern_left'] = {-8.70, 4.64}, ['army_3_middle_eastern_right'] = {10.00, 4.54},
-    ['fleet_middle_eastern_left'] = {-5.45, 4.53}, ['fleet_middle_eastern_right'] = {13.25, 4.52},
   }
   
   Main_Tableau_Local_Positions = { ['religion'] = {0.84, 2, 0.78}, ['ruler'] = {1.30, 2, 1.69}, ['missions'] = {-2.57, 2, -0.75}, ['missions_left'] = {2.57, 2, -0.75},
