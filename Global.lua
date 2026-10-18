@@ -267,13 +267,11 @@ Setup_Bag_Item_GUIDs = {
   brown  = { stability = 'a37f2e', ruler_general = '7a36bc', ship = 'a47f1c', soldier = '45b2df', cube = '5ba8ee',
              vassal = 'ed84de', s_town = '5c9dde', l_town = '2208ad', claim = '366e0f', alliance = 'd4192c', marriage = '60091a',
              war = '7340d5', tag_chit = 'a6b0de', merchant_1 = '5dfc9f', merchant_2 = '61d2ae', merchant_3 = 'a721ef',
-             army_1 = '07aa38', army_2 = '2f259d', army_3 = '8332be', fleet = 'd6cc36',
-             army_1_middle_eastern = '9a8f3a', army_2_middle_eastern = '6e4943', army_3_middle_eastern = '67ce63', fleet_middle_eastern = 'a12e13' },
+             army_1 = '07aa38', army_2 = '2f259d', army_3 = '8332be', fleet = 'd6cc36' },
   teal  = { stability = '4b29d4', ruler_general = 'cef0e6', ship = '703f24', soldier = '1e1ac8', cube = '9123fa',
              vassal = '7f78d1', s_town = '591d40', l_town = '812992', claim = 'c3113d', alliance = '6fb5bb', marriage = '633664',
              war = 'bcca57', tag_chit = 'fdaf40', merchant_1 = 'b84479', merchant_2 = '0589c9', merchant_3 = '9f2ed6',
-             army_1 = 'b98973', army_2 = 'ba4d4c', army_3 = '4dcf8d', fleet = 'f4c7d9',
-             army_1_middle_eastern = 'ffee47', army_2_middle_eastern = 'd97e25', army_3_middle_eastern = '80f5b0', fleet_middle_eastern = 'aefa74' }
+             army_1 = 'b98973', army_2 = 'ba4d4c', army_3 = '4dcf8d', fleet = 'f4c7d9' }
 }
 
 Figurine_GUIDs = {
@@ -4218,20 +4216,20 @@ We wait 2 seconds so that if several are deleted in quick succession, but not in
 action, they will still be spread out over the right spaces
 --]]
 function CleanupSmartDeleteTowns(town_size)
-  Smart_delete_towns_reserved[town_size] = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} }
-  Smart_delete_town_counter[town_size] = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 }
+  Smart_delete_towns_reserved[town_size] = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {}, brown = {}, teal = {} }
+  Smart_delete_town_counter[town_size] = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0, brown = 0, teal = 0 }
   Smart_delete_towns_wait_id[town_size] = nil
 end
 
 Smart_delete_towns_reserved = {
-  LargeTown = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} },
-  SmallTown = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} },
-  Vassal = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {} },
+  LargeTown = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {}, brown = {}, teal = {} },
+  SmallTown = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {}, brown = {}, teal = {} },
+  Vassal = { red = {}, yellow = {}, blue = {}, green = {}, purple = {}, white = {}, brown = {}, teal = {} },
 }
 Smart_delete_town_counter = {
-  LargeTown = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 },
-  SmallTown = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 },
-  Vassal = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0 }
+  LargeTown = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0, brown = 0, teal = 0 },
+  SmallTown = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0, brown = 0, teal = 0 },
+  Vassal = { red = 0, yellow = 0, blue = 0, green = 0, purple = 0, white = 0, brown = 0, teal = 0 }
 }
 Smart_delete_towns_wait_id = { LargeTown = nil, SmallTown = nil }
 Local_Town_positions = {
