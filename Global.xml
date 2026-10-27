@@ -664,3 +664,15 @@
         I can fit 3 lines of text, and if it goes over, the text will just be cut off. That's fine. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah
     </Text>
 </Panel>
+
+<Panel id="message_banner_orange" color="rgba(0,0,0,0.8)" width="600" Height="60" rectAlignment="UpperCenter" offsetXY="0 -70" active="false" visibility="Orange">
+    <Text id="message_banner_txt_orange" class="BannerMessage">
+        I can fit 3 lines of text, and if it goes over, the text will just be cut off. That's fine. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah
+    </Text>
+</Panel>
+
+<Panel id="message_banner_pink" color="rgba(0,0,0,0.8)" width="600" Height="60" rectAlignment="UpperCenter" offsetXY="0 -70" active="false" visibility="Pink">
+    <Text id="message_banner_txt_pink" class="BannerMessage">
+        I can fit 3 lines of text, and if it goes over, the text will just be cut off. That's fine. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah. This is a test message. I am goingto write some really long text to see what happens with the overflow or something or other. Blah Blah Blah Blah Blah Blah Blah
+    </Text>
+</Panel>
