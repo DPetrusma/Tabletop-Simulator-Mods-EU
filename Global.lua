@@ -2361,6 +2361,9 @@ function GetOffset(position, offset2D, seat, height)
   elseif (seat == 7) or (seat == 8) then
     new_pos[1] = position[1] - offset2D[2]
     new_pos[3] = position[3] + offset2D[1]
+  elseif (seat == 9) or (seat == 10) then
+    new_pos[1] = position[1] + offset2D[2]
+    new_pos[3] = position[3] - offset2D[1]
   end
   return new_pos
 end
@@ -2391,6 +2394,12 @@ function GetSeatFromPosition(position3d)
       return 3
     else
       return 2
+    end
+  elseif position3d[1] > -58 then
+    if position3d[3] > 0 then
+      return 10
+    else
+      return 9
     end
   end
   return false
@@ -5034,8 +5043,8 @@ function CreateButtonsForRealms()
     white = {1.50, -8.00},
     brown = {3.00, -8.00},
     teal = {4.50, -8.00},
-    orange = {3.00, -8.00},
-    pink = {4.50, -8.00}
+    orange = {6.00, -8.00},
+    pink = {7.50, -8.00}
   }
   local remove_player_button_offset = {-6.90, -5.08}
   local realm_selection_button_offset = {-2.00, -5.08}
@@ -5112,7 +5121,6 @@ function CreateButtonsForRealms()
 
     if TEST_MODE then log('Placing swap buttons for ' .. color1 .. ' player') end
     
-    if TEST_MODE then log('another log') end
     for color2,_ in pairs(COLOR_RGB_CODES) do
       position = GetOffset(Main_Tableau_Positions[seat],color_swap_button_offsets[color2],seat,1)
 
