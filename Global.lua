@@ -42,14 +42,14 @@ REALM_NAME = {
 RELIGION = { none = 0, catholic = 1, diverse = 2, protestant = 3, counter_reformed = 4, muslim = 5, orthodox = 6, revolutionary = 7 }
 
 COLOR_RGB_CODES = { -- The RGB codes need to be scaled to between 0 and 1
-  red = {224/255, 22/255, 23/255, 255/255},
-  yellow = {237/255, 227/255, 0/255, 255/255},
-  blue = {47/255, 67/255, 150/255, 255/255},
-  green = {33/255, 177/255, 155/255, 255/255},
-  purple = {161/255, 78/255, 154/255, 255/255},
+--   red = {224/255, 22/255, 23/255, 255/255},
+--   yellow = {237/255, 227/255, 0/255, 255/255},
+--   blue = {47/255, 67/255, 150/255, 255/255},
+--   green = {33/255, 177/255, 155/255, 255/255},
+--   purple = {161/255, 78/255, 154/255, 255/255},
   white = {255/255, 255/255, 254/255, 255/255},
   teal = {113/255, 208/255, 255/255, 255/255},
-  brown = {113/255, 59/255, 23/255, 255/255},
+--   brown = {113/255, 59/255, 23/255, 255/255},
   orange = {255/255, 150/255, 0/255, 255/255},
   pink = {253/255, 170/255, 228/255, 255/255}
 }
@@ -72,10 +72,10 @@ Scenario_Book_1_GUID = '1ae561'
 Scenario_Book_2_GUID = '79893d'
 
 Player_Hand_GUIDs = { red = '7a5107', yellow = '4f7aff', blue = '3320f7', green = '82f3dd', purple = 'b29a91', white = 'a98fd0', brown = 'e746fc', teal = 'b9da2a', orange = '882951', pink = '791a34' }
-Main_Tableau_GUIDs = { red = '388336', yellow = '90ffbf', blue = '1418fd', green = '82efa3', purple = 'ad4d79', white = '30484d', brown = '70c4bc', teal = '61904b', orange = '288423', pink = 'b308a8' }
-Army_Tableau_GUIDs = { red = '655dff', yellow = 'd20799', blue = 'a076d6', green = 'e8a3ab', purple = 'c8a406', white = 'be9e18', brown = 'a9e19e', teal = '485332', orange = '74bf76', pink = 'a15baf' }
-Fleet_Tableau_GUIDs = { red = 'ddf4d4', yellow = '005750', blue = 'fbdfa1', green = '558a42', purple = 'a76ad9', white = '3f02c4', brown = '76a366', teal = '85bde4', orange = '74a5b8', pink = 'c2ee53' }
-Bot_Tableau_GUIDs = { red = 'cd844f', yellow = 'c2add8', blue = '7fa64c', green = '3cfa64', purple = 'd06ee7', white = '3fed49', brown = '631b0f', teal = '3033e2', orange = '1403d5', pink = '97a400' }
+Main_Tableau_GUIDs = { red = '388336', yellow = '90ffbf', blue = '1418fd', green = '82efa3', purple = 'ad4d79', white = '30484d', brown = '70c4bc', teal = '61904b', orange = '2bdb9e', pink = '929c8d' }
+Army_Tableau_GUIDs = { red = '655dff', yellow = 'd20799', blue = 'a076d6', green = 'e8a3ab', purple = 'c8a406', white = 'be9e18', brown = 'a9e19e', teal = '485332', orange = '84ceb4', pink = '8d16a1' }
+Fleet_Tableau_GUIDs = { red = 'ddf4d4', yellow = '005750', blue = 'fbdfa1', green = '558a42', purple = 'a76ad9', white = '3f02c4', brown = '76a366', teal = '85bde4', orange = '1edcbd', pink = 'f01a2a' }
+Bot_Tableau_GUIDs = { red = 'cd844f', yellow = 'c2add8', blue = '7fa64c', green = '3cfa64', purple = 'd06ee7', white = '3fed49', brown = '631b0f', teal = '3033e2', orange = '6e4459', pink = '4a098f' }
 
 Setup_Card_Deck_GUID = '6c6621'
 Event_Deck_GUIDs = {
@@ -274,14 +274,14 @@ Setup_Bag_Item_GUIDs = {
              vassal = '7f78d1', s_town = '591d40', l_town = '812992', claim = 'c3113d', alliance = '6fb5bb', marriage = '633664',
              war = 'bcca57', tag_chit = 'fdaf40', merchant_1 = 'b84479', merchant_2 = '0589c9', merchant_3 = '9f2ed6',
              army_1 = 'b98973', army_2 = 'ba4d4c', army_3 = '4dcf8d', fleet = 'f4c7d9' },
-  orange  = { stability = '318287', ruler_general = '144fec', ship = '7adfed', soldier = 'f79ff3', cube = 'd7dcd3',
-             vassal = 'c85ad3', s_town = 'c9a375', l_town = '8b9181', claim = '9f41b5', alliance = '564d05', marriage = 'a11acf',
-             war = '3e35c9', tag_chit = '393fdb', merchant_1 = 'bf5a5d', merchant_2 = '2e6524', merchant_3 = '6f93cb',
-             army_1 = '175af5', army_2 = 'ec289a', army_3 = '1d70a5', fleet = '2004b4' },
-  pink  = { stability = 'a3850a', ruler_general = '272d23', ship = 'd80c7e', soldier = '04d4c0', cube = 'fe26c8',
-             vassal = '405477', s_town = '622025', l_town = '21dcc8', claim = 'b9a71a', alliance = 'fbf72e', marriage = 'e0f1f0',
-             war = 'a313fd', tag_chit = '347db4', merchant_1 = '65c7d5', merchant_2 = 'd6b5d0', merchant_3 = 'dd9bef',
-             army_1 = 'b198c2', army_2 = 'dfb12f', army_3 = 'cce497', fleet = '0019b4' }
+  orange  = { stability = '318287', ruler_general = 'd23edd', ship = 'f0b67d', soldier = '089f0f', cube = '6fb6ef',
+             vassal = '5d40ac', s_town = '99fcce', l_town = 'edd0d1', claim = '16bd82', alliance = 'd512af', marriage = '5b9a34',
+             war = '3e35c9', tag_chit = '518f2e', merchant_1 = '9751e1', merchant_2 = '41504e', merchant_3 = '19a707',
+             army_1 = 'b870be', army_2 = 'bf0393', army_3 = '9f7137', fleet = 'e8e907' },
+  pink  = { stability = 'a3850a', ruler_general = '603b9f', ship = '7e002e', soldier = 'aae6b6', cube = '9444d4',
+             vassal = '26b63c', s_town = 'f08336', l_town = 'cadbe6', claim = '3db8b2', alliance = 'ae349c', marriage = 'ce0571',
+             war = 'f50bfd', tag_chit = 'fe5049', merchant_1 = '999bc9', merchant_2 = 'bc478c', merchant_3 = '53ffb0',
+             army_1 = '021a1c', army_2 = '816aea', army_3 = 'c22b53', fleet = 'd67f9b' }
 }
 
 Figurine_GUIDs = {
@@ -2261,15 +2261,19 @@ function PlaceTableausAndBags(seat, color)
   local obj = false
   local lock = true
   local pos = Main_Tableau_Positions[seat]
+  if TEST_MODE then log('pos ' .. pos[1] ) end
   local height = 1
   local new_pos = {0, 2, 0}
   local rot = Main_Tableau_Rotations[seat]
+  if TEST_MODE then log('rot ' .. rot[1] ) end
   local guid = Main_Tableau_GUIDs[color]
+  if TEST_MODE then log('guid ' .. guid ) end
   local suffix = '_left'
   if seat == 2 then
     suffix = '_right'
   end
   local bag = getObjectFromGUID(Setup_Bag_GUIDs[color])
+  if TEST_MODE then log('bag ' ) end
   obj = bag.takeObject({
     position          = pos,
     rotation          = rot,
