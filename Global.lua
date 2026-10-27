@@ -278,10 +278,10 @@ Setup_Bag_Item_GUIDs = {
              vassal = 'ed84de', s_town = '5c9dde', l_town = '2208ad', claim = '366e0f', alliance = 'd4192c', marriage = '60091a',
              war = '7340d5', tag_chit = 'a6b0de', merchant_1 = '5dfc9f', merchant_2 = '61d2ae', merchant_3 = 'a721ef',
              army_1 = '07aa38', army_2 = '2f259d', army_3 = '8332be', fleet = 'd6cc36' },
-  pink  = { stability = '4b29d4', ruler_general = 'cef0e6', ship = '703f24', soldier = '1e1ac8', cube = '9123fa',
-             vassal = '7f78d1', s_town = '591d40', l_town = '812992', claim = 'c3113d', alliance = '6fb5bb', marriage = '633664',
-             war = 'bcca57', tag_chit = 'fdaf40', merchant_1 = 'b84479', merchant_2 = '0589c9', merchant_3 = '9f2ed6',
-             army_1 = 'b98973', army_2 = 'ba4d4c', army_3 = '4dcf8d', fleet = 'f4c7d9' }
+  pink  = { stability = 'a3850a', ruler_general = '272d23', ship = 'd80c7e', soldier = '04d4c0', cube = 'fe26c8',
+             vassal = '405477', s_town = '622025', l_town = '21dcc8', claim = 'b9a71a', alliance = 'fbf72e', marriage = 'e0f1f0',
+             war = 'a313fd', tag_chit = '347db4', merchant_1 = '65c7d5', merchant_2 = 'd6b5d0', merchant_3 = 'dd9bef',
+             army_1 = 'b198c2', army_2 = 'dfb12f', army_3 = 'cce497', fleet = '0019b4' }
 }
 
 Figurine_GUIDs = {
