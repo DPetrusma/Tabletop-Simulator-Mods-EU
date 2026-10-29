@@ -71,7 +71,7 @@ Generic_Mission_Deck_GUID = 'cadfa8'
 Scenario_Book_1_GUID = '1ae561'
 Scenario_Book_2_GUID = '79893d'
 
-Player_Hand_GUIDs = { red = '7a5107', yellow = '4f7aff', blue = '3320f7', green = '82f3dd', purple = 'b29a91', white = 'a98fd0', brown = 'e746fc', teal = 'b9da2a', orange = '882951', pink = '791a34' }
+Player_Hand_GUIDs = { red = '7a5107', yellow = '4f7aff', blue = '3320f7', green = '82f3dd', purple = 'b29a91', white = 'a98fd0', brown = 'bb1d1d', teal = 'dcd9e8', orange = '882951', pink = '791a34' }
 Main_Tableau_GUIDs = { red = '388336', yellow = '90ffbf', blue = '1418fd', green = '82efa3', purple = 'ad4d79', white = '30484d', brown = '70c4bc', teal = '61904b', orange = '2bdb9e', pink = '929c8d' }
 Army_Tableau_GUIDs = { red = '655dff', yellow = 'd20799', blue = 'a076d6', green = 'e8a3ab', purple = 'c8a406', white = 'be9e18', brown = 'a9e19e', teal = '485332', orange = '84ceb4', pink = '8d16a1' }
 Fleet_Tableau_GUIDs = { red = 'ddf4d4', yellow = '005750', blue = 'fbdfa1', green = '558a42', purple = 'a76ad9', white = '3f02c4', brown = '76a366', teal = '85bde4', orange = '1edcbd', pink = 'f01a2a' }
@@ -546,7 +546,7 @@ function AutoSetupRealm()
   -- At this point, I need to check if all colours have been dealt with. If so, place
   -- the deferred pieces and other final steps
   ManualSetupRealmsDealtWithCount = ManualSetupRealmsDealtWithCount + 1
-  if ManualSetupRealmsDealtWithCount == 8 then
+  if ManualSetupRealmsDealtWithCount == 10 then
     ManualSetupFinalSteps()
   else
     for color,_ in pairs(COLOR_RGB_CODES) do
@@ -898,16 +898,16 @@ function Player_Seat_From_Color(color)
     -- aren't on the board) to find the seat
     local Player_Manual_Initial_Seat_From_Color =
     {
-      blue = 1,
-      yellow = 2,
-      red = 3,
-      white = 4,
-      purple = 5,
-      green = 6,
-      brown = 7,
-      teal = 8,
-      orange = 9,
-      pink = 10
+      orange = 1,
+      blue = 2,
+      teal = 3,
+      yellow = 4,
+      red = 5,
+      white = 6,
+      purple = 7,
+      brown = 8,
+      pink = 9,
+      green = 10
     }
 
     local main_tableau = getObjectFromGUID(Main_Tableau_GUIDs[color])
@@ -1945,7 +1945,7 @@ function SetupRealm(player)
 
     -- Add bot rules, die & targeting chart
     ClearZone(Reference_Zone_GUIDs[seat])
-    if seat == 2 then
+    if seat == 3 then
       new_pos = main_tableau.positionToWorld(Bot_Tableau_Local_Positions.bot_rules_right)
     else
       new_pos = main_tableau.positionToWorld(Bot_Tableau_Local_Positions.bot_rules)
@@ -2269,7 +2269,7 @@ function PlaceTableausAndBags(seat, color)
   local guid = Main_Tableau_GUIDs[color]
   if TEST_MODE then log('guid ' .. guid ) end
   local suffix = '_left'
-  if seat == 2 then
+  if seat == 3 then
     suffix = '_right'
   end
   local bag = getObjectFromGUID(Setup_Bag_GUIDs[color])
@@ -2284,7 +2284,7 @@ function PlaceTableausAndBags(seat, color)
 
   local army_tableau_offset = Main_Tableau_Offset_Positions['armies_left']
   local fleet_tableau_offset = Main_Tableau_Offset_Positions['mixed_left']
-  if seat == 2 then
+  if seat == 3 then
     army_tableau_offset = Main_Tableau_Offset_Positions['armies_right']
     fleet_tableau_offset = Main_Tableau_Offset_Positions['mixed_right']
   end
@@ -2349,57 +2349,57 @@ function GetOffset(position, offset2D, seat, height)
   if height ~= nil then
     new_pos[2] = height
   end
-  if (seat == 1) or (seat == 6) then
+  if (seat == 1) or (seat == 2) or (seat == 10) then
     new_pos[1] = position[1] + offset2D[1]
     new_pos[3] = position[3] + offset2D[2]
-  elseif (seat == 2) or (seat == 3) then
+  elseif (seat == 3) or (seat == 4) then
     new_pos[1] = position[1] + offset2D[2]
     new_pos[3] = position[3] - offset2D[1]
-  elseif (seat == 4) or (seat == 5) then
+  elseif (seat == 5) or (seat == 6) or (seat == 7) then
     new_pos[1] = position[1] - offset2D[1]
     new_pos[3] = position[3] - offset2D[2]
-  elseif (seat == 7) or (seat == 8) then
+  elseif (seat == 8) or (seat == 9) then
     new_pos[1] = position[1] - offset2D[2]
     new_pos[3] = position[3] + offset2D[1]
-  elseif (seat == 9) or (seat == 10) then
-    new_pos[1] = position[1] + offset2D[2]
-    new_pos[3] = position[3] - offset2D[1]
   end
   return new_pos
 end
 
 
---Return Position from 1 to 6 depending on main tableau coordinates
+--Return Position from 1 to 10 depending on main tableau coordinates
 function GetSeatFromPosition(position3d)
-  if position3d[1] > 32 then
-    if position3d[3] > 0 then
-      return 7
-    else
-      return 8
-    end
-  elseif position3d[1] > 0 then
-      if position3d[3] > 0 then
-        return 5
-      else
+  if position3d[1] > 0 then --Right hand side is 1, 6, 7, 8, 9, 10
+    if position3d[3] > 0 then --Upper is 6, 7, 8
+      if position3d[1] < 2 then
         return 6
+      elseif position3d[1] < 22 then
+        return 7
+      else
+        return 8
       end
-  elseif position3d[1] > -27 then
-    if position3d[3] > 0 then
-      return 4
-    else
-      return 1
+    else --Lower is 1, 9, 10
+      if position3d[1] < 7 then
+        return 1
+      elseif position3d[1] < 28 then
+        return 10
+      else
+        return 9
+      end
     end
-  elseif position3d[1] > -38 then
-    if position3d[3] > 0 then
-      return 3
-    else
-      return 2
-    end
-  elseif position3d[1] > -58 then
-    if position3d[3] > 0 then
-      return 10
-    else
-      return 9
+  else --Left hand side is 2, 3, 4, 5
+    if position3d[3] > 0 then --Upper is 4, 5
+      if position3d[1] < -33 then
+        return 4
+      else
+        return 5
+      end
+    else --Lower is 2, 3
+      if position3d[1] < -33 then
+        return 3
+      else
+        return 2
+      end
+
     end
   end
   return false
@@ -4510,7 +4510,7 @@ function CheckRemovedEnter(object, trashBinObject)
       name = 'fleet'
     end
     if name == '' then return false end
-    if seat == 2 then
+    if seat == 3 then
       name = name .. '_right'
     else
       name = name .. '_left'
@@ -5035,20 +5035,20 @@ function CreateButtonsForRealms()
   Tile_for_Bot_Flag = {}
 
   local color_swap_button_offsets = {
-    red = {-6.0, -8.00},
-    yellow = {-4.50, -8.00},
-    blue = {-3.0, -8.0},
-    green = {-1.50, -8.00},
-    purple = {0.00, -8.00},
-    white = {1.50, -8.00},
-    brown = {3.00, -8.00},
-    teal = {4.50, -8.00},
-    orange = {6.00, -8.00},
-    pink = {7.50, -8.00}
+    red = {-11.0, -8.00},
+    yellow = {-9.50, -8.00},
+    blue = {-8.0, -8.0},
+    green = {-6.50, -8.00},
+    purple = {-5.00, -8.00},
+    white = {-3.50, -8.00},
+    brown = {-2.00, -8.00},
+    teal = {-0.50, -8.00},
+    orange = {1.00, -8.00},
+    pink = {2.50, -8.00}
   }
   local remove_player_button_offset = {-6.90, -5.08}
   local realm_selection_button_offset = {-2.00, -5.08}
-  local realm_selection_bot_flag_tile_offset = {5.00, -5.08}
+  local realm_selection_bot_flag_tile_offset = {3.00, -5.08}
 
   for color1,_ in pairs(COLOR_RGB_CODES) do
     local seat = Player_Seat_From_Color(color1)
